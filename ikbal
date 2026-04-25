@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TÜBİTAK — ANP+TOPSIS Cloud KDS</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root{
+            --bg:#0b0d12;--bg2:#111318;--bg3:#181c24;--bg4:#1f2330;
+            --bdr:rgba(255,255,255,0.06);--bdr2:rgba(255,255,255,0.11);
+            --tx:#dde1ec;--tx2:#8890a4;--tx3:#4e5668;
+            --ac:#4b84f5;--ac3:#00bfa0;--gold:#f0c040;
+            --r:10px;
+        }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
+        h1,h2,h3{font-family:'Syne',sans-serif}
+
+        /* ═══ PORTAL SELECTION ═══ */
+        #portal-select{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+        .ps-logo{text-align:center;margin-bottom:48px}
+        .ps-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:700px;width:100%}
+        
+        /* Tıklama sorununu çözen yapı */
+        .ps-card{
+            background:var(--bg2);border:1px solid var(--bdr2);border-radius:16px;
+            padding:40px 30px;cursor:pointer;transition:all 0.3s ease;
+            text-align:center;position:relative;overflow:hidden;
+        }
+        .ps-card:hover{transform:translateY(-5px);border-color:var(--ac);box-shadow:0 20px 40px rgba(0,0,0,0.4)}
+        .ps-card.member:hover{border-color:var(--ac3)}
+
+        /* İçerideki elemanların tıklamayı "yutmasını" engeller */
+        .ps-card * { pointer-events: none; user-select: none; }
+
+        .ps-icon{font-size:48px;display:block;margin-bottom:15px}
+        .ps-card-title{font-size:20px;font-weight:700;margin-bottom:10px}
+        .ps-card-desc{font-size:12px;color:var(--tx3);line-height:1.6}
+
+        /* ═══ MODALS ═══ */
+        .modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(10px);z-index:10000;display:none;align-items:center;justify-content:center}
+        .modal.show{display:flex}
+        .modal-content{background:var(--bg2);padding:40px;border-radius:16px;width:100%;max-width:380px;border:1px solid var(--bdr2)}
+
+        /* ═══ APP SHELL ═══ */
+        #app-shell{display:none;min-height:100vh}
+        #app-shell.show{display:flex}
+        .sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--bdr);display:flex;flex-direction:column}
+        .main-content{flex:1;padding:30px;overflow-y:auto}
+
+        .btn{padding:10px 20px;border-radius:6px;cursor:pointer;border:none;font-weight:600}
+        .btn-primary{background:var(--ac);color:white}
+        input{background:var(--bg3);border:1px solid var(--bdr2);color:white;padding:12px;border-radius:6px;width:100%;margin-bottom:15px;outline:none}
+        
+        .page{display:none}
+        .page.active{display:block}
+    </style>
+</head>
+<body>
+
+<div id="portal-select">
+    <div class="ps-logo">
+        <h1 style="font-size:32px">TÜBİTAK ANP+TOPSIS</h1>
+        <p style="color:var(--tx3)">Bulut Tabanlı Karar Destek Sistemi</p>
+    </div>
+    <div class="ps-cards">
+        <div class="ps-card" id="admin-trigger">
+            <span class="ps-icon">🏛️</span>
+            <div class="ps-card-title" style="color:var(--ac)">Yönetici Portalı</div>
+            <div class="ps-card-desc">Excel verisi yükleme ve ANP hesaplama yönetimi.</div>
+        </div>
+        <div class="ps-card member" id="member-trigger">
+            <span class="ps-icon">📋</span>
+            <div class="ps-card-title" style="color:var(--ac3)">Üye Portalı</div>
+            <div class="ps-card-desc">Proje değerlendirme ve sıralama sonuçları.</div>
+        </div>
+    </div>
+</div>
+
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <h2 style="margin-bottom:20px">Yönetici Girişi</h2>
+        <input type="text" id="adm-user" placeholder="Kullanıcı Adı (ikbal)">
+        <input type="password" id="adm-pass" placeholder="Şifre (159)">
+        <button class="btn btn-primary" style="width:100%" onclick="checkLogin()">Giriş Yap</button>
+        <p onclick="document.getElementById('login-modal').classList.remove('show')" style="text-align:center; margin-top:15px; cursor:pointer; color:var(--tx3); font-size:12px">İptal</p>
+    </div>
+</div>
+
+<div id="app-shell">
+    <aside class="sidebar">
+        <div style="padding:25px; border-bottom:1px solid var(--bdr)">
+            <div style="font-weight:800; color:var(--ac)">ESTÜ KDS</div>
+            <div id="mode-label" style="font-size:11px; color:var(--tx3)">BULUT AKTİF</div>
+        </div>
+        <nav id="nav-list" style="padding:15px"></nav>
+        <div style="margin-top:auto; padding:20px">
+            <button class="btn" style="width:100%; background:var(--bg3); color:white" onclick="location.reload()">Oturumu Kapat</button>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div id="page-dash" class="page active">
+            <h1>Hoş Geldiniz</h1>
+            <p style="color:var(--tx3)">Supabase veritabanı bağlantısı kuruldu.</p>
+        </div>
+        <div id="page-upload" class="page">
+            <h1>Excel Verisi Yükle</h1>
+            <div style="padding:40px; border:2px dashed var(--bdr2); border-radius:12px; text-align:center; margin-top:20px">
+                <input type="file" id="xl-file" style="display:none">
+                <button class="btn btn-primary" onclick="document.getElementById('xl-file').click()">Dosya Seç</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+// !!! BURAYI KENDİ BİLGİLERİNLE DOLDUR !!!
+const SB_URL = "https://PROJE_ID.supabase.co"; 
+const SB_KEY = "EY...ANON_KEY"; 
+const supabase = window.supabase.createClient(SB_URL, SB_KEY);
+
+// Eventler
+document.getElementById('admin-trigger').onclick = () => {
+    document.getElementById('login-modal').classList.add('show');
+};
+
+document.getElementById('member-trigger').onclick = () => {
+    startPortal('Üye');
+};
+
+function checkLogin() {
+    const u = document.getElementById('adm-user').value;
+    const p = document.getElementById('adm-pass').value;
+    if(u === "ikbal" && p === "159") {
+        document.getElementById('login-modal').classList.remove('show');
+        startPortal('Yönetici');
+    } else {
+        alert("Hatalı Giriş!");
+    }
+}
+
+function startPortal(role) {
+    document.getElementById('portal-select').style.display = 'none';
+    document.getElementById('app-shell').classList.add('show');
+    document.getElementById('mode-label').textContent = role.toUpperCase() + " MODU";
+    
+    const nav = document.getElementById('nav-list');
+    nav.innerHTML = role === 'Yönetici' 
+        ? `<div onclick="showPage('dash')" style="padding:10px; cursor:pointer">🏠 Dashboard</div>
+           <div onclick="showPage('upload')" style="padding:10px; cursor:pointer">📁 Excel Yükle</div>`
+        : `<div onclick="showPage('dash')" style="padding:10px; cursor:pointer">📊 Sonuçları Gör</div>`;
+}
+
+function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>
