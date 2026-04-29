@@ -2485,9 +2485,11 @@
             const Wlim = limitM(Ww);
             setCS(7, 'done');
             await delay(70);
-            const gR = Wlim[0],
-                gS = gR.reduce((a, b) => a + b, 0),
-                gW = {};
+           const gR = Wlim.map(row => row.reduce((a,b) => a+b, 0) / 16);
+// ya da: her sütunun ortalaması = her satırın ortalaması (limit'te aynı)
+// Aslında doğrusu: sütun vektörü (her sütun aynı, birini al):
+const gR = Wlim.map(row => row[0]);  // sütun vektörü
+const gS = gR.reduce((a,b)=>a+b,0);
             ALL_SUBS.forEach((s, i) => {
                 const g = GRP.find(g2 => GI[g2].subs.includes(s));
                 gW[`${g}_${s}`] = gR[i] / gS;
