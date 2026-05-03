@@ -219,6 +219,17 @@
         ::-webkit-scrollbar{width:5px;height:5px}
         ::-webkit-scrollbar-track{background:transparent}
         ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+
+        /* ── Üye portalı proje seçici ek stiller ── */
+        .proj-info-box{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px;padding:13px;background:var(--bg3);border-radius:var(--rs);border:1px solid var(--bdr)}
+        .proj-info-box.active-box{border-color:rgba(0,191,160,.3)}
+        .pif-label{font-size:10px;color:var(--tx3);margin-bottom:2px}
+        .pif-val{font-size:13px;font-weight:600;color:var(--tx)}
+        .proj-upload-zone{border:2px dashed var(--bdr2);border-radius:var(--rs);padding:18px;text-align:center;cursor:pointer;transition:all .18s;background:var(--bg3);margin-bottom:13px}
+        .proj-upload-zone:hover,.proj-upload-zone.drag{border-color:var(--ac3);background:rgba(0,191,160,.04)}
+        .proj-upload-zone input{display:none}
+        .proj-upload-zone.loaded{border-color:var(--ac3);background:rgba(0,191,160,.04)}
+        .no-proj-sel{padding:20px;text-align:center;color:var(--tx3);font-size:12px}
     </style>
 </head>
 <body>
@@ -228,7 +239,7 @@
     <div class="ps-head">
         <div class="ps-tag">Karar Destek Sistemi</div>
         <div class="ps-title">TÜBİTAK ANP+TOPSIS</div>
-        <div class="ps-sub">Bağımlı Model · Limit Süperpozisyon · v3.3</div>
+        <div class="ps-sub">Bağımlı Model · Limit Süperpozisyon · v3.4</div>
         <div class="ps-db warn" id="ps-db-badge">⬤ Bağlanıyor…</div>
     </div>
     <div class="ps-cards">
@@ -312,7 +323,7 @@
         </div>
         <button class="sw-btn" onclick="goPortalSelect()">🔄 <span>Portal Değiştir</span></button>
         <div class="sb-foot">
-            ANP+TOPSIS v3.3 · Tez Çalışması<br>
+            ANP+TOPSIS v3.4 · Tez Çalışması<br>
             <div class="db-row"><span class="db-led" id="db-led"></span><span id="db-txt">Yerel Mod</span></div>
         </div>
     </nav>
@@ -514,27 +525,98 @@
                         <div class="stepline" id="sl2"></div>
                         <div class="step" id="st3" style="opacity:.45"><div class="stepn">3</div><div class="stepl">Sonuç</div></div>
                     </div>
+
+                    <!-- STEP 1: Proje Bilgileri (üye portalı için Excel'den seçim) -->
                     <div id="es1">
-                        <div class="card" style="max-width:480px">
+                        <div class="card" style="max-width:540px">
                             <div class="card-t">Proje Bilgileri</div>
-                            <div class="fg"><label>Proje Adı *</label><input id="pname" type="text" placeholder="Proje adını giriniz"></div>
-                            <div class="fg"><label>Kurum / Başvuru Sahibi</label><input id="powner" type="text"></div>
-                            <div class="fg"><label>Proje Türü</label>
-                                <select id="ptype">
-                                    <option>1001 - Bilimsel ve Teknolojik Araştırma</option>
-                                    <option>1002 - Hızlı Destek Programı</option>
-                                    <option>1003 - Uygulamalı Ar-Ge</option>
-                                    <option>1505 - Üniversite-Sanayi İşbirliği</option>
-                                    <option>2209 - Lisans Öğrencisi Araştırma</option>
-                                </select>
+
+                            <!-- Yönetici görünümü (eski form, admin için) -->
+                            <div id="admin-proj-form">
+                                <div class="fg"><label>Proje Adı *</label><input id="pname" type="text" placeholder="Proje adını giriniz"></div>
+                                <div class="fg"><label>Kurum / Başvuru Sahibi</label><input id="powner" type="text"></div>
+                                <div class="fg"><label>Proje Türü</label>
+                                    <select id="ptype">
+                                        <option>1001 - Bilimsel ve Teknolojik Araştırma</option>
+                                        <option>1002 - Hızlı Destek Programı</option>
+                                        <option>1003 - Uygulamalı Ar-Ge</option>
+                                        <option>1505 - Üniversite-Sanayi İşbirliği</option>
+                                        <option>2209 - Lisans Öğrencisi Araştırma</option>
+                                    </select>
+                                </div>
+                                <div class="g2">
+                                    <div class="fg"><label>Bütçe (TL)</label><input id="pbudget" type="number"></div>
+                                    <div class="fg"><label>Süre (Ay)</label><input id="pdur" type="number"></div>
+                                </div>
+                                <button class="btn bp" onclick="goStep2()" style="width:100%;justify-content:center;margin-top:4px">Devam → Kriterleri Puanla</button>
                             </div>
-                            <div class="g2">
-                                <div class="fg"><label>Bütçe (TL)</label><input id="pbudget" type="number"></div>
-                                <div class="fg"><label>Süre (Ay)</label><input id="pdur" type="number"></div>
+
+                            <!-- Üye görünümü: Excel'den proje seç -->
+                            <div id="member-proj-form" style="display:none">
+
+                                <!-- 1) Excel yükleme alanı -->
+                                <div class="fg">
+                                    <label>Proje Listesi Excel Dosyası *</label>
+                                    <div class="proj-upload-zone" id="proj-drop-zone"
+                                        onclick="document.getElementById('proj-file-inp').click()"
+                                        ondragover="event.preventDefault();this.classList.add('drag')"
+                                        ondragleave="this.classList.remove('drag')"
+                                        ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event.dataTransfer.files[0])">
+                                        <input type="file" id="proj-file-inp" accept=".xlsx,.xls" onchange="loadProjExcel(this.files[0])">
+                                        <div style="font-size:22px;margin-bottom:5px;opacity:.65">📋</div>
+                                        <div style="font-size:13px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:3px" id="proj-file-label">Proje listesini yükle (.xlsx / .xls)</div>
+                                        <div style="font-size:11px;color:var(--tx3)">Sütun sırası: Girişimci No · Proje Adı · Kurum · Proje Türü · Bütçe · Süre</div>
+                                    </div>
+                                </div>
+
+                                <!-- 2) Proje dropdown -->
+                                <div class="fg">
+                                    <label>Proje Seç *</label>
+                                    <select id="proj-select" onchange="fillProjFields()">
+                                        <option value="">— Önce Excel yükleyin —</option>
+                                    </select>
+                                </div>
+
+                                <!-- 3) Otomatik dolan alanlar (salt-okunur gösterim) -->
+                                <div class="proj-info-box" id="proj-info-grid">
+                                    <div>
+                                        <div class="pif-label">Girişimci No</div>
+                                        <div class="pif-val" id="pf-no">—</div>
+                                    </div>
+                                    <div>
+                                        <div class="pif-label">Proje Adı</div>
+                                        <div class="pif-val" id="pf-name" style="color:var(--ac3)">—</div>
+                                    </div>
+                                    <div>
+                                        <div class="pif-label">Kurum</div>
+                                        <div class="pif-val" id="pf-owner">—</div>
+                                    </div>
+                                    <div>
+                                        <div class="pif-label">Proje Türü</div>
+                                        <div class="pif-val" id="pf-type">—</div>
+                                    </div>
+                                    <div>
+                                        <div class="pif-label">Bütçe (TL)</div>
+                                        <div class="pif-val" id="pf-budget">—</div>
+                                    </div>
+                                    <div>
+                                        <div class="pif-label">Süre (Ay)</div>
+                                        <div class="pif-val" id="pf-dur">—</div>
+                                    </div>
+                                </div>
+
+                                <!-- 4) Sadece bu alan manuel girilir -->
+                                <div class="fg">
+                                    <label>Değerlendiren Adı *</label>
+                                    <input id="peval-name" type="text" placeholder="Adınızı giriniz">
+                                    <div style="font-size:10.5px;color:var(--tx3);margin-top:4px">📅 Değerlendirme tarihi otomatik kaydedilecektir.</div>
+                                </div>
+
+                                <button class="btn bp" onclick="goStep2FromExcel()" style="width:100%;justify-content:center;margin-top:4px">Devam → Kriterleri Puanla</button>
                             </div>
-                            <button class="btn bp" onclick="goStep2()" style="width:100%;justify-content:center;margin-top:4px">Devam → Kriterleri Puanla</button>
                         </div>
                     </div>
+
                     <div id="es2" style="display:none">
                         <div class="notif n-info"><span>ℹ</span>
                             <div><strong>Saaty 1-9:</strong> 1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div>
@@ -800,7 +882,7 @@ async function loadProjFromDB(){
         const {data,error}=await DB.from('projects').select('*').order('cstar',{ascending:false});
         if(!error&&data){ PROJECTS=data.map(r=>({id:r.id,name:r.name,owner:r.owner,type:r.type,budget:r.budget,
             dur:r.duration,date:new Date(r.created_at).toLocaleDateString('tr-TR'),scores:r.scores,
-            Cstar:r.cstar,Dp:r.dp,Dn:r.dn,evaluator:r.evaluator})); saveProjLocal(); }
+            Cstar:r.cstar,Dp:r.dp,Dn:r.dn,evaluator:r.evaluator,projNo:r.proj_no})); saveProjLocal(); }
     }catch(e){ console.warn(e); }
 }
 async function saveProjToDB(p){
@@ -808,7 +890,7 @@ async function saveProjToDB(p){
     try{
         const {data,error}=await DB.from('projects').insert({name:p.name,owner:p.owner,type:p.type,
             budget:p.budget,duration:p.dur,scores:p.scores,cstar:p.Cstar,dp:p.Dp,dn:p.Dn,
-            evaluator:p.evaluator}).select().single();
+            evaluator:p.evaluator,proj_no:p.projNo}).select().single();
         if(!error&&data) return data.id;
     }catch(e){ console.warn(e); }
     return null;
@@ -870,7 +952,7 @@ const limitM=W=>{
 
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 
-/* ── Excel İşleme ── */
+/* ── Excel İşleme (ANP - Yönetici) ── */
 function handleFile(file){
     if(!file) return;
     if(!['xlsx','xls'].includes(file.name.split('.').pop().toLowerCase())){ alert('Lütfen .xlsx veya .xls seçin.'); return; }
@@ -896,7 +978,6 @@ async function processANP(raw,fname){
     await delay(50); setCS(1,'done');
     await delay(80); setCS(2,'active');
 
-    /* Alt kriter matrisleri */
     const sM={},sW={},sCR={};
     for(const g of GRP){
         const inf=COL_MAP[g];
@@ -907,14 +988,12 @@ async function processANP(raw,fname){
     setCS(2,'done'); await delay(70);
     setCS(3,'active'); await delay(80); setCS(3,'done');
 
-    /* Ana kriter matrisi */
     setCS(4,'active');
     const mM=pairMat(rows,MAIN_COLS,MAIN_PAIRS,5);
     const mW=priVec(mM);
     const mCR=calcCR(mM,mW);
     setCS(4,'done'); await delay(70);
 
-    /* Etki / bağımlılık */
     const infl={},normInfl={};
     ETKI_MAP.forEach(([f,t,c])=>{ infl[`${f}->${t}`]=geoM(rows.map(r=>r[c])); });
     GRP.forEach(f=>{
@@ -922,16 +1001,13 @@ async function processANP(raw,fname){
         GRP.filter(t=>t!==f).forEach(t=>{ normInfl[`${f}->${t}`]=infl[`${f}->${t}`]/tot; });
     });
 
-    /* ── Ağırlıksız süperpozisyon (16×16) ── */
     setCS(5,'active');
     const n=16, Wun=Array.from({length:n},()=>Array(n).fill(0));
     GRP.forEach(f=>{
         const fo=OFFSETS[f], fs=SIZES[f];
         for(let j=0;j<fs;j++){
             const col=fo+j;
-            /* Kendi grubundan katkı */
             for(let i=0;i<fs;i++) Wun[fo+i][col]=sW[f][i];
-            /* Diğer gruplardan etki katkısı */
             GRP.filter(t=>t!==f).forEach(t=>{
                 const to=OFFSETS[t], ts=SIZES[t], sc=normInfl[`${f}->${t}`];
                 for(let i=0;i<ts;i++) Wun[to+i][col]=sc*sW[t][i];
@@ -940,7 +1016,6 @@ async function processANP(raw,fname){
     });
     setCS(5,'done'); await delay(70);
 
-    /* ── Ağırlıklı süperpozisyon ── */
     setCS(6,'active');
     const Ww=Wun.map(r=>[...r]);
     GRP.forEach((f,fi)=>{
@@ -953,26 +1028,18 @@ async function processANP(raw,fname){
             });
         }
     });
-    /* Stokastik normalize */
     for(let j=0;j<n;j++){
         const s=Ww.reduce((a,r)=>a+r[j],0);
         if(s>0) for(let i=0;i<n;i++) Ww[i][j]/=s;
     }
     setCS(6,'done'); await delay(70);
 
-    /* ── Limit süperpozisyon ── */
     setCS(7,'active'); await delay(50);
     const Wlim=limitM(Ww);
     setCS(7,'done'); await delay(70);
 
-    /* ── Global ANP ağırlıkları ──
-       KRİTİK DÜZELTME: Limit matrisinde tüm SÜTUNLAR aynı stasyoner dağılımı verir.
-       Global ağırlıklar = limit matrisin sütun vektörü (herhangi bir sütun).
-       YANLIŞ: Wlim[0]  → ilk satır (tüm satırlar eşit, ayrım sağlamaz)
-       DOĞRU:  Wlim.map(row => row[0])  → ilk sütun = gerçek stasyoner dağılım
-    ── */
     setCS(8,'active');
-    const gR = Wlim.map(row => row[0]);   // ← DOĞRU: sütun vektörü
+    const gR = Wlim.map(row => row[0]);
     const gS = gR.reduce((a,b)=>a+b,0);
     const gW={};
     ALL_SUBS.forEach((s,i)=>{ const g=GRP.find(g2=>GI[g2].subs.includes(s)); gW[`${g}_${s}`]=gR[i]/gS; });
@@ -1090,11 +1157,12 @@ function renderDashboard(){
     }
     const ranked=rankAll();
     if(!ranked.length){ $('d-recent').innerHTML='<p style="text-align:center;padding:16px;color:var(--tx3)">Henüz proje yok.</p>'; return; }
-    let rh=`<table><tr><th>#</th><th>Proje</th><th>Değerlendiren</th><th>C*</th><th>Durum</th></tr>`;
+    let rh=`<table><tr><th>#</th><th>Girişimci No</th><th>Proje</th><th>Değerlendiren</th><th>C*</th><th>Durum</th></tr>`;
     ranked.slice(0,6).forEach((p,i)=>{
         const col=i===0?'var(--gold)':i<3?'var(--ac3)':'var(--tx2)';
         rh+=`<tr>
 <td style="color:${col};font-weight:700">${i+1}</td>
+<td style="color:var(--tx3);font-size:11.5px">${p.projNo||'—'}</td>
 <td style="font-weight:500">${p.name}</td>
 <td style="color:var(--tx3);font-size:11.5px">${p.evaluator||'—'}</td>
 <td style="font-weight:700;color:${col}">${p.Cstar.toFixed(4)}</td>
@@ -1226,11 +1294,153 @@ function renderInfl(){
     $('infl-body').innerHTML=h;
 }
 
+/* ═══════════════════════════════════════════════════════
+   ÜYE PORTALI: Excel'den Proje Listesi Yükleme
+   ═══════════════════════════════════════════════════════ */
+let PROJ_LIST = []; // Yüklenen proje listesi (üye portalı için)
+
+/**
+ * Üye portalı: Proje listesi Excel dosyasını okur ve dropdown'u doldurur.
+ * Beklenen sütun sırası (1. satır başlık):
+ *   A(0): Girişimci No
+ *   B(1): Proje Adı
+ *   C(2): Kurum / Başvuru Sahibi
+ *   D(3): Proje Türü
+ *   E(4): Bütçe (TL)
+ *   F(5): Süre (Ay)
+ */
+function loadProjExcel(file) {
+    if (!file) return;
+    if (!['xlsx','xls'].includes(file.name.split('.').pop().toLowerCase())) {
+        alert('Lütfen .xlsx veya .xls formatında dosya seçin.');
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = e => {
+        try {
+            const wb = XLSX.read(e.target.result, {type:'array'});
+            const ws = wb.Sheets[wb.SheetNames[0]];
+            const raw = XLSX.utils.sheet_to_json(ws, {header:1, defval:''});
+            // İlk satır başlık, geri kalanlar veri
+            PROJ_LIST = raw.slice(1).filter(r => r && (r[0] !== '' || r[1] !== ''));
+            if (!PROJ_LIST.length) {
+                toast('Excel\'de veri bulunamadı. Başlık satırını kontrol edin.', 'err');
+                return;
+            }
+            // Dropdown'u doldur
+            const sel = $('proj-select');
+            sel.innerHTML = '<option value="">— Proje seçiniz —</option>';
+            PROJ_LIST.forEach((r, i) => {
+                const no   = String(r[0] || '').trim();
+                const ad   = String(r[1] || '').trim() || ('Proje ' + (i+1));
+                const opt  = document.createElement('option');
+                opt.value  = i;
+                opt.textContent = no ? `[${no}]  ${ad}` : ad;
+                sel.appendChild(opt);
+            });
+            // Yükleme bölgesini güncelle
+            const zone = $('proj-drop-zone');
+            zone.classList.add('loaded');
+            $('proj-file-label').textContent = '✓ ' + file.name + '  (' + PROJ_LIST.length + ' proje yüklendi)';
+            // Bilgi alanlarını sıfırla
+            fillProjFields();
+            toast(PROJ_LIST.length + ' proje yüklendi', 'ok');
+        } catch(err) {
+            toast('Excel okunamadı: ' + err.message, 'err');
+        }
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+/**
+ * Dropdown'dan proje seçilince bilgi alanlarını otomatik doldurur.
+ */
+function fillProjFields() {
+    const sel = $('proj-select');
+    const idx = parseInt(sel.value);
+    const box = $('proj-info-grid');
+    if (isNaN(idx) || !PROJ_LIST[idx]) {
+        ['pf-no','pf-name','pf-owner','pf-type','pf-budget','pf-dur'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = '—';
+        });
+        box.classList.remove('active-box');
+        return;
+    }
+    const r = PROJ_LIST[idx];
+    // Sütun sırası: 0=GirişimciNo, 1=ProjeAdı, 2=Kurum, 3=ProjeTürü, 4=Bütçe, 5=Süre
+    $('pf-no').textContent     = String(r[0] || '—').trim();
+    $('pf-name').textContent   = String(r[1] || '—').trim();
+    $('pf-owner').textContent  = String(r[2] || '—').trim();
+    $('pf-type').textContent   = String(r[3] || '—').trim();
+    const budgetRaw = parseFloat(r[4]);
+    $('pf-budget').textContent = isNaN(budgetRaw) ? (r[4] || '—') : budgetRaw.toLocaleString('tr-TR') + ' ₺';
+    $('pf-dur').textContent    = r[5] ? String(r[5]).trim() + ' ay' : '—';
+    box.classList.add('active-box');
+}
+
+/**
+ * Üye portalı Step 2'ye geç — seçili proje bilgilerini gizli inputlara aktar.
+ */
+function goStep2FromExcel() {
+    const sel      = $('proj-select');
+    const idx      = parseInt(sel.value);
+    const evalName = $('peval-name').value.trim();
+
+    if (isNaN(idx) || !PROJ_LIST[idx]) {
+        alert('Lütfen listeden bir proje seçin.');
+        return;
+    }
+    if (!evalName) {
+        alert('Değerlendiren adı zorunludur.');
+        $('peval-name').focus();
+        return;
+    }
+
+    const r = PROJ_LIST[idx];
+
+    // Gizli admin inputlarına yaz (doTOPSIS bunları kullanıyor)
+    $('pname').value   = String(r[1] || '').trim();
+    $('powner').value  = String(r[2] || '').trim();
+    $('pbudget').value = r[4] || '';
+    $('pdur').value    = r[5] || '';
+
+    // Proje türünü ve girişimci numarasını saklıyoruz
+    window._evalProjNo   = String(r[0] || '').trim();
+    window._evalProjType = String(r[3] || '').trim();
+
+    // Değerlendiren adını ME olarak güncelle
+    ME = evalName;
+    $('tb-user').textContent = ME;
+
+    goStep2();
+}
+
 /* ── Değerlendirme ── */
 function initEval(){
     if(!ANP){ $('eval-no-anp').style.display='flex'; $('eval-wrap').style.display='none'; return; }
     $('eval-no-anp').style.display='none'; $('eval-wrap').style.display='block';
-    evalScores={}; goStep1(); buildScoreForm();
+    evalScores={};
+
+    // Portal tipine göre doğru formu göster
+    const isAdmin = (PORTAL === 'admin');
+    $('admin-proj-form').style.display  = isAdmin ? 'block' : 'none';
+    $('member-proj-form').style.display = isAdmin ? 'none'  : 'block';
+
+    // Admin formunu sıfırla
+    if (isAdmin) {
+        $('pname').value = '';
+        $('powner').value = '';
+        $('pbudget').value = '';
+        $('pdur').value = '';
+    }
+
+    // Sıfırla
+    window._evalProjNo   = '';
+    window._evalProjType = '';
+
+    goStep1();
+    buildScoreForm();
 }
 
 function buildScoreForm(){
@@ -1270,7 +1480,7 @@ function goStep1(){
     $('es1').style.display='block'; setStepUI(1);
 }
 function goStep2(){
-    if(!$('pname').value.trim()){ alert('Proje adı gerekli'); return; }
+    if(PORTAL==='admin' && !$('pname').value.trim()){ alert('Proje adı gerekli'); return; }
     $('es1').style.display='none'; $('es2').style.display='block'; setStepUI(2);
 }
 function setStepUI(s){
@@ -1322,9 +1532,24 @@ async function doTOPSIS(){
     const Dp=Math.sqrt(keys.reduce((s,_,j)=>(wm[li][j]-Ap[j])**2+s,0));
     const Dn=Math.sqrt(keys.reduce((s,_,j)=>(wm[li][j]-An[j])**2+s,0));
     const Cstar=(Dp+Dn)>0?Dn/(Dp+Dn):0;
-    const p={name,owner:$('powner').value,type:$('ptype').value,budget:$('pbudget').value,
-        dur:$('pdur').value,date:new Date().toLocaleDateString('tr-TR'),
-        scores:{...evalScores},evaluator:ME||'üye',Cstar,Dp,Dn};
+
+    // Proje türü: admin → select, üye → window._evalProjType
+    const projType = (PORTAL === 'admin')
+        ? $('ptype').value
+        : (window._evalProjType || '—');
+
+    const p={
+        name,
+        owner:$('powner').value,
+        type:projType,
+        budget:$('pbudget').value,
+        dur:$('pdur').value,
+        date:new Date().toLocaleDateString('tr-TR'),
+        scores:{...evalScores},
+        evaluator:ME||'üye',
+        projNo:window._evalProjNo||'',
+        Cstar,Dp,Dn
+    };
     const dbId=await saveProjToDB(p);
     if(dbId) p.id=dbId;
     PROJECTS.push(p);
@@ -1333,11 +1558,27 @@ async function doTOPSIS(){
     const ranked=rankAll();
     const rank=ranked.findIndex(x=>x.Cstar===Cstar&&x.name===name)+1;
     $('es2').style.display='none'; $('es3').style.display='block'; setStepUI(3);
+
+    // Sonuç ekranı
     let h=`<div class="notif n-ok">✓ Proje kaydedildi ${USE_DB?'(veritabanı)':'(yerel)'}.</div>`;
+
+    // Proje bilgi özeti
+    h+=`<div class="card" style="margin-bottom:12px">
+<div class="card-t">Proje Bilgisi</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12.5px">`;
+    if(p.projNo) h+=`<div><span style="color:var(--tx3)">Girişimci No:</span> <strong>${p.projNo}</strong></div>`;
+    h+=`<div><span style="color:var(--tx3)">Proje Adı:</span> <strong>${p.name}</strong></div>`;
+    if(p.owner)  h+=`<div><span style="color:var(--tx3)">Kurum:</span> ${p.owner}</div>`;
+    if(p.type)   h+=`<div><span style="color:var(--tx3)">Tür:</span> ${p.type}</div>`;
+    h+=`<div><span style="color:var(--tx3)">Değerlendiren:</span> ${p.evaluator}</div>`;
+    h+=`<div><span style="color:var(--tx3)">Tarih:</span> ${p.date}</div>`;
+    h+=`</div></div>`;
+
     h+=`<div class="g3" style="margin-bottom:14px">
 <div class="stat"><div class="sl">C* Skoru</div><div class="sv" style="color:var(--ac3)">${Cstar.toFixed(4)}</div><div class="ss">ANP-TOPSIS İdeal Yakınlık</div></div>
 <div class="stat"><div class="sl">Sıralama</div><div class="sv" style="color:var(--gold)">#${rank}</div><div class="ss">${PROJECTS.length} proje içinde</div></div>
 <div class="stat"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:12px">${Dp.toFixed(4)} / ${Dn.toFixed(4)}</div></div></div>`;
+
     h+=`<div class="card" style="margin-bottom:12px">
 <div class="card-t">Kriter Puanları — ANP Global Ağırlıklar</div>
 <table><tr><th>Kod</th><th>Kriter</th><th>Puan</th><th>ANP Global W</th></tr>`;
@@ -1378,7 +1619,7 @@ function renderResults(){
         h+=`<div class="rc ${i===0?'r1':''}">
 <div class="rn" style="${i===0?'background:rgba(240,192,64,.12);color:var(--gold)':''}">${i+1}</div>
 <div class="ri">
-<div class="rname">${p.name}</div>
+<div class="rname">${p.name}${p.projNo?' <span style="font-size:10.5px;color:var(--tx3);font-weight:400">['+p.projNo+']</span>':''}</div>
 <div class="rmeta">${p.owner?p.owner+' · ':''}${p.evaluator?'Değerlendiren: '+p.evaluator+' · ':''}${p.date}</div>
 <div class="pbar"><div class="pfill" style="width:${pct}%;background:${col}"></div></div></div>
 <div style="text-align:right;flex-shrink:0">
@@ -1393,11 +1634,12 @@ function renderResults(){
 function renderProjects(){
     if(!PROJECTS.length){ $('proj-tbl').innerHTML='<p style="text-align:center;padding:28px;color:var(--tx3)">Henüz proje yok.</p>'; return; }
     const ranked=rankAll();
-    let h=`<table><tr><th>Sıra</th><th>Proje</th><th>Kurum</th><th>Değerlendiren</th><th>Tarih</th><th>C*</th><th></th></tr>`;
+    let h=`<table><tr><th>Sıra</th><th>Girişimci No</th><th>Proje</th><th>Kurum</th><th>Değerlendiren</th><th>Tarih</th><th>C*</th><th></th></tr>`;
     ranked.forEach((p,i)=>{
         const col=i===0?'var(--gold)':i<3?'var(--ac3)':'var(--tx2)';
         h+=`<tr>
 <td style="font-weight:700;color:${col}">#${i+1}</td>
+<td style="color:var(--tx3);font-size:11.5px">${p.projNo||'—'}</td>
 <td style="font-weight:500">${p.name}</td>
 <td style="color:var(--tx2)">${p.owner||'—'}</td>
 <td style="color:var(--tx3)">${p.evaluator||'—'}</td>
@@ -1420,9 +1662,9 @@ function exportCSV(){
     if(!PROJECTS.length){ alert('Proje yok.'); return; }
     const ranked=rankAll();
     const keys=ANP?Object.keys(ANP.globalW):[];
-    let csv='Sıra,Proje,Kurum,Değerlendiren,Tarih,'+keys.join(',')+',D+,D-,C*\n';
+    let csv='Sıra,Girişimci No,Proje,Kurum,Değerlendiren,Tarih,'+keys.join(',')+',D+,D-,C*\n';
     ranked.forEach((p,i)=>{
-        csv+=`${i+1},"${p.name}","${p.owner||''}","${p.evaluator||''}",${p.date},${keys.map(k=>p.scores?.[k]||5).join(',')},${(p.Dp||0).toFixed(6)},${(p.Dn||0).toFixed(6)},${p.Cstar.toFixed(6)}\n`;
+        csv+=`${i+1},"${p.projNo||''}","${p.name}","${p.owner||''}","${p.evaluator||''}",${p.date},${keys.map(k=>p.scores?.[k]||5).join(',')},${(p.Dp||0).toFixed(6)},${(p.Dn||0).toFixed(6)},${p.Cstar.toFixed(6)}\n`;
     });
     const a=Object.assign(document.createElement('a'),{
         href:URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),
