@@ -898,46 +898,33 @@ function _saveProjListLocal(){
     })); }catch(e){}
 }
 
-/* Supabase'e kaydet - anp_weights gibi ayrı sütun yerine JSON string olarak */
+/* Supabase'e kaydet - anp_weights tablosuna project_list_data sütununa */
 async function saveProjListToDB(){
-    if(!USE_DB){ console.warn('USE_DB false, DB kaydı atlandı'); return; }
+    if(!USE_DB) return;
     try{
-        console.log('DB proje listesi kaydediliyor...', PROJ_LIST.length, 'proje');
-        const {data,error} = await DB.from('project_list').upsert({
-            id: 1,
-            data: PROJ_LIST,
-            fname: window._plistFname || '',
-            updated_at: new Date().toISOString()
-        }).select();
-        if(error){ console.error('DB kayıt hatası:', error); }
-        else{ console.log('DB kayıt başarılı:', data); }
-    }catch(e){ console.error('Proje listesi DB kaydı exception:',e); }
+        await DB.from('anp_weights').update({
+            project_list_data: PROJ_LIST,
+            project_list_fname: window._plistFname || ''
+        }).eq('id',1);
+    }catch(e){ console.warn('Proje listesi DB kaydı başarısız:',e); }
 }
 
-/* Supabase'den yükle, yoksa localStorage'a düş */
+/* anp_weights tablosundan proje listesini yükle */
 async function loadProjListFromDB(){
     if(!USE_DB){
-        console.log('USE_DB false, local yükleniyor');
         _loadProjListLocal();
         return;
     }
     try{
-        console.log('DB proje listesi yükleniyor...');
-        const {data,error} = await DB.from('project_list').select('*').eq('id',1).single();
-        console.log('DB yanıt:', {data, error});
-        if(!error && data && data.data && Array.isArray(data.data) && data.data.length > 0){
-            PROJ_LIST = data.data;
-            window._plistFname = data.fname || '';
-            window._plistDate  = data.updated_at
-                ? new Date(data.updated_at).toLocaleDateString('tr-TR')
-                : '';
+        const {data,error} = await DB.from('anp_weights').select('project_list_data,project_list_fname').eq('id',1).single();
+        if(!error && data && data.project_list_data && Array.isArray(data.project_list_data) && data.project_list_data.length > 0){
+            PROJ_LIST = data.project_list_data;
+            window._plistFname = data.project_list_fname || '';
+            window._plistDate  = '';
             _saveProjListLocal();
-            console.log('DB proje listesi yüklendi:', PROJ_LIST.length, 'proje');
             return;
-        } else {
-            console.log('DB boş veya hata, local deneniyor. error:', error, 'data:', data);
         }
-    }catch(e){ console.warn('DB proje listesi exception:',e); }
+    }catch(e){ console.warn('DB proje listesi alınamadı:',e); }
     _loadProjListLocal();
 }
 
