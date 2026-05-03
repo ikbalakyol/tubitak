@@ -681,12 +681,12 @@
 /* ═══════════════════════════════════
    SUPABASE
 ═══════════════════════════════════ */
-const SB_URL = 'https://okdqitbirdgghidamyxl';
+const SB_URL = 'https://okdqitbirdgghidamyxl.supabase.co';
 const SB_KEY = 'sb_publishable_nj7BVGpS-JnvKr4SlGVpAQ_VRnAydQg';
 let DB = null, USE_DB = false;
 
 async function initDB(){
-    if(SB_URL.includes('BURAYA')||SB_KEY.includes('BURAYA')){ setDBBadge(false); toast('Yerel modda çalışıyor','warn'); return; }
+    if(SB_URL.includes('https://okdqitbirdgghidamyxl.supabase.co')||SB_KEY.includes('sb_publishable_nj7BVGpS-JnvKr4SlGVpAQ_VRnAydQg')){ setDBBadge(false); toast('Yerel modda çalışıyor','warn'); return; }
     try{
         DB=window.supabase.createClient(SB_URL,SB_KEY);
         USE_DB=true; setDBBadge(true); toast('Supabase bağlandı!','ok');
