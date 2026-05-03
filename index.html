@@ -685,12 +685,14 @@ const SB_URL = 'https://okdqitbirdgghidamyxl';
 const SB_KEY = 'sb_publishable_nj7BVGpS-JnvKr4SlGVpAQ_VRnAydQg';
 let DB = null, USE_DB = false;
 
-function initDB(){
+async function initDB(){
     if(SB_URL.includes('BURAYA')||SB_KEY.includes('BURAYA')){ setDBBadge(false); toast('Yerel modda çalışıyor','warn'); return; }
     try{
         DB=window.supabase.createClient(SB_URL,SB_KEY);
         USE_DB=true; setDBBadge(true); toast('Supabase bağlandı!','ok');
         loadANPFromDB();
+        await loadProjListFromDB();
+        updateProjListBadge();
     }catch(e){ console.error(e); setDBBadge(false); }
 }
 function setDBBadge(on){
@@ -882,19 +884,55 @@ async function deleteProjFromDB(id){
 
 /* ═══════════════════════════════════
    ★ PERSIST — PROJE LİSTESİ (YÖNETİCİ YÜKLEDİĞİ)
-   localStorage'da kalır, silinene kadar.
+   Öncelik: Supabase DB → yoksa localStorage fallback.
+   Her cihaz/tarayıcıdan aynı listeyi görür.
 ═══════════════════════════════════ */
 const PLIST_KEY = 'tubitak_plist_v35';
 
-function saveProjListLocal(){
+/* localStorage'a yedek kayıt (offline destek) */
+function _saveProjListLocal(){
     try{ localStorage.setItem(PLIST_KEY, JSON.stringify({
         list: PROJ_LIST,
         fname: window._plistFname || '',
-        date: new Date().toLocaleDateString('tr-TR')
-    })); }catch(e){ console.warn('Proje listesi kaydedilemedi:',e); }
+        date: window._plistDate || new Date().toLocaleDateString('tr-TR')
+    })); }catch(e){}
 }
 
-function loadProjListLocal(){
+/* Supabase'e kaydet */
+async function saveProjListToDB(){
+    if(!USE_DB) return;
+    try{
+        await DB.from('project_list').upsert({
+            id: 1,
+            data: PROJ_LIST,
+            fname: window._plistFname || '',
+            updated_at: new Date().toISOString()
+        });
+    }catch(e){ console.warn('Proje listesi DB kaydı başarısız:',e); }
+}
+
+/* Supabase'den yükle, yoksa localStorage'a düş */
+async function loadProjListFromDB(){
+    if(!USE_DB){
+        _loadProjListLocal();
+        return;
+    }
+    try{
+        const {data,error} = await DB.from('project_list').select('*').eq('id',1).single();
+        if(!error && data && data.data && data.data.length > 0){
+            PROJ_LIST = data.data;
+            window._plistFname = data.fname || '';
+            window._plistDate  = data.updated_at
+                ? new Date(data.updated_at).toLocaleDateString('tr-TR')
+                : '';
+            _saveProjListLocal(); // yerel yedeği güncelle
+            return;
+        }
+    }catch(e){ console.warn('DB proje listesi alınamadı, yerel yedek deneniyor:',e); }
+    _loadProjListLocal(); // DB yoksa local'e düş
+}
+
+function _loadProjListLocal(){
     try{
         const s = localStorage.getItem(PLIST_KEY);
         if(s){
@@ -902,18 +940,29 @@ function loadProjListLocal(){
             PROJ_LIST = d.list || [];
             window._plistFname = d.fname || '';
             window._plistDate  = d.date  || '';
-            return PROJ_LIST.length > 0;
         }
-    }catch(e){ console.warn(e); }
-    return false;
+    }catch(e){}
 }
 
-function clearProjList(){
+/* Hem DB hem local'e kaydet */
+async function saveProjListAll(){
+    window._plistDate = new Date().toLocaleDateString('tr-TR');
+    _saveProjListLocal();
+    await saveProjListToDB();
+}
+
+/* Hem DB hem local'den sil */
+async function clearProjList(){
     if(!confirm('Proje listesi silinsin mi? Üyeler bir daha proje seçemez.')) return;
     PROJ_LIST = [];
     window._plistFname = '';
     window._plistDate  = '';
     localStorage.removeItem(PLIST_KEY);
+    if(USE_DB){
+        try{
+            await DB.from('project_list').upsert({id:1, data:[], fname:'', updated_at: new Date().toISOString()});
+        }catch(e){ console.warn(e); }
+    }
     $('nb-plist').textContent = '—';
     renderProjListPage();
     toast('Proje listesi silindi','warn');
@@ -1129,7 +1178,7 @@ function renderExpertList(){
 
 /* ═══════════════════════════════════
    ★ PROJE LİSTESİ EXCEL YÜKLEME (YÖNETİCİ SAYFASI)
-   localStorage'a kaydeder. Üyeler bu listeyi görecek.
+   Supabase DB + localStorage — tüm cihazlar görür.
 ═══════════════════════════════════ */
 function loadProjExcel(file){
     if(!file) return;
@@ -1137,7 +1186,7 @@ function loadProjExcel(file){
         alert('Lütfen .xlsx veya .xls seçin.'); return;
     }
     const reader=new FileReader();
-    reader.onload=e=>{
+    reader.onload=async e=>{
         try{
             const wb=XLSX.read(e.target.result,{type:'array'});
             const ws=wb.Sheets[wb.SheetNames[0]];
@@ -1146,11 +1195,13 @@ function loadProjExcel(file){
             if(!rows.length){ toast('Excel\'de veri bulunamadı.','err'); return; }
             PROJ_LIST=rows;
             window._plistFname=file.name;
-            saveProjListLocal();
+            showLoad('Proje listesi kaydediliyor…');
+            await saveProjListAll();
+            hideLoad();
             updateProjListBadge();
             renderProjListPage();
             toast(rows.length+' proje listesi kaydedildi','ok');
-        }catch(err){ toast('Excel okunamadı: '+err.message,'err'); }
+        }catch(err){ hideLoad(); toast('Excel okunamadı: '+err.message,'err'); }
     };
     reader.readAsArrayBuffer(file);
 }
@@ -1719,9 +1770,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     $('inp-user').addEventListener('keydown',e=>{ if(e.key==='Enter') $('inp-pass').focus(); });
     loadANPLocal();
     loadProjLocal();
-    loadProjListLocal();   // ★ Kalıcı proje listesini yükle
-    updateProjListBadge(); // ★ Sidebar badge
-    initDB();
+    // Önce localStorage'dan yükle (hızlı başlangıç), sonra DB bağlanınca üzerine yazar
+    _loadProjListLocal();
+    updateProjListBadge();
+    initDB(); // ★ DB bağlanınca proje listesini DB'den çeker ve günceller
 });
 </script>
 </body>
