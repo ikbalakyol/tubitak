@@ -218,8 +218,7 @@
 <div id="scr-portal" class="screen show">
     <div class="ps-head">
         <div class="ps-tag">Karar Destek Sistemi</div>
-        <div class="ps-title">TÜBİTAK ANP+TOPSIS</div>
-        <div class="ps-sub">Bağımlı Model · Limit Süperpozisyon · v3.5</div>
+        <div class="ps-title">ANP - TOPSİS TABANLI GİRİŞİMCİ DEĞERLENDİRME PORTALI</div>
         <div class="ps-db warn" id="ps-db-badge">⬤ Bağlanıyor…</div>
     </div>
     <div class="ps-cards">
@@ -237,7 +236,7 @@
             <span class="ps-cta">Giriş →</span>
         </button>
     </div>
-    <div class="ps-foot">TÜBİTAK · ANP+TOPSIS Karar Destek Sistemi · Tez Çalışması</div>
+    <div class="ps-foot">TÜBİTAK · ANP+TOPSIS Karar Destek Sistemi · Eskişehir Teknik Üniversitesi </div>
 </div>
 
 <!-- GİRİŞ -->
@@ -697,7 +696,7 @@ async function initDB(){
 }
 function setDBBadge(on){
     const badge=$('ps-db-badge'),led=$('db-led'),txt=$('db-txt');
-    if(on){ badge.className='ps-db ok'; badge.textContent='⬤ Supabase Bağlı'; led.className='db-led on'; txt.textContent='Supabase Bağlı'; }
+    if(on){ badge.className='ps-db ok'; badge.textContent='⬤ Sistem Aktif'; led.className='db-led on'; txt.textContent='Sistem Aktif'; }
     else  { badge.className='ps-db warn'; badge.textContent='⬤ Yerel Mod'; led.className='db-led local'; txt.textContent='Yerel Mod (localStorage)'; }
 }
 
@@ -721,7 +720,7 @@ function doLogin(){
 
 function setupPortal(type){
     PORTAL=type; const isAdmin=type==='admin';
-    $('sb-tag').textContent=isAdmin?'Yönetici Portalı':'Üye Portalı';
+    $('sb-tag').textContent=isAdmin?'Yönetici Portalı':'Değerlendirici Uzman Portalı';
     $('sb-tag').className='logo-tag '+(isAdmin?'a':'m');
     $('sb-sub').textContent=isAdmin?'Super Decisions Motoru':'Proje Değerlendirme';
     $('nav-admin').style.display=isAdmin?'block':'none';
