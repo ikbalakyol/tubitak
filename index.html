@@ -24,7 +24,7 @@
         #scr-portal{position:fixed;inset:0;z-index:9000;background:#0B132B;flex-direction:column;align-items:center;justify-content:center;padding:24px}
         .ps-head{text-align:center;margin-bottom:44px}
         .ps-tag{font-size:10px;font-weight:700;letter-spacing:.2em;color:#38BDF8;text-transform:uppercase;margin-bottom:8px}
-        .ps-title{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:#FFFFFF;margin-bottom:5px}
+        .ps-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#FFFFFF;margin-bottom:5px}
         .ps-sub{font-size:12.5px;color:#94A3B8}
         .ps-db{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:4px 13px;border-radius:20px;font-size:11px}
         .ps-db.ok{background:rgba(0,191,160,.08);color:var(--ac3);border:1px solid rgba(0,191,160,.2)}
@@ -40,8 +40,8 @@
         .ps-card.member::before{background:linear-gradient(90deg,var(--ac3),#00d4b8)}
         .ps-lock{position:absolute;top:11px;right:11px;font-size:10px;font-weight:700;background:rgba(75,132,245,.1);color:var(--ac);border:1px solid rgba(75,132,245,.2);border-radius:5px;padding:2px 7px}
         .ps-icon{font-size:38px;display:block;margin-bottom:12px}
-        .ps-ctitle{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:8px}
-        .ps-card.admin .ps-ctitle{color:var(--ac)}.ps-card.member .ps-ctitle{color:var(--ac3)}
+        .ps-ctitle{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px}
+        .ps-card.admin .ps-ctitle{#FFFFFF}.ps-card.member .ps-ctitle{#FFFFFF}
         .ps-cdesc{font-size:11.5px;#94A3B8;line-height:1.7;margin-bottom:18px}
         .ps-cta{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:var(--rs);font-size:13px;font-weight:600;font-family:'Syne',sans-serif}
         .ps-card.admin .ps-cta{background:rgba(75,132,245,.1);color:var(--ac);border:1px solid rgba(75,132,245,.2)}
@@ -226,13 +226,13 @@
             <span class="ps-lock">🔒 Şifreli</span>
             <span class="ps-icon">🏛️</span>
             <div class="ps-ctitle">Yönetici Portalı</div>
-            <div class="ps-cdesc">ANP hesaplama, Excel yükleme, matrisler ve tüm proje yönetimi.</div>
+           
             <span class="ps-cta">Giriş Yap →</span>
         </button>
         <button class="ps-card member" onclick="goMember()">
             <span class="ps-icon">📋</span>
             <div class="ps-ctitle">Değerlendirici Uzman Portalı</div>
-            <div class="ps-cdesc">Proje puanlama ve TOPSIS sıralaması. ANP ağırlıkları ile değerlendirme.</div>
+           
             <span class="ps-cta">Giriş →</span>
         </button>
     </div>
@@ -247,7 +247,7 @@
         <div class="al-title">Yönetici Girişi</div>
         <div class="al-sub">Kimlik bilgilerinizi girin</div>
         <label class="al-lbl">Kullanıcı Adı</label>
-        <input class="al-inp" id="inp-user" type="text" placeholder="ikbal / beyza / burak" autocomplete="username">
+        <input class="al-inp" id="inp-user" type="text" placeholder=" Kullanıcı adınızı giriniz " autocomplete="username">
         <label class="al-lbl">Şifre</label>
         <input class="al-inp" id="inp-pass" type="password" placeholder="••••••" autocomplete="current-password">
         <button class="al-btn" onclick="doLogin()">Giriş Yap</button>
