@@ -9,11 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg:#0b0d12;--bg2:#111318;--bg3:#181c24;--bg4:#1f2330;--bg5:#252a38;
-            --bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.11);--bdr3:rgba(255,255,255,.18);
-            --tx:#dde1ec;--tx2:#8890a4;--tx3:#4e5668;
-            --ac:#4b84f5;--ac2:#7c5ce8;--ac3:#00bfa0;--ac4:#f58c4b;
-            --gold:#f0c040;--red:#f0485f;--r:10px;--rs:7px;
+            --bg:#f5f7fa;--bg2:#ffffff;--bg3:#f0f2f6;--bg4:#e8eaf0;--bg5:#dde0e8;
+            --bdr:rgba(0,0,0,.08);--bdr2:rgba(0,0,0,.12);--bdr3:rgba(0,0,0,.18);
+            --tx:#1a1d2e;--tx2:#4a5068;--tx3:#8890a4;
+            --ac:#2563eb;--ac2:#6d28d9;--ac3:#059669;--ac4:#d97706;
+            --gold:#b45309;--red:#dc2626;--r:10px;--rs:7px;
         }
         *{box-sizing:border-box;margin:0;padding:0}
         body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:13.5px;line-height:1.6}
@@ -21,16 +21,16 @@
         .screen{display:none}.screen.show{display:flex}
         #scr-app.show{display:block}
         /* PORTAL */
-        #scr-portal{position:fixed;inset:0;z-index:9000;background:#0B132B;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+        #scr-portal{position:fixed;inset:0;z-index:9000;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;padding:24px}
         .ps-head{text-align:center;margin-bottom:44px}
-        .ps-tag{font-size:10px;font-weight:700;letter-spacing:.2em;color:#38BDF8;text-transform:uppercase;margin-bottom:8px}
-        .ps-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#FFFFFF;margin-bottom:5px}
-        .ps-sub{font-size:12.5px;color:#94A3B8}
+        .ps-tag{font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--ac);text-transform:uppercase;margin-bottom:8px}
+        .ps-title{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:var(--tx);margin-bottom:5px}
+        .ps-sub{font-size:12.5px;color:var(--tx3)}
         .ps-db{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:4px 13px;border-radius:20px;font-size:11px}
         .ps-db.ok{background:rgba(0,191,160,.08);color:var(--ac3);border:1px solid rgba(0,191,160,.2)}
         .ps-db.warn{background:rgba(240,192,64,.08);color:var(--gold);border:1px solid rgba(240,192,64,.2)}
         .ps-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:660px;width:100%}
-        .ps-card{background:#111E38;border-radius:16px;padding:36px 28px;text-align:center;cursor:pointer;border:1.5px solid #111E38;font-family:'DM Sans',sans-serif;transition:all .22s;position:relative;width:100%}
+        .ps-card{background:var(--bg2);border-radius:16px;padding:36px 28px;text-align:center;cursor:pointer;border:1.5px solid var(--bdr2);font-family:'DM Sans',sans-serif;transition:all .22s;position:relative;width:100%}
         .ps-card.admin{border-color:rgba(75,132,245,.25)}
         .ps-card.admin:hover{border-color:rgba(75,132,245,.55);transform:translateY(-3px);box-shadow:0 16px 48px rgba(75,132,245,.1)}
         .ps-card.member{border-color:rgba(0,191,160,.2)}
@@ -40,9 +40,9 @@
         .ps-card.member::before{background:linear-gradient(90deg,var(--ac3),#00d4b8)}
         .ps-lock{position:absolute;top:11px;right:11px;font-size:10px;font-weight:700;background:rgba(75,132,245,.1);color:var(--ac);border:1px solid rgba(75,132,245,.2);border-radius:5px;padding:2px 7px}
         .ps-icon{font-size:38px;display:block;margin-bottom:12px}
-        .ps-ctitle{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px}
-        .ps-card.admin .ps-ctitle{#FFFFFF}.ps-card.member .ps-ctitle{#FFFFFF}
-        .ps-cdesc{font-size:11.5px;#94A3B8;line-height:1.7;margin-bottom:18px}
+        .ps-ctitle{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:8px}
+        .ps-card.admin .ps-ctitle{color:var(--ac)}.ps-card.member .ps-ctitle{color:var(--ac3)}
+        .ps-cdesc{font-size:11.5px;color:var(--tx3);line-height:1.7;margin-bottom:18px}
         .ps-cta{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:var(--rs);font-size:13px;font-weight:600;font-family:'Syne',sans-serif}
         .ps-card.admin .ps-cta{background:rgba(75,132,245,.1);color:var(--ac);border:1px solid rgba(75,132,245,.2)}
         .ps-card.member .ps-cta{background:rgba(0,191,160,.1);color:var(--ac3);border:1px solid rgba(0,191,160,.2)}
@@ -217,8 +217,9 @@
 <!-- PORTAL SEÇİM -->
 <div id="scr-portal" class="screen show">
     <div class="ps-head">
-        <div class="ps-tag">Karar Destek Sistemi</div>
-        <div class="ps-title">ANP - TOPSİS TABANLI GİRİŞİMCİ DEĞERLENDİRME PORTALI</div>
+        <div class="ps-tag">TÜBİTAK · Karar Destek Sistemi</div>
+        <div class="ps-title">ANP-TOPSİS TABANLI GİRİŞİMCİ DEĞERLENDİRME PORTALI</div>
+        
         <div class="ps-db warn" id="ps-db-badge">⬤ Bağlanıyor…</div>
     </div>
     <div class="ps-cards">
@@ -226,17 +227,17 @@
             <span class="ps-lock">🔒 Şifreli</span>
             <span class="ps-icon">🏛️</span>
             <div class="ps-ctitle">Yönetici Portalı</div>
-           
+            <div class="ps-cdesc">ANP hesaplama, matrisler ve tüm proje yönetimi.</div>
             <span class="ps-cta">Giriş Yap →</span>
         </button>
         <button class="ps-card member" onclick="goMember()">
             <span class="ps-icon">📋</span>
             <div class="ps-ctitle">Değerlendirici Uzman Portalı</div>
-           
+            <div class="ps-cdesc">Proje puanlama ve TOPSIS sıralaması. ANP ağırlıkları ile uzman değerlendirmesi.</div>
             <span class="ps-cta">Giriş →</span>
         </button>
     </div>
-    <div class="ps-foot">TÜBİTAK · ANP+TOPSIS Karar Destek Sistemi · Eskişehir Teknik Üniversitesi </div>
+    <div class="ps-foot">TÜBİTAK · ANP+TOPSIS Karar Destek Sistemi · Tez Çalışması</div>
 </div>
 
 <!-- GİRİŞ -->
@@ -247,7 +248,7 @@
         <div class="al-title">Yönetici Girişi</div>
         <div class="al-sub">Kimlik bilgilerinizi girin</div>
         <label class="al-lbl">Kullanıcı Adı</label>
-        <input class="al-inp" id="inp-user" type="text" placeholder=" Kullanıcı adınızı giriniz " autocomplete="username">
+        <input class="al-inp" id="inp-user" type="text" placeholder="Kullanıcı adınızı giriniz" autocomplete="username">
         <label class="al-lbl">Şifre</label>
         <input class="al-inp" id="inp-pass" type="password" placeholder="••••••" autocomplete="current-password">
         <button class="al-btn" onclick="doLogin()">Giriş Yap</button>
@@ -296,14 +297,15 @@
         </div>
         <div id="nav-member" style="display:none">
             <div class="nav-sec" style="padding-top:12px">
-                <div class="nav-lbl">Değerlendirme</div>
+                <div class="nav-lbl">Menü</div>
                 <button class="ni mn" data-p="evaluate"><span class="ni-dot"></span>Proje Değerlendir</button>
-                <button class="ni mn" data-p="about"><span class="ni-dot"></span>Yöntem Hakkında</button>
+                <button class="ni mn" data-p="criteria-info"><span class="ni-dot"></span>Kriterler Hakkında</button>
+                <button class="ni mn" data-p="user-guide"><span class="ni-dot"></span>Portal Kullanma Kılavuzu</button>
             </div>
         </div>
         <button class="sw-btn" onclick="goPortalSelect()">🔄 <span>Portal Değiştir</span></button>
         <div class="sb-foot">
-            ANP+TOPSIS v3.5 · Tez Çalışması<br>
+            ANP+TOPSIS  · Eskişehir Teknik Üniversitesi <br>
             <div class="db-row"><span class="db-led" id="db-led"></span><span id="db-txt">Yerel Mod</span></div>
         </div>
     </nav>
@@ -506,6 +508,18 @@
                 <div id="infl-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
             </div>
 
+            <!-- KRİTERLER HAKKINDA -->
+            <div class="page" id="page-criteria-info">
+                <div class="ph"><div><h1 class="pt">Kriterler Hakkında</h1><p class="psd">Değerlendirme boyutları ve açıklamaları</p></div></div>
+                <div id="criteria-info-body"></div>
+            </div>
+
+            <!-- PORTAL KULLANMA KILAVUZU -->
+            <div class="page" id="page-user-guide">
+                <div class="ph"><div><h1 class="pt">Portal Kullanma Kılavuzu</h1><p class="psd">Uzman değerlendirici rehberi</p></div></div>
+                <div id="user-guide-body"></div>
+            </div>
+
             <!-- DEĞERLENDİRME -->
             <div class="page" id="page-evaluate">
                 <div class="ph">
@@ -565,13 +579,13 @@
                                     </div>
 
                                     <!-- Otomatik dolan bilgiler (salt okunur) -->
-                                    <div class="proj-info-box" id="proj-info-grid">
-                                        <div><div class="pif-label">Girişimci No</div><div class="pif-val" id="pf-no">—</div></div>
-                                        <div><div class="pif-label">Proje Adı</div><div class="pif-val" id="pf-name" style="color:var(--ac3)">—</div></div>
-                                        <div><div class="pif-label">Kurum</div><div class="pif-val" id="pf-owner">—</div></div>
-                                        <div><div class="pif-label">Proje Türü</div><div class="pif-val" id="pf-type">—</div></div>
-                                        <div><div class="pif-label">Bütçe (TL)</div><div class="pif-val" id="pf-budget">—</div></div>
-                                        <div><div class="pif-label">Süre (Ay)</div><div class="pif-val" id="pf-dur">—</div></div>
+                                    <div class="proj-info-box" id="proj-info-grid" style="grid-template-columns:1fr 2fr">
+                                        <div><div class="pif-label">Girişimci No (Otomatik)</div><div class="pif-val" id="pf-no" style="color:var(--ac);font-family:monospace;font-size:14px">—</div></div>
+                                        <div><div class="pif-label">Ad / İsim</div><div class="pif-val" id="pf-name" style="color:var(--ac3)">—</div></div>
+                                        <div style="display:none"><div class="pif-label">Kurum</div><div class="pif-val" id="pf-owner">—</div></div>
+                                        <div style="display:none"><div class="pif-label">Proje Türü</div><div class="pif-val" id="pf-type">—</div></div>
+                                        <div style="display:none"><div class="pif-label">Bütçe (TL)</div><div class="pif-val" id="pf-budget">—</div></div>
+                                        <div style="display:none"><div class="pif-label">Süre (Ay)</div><div class="pif-val" id="pf-dur">—</div></div>
                                     </div>
 
                                     <!-- Sadece bu alan manuel girilir -->
@@ -696,7 +710,7 @@ async function initDB(){
 }
 function setDBBadge(on){
     const badge=$('ps-db-badge'),led=$('db-led'),txt=$('db-txt');
-    if(on){ badge.className='ps-db ok'; badge.textContent='⬤ Sistem Aktif'; led.className='db-led on'; txt.textContent='Sistem Aktif'; }
+    if(on){ badge.className='ps-db ok'; badge.textContent='⬤  Sistem Aktif'; led.className='db-led on'; txt.textContent=' Sistem Aktif'; }
     else  { badge.className='ps-db warn'; badge.textContent='⬤ Yerel Mod'; led.className='db-led local'; txt.textContent='Yerel Mod (localStorage)'; }
 }
 
@@ -725,7 +739,7 @@ function setupPortal(type){
     $('sb-sub').textContent=isAdmin?'Super Decisions Motoru':'Proje Değerlendirme';
     $('nav-admin').style.display=isAdmin?'block':'none';
     $('nav-member').style.display=isAdmin?'none':'block';
-    $('tb-portal').textContent=isAdmin?'🏛️ '+ME:'📋 Üye';
+    $('tb-portal').textContent=isAdmin?'🏛️ '+ME:'🎓 Uzman';
     $('tb-portal').style.cssText=isAdmin
         ?'background:rgba(75,132,245,.1);color:var(--ac);border:1px solid rgba(75,132,245,.2)'
         :'background:rgba(0,191,160,.1);color:var(--ac3);border:1px solid rgba(0,191,160,.2)';
@@ -751,6 +765,8 @@ const PM={
     'sd-submat':['Alt Kriter Matrisleri','Geometrik ortalama karşılaştırma'],
     'sd-influence':['Etki / Bağımlılık','Grup arası etkileşimler'],
     evaluate:['Proje Değerlendirme','Saaty 1-9 puanlama + ANP-TOPSIS'],
+    'criteria-info':['Kriterler Hakkında','Değerlendirme kriterleri ve açıklamaları'],
+    'user-guide':['Portal Kullanma Kılavuzu','Uzmanlar için kullanım rehberi'],
     results:['TOPSIS Sıralaması','C* skoruna göre tüm projeler'],
     projects:['Değerlendirme Listesi','Kayıtlı değerlendirmeler'],
     about:['Yöntem & Formüller','ANP ve TOPSIS temelleri'],
@@ -772,6 +788,8 @@ function nav(id){
     if(id==='results')        loadProjAndRender();
     if(id==='projects')       loadProjAndRender();
     if(id==='upload')         renderUploadStatus();
+    if(id==='criteria-info')  renderCriteriaInfo();
+    if(id==='user-guide')     renderUserGuide();
     if(id==='projlist')       renderProjListPage();
 }
 
@@ -1175,6 +1193,9 @@ function renderExpertList(){
    ★ PROJE LİSTESİ EXCEL YÜKLEME (YÖNETİCİ SAYFASI)
    Supabase DB + localStorage — tüm cihazlar görür.
 ═══════════════════════════════════ */
+/* Excel'de "Ad" veya "İsim" başlıklı sütunu otomatik bulur.
+   Girişimci No otomatik üretilir: 2026-01-01, 2026-01-02 ...
+   PROJ_LIST her satır için {no, name, raw, colIdx} saklar. */
 function loadProjExcel(file){
     if(!file) return;
     if(!['xlsx','xls'].includes(file.name.split('.').pop().toLowerCase())){
@@ -1186,16 +1207,36 @@ function loadProjExcel(file){
             const wb=XLSX.read(e.target.result,{type:'array'});
             const ws=wb.Sheets[wb.SheetNames[0]];
             const raw=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-            const rows=raw.slice(1).filter(r=>r&&(r[0]!==''||r[1]!==''));
+            if(!raw.length){ toast('Excel boş.','err'); return; }
+
+            // Başlık satırında "ad" veya "isim" içeren sütunu bul (büyük/küçük harf duyarsız)
+            const headers = raw[0].map(h => String(h||'').trim().toLowerCase());
+            let nameColIdx = headers.findIndex(h => h==='ad' || h==='isim' || h.includes('ad') || h.includes('isim'));
+            
+            if(nameColIdx === -1){
+                toast('⚠ "Ad" veya "İsim" başlıklı sütun bulunamadı! Başlık satırını kontrol edin.','err');
+                return;
+            }
+
+            // Veri satırlarını al (başlık hariç), seçilen sütun dolu olanlar
+            const rows = raw.slice(1).filter(r => r && String(r[nameColIdx]||'').trim() !== '');
             if(!rows.length){ toast('Excel\'de veri bulunamadı.','err'); return; }
-            PROJ_LIST=rows;
-            window._plistFname=file.name;
+
+            // Her satır için otomatik girişimci no üret: 2026-01-XX
+            PROJ_LIST = rows.map((r, i) => {
+                const seq = String(i+1).padStart(2,'0');
+                const autoNo = '2026-01-' + seq;
+                return { no: autoNo, name: String(r[nameColIdx]||'').trim(), raw: r, colIdx: nameColIdx };
+            });
+
+            window._plistFname = file.name;
+            window._plistNameCol = headers[nameColIdx]; // hangi başlıktan okundu
             showLoad('Proje listesi kaydediliyor…');
             await saveProjListAll();
             hideLoad();
             updateProjListBadge();
             renderProjListPage();
-            toast(rows.length+' proje listesi kaydedildi','ok');
+            toast(rows.length + ' kayıt yüklendi. Sütun: "' + raw[0][nameColIdx] + '"', 'ok');
         }catch(err){ hideLoad(); toast('Excel okunamadı: '+err.message,'err'); }
     };
     reader.readAsArrayBuffer(file);
@@ -1232,20 +1273,18 @@ function renderProjListPage(){
     zone.classList.add('loaded');
     lbl.textContent='✓ '+( window._plistFname||'liste.xlsx')+' ('+PROJ_LIST.length+' proje) — Değiştirmek için yeni dosya yükle';
 
-    // Önizleme tablosu
-    let h=`<div style="max-height:420px;overflow-y:auto">
+    // Önizleme tablosu - otomatik girişimci no ve bulunan ad/isim sütunu
+    const colLabel = window._plistNameCol ? '"'+window._plistNameCol+'" sütunu' : 'Ad/İsim';
+    let h=`<div style="margin-bottom:8px;font-size:11.5px;color:var(--ac3)">
+✓ Tespit edilen sütun: <strong>${colLabel}</strong></div>
+<div style="max-height:420px;overflow-y:auto">
 <table>
-<tr><th>#</th><th>Girişimci No</th><th>Proje Adı</th><th>Kurum</th><th>Proje Türü</th><th>Bütçe</th><th>Süre</th></tr>`;
-    PROJ_LIST.forEach((r,i)=>{
-        const bud=parseFloat(r[4]);
+<tr><th>#</th><th>Girişimci No (Otomatik)</th><th>${colLabel}</th></tr>`;
+    PROJ_LIST.forEach((p,i)=>{
         h+=`<tr>
 <td style="color:var(--tx3)">${i+1}</td>
-<td style="font-weight:600;color:var(--ac3)">${r[0]||'—'}</td>
-<td style="font-weight:500">${r[1]||'—'}</td>
-<td style="color:var(--tx2)">${r[2]||'—'}</td>
-<td style="color:var(--tx3)">${r[3]||'—'}</td>
-<td style="color:var(--tx3)">${isNaN(bud)?r[4]||'—':bud.toLocaleString('tr-TR')+' ₺'}</td>
-<td style="color:var(--tx3)">${r[5]?r[5]+' ay':'—'}</td>
+<td style="font-weight:700;color:var(--ac3);font-family:monospace">${p.no||'—'}</td>
+<td style="font-weight:500">${p.name||'—'}</td>
 </tr>`;
     });
     previewEl.innerHTML=h+'</table></div>';
@@ -1472,12 +1511,11 @@ function initEval(){
 function populateProjDropdown(){
     const sel=$('proj-select');
     sel.innerHTML='<option value="">— Proje seçiniz —</option>';
-    PROJ_LIST.forEach((r,i)=>{
-        const no=String(r[0]||'').trim();
-        const ad=String(r[1]||'').trim()||('Proje '+(i+1));
+    PROJ_LIST.forEach((p,i)=>{
         const opt=document.createElement('option');
         opt.value=i;
-        opt.textContent=no?`[${no}]  ${ad}`:ad;
+        // Sadece ad/isim göster - girişimci no otomatik üretiliyor
+        opt.textContent=p.name||('Girişimci '+(i+1));
         sel.appendChild(opt);
     });
     fillProjFields(); // sıfırla
@@ -1494,14 +1532,13 @@ function fillProjFields(){
         ['pf-no','pf-name','pf-owner','pf-type','pf-budget','pf-dur'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent='—'; });
         box.classList.remove('active-box'); return;
     }
-    const r=PROJ_LIST[idx];
-    $('pf-no').textContent    = String(r[0]||'—').trim();
-    $('pf-name').textContent  = String(r[1]||'—').trim();
-    $('pf-owner').textContent = String(r[2]||'—').trim();
-    $('pf-type').textContent  = String(r[3]||'—').trim();
-    const bud=parseFloat(r[4]);
-    $('pf-budget').textContent= isNaN(bud)?(r[4]||'—'):bud.toLocaleString('tr-TR')+' ₺';
-    $('pf-dur').textContent   = r[5]?String(r[5]).trim()+' ay':'—';
+    const p=PROJ_LIST[idx];
+    $('pf-no').textContent    = p.no || '—';        // Otomatik üretilen girişimci no
+    $('pf-name').textContent  = p.name || '—';      // Excel 1. sütun (ad/isim)
+    $('pf-owner').textContent = '—';
+    $('pf-type').textContent  = '—';
+    $('pf-budget').textContent= '—';
+    $('pf-dur').textContent   = '—';
     box.classList.add('active-box');
 }
 
@@ -1514,13 +1551,13 @@ function goStep2FromList(){
     const evalName=$('peval-name').value.trim();
     if(isNaN(idx)||!PROJ_LIST[idx]){ alert('Lütfen listeden bir proje seçin.'); return; }
     if(!evalName){ alert('Değerlendiren adı zorunludur.'); $('peval-name').focus(); return; }
-    const r=PROJ_LIST[idx];
-    $('pname').value   = String(r[1]||'').trim();
-    $('powner').value  = String(r[2]||'').trim();
-    $('pbudget').value = r[4]||'';
-    $('pdur').value    = r[5]||'';
-    window._evalProjNo   = String(r[0]||'').trim();
-    window._evalProjType = String(r[3]||'').trim();
+    const p=PROJ_LIST[idx];
+    $('pname').value   = p.name || '';   // ad/isim proje adı olarak kullanılır
+    $('powner').value  = '';
+    $('pbudget').value = '';
+    $('pdur').value    = '';
+    window._evalProjNo   = p.no || '';   // otomatik girişimci no
+    window._evalProjType = '';
     ME=evalName;
     $('tb-user').textContent=ME;
     goStep2();
@@ -1558,7 +1595,9 @@ function setScore(g,s,v){
     evalScores[`${g}_${s}`]=v;
     for(let i=1;i<=9;i++){ const b=document.getElementById(`sb-${g}-${s}-${i}`); if(b) b.className=i===v?'sb9 sel':'sb9'; }
     const l=document.getElementById(`sl-${g}-${s}`);
-    if(l) l.textContent=`Seçilen: ${v} — ${S9[v]}`;
+    if(l){ l.textContent=`Seçilen: ${v} — ${S9[v]}`; l.style.color='var(--ac3)'; }
+    // Seçilen butonun outline'ını temizle
+    for(let i=1;i<=9;i++){ const b=document.getElementById(`sb-${g}-${s}-${i}`); if(b) b.style.outline=''; }
 }
 
 function goStep1(){
@@ -1604,8 +1643,16 @@ async function doTOPSIS(){
     const keys=Object.keys(ANP.globalW);
     const missing=keys.filter(k=>!evalScores[k]);
     if(missing.length){
-        if(!confirm(`${missing.length} kriter puanlanmadı. Bunlar 5 (Orta) alınacak. Devam?`)) return;
-        missing.forEach(k=>{ evalScores[k]=5; const [g,s]=k.split('_'); setScore(g,s,5); });
+        // Eksik kriterleri göster ve kullanıcıyı bilgilendir
+        const missingNames = missing.map(k=>{ const [g,s]=k.split('_'); return s+' — '+SF[s]; });
+        alert('⚠️ Aşağıdaki ' + missing.length + ' kriter puanlanmamış:\n\n' + missingNames.join('\n') + '\n\nLütfen tüm kriterleri eksiksiz doldurunuz. Boş bırakılan alan kabul edilmez.');
+        // Sayfayı ilk eksik kritere kaydır
+        const firstMissing = missing[0];
+        const [fg, fs] = firstMissing.split('_');
+        const el = document.getElementById('sb-' + fg + '-' + fs + '-1');
+        if(el){ el.scrollIntoView({behavior:'smooth', block:'center'}); el.style.outline='2px solid var(--red)'; setTimeout(()=>el.style.outline='',2000); }
+        hideLoad();
+        return;
     }
     showLoad('TOPSIS hesaplanıyor…');
     const tmpProj=[...PROJECTS,{scores:{...evalScores}}];
@@ -1739,6 +1786,179 @@ function exportCSV(){
     });
     a.click(); URL.revokeObjectURL(a.href);
     toast('CSV indirildi','ok');
+}
+
+/* ═══════════════════════════════════
+   KRİTERLER SAYFASI
+═══════════════════════════════════ */
+function renderCriteriaInfo(){
+    const el = document.getElementById('criteria-info-body');
+    const groups = [
+        {
+            no:'1', name:'Teknoloji Grubu', color:'#2563eb', icon:'🔬',
+            items:[
+                {code:'T1', name:'Projenin Özgünlüğü ve Yenilikçi Yönü',
+                 desc:'Mevcut projelerden farkı, taklit edilemez oluşu ve sektöre veya literatüre getirdiği yeni yaklaşım.'},
+                {code:'T2', name:'Teknoloji Düzeyi',
+                 desc:'Kullanılan teknolojinin güncelliği ve karmaşıklığı ile birlikte teknolojide gelinen noktayı ifade eder. Projenin teorik bir fikirden öteye geçerek; kavram doğrulaması, konsept tasarımı ve prototip aşamalarına ulaşma derecesini kapsar.'},
+                {code:'T3', name:'Ar-Ge Niteliği',
+                 desc:'Bilimsel yöntemlerle yapılan araştırma ve geliştirme derinliği ile projenin fikri mülkiyet hakları kapsamında korunabilirliği ve tescil potansiyeli.'},
+            ]
+        },
+        {
+            no:'2', name:'Ekip Grubu', color:'#6d28d9', icon:'👥',
+            items:[
+                {code:'E1', name:'Ekip Yetkinliği',
+                 desc:'Uzmanlıkların proje ihtiyaçlarını karşılama düzeyi.'},
+                {code:'E2', name:'Teknik/Ticari Birikim',
+                 desc:'Ekibin geçmişteki iş ve akademik deneyimleri.'},
+                {code:'E3', name:'Ekip Uyumu ve Motivasyonu',
+                 desc:'Üyelerin birlikte çalışma pratiği, iletişim gücü ve projenin ortak amaçlarına yönelik vizyoner uyumu ile grubun projeye olan inancı ve bitirme isteği.'},
+            ]
+        },
+        {
+            no:'3', name:'Pazar Grubu', color:'#059669', icon:'📊',
+            items:[
+                {code:'P1', name:'Pazar Büyüklüğü ve Potansiyeli',
+                 desc:'Ürünün hitap ettiği pazarın toplam hacmi ve büyüme hızı.'},
+                {code:'P2', name:'Hedef Kitle Tanımı',
+                 desc:'Potansiyel müşterilerin kim olduğunun netliği.'},
+                {code:'P3', name:'Gelir Modeli',
+                 desc:'Ürünün satılabilirliği ve gelir modeli netliği.'},
+                {code:'P4', name:'Projenin Ölçeklenebilirliği',
+                 desc:'Projenin ölçeklenebilirlik kapasitesi veya pazarlara uyarlanabilme potansiyeli.'},
+            ]
+        },
+        {
+            no:'4', name:'Uygulama Grubu', color:'#d97706', icon:'⚙️',
+            items:[
+                {code:'U1', name:'Projenin Uygulanabilirliği',
+                 desc:'Mevcut teknik ve fiziksel imkânların projeyi başarıyla tamamlamaya yetmesi ile birlikte; projenin faaliyet alanına ilişkin ilgili yasal mevzuat ve düzenlemelerin uyum sağlayabilir nitelikte olmasını ifade eder.'},
+                {code:'U2', name:'Faaliyet Uygunluğu',
+                 desc:'Seçilen yöntemlerin proje amaçlarına hizmet etmesi.'},
+                {code:'U3', name:'İş Planının Uygunluğu',
+                 desc:'Zaman çizelgesinin ve iş paketlerinin uygunluğu.'},
+            ]
+        },
+        {
+            no:'5', name:'Finans Grubu', color:'#b45309', icon:'💰',
+            items:[
+                {code:'F1', name:'Bütçe ve Maliyet Etkinliği',
+                 desc:'Harcanacak paranın verimli ve dengeli kullanımı.'},
+                {code:'F2', name:'Beklenen Kâr',
+                 desc:'Yatırımın sonucunda elde edilecek finansal kazanç.'},
+                {code:'F3', name:'Ekonomik Getiri',
+                 desc:'Projenin ülke ekonomisine veya yatırımcıya sağlayacağı katma değer.'},
+            ]
+        }
+    ];
+
+    let h = '';
+    groups.forEach(g => {
+        h += `<div class="card" style="margin-bottom:16px;border-left:4px solid ${g.color}">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+<span style="font-size:22px">${g.icon}</span>
+<div>
+<div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:${g.color}">${g.no}. ${g.name}</div>
+</div></div>`;
+        g.items.forEach(item => {
+            h += `<div style="margin-bottom:12px;padding:12px 14px;background:var(--bg3);border-radius:var(--rs);border-left:3px solid ${g.color}40">
+<div style="font-weight:600;font-size:13px;color:var(--tx);margin-bottom:4px">
+<span style="display:inline-block;background:${g.color}20;color:${g.color};padding:1px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-right:7px">${item.code}</span>
+${item.name}
+</div>
+<div style="font-size:12.5px;color:var(--tx2);line-height:1.7">${item.desc}</div>
+</div>`;
+        });
+        h += '</div>';
+    });
+    el.innerHTML = h;
+}
+
+/* ═══════════════════════════════════
+   KULLANIM KILAVUZU SAYFASI
+═══════════════════════════════════ */
+function renderUserGuide(){
+    const el = document.getElementById('user-guide-body');
+    el.innerHTML = `
+<div class="g2" style="margin-bottom:16px">
+<div class="card" style="border-left:4px solid var(--ac)">
+<div class="card-t" style="color:var(--ac)">📋 Genel Bakış</div>
+<div style="font-size:13px;color:var(--tx2);line-height:1.8">
+Bu portal, TÜBİTAK girişimcilik projelerinin <strong style="color:var(--tx)">ANP (Analitik Ağ Süreci)</strong> ve <strong style="color:var(--tx)">TOPSIS</strong> yöntemleriyle bilimsel olarak değerlendirilmesi için tasarlanmıştır. Her uzman, kendisine atanan projeleri bağımsız olarak puanlar; sistem otomatik olarak C* skorunu hesaplayarak sıralama oluşturur.
+</div>
+</div>
+<div class="card" style="border-left:4px solid var(--ac3)">
+<div class="card-t" style="color:var(--ac3)">🎯 Değerlendirme Ölçeği</div>
+<div style="font-size:13px;color:var(--tx2);line-height:1.8">
+Tüm kriterler <strong style="color:var(--tx)">Saaty 1-9 ölçeği</strong> ile puanlanır:<br>
+<span style="display:inline-block;margin-top:6px">
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>1</strong> — Çok Zayıf</span>
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>2</strong> — Zayıf</span>
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>3</strong> — Ortanın Altı</span>
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>4</strong> — Orta-Alt</span>
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>5</strong> — Orta</span>
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>6</strong> — Orta-Üst</span>
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>7</strong> — İyi</span>
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>8</strong> — Çok İyi</span>
+<span style="background:var(--bg3);padding:2px 8px;border-radius:4px;margin:2px;display:inline-block"><strong>9</strong> — Mükemmel</span>
+</span>
+</div>
+</div>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+<div class="card-t">🪜 Adım Adım Değerlendirme Süreci</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px">
+<div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac)">
+<div style="font-size:22px;margin-bottom:8px">1️⃣</div>
+<div style="font-weight:700;font-size:13px;color:var(--tx);margin-bottom:6px">Proje Seç</div>
+<div style="font-size:12px;color:var(--tx2);line-height:1.7">Sol menüden <strong>Proje Değerlendir</strong>'e tıklayın. Açılan listeden size atanan projeyi seçin. Proje bilgileri otomatik dolacaktır.</div>
+</div>
+<div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac2)">
+<div style="font-size:22px;margin-bottom:8px">2️⃣</div>
+<div style="font-weight:700;font-size:13px;color:var(--tx);margin-bottom:6px">Adınızı Girin</div>
+<div style="font-size:12px;color:var(--tx2);line-height:1.7">Değerlendiren adı alanına adınızı ve soyadınızı yazın. Tarih otomatik kaydedilir. <strong>Devam</strong> butonuna basın.</div>
+</div>
+<div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac3)">
+<div style="font-size:22px;margin-bottom:8px">3️⃣</div>
+<div style="font-weight:700;font-size:13px;color:var(--tx);margin-bottom:6px">Kriterleri Puanla</div>
+<div style="font-size:12px;color:var(--tx2);line-height:1.7">16 kriter için 1-9 arası puan seçin. <strong>Tüm alanlar zorunludur.</strong> Eksik bırakılan kriter varsa sistem uyarı verir.</div>
+</div>
+</div>
+</div>
+
+<div class="g2" style="margin-bottom:16px">
+<div class="card" style="border-left:4px solid var(--ac4)">
+<div class="card-t" style="color:var(--ac4)">⚠️ Dikkat Edilmesi Gerekenler</div>
+<ul style="font-size:13px;color:var(--tx2);line-height:2;padding-left:18px">
+<li>Her proje için <strong style="color:var(--tx)">bağımsız</strong> değerlendirme yapınız.</li>
+<li>Puanlamada diğer uzmanlarla <strong style="color:var(--tx)">koordinasyon sağlamayınız.</strong></li>
+<li>Aynı projeyi <strong style="color:var(--tx)">birden fazla kez</strong> değerlendirmeyiniz.</li>
+<li>Puanlarınızı proje sunumuna ve belgelerine dayanarak veriniz.</li>
+<li>Tüm 16 kriteri eksiksiz doldurunuz; boş bırakılan alan kabul edilmez.</li>
+</ul>
+</div>
+<div class="card" style="border-left:4px solid var(--ac3)">
+<div class="card-t" style="color:var(--ac3)">📈 C* Skoru Ne Anlama Gelir?</div>
+<div style="font-size:13px;color:var(--tx2);line-height:1.8">
+Değerlendirmeniz tamamlandığında sistem <strong style="color:var(--tx)">C* (TOPSIS yakınlık katsayısı)</strong> skorunu hesaplar.<br><br>
+<span style="display:block;padding:8px 12px;background:var(--bg3);border-radius:6px;margin-bottom:6px"><strong style="color:var(--ac3)">C* > 0.60</strong> → Öncelikli proje</span>
+<span style="display:block;padding:8px 12px;background:var(--bg3);border-radius:6px;margin-bottom:6px"><strong style="color:var(--gold)">0.40 ≤ C* ≤ 0.60</strong> → İncelemede</span>
+<span style="display:block;padding:8px 12px;background:var(--bg3);border-radius:6px"><strong style="color:var(--ac2)">C* < 0.40</strong> → Düşük öncelik</span>
+</div>
+</div>
+</div>
+
+<div class="card" style="border-left:4px solid var(--tx3)">
+<div class="card-t">❓ Sık Sorulan Sorular</div>
+<div style="font-size:13px;color:var(--tx2);line-height:1.9">
+<strong style="color:var(--tx)">Listede projem görünmüyor?</strong> Yönetici henüz proje listesini yüklememiş olabilir, lütfen bekleyiniz.<br>
+<strong style="color:var(--tx)">Kaydetmeden çıkarsam ne olur?</strong> Değerlendirme yalnızca "TOPSIS Hesapla & Kaydet" butonuna basıldığında kaydedilir.<br>
+<strong style="color:var(--tx)">Aynı projeyi tekrar değerlendirebilir miyim?</strong> Teknik olarak mümkün olsa da her proje bir kez değerlendirilmelidir.<br>
+<strong style="color:var(--tx)">Puan değiştirmek istiyorum?</strong> Sayfayı yenileyip aynı projeyi yeniden değerlendirin, yöneticinize eski kaydı silmesini belirtin.
+</div>
+</div>`;
 }
 
 /* ═══════════════════════════════════
