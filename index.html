@@ -228,11 +228,11 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 <button class="ps-card member" onclick="goMember()">
 <span class="ps-icon"> 📋 </span>
 <div class="ps-ctitle">Değerlendirici Uzman Portalı</div>
-<div class="ps-cdesc">Proje puanlama ve ANP ağırlıklı TOPSIS sıralaması. Saaty 1-9 ölçeği ile değerlendirme.</div>
+<div class="ps-cdesc">Proje puanlama ve ANP ağırlıklı  sıralaması. Saaty 1-9 ölçeği ile değerlendirme.</div>
 <span class="ps-cta">Giriş →</span>
 </button>
 </div>
-<div class="ps-foot">TÜBİTAK · ANP+TOPSIS Karar Destek Sistemi · Eskişehir Teknik Üniversitesi</div>
+<div class="ps-foot">TÜBİTAK · ANP+ Karar Destek Sistemi · Eskişehir Teknik Üniversitesi</div>
 </div>
 <div id="scr-login" class="screen">
 <div class="al-box">
@@ -252,7 +252,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 <nav class="sidebar">
 <div class="logo-wrap">
 <div class="logo-tag a" id="sb-tag">Yönetici Portalı</div>
-<div class="logo-h">TÜBİTAK<br>ANP+TOPSIS</div>
+<div class="logo-h">TÜBİTAK<br>ANP+</div>
 <div class="logo-s" id="sb-sub">Limit Süperpozisyon Motoru</div>
 </div>
 <div id="nav-admin">
@@ -278,7 +278,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 </div>
 <div class="nav-sec">
 <div class="nav-lbl">Projeler</div>
-<button class="ni an" data-p="results"><span class="ni-dot"></span>TOPSIS Sıralaması<span class="ni-badge" id="nb-res">0</span></button>
+<button class="ni an" data-p="results"><span class="ni-dot"></span> Sıralaması<span class="ni-badge" id="nb-res">0</span></button>
 <button class="ni an" data-p="projects"><span class="ni-dot"></span>Değerlendirme Listesi</button>
 </div>
 <div class="nav-sec">
@@ -296,7 +296,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 </div>
 <button class="sw-btn" onclick="goPortalSelect()"> 🔄  <span>Portal Değiştir</span></button>
 <div class="sb-foot">
-ANP+TOPSIS · Eskişehir Teknik Üniversitesi<br>
+ANP+ · Eskişehir Teknik Üniversitesi<br>
 <div class="db-row"><span class="db-led" id="db-led"></span><span id="db-txt">Yerel Mod</span></div>
 </div>
 </nav>
@@ -316,7 +316,7 @@ ANP+TOPSIS · Eskişehir Teknik Üniversitesi<br>
 <div class="content">
 <div class="page" id="page-dashboard">
 <div class="ph">
-<div><h1 class="pt">Sistem Özeti</h1><p class="psd">ANP + TOPSIS entegre karar destek sistemi.</p></div>
+<div><h1 class="pt">Sistem Özeti</h1><p class="psd">ANP +  entegre karar destek sistemi.</p></div>
 <div style="display:flex;gap:8px">
 <button class="btn bo" onclick="nav('upload')">↑ ANP Excel</button>
 <button class="btn bp" onclick="nav('evaluate')">+ Proje Değerlendir</button>
@@ -547,7 +547,7 @@ ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event
 <div id="score-form"></div>
 <div style="display:flex;gap:10px;margin-top:16px">
 <button class="btn bo" onclick="goStep1()">← Geri</button>
-<button class="btn bs" onclick="doTOPSIS()" style="flex:1;justify-content:center">✓ TOPSIS Hesapla & Kaydet</button>
+<button class="btn bs" onclick="do()" style="flex:1;justify-content:center">✓  Hesapla & Kaydet</button>
 </div>
 </div>
 <div id="es3" style="display:none"><div id="eval-result"></div></div>
@@ -555,7 +555,7 @@ ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event
 </div>
 <div class="page" id="page-results">
 <div class="ph">
-<div><h1 class="pt">TOPSIS Sıralaması</h1><p class="psd">ANP ağırlıklı C* skoruna göre tüm projeler.</p></div>
+<div><h1 class="pt"> Sıralaması</h1><p class="psd">ANP ağırlıklı C* skoruna göre tüm projeler.</p></div>
 <div style="display:flex;gap:8px">
 <button class="btn bo" onclick="loadProjAndRender()"> ↺  Yenile</button>
 <button class="btn bo" onclick="exportCSV()">↓ CSV</button>
@@ -1531,20 +1531,63 @@ const ln=document.getElementById('sl'+i); if(ln) ln.className='stepline'+(i<s?' 
 TOPSIS HESAPLAMA
 ════════════════════════════════════════  */
 function rankAll() {
-if (!PROJECTS.length || !ANP) return [];
-const keys  = Object.keys(ANP.globalW);
-const W     = keys.map(k => ANP.globalW[k]);
-const mat   = PROJECTS.map(p => keys.map(k => p.scores?.[k]||1));
-const cN    = keys.map((_,j) => Math.sqrt(mat.reduce((s,r) => s+r[j]**2, 0)));
-const nm    = mat.map(r => r.map((v,j) => cN[j]>0 ? v/cN[j] : 0));
-const wm    = nm.map(r => r.map((v,j) => v*W[j]));
-const Ap    = keys.map((_,j) => Math.max(...wm.map(r=>r[j])));
-const An    = keys.map((_,j) => Math.min(...wm.map(r=>r[j])));
-return PROJECTS.map((p,i) => {
-const Dp=Math.sqrt(keys.reduce((s,_,j) => s+(wm[i][j]-Ap[j])**2, 0));
-const Dn=Math.sqrt(keys.reduce((s,_,j) => s+(wm[i][j]-An[j])**2, 0));
-return {...p, Dp, Dn, Cstar: (Dp+Dn)>0 ? Dn/(Dp+Dn) : 0};
-}).sort((a,b)=>b.Cstar-a.Cstar);
+    if (!PROJECTS.length || !ANP) return [];
+    
+    // 1. Projeleri numarasına veya ismine göre grupla
+    const grouped = {};
+    PROJECTS.forEach(p => {
+        const key = p.projNo || p.name;
+        if (!grouped[key]) {
+            grouped[key] = {
+                base: p,
+                evaluators: [],
+                scoresList: []
+            };
+        }
+        if (p.evaluator) {
+            grouped[key].evaluators.push(p.evaluator);
+        }
+        grouped[key].scoresList.push(p.scores);
+    });
+
+    // 2. Gruplanan projelerin kriter puanlarının ortalamasını al
+    const keys = Object.keys(ANP.globalW);
+    const aggregatedProjects = Object.values(grouped).map(g => {
+        const avgScores = {};
+        keys.forEach(k => {
+            let sum = 0, count = 0;
+            g.scoresList.forEach(s => {
+                const val = s[k] || 1;
+                sum += val;
+                count++;
+            });
+            avgScores[k] = count > 0 ? sum / count : 1;
+        });
+        
+        // Değerlendirenleri virgülle birleştir
+        const uniqueEvaluators = [...new Set(g.evaluators)];
+        
+        return {
+            ...g.base,
+            evaluator: uniqueEvaluators.join(', '),
+            scores: avgScores
+        };
+    });
+
+    // 3. TOPSIS adımlarını ortalaması alınmış veriye uygula
+    const W     = keys.map(k => ANP.globalW[k]);
+    const mat   = aggregatedProjects.map(p => keys.map(k => p.scores?.[k]||1));
+    const cN    = keys.map((_,j) => Math.sqrt(mat.reduce((s,r) => s+r[j]**2, 0)));
+    const nm    = mat.map(r => r.map((v,j) => cN[j]>0 ? v/cN[j] : 0));
+    const wm    = nm.map(r => r.map((v,j) => v*W[j]));
+    const Ap    = keys.map((_,j) => Math.max(...wm.map(r=>r[j])));
+    const An    = keys.map((_,j) => Math.min(...wm.map(r=>r[j])));
+    
+    return aggregatedProjects.map((p,i) => {
+        const Dp = Math.sqrt(keys.reduce((s,_,j) => s+(wm[i][j]-Ap[j])**2, 0));
+        const Dn = Math.sqrt(keys.reduce((s,_,j) => s+(wm[i][j]-An[j])**2, 0));
+        return {...p, Dp, Dn, Cstar: (Dp+Dn)>0 ? Dn/(Dp+Dn) : 0};
+    }).sort((a,b) => b.Cstar - a.Cstar);
 }
 async function doTOPSIS() {
 const name=$('pname').value.trim();
