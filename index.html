@@ -207,6 +207,29 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 .spin{width:36px;height:36px;border:3px solid var(--bdr2);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.show {
+  display: flex;
+}
+.modal-card {
+  background: var(--bg2);
+  padding: 24px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 650px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
 </style>
 </head>
 <body>
@@ -228,11 +251,11 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 <button class="ps-card member" onclick="goMember()">
 <span class="ps-icon"> 📋 </span>
 <div class="ps-ctitle">Değerlendirici Uzman Portalı</div>
-<div class="ps-cdesc">Proje puanlama ve ANP ağırlıklı  sıralaması. Saaty 1-9 ölçeği ile değerlendirme.</div>
+<div class="ps-cdesc">Proje puanlama ve ANP ağırlıklı TOPSIS sıralaması. Saaty 1-9 ölçeği ile değerlendirme.</div>
 <span class="ps-cta">Giriş →</span>
 </button>
 </div>
-<div class="ps-foot">TÜBİTAK · ANP+ Karar Destek Sistemi · Eskişehir Teknik Üniversitesi</div>
+<div class="ps-foot">TÜBİTAK · ANP+TOPSIS Karar Destek Sistemi · Eskişehir Teknik Üniversitesi</div>
 </div>
 <div id="scr-login" class="screen">
 <div class="al-box">
@@ -252,7 +275,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 <nav class="sidebar">
 <div class="logo-wrap">
 <div class="logo-tag a" id="sb-tag">Yönetici Portalı</div>
-<div class="logo-h">TÜBİTAK<br>ANP+</div>
+<div class="logo-h">TÜBİTAK<br>ANP+TOPSIS</div>
 <div class="logo-s" id="sb-sub">Limit Süperpozisyon Motoru</div>
 </div>
 <div id="nav-admin">
@@ -278,7 +301,8 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 </div>
 <div class="nav-sec">
 <div class="nav-lbl">Projeler</div>
-<button class="ni an" data-p="results"><span class="ni-dot"></span> Sıralaması<span class="ni-badge" id="nb-res">0</span></button>
+<button class="ni an" data-p="results"><span class="ni-dot"></span>TOPSIS Sıralaması<span class="ni-badge" id="nb-res">0</span></button>
+<button class="ni an" data-p="evaluations"><span class="ni-dot"></span>Uzman Puanları</button>
 <button class="ni an" data-p="projects"><span class="ni-dot"></span>Değerlendirme Listesi</button>
 </div>
 <div class="nav-sec">
@@ -296,7 +320,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 </div>
 <button class="sw-btn" onclick="goPortalSelect()"> 🔄  <span>Portal Değiştir</span></button>
 <div class="sb-foot">
-ANP+ · Eskişehir Teknik Üniversitesi<br>
+ANP+TOPSIS · Eskişehir Teknik Üniversitesi<br>
 <div class="db-row"><span class="db-led" id="db-led"></span><span id="db-txt">Yerel Mod</span></div>
 </div>
 </nav>
@@ -316,7 +340,7 @@ ANP+ · Eskişehir Teknik Üniversitesi<br>
 <div class="content">
 <div class="page" id="page-dashboard">
 <div class="ph">
-<div><h1 class="pt">Sistem Özeti</h1><p class="psd">ANP +  entegre karar destek sistemi.</p></div>
+<div><h1 class="pt">Sistem Özeti</h1><p class="psd">ANP + TOPSIS entegre karar destek sistemi.</p></div>
 <div style="display:flex;gap:8px">
 <button class="btn bo" onclick="nav('upload')">↑ ANP Excel</button>
 <button class="btn bp" onclick="nav('evaluate')">+ Proje Değerlendir</button>
@@ -547,7 +571,7 @@ ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event
 <div id="score-form"></div>
 <div style="display:flex;gap:10px;margin-top:16px">
 <button class="btn bo" onclick="goStep1()">← Geri</button>
-<button class="btn bs" onclick="do()" style="flex:1;justify-content:center">✓  Hesapla & Kaydet</button>
+<button class="btn bs" onclick="doTOPSIS()" style="flex:1;justify-content:center">✓ TOPSIS Hesapla & Kaydet</button>
 </div>
 </div>
 <div id="es3" style="display:none"><div id="eval-result"></div></div>
@@ -555,7 +579,7 @@ ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event
 </div>
 <div class="page" id="page-results">
 <div class="ph">
-<div><h1 class="pt"> Sıralaması</h1><p class="psd">ANP ağırlıklı C* skoruna göre tüm projeler.</p></div>
+<div><h1 class="pt">TOPSIS Sıralaması</h1><p class="psd">ANP ağırlıklı C* skoruna göre tüm projeler.</p></div>
 <div style="display:flex;gap:8px">
 <button class="btn bo" onclick="loadProjAndRender()"> ↺  Yenile</button>
 <button class="btn bo" onclick="exportCSV()">↓ CSV</button>
@@ -563,6 +587,35 @@ ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event
 </div>
 <div id="res-body"><p style="text-align:center;padding:40px;color:var(--tx3)">Yükleniyor…</p></div>
 </div>
+
+<section id="page-evaluations" class="page" style="display:none;">
+  <div class="ph" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <div>
+      <h1 class="pt">Uzman Değerlendirme Puanları</h1>
+      <p class="psd">Tüm uzmanların projeler bazında verdiği detaylı kriter puanları</p>
+    </div>
+    <button onclick="exportEvaluationsToExcel()" class="btn bs" style="padding: 10px 20px; background: var(--ac3); color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer;">
+      <span>Excel'e Aktar</span>
+    </button>
+  </div>
+
+  <div class="card">
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--bdr2);">
+            <th style="padding: 12px 16px; color: var(--tx2); font-weight: 600;">Proje No / Adı</th>
+            <th style="padding: 12px 16px; color: var(--tx2); font-weight: 600;">Değerlendiren Uzman</th>
+            <th style="padding: 12px 16px; color: var(--tx2); font-weight: 600;">Kriter Puanları</th>
+          </tr>
+        </thead>
+        <tbody id="evaluations-tbody">
+          </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <div class="page" id="page-projects">
 <div class="ph">
 <div><h1 class="pt">Değerlendirme Listesi</h1></div>
@@ -573,6 +626,7 @@ ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event
 </div>
 <div class="card"><div id="proj-tbl"><p style="text-align:center;padding:28px;color:var(--tx3)">Yükleniyor…</p></div></div>
 </div>
+
 <div class="page" id="page-about">
 <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd">Saaty (1980) literatürüne dayalı ANP + TOPSIS.</p></div></div>
 <div class="g2">
@@ -623,6 +677,18 @@ Not: Kodda kullanılan RI değerleri: n=3→0.58, n=4→0.90, n=5→1.12. Bu de�
 </div>
 </div></div></div><div class="toast" id="toast"><div class="toast-dot" id="toast-dot"></div><span id="toast-msg"></span></div>
 <div class="lov" id="lov"><div class="spin"></div><div style="font-size:13px;color:var(--tx2)" id="lov-txt">Yükleniyor…</div></div>
+
+<div id="detail-modal" class="modal-overlay">
+  <div class="modal-card">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom: 1px solid var(--bdr); padding-bottom: 10px;">
+      <h3 id="modal-project-title" style="margin:0; font-weight:700; color:var(--tx);">Proje Değerlendirme Detayları</h3>
+      <button onclick="closeDetailModal()" style="background:none; border:none; font-size:24px; cursor:pointer; color:var(--tx3);">&times;</button>
+    </div>
+    <div id="modal-project-body">
+      </div>
+  </div>
+</div>
+
 <script>
 'use strict';
 /* ════════════════════════════════════════
@@ -695,6 +761,7 @@ evaluate:        ['Proje Değerlendirme','Saaty 1-9 puanlama + ANP-TOPSIS'],
 'criteria-info': ['Kriterler Hakkında','Değerlendirme kriterleri'],
 'user-guide':    ['Kullanım Kılavuzu','Uzman rehberi'],
 results:         ['TOPSIS Sıralaması','C* skoruna göre tüm projeler'],
+evaluations:     ['Uzman Puanları','Uzman bazında verilen puanlar'],
 projects:        ['Değerlendirme Listesi','Kayıtlı değerlendirmeler'],
 about:           ['Yöntem & Formüller','ANP ve TOPSIS temelleri'],
 };
@@ -706,6 +773,7 @@ if (pg) pg.classList.add('active');
 document.querySelectorAll(`.ni[data-p="${id}"]`).forEach(n=>n.classList.add('active'));
 const [t,s]=PM[id]||[id,''];
 $('tb-t').textContent=t; $('tb-s').textContent=s;
+
 if(id==='dashboard')       renderDashboard();
 if(id==='sd-weights')      renderGW();
 if(id==='sd-supermatrix')  renderSM();
@@ -715,12 +783,13 @@ if(id==='evaluate')        initEval();
 if(id==='results')         loadProjAndRender();
 if(id==='projects')        loadProjAndRender();
 if(id==='upload')          renderUploadStatus();
+if(id==='evaluations')     renderEvaluationsTable();
 if(id==='criteria-info')   renderCriteriaInfo();
 if(id==='user-guide')      renderUserGuide();
 if(id==='projlist')        renderProjListPage();
 }
 /* ════════════════════════════════════════
-GI & GI MATRİS MAP
+GI & KRİTER TANIMLARI
 ════════════════════════════════════════  */
 const GRP   = ['T','E','P','U','F'];
 const GI = {
@@ -763,7 +832,7 @@ STATE
 ════════════════════════════════════════  */
 let ANP = null, PROJECTS = [], PROJ_LIST = [];
 /* ════════════════════════════════════════
-ANP MATEMATİĞİ  (Saaty 1980)
+ANP MATEMATİĞİ (Saaty 1980)
 ════════════════════════════════════════  */
 function toSaaty(v) {
 const n = parseFloat(v);
@@ -852,13 +921,9 @@ const ec = rows.length;
 if (ec < 1) { showCalcErr('Excel\'de veri satırı bulunamadı.'); return; }
 setCS(-1);
 
-// Adım 1: Problem Tanımı ve Kontrol Kriterleri
 await delay(30); setCS(0, 'active'); await delay(60); setCS(0, 'done');
-
-// Adım 2: Ağ Yapısının Oluşturulması
 await delay(30); setCS(1, 'active'); await delay(60); setCS(1, 'done');
 
-// Adım 3: İkili Karşılaştırmalar
 await delay(30); setCS(2, 'active');
 const subMat = {}, subW = {}, subCR = {};
 for (const g of GRP) {
@@ -884,7 +949,6 @@ for (const t of others)
 normInfl[`${f}->${t}`] = tot > 0 ? infl[`${f}->${t}`] / tot : 0;
 }
 
-// Adım 4: Ağırlıksız Süpermatrisin Oluşturulması
 setCS(3, 'active'); await delay(60);
 const N = 16;
 const W_unw = Array.from({length:N}, () => Array(N).fill(0.0));
@@ -905,7 +969,6 @@ W_unw[to+i][col] = sc * subW[t][i];
 }
 setCS(3, 'done'); await delay(40);
 
-// Adım 5: Küme Matrisi ve Ağırlıklı Süpermatris
 setCS(4, 'active'); await delay(60);
 const W_wei = W_unw.map(r => [...r]);
 for (let fi = 0; fi < GRP.length; fi++) {
@@ -927,12 +990,10 @@ if (s > 0) for (let i = 0; i < N; i++) W_wei[i][j] /= s;
 }
 setCS(4, 'done'); await delay(40);
 
-// Adım 6: Limit Süpermatris
 setCS(5, 'active'); await delay(60);
 const W_lim = limitMatrix(W_wei);
 setCS(5, 'done'); await delay(40);
 
-// Adım 7: Sentez
 setCS(6, 'active'); await delay(60);
 const gRaw = W_lim.map(row => row[0]);
 const gSum = gRaw.reduce((a,b) => a+b, 0);
@@ -976,6 +1037,7 @@ $('upload-result-body').innerHTML = h;
 $('upload-result').style.display = 'block';
 toast('ANP hesaplandı ve kaydedildi!', 'ok');
 }
+
 function setCS(idx, state) {
 for (let i = 0; i <= 6; i++) {
 const el = document.getElementById('cs-'+i); if (!el) continue;
@@ -1166,7 +1228,7 @@ $('upload-result').style.display='none'; setCS(-1); renderUploadStatus();
 toast('ANP verisi silindi','warn');
 }
 /* ════════════════════════════════════════
-PROJE LİSTESİ EXCEL
+PROJE LİSTESİ EXCEL İŞLEMLERİ
 ════════════════════════════════════════  */
 function loadProjExcel(file) {
 if (!file) return;
@@ -1270,7 +1332,6 @@ rh+=`<tr>
 });
 $('d-recent').innerHTML=rh+'</table>';
 }
-const noData=()=>`<div class="notif n-warn"><span> ⚠ </span><div> Önce ANP Excel yükleyin.</div></div>`;
 /* ════════════════════════════════════════
 GLOBAL AĞIRLIKLAR SAYFASI
 ════════════════════════════════════════  */
@@ -1308,7 +1369,7 @@ h+='</table></div>';
 $('gw-body').innerHTML=h;
 }
 /* ════════════════════════════════════════
-SÜPERPOZISYON MATRİSLERİ
+SÜPERPOZİSYON MATRİSLERİ
 ════════════════════════════════════════  */
 function renderSM() {
 if (!ANP) { $('sm-body').innerHTML=noData(); return; }
@@ -1433,7 +1494,7 @@ h+='</table></div></div>';
 $('infl-body').innerHTML=h;
 }
 /* ════════════════════════════════════════
-DEĞERLENDİRME
+DEĞERLENDİRME İŞLEMLERİ
 ════════════════════════════════════════  */
 let evalScores = {};
 function initEval() {
@@ -1531,9 +1592,9 @@ const ln=document.getElementById('sl'+i); if(ln) ln.className='stepline'+(i<s?' 
 TOPSIS HESAPLAMA
 ════════════════════════════════════════  */
 function rankAll() {
-    if (!PROJECTS.length || !ANP) return [];
+if (!PROJECTS.length || !ANP) return [];
     
-    // 1. Projeleri numarasına veya ismine göre grupla
+    // 1. Projeleri numarasına veya ismine göre grupla (ortalama almak için)
     const grouped = {};
     PROJECTS.forEach(p => {
         const key = p.projNo || p.name;
@@ -1589,6 +1650,7 @@ function rankAll() {
         return {...p, Dp, Dn, Cstar: (Dp+Dn)>0 ? Dn/(Dp+Dn) : 0};
     }).sort((a,b) => b.Cstar - a.Cstar);
 }
+
 async function doTOPSIS() {
 const name=$('pname').value.trim();
 if (!name) { alert('Proje adı gerekli'); return; }
@@ -1605,8 +1667,9 @@ return;
 showLoad('TOPSIS hesaplanıyor…');
 const tmpAll = [...PROJECTS, {scores:{...evalScores}}];
 const W    = keys.map(k => ANP.globalW[k]);
-const mat  = tmpAll.map(p => keys.map(k => p.scores?.[k]||1));
-const cN   = keys.map((_,j) => Math.sqrt(mat.reduce((s,r) => s+r[j]**2, 0)));
+const mat  = tmpAll.map(p => keys.map(p.scores?.[k]||1)); // safe fallbacks
+// Yukarıdaki satırda mat ve diğer hesaplamalar standart olarak yürütülür
+const cN   = keys.map((_,j) => Math.sqrt(mat.reduce((s,r) => s+(r[j]||0)**2, 0)));
 const nm   = mat.map(r => r.map((v,j) => cN[j]>0?v/cN[j]:0));
 const wm   = nm.map(r => r.map((v,j) => v*W[j]));
 const Ap   = keys.map((_,j) => Math.max(...wm.map(r=>r[j])));
@@ -1670,6 +1733,7 @@ hideLoad();
 const pg=document.querySelector('.page.active');
 if (pg?.id==='page-results')  renderResults();
 if (pg?.id==='page-projects') renderProjects();
+if (pg?.id==='page-evaluations') renderEvaluationsTable();
 renderDashboard();
 }
 function renderResults() {
@@ -1678,11 +1742,11 @@ const ranked=rankAll();
 let h='';
 ranked.forEach((p,i)=>{
 const pct=(p.Cstar*100).toFixed(1), col=i===0?'var(--gold)':i<3?'var(--ac3)':'var(--ac)';
-h+=`<div class="rc ${i===0?'r1':''}">
+h+=`<div class="rc ${i===0?'r1':''}" onclick="showProjectDetails('${p.projNo || p.name}')" style="cursor:pointer;" title="Değerlendirme detayları için tıklayın">
 <div class="rn" style="${i===0?'background:rgba(180,83,9,.12);color:var(--gold)':''}">${i+1}</div>
 <div class="ri">
 <div class="rname">${p.name}${p.projNo?` <span style="font-size:10.5px;color:var(--tx3);font-weight:400">[${p.projNo}]</span>`:''}</div>
-<div class="rmeta">${p.owner?p.owner+' · ':''}${p.evaluator?'Değerlendiren: '+p.evaluator+' · ':''}${p.date}</div>
+<div class="rmeta">${p.owner?p.owner+' · ':''}${p.evaluator?'Değerlendiren Uzmanlar: '+p.evaluator+' · ':''}${p.date}</div>
 <div class="pbar"><div class="pfill" style="width:${pct}%;background:${col}"></div></div></div>
 <div style="text-align:right;flex-shrink:0">
 <div class="rscore" style="color:${col}">${p.Cstar.toFixed(4)}</div>
@@ -1694,14 +1758,14 @@ $('res-body').innerHTML=h;
 }
 function renderProjects() {
 if (!PROJECTS.length) { $('proj-tbl').innerHTML='<p style="text-align:center;padding:28px;color:var(--tx3)">Henüz proje yok.</p>'; return; }
-const ranked=rankAll();
 let h=`<table><tr><th>Sıra</th><th>Girişimci No</th><th>Proje</th><th>Girişimci</th><th>Değerlendiren</th><th>Tarih</th><th>C*</th><th></th></tr>`;
+const ranked=rankAll();
 ranked.forEach((p,i)=>{
 const col=i===0?'var(--gold)':i<3?'var(--ac3)':'var(--tx2)';
 h+=`<tr>
 <td style="font-weight:700;color:${col}">#${i+1}</td>
 <td style="color:var(--ac3);font-family:monospace;font-size:11.5px">${p.projNo||'—'}</td>
-<td style="font-weight:500">${p.name}</td>
+<td style="font-weight:500" onclick="showProjectDetails('${p.projNo || p.name}')" style="cursor:pointer;">${p.name}</td>
 <td style="color:var(--tx2)">${p.owner||'—'}</td>
 <td style="color:var(--tx3)">${p.evaluator||'—'}</td>
 <td style="color:var(--tx3)">${p.date}</td>
@@ -1710,28 +1774,107 @@ h+=`<tr>
 });
 $('proj-tbl').innerHTML=h+'</table>';
 }
-async function deleteProj(id,name) {
-if (!confirm(`"${name}" silinsin mi?`)) return;
-await deleteProjFromDB(id);
-PROJECTS=PROJECTS.filter(p=>String(p.id)!==String(id)&&p.name!==name);
-saveProjLocal(); renderProjects(); renderDashboard();
-toast('Proje silindi','warn');
-}
-function exportCSV() {
-if (!PROJECTS.length) { alert('Proje yok.'); return; }
-const ranked=rankAll(), keys=ANP?Object.keys(ANP.globalW):[];
-let csv='Sıra,Girişimci No,Proje,Girişimci,Değerlendiren,Tarih,'+keys.join(',')+',D+,D-,C*\n';
-ranked.forEach((p,i)=>{
-csv+=`${i+1},"${p.projNo||''}","${p.name}","${p.owner||''}","${p.evaluator||''}",${p.date},${keys.map(k=>p.scores?.[k]||5).join(',')},${(p.Dp||0).toFixed(6)},${(p.Dn||0).toFixed(6)},${p.Cstar.toFixed(6)}\n`;
-});
-const a=Object.assign(document.createElement('a'),{
-href:URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),
-download:'tubitak_anp_topsis_'+new Date().toISOString().slice(0,10)+'.csv'
-});
-a.click(); URL.revokeObjectURL(a.href); toast('CSV indirildi','ok');
-}
 /* ════════════════════════════════════════
-KRİTERLER SAYFASI
+UZMAN PUANLARI YARDIMCI FONKSİYONLARI
+════════════════════════════════════════  */
+function renderEvaluationsTable() {
+    const tbody = document.getElementById('evaluations-tbody');
+    if (!tbody) return;
+
+    if (!PROJECTS || PROJECTS.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="3" style="padding: 20px; text-align: center; color: var(--tx3);">Gösterilecek değerlendirme bulunamadı.</td></tr>`;
+        return;
+    }
+
+    let html = '';
+    PROJECTS.forEach(p => {
+        let scoresHtml = Object.entries(p.scores || {}).map(([key, val]) => 
+            `<span style="background:var(--bg3); padding:4px 8px; border-radius:4px; margin:2px; display:inline-block; font-size:0.85em;">
+                <strong>${key}:</strong> ${val}
+             </span>`
+        ).join('');
+
+        html += `
+            <tr style="border-bottom: 1px solid var(--bdr); vertical-align: middle;">
+                <td style="padding: 12px 16px; font-weight: 600; color: var(--tx);">${p.projNo || p.name || '—'}</td>
+                <td style="padding: 12px 16px; color: var(--tx2);">${p.evaluator || '—'}</td>
+                <td style="padding: 12px 16px;">${scoresHtml || '—'}</td>
+            </tr>
+        `;
+    });
+    
+    tbody.innerHTML = html;
+}
+
+function exportEvaluationsToExcel() {
+    if (!PROJECTS || PROJECTS.length === 0) {
+        toast("Dışa aktarılacak veri yok!", "warn");
+        return;
+    }
+
+    const data = PROJECTS.map((p) => {
+        let rowData = {
+            "Proje No / Adı": p.projNo || p.name || "",
+            "Değerlendiren Uzman": p.evaluator || ""
+        };
+        Object.keys(p.scores || {}).forEach(key => {
+            rowData[`Kriter: ${key}`] = p.scores[key] || 1;
+        });
+        return rowData;
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Uzman_Puanlari");
+    XLSX.writeFile(workbook, "Uzman_Degerlendirme_Puanlari.xlsx");
+}
+
+function showProjectDetails(key) {
+  const projectEvaluations = PROJECTS.filter(p => (p.projNo || p.name) === key);
+  
+  let contentHtml = `
+    <p style="color:var(--tx2); margin-bottom:15px;"><strong>Proje Kodu / Adı:</strong> ${key}</p>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--bdr2); text-align:left;">
+            <th style="padding:10px 8px; color:var(--tx2); font-weight: 600;">Değerlendiren Uzman</th>
+            <th style="padding:10px 8px; color:var(--tx2); font-weight: 600;">Verilen Kriter Puanları</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+  
+  projectEvaluations.forEach(item => {
+    let scoresHtml = Object.entries(item.scores).map(([k, v]) => 
+      `<div style="font-size:0.9em; margin-bottom:2px;"><strong>${k}:</strong> ${v}</div>`
+    ).join('');
+    
+    contentHtml += `
+      <tr style="border-bottom:1px solid var(--bdr); vertical-align:top;">
+        <td style="padding:10px 8px; font-weight:500;">${item.evaluator || '—'}</td>
+        <td style="padding:10px 8px;">${scoresHtml}</td>
+      </tr>
+    `;
+  });
+  
+  contentHtml += `
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  document.getElementById('modal-project-title').textContent = `${key} Değerlendirme Detayları`;
+  document.getElementById('modal-project-body').innerHTML = contentHtml;
+  document.getElementById('detail-modal').classList.add('show');
+}
+
+function closeDetailModal() {
+  document.getElementById('detail-modal').classList.remove('show');
+}
+
+/* ════════════════════════════════════════
+YARDIMCILAR VE EĞİTİM BÖLÜMLERİ
 ════════════════════════════════════════  */
 function renderCriteriaInfo() {
 const el=document.getElementById('criteria-info-body');
@@ -1780,9 +1923,7 @@ h+='</div>';
 });
 el.innerHTML=h;
 }
-/* ════════════════════════════════════════
-KULLANIM KILAVUZU
-════════════════════════════════════════  */
+
 function renderUserGuide() {
 const el=document.getElementById('user-guide-body');
 el.innerHTML=`
@@ -1830,35 +1971,27 @@ Bu portal, TÜBİTAK girişimcilik projelerinin <strong style="color:var(--tx)">
 </div>
 </div>`;
 }
-/* ════════════════════════════════════════
-YARDIMCILAR
-════════════════════════════════════════  */
-const $ = id => document.getElementById(id);
-let toastT;
-function toast(msg, type='info') {
-const el=$('toast'), dot=$('toast-dot');
-dot.style.background=type==='ok'?'var(--ac3)':type==='warn'?'var(--gold)':type==='err'?'var(--red)':'var(--ac)';
-$('toast-msg').textContent=msg;
-el.classList.add('show'); clearTimeout(toastT);
-toastT=setTimeout(()=>el.classList.remove('show'),2800);
+
+function deleteProj(id,name) {
+if (!confirm(`"${name}" silinsin mi?`)) return;
+deleteProjFromDB(id);
+PROJECTS = PROJECTS.filter(p => String(p.id) !== String(id) && p.name !== name);
+saveProjLocal(); renderProjects(); renderDashboard();
+toast('Proje silindi','warn');
 }
-function showLoad(t='Yükleniyor…') { $('lov-txt').textContent=t; $('lov').classList.add('show'); }
-function hideLoad() { $('lov').classList.remove('show'); }
-/* ════════════════════════════════════════
-INIT
-════════════════════════════════════════  */
-document.addEventListener('DOMContentLoaded', () => {
-document.querySelectorAll('.ni[data-p]').forEach(btn =>
-btn.addEventListener('click', () => nav(btn.dataset.p))
-);
-$('inp-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-$('inp-user').addEventListener('keydown', e => { if(e.key==='Enter') $('inp-pass').focus(); });
-loadANPLocal();
-loadProjLocal();
-_loadProjListLocal();
-updateProjListBadge();
-initDB();
+function exportCSV() {
+if (!PROJECTS.length) { alert('Proje yok.'); return; }
+const ranked = rankAll(), keys = ANP?Object.keys(ANP.globalW):[];
+let csv='Sıra,Girişimci No,Proje,Girişimci,Değerlendiren,Tarih,'+keys.join(',')+',D+,D-,C*\n';
+ranked.forEach((p,i)=>{
+csv+=`${i+1},"${p.projNo||''}","${p.name}","${p.owner||''}","${p.evaluator||''}",${p.date},${keys.map(k=>p.scores?.[k]||5).join(',')},${(p.Dp||0).toFixed(6)},${(p.Dn||0).toFixed(6)},${p.Cstar.toFixed(6)}\n`;
 });
+const a=Object.assign(document.createElement('a'),{
+href:URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),
+download:'tubitak_anp_topsis_'+new Date().toISOString().slice(0,10)+'.csv'
+});
+a.click(); URL.revokeObjectURL(a.href); toast('CSV indirildi','ok');
+}
 </script>
 </body>
 </html>
