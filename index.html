@@ -1132,23 +1132,56 @@ function loadANPLocal(){
 async function loadANPFromDB(){
   if(!USE_DB)return;
   try{
-    const{data,error}=await DB.from('anp_weights').select('*').order('created_at',{ascending:false}).limit(1);
-    if(!error&&data&&data.length>0){
-      const r=data[0];
-      ANP={expertCount:r.expert_count,fname:r.filename,date:new Date(r.created_at).toLocaleDateString('tr-TR'),
-        globalW:r.global_weights,mainW:r.main_weights,subW:r.sub_weights,subCR:r.sub_cr,mainCR:r.main_cr,
-        experts:r.experts||[],W_lim:r.w_lim,W_unw:r.w_lim,W_wei:r.w_lim,subMat:null,mainMat:null,inflRaw:{},normInfl:{}};
-      saveANPLocal(); updateANPBadges();
+    const {data, error} = await DB.from('anp_weights').select('*').order('created_at',{ascending:false}).limit(1);
+    if(!error && data && data.length > 0){
+      const r = data[0];
+      ANP = {
+        expertCount: r.expert_count,
+        fname: r.filename,
+        date: new Date(r.created_at).toLocaleDateString('tr-TR'),
+        globalW: r.global_weights,
+        mainW: r.main_weights,
+        subW: r.sub_weights,
+        subCR: r.sub_cr,
+        mainCR: r.main_cr,
+        experts: r.experts || [],
+        W_lim: r.w_lim,
+        // Yeni Eklenenler (Veritabanından çekiliyor):
+        W_unw: r.w_unw || r.w_lim,
+        W_wei: r.w_wei || r.w_lim,
+        subMat: r.sub_mat || null,
+        mainMat: r.main_mat || null,
+        inflRaw: r.infl_raw || {},
+        normInfl: r.norm_infl || {}
+      };
+      saveANPLocal(); 
+      updateANPBadges();
     }
-  }catch(e){ console.warn(e); }
+  } catch(e) { console.warn("Veri çekme hatası:", e); }
 }
 async function saveANPToDB(a){
   if(!USE_DB)return;
   try{
-    await DB.from('anp_weights').upsert({id:1,expert_count:a.expertCount,filename:a.fname,
-      global_weights:a.globalW,main_weights:a.mainW,sub_weights:a.subW,sub_cr:a.subCR,
-      main_cr:a.mainCR,experts:a.experts,w_lim:a.W_lim});
-  }catch(e){ console.warn(e); }
+    await DB.from('anp_weights').upsert({
+      id: 1,
+      expert_count: a.expertCount,
+      filename: a.fname,
+      global_weights: a.globalW,
+      main_weights: a.mainW,
+      sub_weights: a.subW,
+      sub_cr: a.subCR,
+      main_cr: a.mainCR,
+      experts: a.experts,
+      w_lim: a.W_lim,
+      // Yeni Eklenenler (Veritabanına gönderiliyor):
+      w_unw: a.W_unw,
+      w_wei: a.W_wei,
+      sub_mat: a.subMat,
+      main_mat: a.mainMat,
+      infl_raw: a.inflRaw,
+      norm_infl: a.normInfl
+    });
+  } catch(e) { console.warn("Kaydetme hatası:", e); }
 }
 
 /* ═══════════ PERSIST — PROJELER ═══════════ */
