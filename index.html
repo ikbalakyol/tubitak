@@ -202,41 +202,78 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 .modal-overlay.show{display:flex}
 .modal-card{background:var(--bg2);padding:24px;border-radius:12px;width:90%;max-width:650px;max-height:80vh;overflow-y:auto;box-shadow:0 10px 25px rgba(0,0,0,.15)}
 
-/* ── YENİ: Uzman Değerlendirme Tablosu ── */
-.eval-expert-grid{overflow-x:auto;padding-bottom:6px}
-.eval-expert-table{border-collapse:separate;border-spacing:0;min-width:600px;width:100%}
-.eval-expert-table th{padding:0;border:none}
-.eval-expert-table td{padding:0;border:none}
+/* ── Uzman Değerlendirme — Kart Sütun Düzeni ── */
+.eval-expert-grid{
+  display:flex;
+  flex-direction:row;
+  gap:0;
+  overflow-x:auto;
+  padding-bottom:6px;
+  align-items:flex-start;
+  border-radius:12px;
+  overflow:hidden;
+}
+.eval-expert-col{
+  flex:1;
+  min-width:200px;
+  display:flex;
+  flex-direction:column;
+}
 .exp-col-head{
-  padding:12px 16px 14px;
+  padding:16px 16px 14px;
   background:var(--bg3);
   border:1px solid var(--bdr2);
-  border-radius:10px 10px 0 0;
+  border-bottom:none;
   text-align:center;
-  min-width:160px;
 }
-.exp-col-head-inner{display:flex;flex-direction:column;align-items:center;gap:5px}
-.exp-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.exp-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--tx);white-space:nowrap}
-.exp-count{font-size:10px;color:var(--tx3)}
-.eval-proj-cell{
-  padding:10px 14px;
-  border:1px solid var(--bdr);
+.eval-expert-col:first-child .exp-col-head{border-radius:10px 0 0 0}
+.eval-expert-col:last-child .exp-col-head{border-radius:0 10px 0 0}
+.exp-col-head-inner{display:flex;flex-direction:column;align-items:center;gap:6px}
+.exp-avatar{width:44px;height:44px;border-radius:50%;color:#000;font-family:'Syne',sans-serif;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.exp-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--tx);white-space:nowrap}
+.exp-count{font-size:10.5px;color:var(--tx3)}
+.eval-cards-list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  padding:10px;
+  background:var(--bg3);
+  border:1px solid var(--bdr2);
   border-top:none;
-  background:var(--bg2);
-  cursor:pointer;
-  transition:background .15s;
-  vertical-align:middle;
+  min-height:80px;
+  flex:1;
 }
-.eval-proj-cell:hover{background:var(--bg3)}
-.eval-proj-cell.empty{cursor:default;background:var(--bg3);opacity:.55}
-.eval-proj-cell.empty:hover{background:var(--bg3)}
-.eval-proj-inner{display:flex;flex-direction:column;gap:3px}
-.eval-proj-no{font-size:10px;color:var(--ac3);font-family:monospace;font-weight:700}
-.eval-proj-name{font-size:12px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
-.eval-cstar{font-size:11px;color:var(--gold);font-weight:700;font-family:'Syne',sans-serif}
-.eval-date{font-size:10px;color:var(--tx3)}
-.proj-label-col{min-width:0;width:1px}
+.eval-expert-col:last-child .eval-cards-list{border-radius:0 0 10px 0}
+.eval-expert-col:first-child .eval-cards-list{border-radius:0 0 0 10px}
+.eval-proj-card{
+  border-radius:10px;
+  padding:13px 14px;
+  cursor:pointer;
+  transition:transform .18s, box-shadow .18s;
+  margin-bottom:8px;
+  position:relative;
+  overflow:hidden;
+}
+.eval-proj-card:last-child{margin-bottom:0}
+.eval-proj-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.eval-proj-card.empty-card{
+  background:transparent;
+  border:2px dashed var(--bdr2);
+  cursor:default;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:72px;
+  color:var(--tx3);
+  font-size:12px;
+  border-radius:10px;
+}
+.eval-proj-card.empty-card:hover{transform:none;box-shadow:none}
+.epc-no{font-size:10px;font-family:monospace;font-weight:700;opacity:.75;margin-bottom:3px}
+.epc-name{font-size:13px;font-weight:700;font-family:'Syne',sans-serif;line-height:1.35;margin-bottom:8px}
+.epc-score{font-size:20px;font-weight:800;font-family:'Syne',sans-serif;margin-bottom:1px;letter-spacing:-.5px}
+.epc-label{font-size:10px;opacity:.7;margin-bottom:7px;font-weight:600}
+.epc-detail{font-size:11px;font-weight:600;opacity:.8;display:inline-flex;align-items:center;gap:4px}
 
 /* Detail modal — kriter puanları */
 .detail-score-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
@@ -620,16 +657,14 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
         <div id="res-body"><p style="text-align:center;padding:40px;color:var(--tx3)">Yükleniyor…</p></div>
       </div>
 
-      <!-- UZMAN PUANLARI — YENİ TASARIM -->
+      <!-- UZMAN PUANLARI — KART SÜTUN DÜZENİ -->
       <div class="page" id="page-evaluations">
         <div class="ph" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-          <div><h1 class="pt">Uzman Değerlendirme Puanları</h1><p class="psd">Uzmana göre sütunlar, projeye göre satırlar — detay için proje hücresine tıklayın</p></div>
+          <div><h1 class="pt">Uzman Değerlendirme Puanları</h1><p class="psd">Uzmana göre sütunlar, projeye göre satırlar — detay için proje kartına tıklayın</p></div>
           <button onclick="exportEvaluationsToExcel()" class="btn bs" style="padding:10px 20px;">Excel'e Aktar</button>
         </div>
-        <div class="card" style="padding:0;overflow:hidden">
-          <div class="eval-expert-grid" id="eval-expert-grid">
-            <p style="padding:32px;text-align:center;color:var(--tx3)">Henüz değerlendirme yok.</p>
-          </div>
+        <div id="eval-expert-grid">
+          <p style="padding:32px;text-align:center;color:var(--tx3)">Henüz değerlendirme yok.</p>
         </div>
       </div>
 
@@ -701,7 +736,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 <div class="toast" id="toast"><div class="toast-dot" id="toast-dot"></div><span id="toast-msg"></span></div>
 <div class="lov" id="lov"><div class="spin"></div><div style="font-size:13px;color:var(--tx2)" id="lov-txt">Yükleniyor…</div></div>
 
-<!-- GENEL DETAIL MODAL (projeler için) -->
+<!-- GENEL DETAIL MODAL -->
 <div id="detail-modal" class="modal-overlay">
   <div class="modal-card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;border-bottom:1px solid var(--bdr);padding-bottom:10px;">
@@ -722,9 +757,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       </div>
       <button onclick="closeEvalDetailModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--tx3);">&times;</button>
     </div>
-    <!-- Skor özeti -->
     <div id="edm-summary" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"></div>
-    <!-- Kriter puanları grid -->
     <div style="font-size:9.5px;font-weight:700;font-family:'Syne',sans-serif;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Kriter Puanları & Global ANP Ağırlıkları</div>
     <div id="edm-scores" class="detail-score-grid"></div>
   </div>
@@ -1711,17 +1744,18 @@ function renderProjects(){
 }
 
 /* ═══════════════════════════════════════════════
-   YENİ: UZMAN PUANLARI — Sütun = Uzman, Satır = Proje
+   UZMAN PUANLARI — Kart Sütun Düzeni
+   Her uzman = bir sütun, projeler = renkli kartlar
    ═══════════════════════════════════════════════ */
 
-// Renk paleti: her uzmana benzersiz renk
+// Canlı renk paleti — görseldeki amber/lime/cyan tonları
 const EXP_COLORS=[
-  {bg:'linear-gradient(135deg,#2563eb,#6d28d9)',light:'rgba(37,99,235,.08)',border:'rgba(37,99,235,.25)'},
-  {bg:'linear-gradient(135deg,#059669,#0891b2)',light:'rgba(5,150,105,.08)',border:'rgba(5,150,105,.25)'},
-  {bg:'linear-gradient(135deg,#d97706,#dc2626)',light:'rgba(217,119,6,.08)',border:'rgba(217,119,6,.25)'},
-  {bg:'linear-gradient(135deg,#7c3aed,#db2777)',light:'rgba(124,58,237,.08)',border:'rgba(124,58,237,.25)'},
-  {bg:'linear-gradient(135deg,#0f766e,#2563eb)',light:'rgba(15,118,110,.08)',border:'rgba(15,118,110,.25)'},
-  {bg:'linear-gradient(135deg,#b45309,#92400e)',light:'rgba(180,83,9,.08)',border:'rgba(180,83,9,.25)'},
+  {bg:'#f59e0b',text:'#1a1200'},   // amber/gold
+  {bg:'#84cc16',text:'#0f2800'},   // lime green
+  {bg:'#22d3ee',text:'#001c22'},   // cyan
+  {bg:'#f472b6',text:'#2a0018'},   // pink
+  {bg:'#a78bfa',text:'#1a0035'},   // purple
+  {bg:'#fb923c',text:'#2a0800'},   // orange
 ];
 
 function renderEvaluationsGrid(){
@@ -1731,25 +1765,14 @@ function renderEvaluationsGrid(){
     return;
   }
 
-  // Uzmanları bul (benzersiz isimler, kayıt sırasına göre)
+  // Benzersiz uzmanlar (kayıt sırasına göre)
   const expertNames=[];
   PROJECTS.forEach(p=>{
     const ev=p.evaluator||'—';
     if(!expertNames.includes(ev)) expertNames.push(ev);
   });
 
-  // Projeleri bul (benzersiz projNo+name)
-  const projKeys=[];
-  const projMeta={};
-  PROJECTS.forEach(p=>{
-    const key=p.projNo||p.name;
-    if(!projKeys.includes(key)){
-      projKeys.push(key);
-      projMeta[key]={no:p.projNo||'—', name:p.name||'—'};
-    }
-  });
-
-  // Uzman × Proje haritası: {expertName: {projKey: projektRecord}}
+  // Uzman × Proje haritası
   const map={};
   expertNames.forEach(ev=>{ map[ev]={}; });
   PROJECTS.forEach(p=>{
@@ -1759,86 +1782,60 @@ function renderEvaluationsGrid(){
     map[ev][key]=p;
   });
 
-  // Tablo oluştur
-  // Başlık: ilk sütun boş (proje etiketleri için), sonra her uzman için bir sütun
-  let h=`<table class="eval-expert-table">`;
-
-  // Başlık satırı
-  h+=`<thead><tr>`;
-  // Boş köşe hücresi
-  h+=`<th class="proj-label-col" style="padding:12px 16px 14px;background:var(--bg3);border:1px solid var(--bdr2);border-radius:10px 0 0 0;min-width:180px;text-align:left;">
-    <div style="font-size:9px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em">Proje / Uzman →</div>
-  </th>`;
+  let h='';
   expertNames.forEach((ev,ei)=>{
     const col=EXP_COLORS[ei%EXP_COLORS.length];
     const evProjs=Object.values(map[ev]||{});
     const initials=ev.split(' ').map(w=>w[0]||'').join('').toUpperCase().substring(0,2)||'U';
-    h+=`<th style="padding:0;border:none;vertical-align:top">
-      <div class="exp-col-head" style="border-left:none;${ei===expertNames.length-1?'border-radius:0 10px 0 0':''};background:${col.light};border-color:${col.border}">
-        <div class="exp-col-head-inner">
-          <div class="exp-avatar" style="background:${col.bg}">${escHtml(initials)}</div>
-          <div class="exp-name">${escHtml(ev)}</div>
-          <div class="exp-count">${evProjs.length} proje değerlendirdi</div>
-        </div>
-      </div>
-    </th>`;
-  });
-  h+=`</tr></thead>`;
 
-  // Gövde: her satır = bir proje
-  h+=`<tbody>`;
-  projKeys.forEach((key,pi)=>{
-    const pm=projMeta[key];
-    const isLast=(pi===projKeys.length-1);
-    h+=`<tr>`;
-    // Sol sütun: proje etiketi
-    h+=`<td style="padding:12px 16px;background:var(--bg3);border:1px solid var(--bdr);border-top:none;vertical-align:middle;${isLast?'border-radius:0 0 0 10px':''}">
-      <div style="font-size:10px;color:var(--ac3);font-family:monospace;font-weight:700;margin-bottom:2px">${escHtml(pm.no)}</div>
-      <div style="font-size:12.5px;font-weight:600;color:var(--tx);max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${escHtml(pm.name)}">${escHtml(pm.name)}</div>
-    </td>`;
-    // Her uzman sütunu
-    expertNames.forEach((ev,ei)=>{
-      const col=EXP_COLORS[ei%EXP_COLORS.length];
-      const rec=map[ev]&&map[ev][key];
-      const isLastCol=(ei===expertNames.length-1);
-      if(rec){
-        const cstar=(rec.Cstar||0).toFixed(4);
-        const scoreCount=Object.keys(rec.scores||{}).length;
-        const avgScore=scoreCount>0?(Object.values(rec.scores||{}).reduce((a,b)=>a+parseFloat(b||0),0)/scoreCount).toFixed(1):'—';
-        const cstarNum=parseFloat(cstar);
-        const statusCol=cstarNum>.6?'var(--ac3)':cstarNum>.4?'var(--gold)':'var(--ac2)';
-        h+=`<td class="eval-proj-cell" 
-          data-ev="${escHtml(ev)}" 
-          data-projkey="${escHtml(key)}"
-          style="border:1px solid ${col.border};border-top:none;border-left:none;background:${col.light};${isLast&&isLastCol?'border-radius:0 0 10px 0':isLast?'border-radius:0 0 0 0':''}">
-          <div class="eval-proj-inner">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
-              <div style="font-size:14px;font-weight:800;font-family:'Syne',sans-serif;color:${statusCol}">${cstar}</div>
-              <span style="font-size:9px;padding:2px 6px;border-radius:10px;background:${statusCol}18;color:${statusCol};font-weight:700;border:1px solid ${statusCol}30">${cstarNum>.6?'Öncelikli':cstarNum>.4?'İncelemede':'Düşük'}</span>
-            </div>
-            <div style="font-size:10px;color:var(--tx3);margin-top:2px">Ort. puan: <strong style="color:var(--tx2)">${avgScore}</strong> · ${scoreCount} kriter</div>
-            <div style="font-size:10px;color:var(--tx3)">${rec.date||''}</div>
-            <div style="margin-top:5px;font-size:10px;color:${col.border.replace('rgba','rgb').replace(',.25)',','+'1)')};font-weight:600;display:flex;align-items:center;gap:3px">
-              <span>Detayı gör</span><span>→</span>
-            </div>
-          </div>
-        </td>`;
-      }else{
-        h+=`<td class="eval-proj-cell empty" style="border:1px solid var(--bdr);border-top:none;border-left:none;${isLast&&isLastCol?'border-radius:0 0 10px 0':''}">
-          <div style="text-align:center;color:var(--tx3);font-size:11px;padding:8px 0">—<br><span style="font-size:10px">Değerlendirme yok</span></div>
-        </td>`;
-      }
-    });
-    h+=`</tr>`;
+    h+=`<div class="eval-expert-col">`;
+
+    // Başlık — avatar + isim
+    h+=`<div class="exp-col-head">
+      <div class="exp-col-head-inner">
+        <div class="exp-avatar" style="background:${col.bg};color:${col.text}">${escHtml(initials)}</div>
+        <div class="exp-name">${escHtml(ev)}</div>
+        <div class="exp-count">${evProjs.length} proje değerlendirdi</div>
+      </div>
+    </div>`;
+
+    // Kart listesi
+    h+=`<div class="eval-cards-list">`;
+
+    if(!evProjs.length){
+      h+=`<div class="eval-proj-card empty-card">Değerlendirme yok</div>`;
+    } else {
+      evProjs.forEach(rec=>{
+        const key=rec.projNo||rec.name;
+        const cstar=(rec.Cstar||0);
+        const cstarStr=cstar.toFixed(4);
+        const statusLabel=cstar>.6?'Öncelikli':cstar>.4?'İncelemede':'Düşük';
+        const projName=rec.name||key;
+        const projNo=rec.projNo||'';
+
+        h+=`<div class="eval-proj-card"
+          style="background:${col.bg};color:${col.text}"
+          data-ev="${escHtml(ev)}"
+          data-projkey="${escHtml(key)}">
+          ${projNo?`<div class="epc-no">${escHtml(projNo)}</div>`:''}
+          <div class="epc-name">${escHtml(projName)}</div>
+          <div class="epc-score">C* =${cstarStr}</div>
+          <div class="epc-label">${statusLabel}</div>
+          <div class="epc-detail">Detayı gör →</div>
+        </div>`;
+      });
+    }
+
+    h+=`</div></div>`;
   });
-  h+=`</tbody></table>`;
+
   el.innerHTML=h;
 
-  // Tıklama olayları — dolu hücrelere
-  el.querySelectorAll('.eval-proj-cell:not(.empty)').forEach(cell=>{
-    cell.addEventListener('click',()=>{
-      const ev=cell.getAttribute('data-ev');
-      const projKey=cell.getAttribute('data-projkey');
+  // Tıklama olayları
+  el.querySelectorAll('.eval-proj-card:not(.empty-card)').forEach(card=>{
+    card.addEventListener('click',()=>{
+      const ev=card.getAttribute('data-ev');
+      const projKey=card.getAttribute('data-projkey');
       openEvalDetailModal(ev, projKey);
     });
   });
@@ -1852,11 +1849,9 @@ function openEvalDetailModal(expertName, projKey){
   const titleEl=$('edm-title'),metaEl=$('edm-meta'),summaryEl=$('edm-summary'),scoresEl=$('edm-scores'),mo=$('eval-detail-modal');
   if(!titleEl||!mo)return;
 
-  // Başlık
   titleEl.textContent=rec.name+(rec.projNo?' ['+rec.projNo+']':'');
   metaEl.innerHTML=`👤 <strong>${escHtml(expertName)}</strong> · 📅 ${rec.date||'—'}${rec.owner?' · 🏢 '+escHtml(rec.owner):''}`;
 
-  // Özet istatistikler
   const cstar=(rec.Cstar||0);
   const scores=Object.values(rec.scores||{}).map(v=>parseFloat(v)||0).filter(v=>v>0);
   const avgSc=scores.length>0?(scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(2):'—';
@@ -1868,7 +1863,6 @@ function openEvalDetailModal(expertName, projKey){
     <div class="stat" style="padding:12px"><div class="sl">Ort. Puan</div><div class="sv" style="font-size:18px;color:var(--ac)">${avgSc}</div><div class="ss">Min:${minSc} · Max:${maxSc}</div></div>
     <div class="stat" style="padding:12px"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:13px;color:var(--tx2)">${(rec.Dp||0).toFixed(4)}<br>${(rec.Dn||0).toFixed(4)}</div></div>`;
 
-  // Kriter puanları — ANP ağırlığına göre sıralı
   const sortedKeys=ANP
     ? Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).map(([k])=>k)
     : Object.keys(rec.scores||{});
@@ -1893,15 +1887,12 @@ function openEvalDetailModal(expertName, projKey){
     </div>`;
   });
   scoresEl.innerHTML=sh;
-
   mo.classList.add('show');
 }
 function closeEvalDetailModal(){ const m=$('eval-detail-modal'); if(m)m.classList.remove('show'); }
 
-// Modal dışına tıkla kapat
 $('eval-detail-modal').addEventListener('click',function(e){ if(e.target===this)closeEvalDetailModal(); });
 
-/* ─── eski renderEvaluationsTable (uyumluluk) ─── */
 function renderEvaluationsTable(){ renderEvaluationsGrid(); }
 
 function exportEvaluationsToExcel(){
