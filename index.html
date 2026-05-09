@@ -764,9 +764,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       </div>
       <button onclick="closeEvalDetailModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--tx3);">&times;</button>
     </div>
-    <div id="edm-summary" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"></div>
-    <div style="font-size:9.5px;font-weight:700;font-family:'Syne',sans-serif;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Kriter Puanları & Global ANP Ağırlıkları</div>
-    <div id="edm-scores" class="detail-score-grid"></div>
+    <div id="edm-scores"></div>
   </div>
 </div>
 
@@ -1286,10 +1284,12 @@ function loadProjExcel(file){
       if(!raw.length){ toast('Excel boş.','err'); return; }
       const dataRows=raw.slice(1).filter(r=>r&&(String(r[1]||'').trim()||String(r[2]||'').trim()));
       if(!dataRows.length){ toast("Excel'de veri bulunamadı.",'err'); return; }
-      PROJ_LIST=dataRows.map((r,i)=>({
-        no:String(r[0]||'').trim()||('2026-01-'+String(i+1).padStart(2,'0')),
-        gname:String(r[1]||'').trim(), name:String(r[2]||'').trim()
-      }));
+      PROJ_LIST=dataRows.map((r,i)=>{
+        const rawNo=String(r[0]||'').trim();
+        const seq=rawNo&&!isNaN(rawNo)?parseInt(rawNo):i+1;
+        const no='2026-1-'+String(seq).padStart(2,'0');
+        return{no, gname:String(r[1]||'').trim(), name:String(r[2]||'').trim()};
+      });
       window._plistFname=file.name;
       showLoad('Proje listesi kaydediliyor…'); await saveProjListAll(); hideLoad();
       updateProjListBadge(); renderProjListPage(); toast(dataRows.length+' proje yüklendi.','ok');
@@ -1885,7 +1885,7 @@ function openEvalDetailModal(expertName, projKey){
   const rec=PROJECTS.find(p=>(p.projNo||p.name)===projKey && (p.evaluator||'—')===expertName);
   if(!rec) return;
 
-  const titleEl=$('edm-title'),metaEl=$('edm-meta'),summaryEl=$('edm-summary'),scoresEl=$('edm-scores'),mo=$('eval-detail-modal');
+  const titleEl=$('edm-title'),metaEl=$('edm-meta'),scoresEl=$('edm-scores'),mo=$('eval-detail-modal');
   if(!titleEl||!mo)return;
 
   titleEl.textContent=rec.name+(rec.projNo?' ['+rec.projNo+']':'');
@@ -1897,12 +1897,11 @@ function openEvalDetailModal(expertName, projKey){
   const maxSc=scores.length>0?Math.max(...scores):'—';
   const minSc=scores.length>0?Math.min(...scores):'—';
   const cstarCol=cstar>.6?'var(--ac3)':cstar>.4?'var(--gold)':'var(--ac2)';
-  // Grid layout geri (tek uzman modu)
-  summaryEl.style.display='grid'; summaryEl.style.gridTemplateColumns='repeat(3,1fr)';
-  summaryEl.innerHTML=`
+  const statsHtml=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">
     <div class="stat" style="padding:12px"><div class="sl">C* Skoru</div><div class="sv" style="font-size:18px;color:${cstarCol}">${cstar.toFixed(4)}</div><div class="ss">İdeal yakınlık</div></div>
     <div class="stat" style="padding:12px"><div class="sl">Ort. Puan</div><div class="sv" style="font-size:18px;color:var(--ac)">${avgSc}</div><div class="ss">Min:${minSc} · Max:${maxSc}</div></div>
-    <div class="stat" style="padding:12px"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:13px;color:var(--tx2)">${(rec.Dp||0).toFixed(4)}<br>${(rec.Dn||0).toFixed(4)}</div></div>`;
+    <div class="stat" style="padding:12px"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:13px;color:var(--tx2)">${(rec.Dp||0).toFixed(4)}<br>${(rec.Dn||0).toFixed(4)}</div></div>
+  </div>`;
 
   const sortedKeys=ANP
     ? Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).map(([k])=>k)
@@ -1927,7 +1926,9 @@ function openEvalDetailModal(expertName, projKey){
       </div>
     </div>`;
   });
-  scoresEl.innerHTML=sh;
+  scoresEl.innerHTML=statsHtml+`
+    <div style="font-size:9.5px;font-weight:700;font-family:'Syne',sans-serif;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Kriter Puanları & Global ANP Ağırlıkları</div>
+    <div class="detail-score-grid">${sh}</div>`;
   mo.classList.add('show');
 }
 function closeEvalDetailModal(){ const m=$('eval-detail-modal'); if(m)m.classList.remove('show'); }
@@ -1961,17 +1962,15 @@ function showProjectDetails(key){
 
   // Birden fazla uzman varsa: her uzman için sekme oluştur
   const rec0=evals[0];
-  const titleEl=$('edm-title'),metaEl=$('edm-meta'),summaryEl=$('edm-summary'),scoresEl=$('edm-scores'),mo=$('eval-detail-modal');
+  const titleEl=$('edm-title'),metaEl=$('edm-meta'),scoresEl=$('edm-scores'),mo=$('eval-detail-modal');
   if(!titleEl||!mo) return;
 
   titleEl.textContent=(rec0.name||key)+(rec0.projNo?' ['+rec0.projNo+']':'');
 
-  // Meta: tüm uzmanlar
   const evNames=[...new Set(evals.map(e=>e.evaluator||'—'))].join(' · ');
   metaEl.innerHTML=`👥 <strong>${escHtml(evNames)}</strong> · ${evals.length} uzman değerlendirmesi`;
 
-  // Uzman seçim sekmeleri — grid'i sıfırla, flex yap
-  summaryEl.style.display='block'; summaryEl.style.gridTemplateColumns='';
+  // Sekme butonlarını scoresEl'in tepesine yaz, içerik sonra eklenecek
   let tabHtml=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px" id="edm-tabs">`;
   evals.forEach((ev,i)=>{
     tabHtml+=`<button onclick="switchEvalTab(${i})"
@@ -1980,8 +1979,8 @@ function showProjectDetails(key){
       ${escHtml(ev.evaluator||'—')}
     </button>`;
   });
-  tabHtml+='</div>';
-  summaryEl.innerHTML=tabHtml;
+  tabHtml+='</div><div id="edm-tab-content"></div>';
+  scoresEl.innerHTML=tabHtml;
 
   // İlk uzmanın verilerini yükle
   window._pdEvals=evals;
@@ -2008,7 +2007,9 @@ function switchEvalTab(idx){
 function _renderEvalTabContent(idx){
   const evals=window._pdEvals||[];
   const rec=evals[idx]; if(!rec) return;
-  const scoresEl=$('edm-scores'); if(!scoresEl) return;
+  // Sekme içeriği ayrı bir div'e yaz (sekmeler kaybolmasın)
+  const scoresEl=document.getElementById('edm-tab-content')||$('edm-scores');
+  if(!scoresEl) return;
 
   const cstar=(rec.Cstar||0);
   const scores=Object.values(rec.scores||{}).map(v=>parseFloat(v)||0).filter(v=>v>0);
