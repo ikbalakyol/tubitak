@@ -442,7 +442,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       <!-- UPLOAD -->
       <div class="page" id="page-upload">
         <div class="ph">
-          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">Ömürbek vd. (2013) — Saaty (1980) limit süperpozisyon yöntemi ile global ANP ağırlıkları hesaplanır.</p></div>
+          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">Limit süperpozisyon yöntemi ile global ANP ağırlıkları hesaplanır.</p></div>
         </div>
         <div class="g2" style="align-items:start">
           <div>
@@ -467,7 +467,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
               </div>
             </div>
             <div class="card">
-              <div class="card-t">Excel Sütun Yapısı (50 Sütun — Ömürbek Formatı)</div>
+              <div class="card-t">Excel Sütun Yapısı </div>
               <div style="font-size:11.5px;color:var(--tx2);line-height:2">
                 <span class="badge b-gray" style="margin-right:5px">A-B (0-1)</span>Ad/Kurum · Uzmanlık<br>
                 <span class="badge b-blue" style="margin-right:5px">C-E (2-4)</span>Teknoloji alt kriter ikili karşılaştırmaları (3 çift)<br>
@@ -485,7 +485,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
           </div>
           <div>
             <div class="card" style="margin-bottom:13px">
-              <div class="card-t">ANP Hesaplama Adımları — Ömürbek vd. (2013) / Saaty (1980)</div>
+              <div class="card-t">ANP Hesaplama Adımları</div>
               <div id="calc-steps">
                 <div class="calc-step pending" id="cs-0"><span>📂</span><span>Adım 1: Problem Tanımı — Kriter ve Alt Kriter Yapısı</span></div>
                 <div class="calc-step pending" id="cs-1"><span>🕸️</span><span>Adım 2: Kriterlerarası Etkileşim Ağı Kurulması</span></div>
@@ -655,7 +655,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       <!-- TOPSIS SONUÇLARI -->
       <div class="page" id="page-results">
         <div class="ph">
-          <div><h1 class="pt">TOPSIS Sıralaması</h1><p class="psd">ANP ağırlıklı C* = D⁻/(D⁺+D⁻) skoruna göre — Ömürbek vd. (2013) Adım 6.</p></div>
+          <div><h1 class="pt">TOPSIS Sıralaması</h1><p class="psd">ANP ağırlıklı C* = D⁻/(D⁺+D⁻) skoruna göre —  Adım 6.</p></div>
           <div style="display:flex;gap:8px">
             <button class="btn bo" onclick="loadProjAndRender()">↺ Yenile</button>
             <button class="btn bo" onclick="exportCSV()">↓ CSV</button>
@@ -689,10 +689,10 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 
       <!-- YÖNTEM -->
       <div class="page" id="page-about">
-        <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd">Ömürbek, Demirci & Akalin (2013) — Saaty (1980) ANP + TOPSIS.</p></div></div>
+        <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd"> ANP + TOPSIS.</p></div></div>
         <div class="g2">
           <div class="card">
-            <div class="card-t">ANP — Adım Adım (Saaty 1980 / Ömürbek vd. 2013)</div>
+            <div class="card-t">ANP — Adım Adım </div>
             <div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)">
               <div><strong>Adım 1</strong> — Problem tanımı: amaç, kriterler, alt kriterler, alternatifler</div>
               <div><strong>Adım 2</strong> — Kriterlerarası iç ve dış bağımlılık ilişkileri belirlenir</div>
@@ -1393,7 +1393,7 @@ function renderGW(){
     });
     h+='</table></div>';
   });
-  h+=`<div class="card"><div class="card-t">Ana Kriter PCM — 5×5 (Ömürbek Tablo 3)</div>
+  h+=`<div class="card"><div class="card-t">Ana Kriter PCM — 5×5 </div>
     <table><tr><th>Grup</th><th>Ana W (PCM normalize)</th><th>CR Durumu</th></tr>`;
   GRP.forEach(g=>{
     h+=`<tr><td style="color:${GI[g].color};font-weight:600">${GI[g].name}</td>
