@@ -1344,15 +1344,19 @@ function renderGW(){
   let h='';
   GRP.forEach(g=>{
     const ss=GI[g].subs, tot=ss.reduce((s,s2)=>s+(ANP.globalW[`${g}_${s2}`]||0),0);
+    const cr=ANP.subCR[g].CR;
     h+=`<div class="card" style="margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
       <div class="card-t" style="margin-bottom:0;color:${GI[g].color}">${GI[g].name} Grubu</div>
-      <div style="display:flex;gap:7px"><span class="badge b-amber">Grup Toplam: ${(tot*100).toFixed(2)}%</span><span class="badge b-blue">Ana W: ${(ANP.mainW[g]*100).toFixed(2)}%</span></div></div>
-      <table><tr><th>Kod</th><th>Alt Kriter</th><th>Yerel W (PCM)</th><th>Global ANP W (Limit)</th><th>CR</th></tr>`;
-    ss.forEach((s,si)=>{
+      <div style="display:flex;gap:7px">
+        <span class="badge ${cr<.10?'cr-ok':'cr-warn'}">CR=${cr.toFixed(4)}</span>
+        <span class="badge b-amber">Grup Toplam: ${(tot*100).toFixed(2)}%</span>
+        <span class="badge b-blue">Ana W: ${(ANP.mainW[g]*100).toFixed(2)}%</span>
+      </div></div>
+      <table><tr><th>Kod</th><th>Alt Kriter</th><th>Yerel W (PCM)</th><th>Global ANP W (Limit)</th></tr>`;
+    ss.forEach((s)=>{
       h+=`<tr><td style="font-weight:600">${s}</td><td style="font-size:11.5px;color:var(--tx2)">${SF[s]}</td>
-        <td style="color:${GI[g].color};font-weight:600">${((ANP.subW[g]||[])[si]*100||0).toFixed(2)}%</td>
-        <td style="color:var(--ac3);font-weight:700">${((ANP.globalW[`${g}_${s}`]||0)*100).toFixed(3)}%</td>
-        <td>${si===0?`<span class="badge ${ANP.subCR[g].CR<.10?'cr-ok':'cr-warn'}">CR=${ANP.subCR[g].CR.toFixed(4)}</span>`:'—'}</td></tr>`;
+        <td style="color:${GI[g].color};font-weight:600">${((ANP.subW[g]||[])[GI[g].subs.indexOf(s)]*100||0).toFixed(2)}%</td>
+        <td style="color:var(--ac3);font-weight:700">${((ANP.globalW[`${g}_${s}`]||0)*100).toFixed(3)}%</td></tr>`;
     });
     h+='</table></div>';
   });
@@ -1858,6 +1862,8 @@ function openEvalDetailModal(expertName, projKey){
   const maxSc=scores.length>0?Math.max(...scores):'—';
   const minSc=scores.length>0?Math.min(...scores):'—';
   const cstarCol=cstar>.6?'var(--ac3)':cstar>.4?'var(--gold)':'var(--ac2)';
+  // Grid layout geri (tek uzman modu)
+  summaryEl.style.display='grid'; summaryEl.style.gridTemplateColumns='repeat(3,1fr)';
   summaryEl.innerHTML=`
     <div class="stat" style="padding:12px"><div class="sl">C* Skoru</div><div class="sv" style="font-size:18px;color:${cstarCol}">${cstar.toFixed(4)}</div><div class="ss">İdeal yakınlık</div></div>
     <div class="stat" style="padding:12px"><div class="sl">Ort. Puan</div><div class="sv" style="font-size:18px;color:var(--ac)">${avgSc}</div><div class="ss">Min:${minSc} · Max:${maxSc}</div></div>
@@ -1908,26 +1914,109 @@ function exportEvaluationsToExcel(){
 }
 
 function showProjectDetails(key){
+  // Projeye ait tüm değerlendirmeleri bul
   const evals=PROJECTS.filter(p=>(p.projNo||p.name)===key);
-  let c=`<p style="color:var(--tx2);margin-bottom:15px;"><strong>Proje:</strong> ${escHtml(key)}</p>
-    <div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;margin-top:10px;">
-    <thead><tr style="border-bottom:2px solid var(--bdr2);text-align:left;">
-    <th style="padding:10px 8px;color:var(--tx2);font-weight:600;">Değerlendiren</th>
-    <th style="padding:10px 8px;color:var(--tx2);font-weight:600;">Kriter Puanları</th>
-    <th style="padding:10px 8px;color:var(--tx2);font-weight:600;">C*</th>
-    </tr></thead><tbody>`;
-  evals.forEach(item=>{
-    let sh=Object.entries(item.scores||{}).map(([k,v])=>`<div style="font-size:0.9em;margin-bottom:2px;"><strong>${k}:</strong> ${v}</div>`).join('');
-    c+=`<tr style="border-bottom:1px solid var(--bdr);vertical-align:top;">
-      <td style="padding:10px 8px;font-weight:500;">${escHtml(item.evaluator||'—')}</td>
-      <td style="padding:10px 8px;">${sh}</td>
-      <td style="padding:10px 8px;font-weight:700;color:var(--ac3)">${item.Cstar?item.Cstar.toFixed(4):'—'}</td></tr>`;
+  if(!evals.length) return;
+
+  // Tek uzman ise doğrudan openEvalDetailModal'ı kullan
+  if(evals.length===1){
+    openEvalDetailModal(evals[0].evaluator||'—', key);
+    return;
+  }
+
+  // Birden fazla uzman varsa: her uzman için sekme oluştur
+  const rec0=evals[0];
+  const titleEl=$('edm-title'),metaEl=$('edm-meta'),summaryEl=$('edm-summary'),scoresEl=$('edm-scores'),mo=$('eval-detail-modal');
+  if(!titleEl||!mo) return;
+
+  titleEl.textContent=(rec0.name||key)+(rec0.projNo?' ['+rec0.projNo+']':'');
+
+  // Meta: tüm uzmanlar
+  const evNames=[...new Set(evals.map(e=>e.evaluator||'—'))].join(' · ');
+  metaEl.innerHTML=`👥 <strong>${escHtml(evNames)}</strong> · ${evals.length} uzman değerlendirmesi`;
+
+  // Uzman seçim sekmeleri — grid'i sıfırla, flex yap
+  summaryEl.style.display='block'; summaryEl.style.gridTemplateColumns='';
+  let tabHtml=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px" id="edm-tabs">`;
+  evals.forEach((ev,i)=>{
+    tabHtml+=`<button onclick="switchEvalTab(${i})"
+      id="edm-tab-${i}"
+      style="padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;font-family:'Syne',sans-serif;cursor:pointer;border:1.5px solid ${i===0?'var(--ac)':'var(--bdr2)'};background:${i===0?'var(--ac)':'transparent'};color:${i===0?'#fff':'var(--tx2)'};transition:all .15s">
+      ${escHtml(ev.evaluator||'—')}
+    </button>`;
   });
-  c+='</tbody></table></div>';
-  const mt=$('modal-project-title'),mb=$('modal-project-body'),mo=$('detail-modal');
-  if(mt)mt.textContent=`${key} — Değerlendirme Detayları`;
-  if(mb)mb.innerHTML=c; if(mo)mo.classList.add('show');
+  tabHtml+='</div>';
+  summaryEl.innerHTML=tabHtml;
+
+  // İlk uzmanın verilerini yükle
+  window._pdEvals=evals;
+  _renderEvalTabContent(0);
+
+  mo.classList.add('show');
 }
+
+function switchEvalTab(idx){
+  const evals=window._pdEvals||[];
+  // Sekme stillerini güncelle
+  evals.forEach((_,i)=>{
+    const btn=document.getElementById('edm-tab-'+i);
+    if(!btn) return;
+    if(i===idx){
+      btn.style.background='var(--ac)'; btn.style.color='#fff'; btn.style.borderColor='var(--ac)';
+    } else {
+      btn.style.background='transparent'; btn.style.color='var(--tx2)'; btn.style.borderColor='var(--bdr2)';
+    }
+  });
+  _renderEvalTabContent(idx);
+}
+
+function _renderEvalTabContent(idx){
+  const evals=window._pdEvals||[];
+  const rec=evals[idx]; if(!rec) return;
+  const scoresEl=$('edm-scores'); if(!scoresEl) return;
+
+  const cstar=(rec.Cstar||0);
+  const scores=Object.values(rec.scores||{}).map(v=>parseFloat(v)||0).filter(v=>v>0);
+  const avgSc=scores.length>0?(scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(2):'—';
+  const maxSc=scores.length>0?Math.max(...scores):'—';
+  const minSc=scores.length>0?Math.min(...scores):'—';
+  const cstarCol=cstar>.6?'var(--ac3)':cstar>.4?'var(--gold)':'var(--ac2)';
+
+  // Özet istatistikler
+  const statsHtml=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">
+    <div class="stat" style="padding:12px"><div class="sl">C* Skoru</div><div class="sv" style="font-size:18px;color:${cstarCol}">${cstar.toFixed(4)}</div><div class="ss">İdeal yakınlık</div></div>
+    <div class="stat" style="padding:12px"><div class="sl">Ort. Puan</div><div class="sv" style="font-size:18px;color:var(--ac)">${avgSc}</div><div class="ss">Min:${minSc} · Max:${maxSc}</div></div>
+    <div class="stat" style="padding:12px"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:13px;color:var(--tx2)">${(rec.Dp||0).toFixed(4)}<br>${(rec.Dn||0).toFixed(4)}</div></div>
+  </div>
+  <div style="font-size:9.5px;font-weight:700;font-family:'Syne',sans-serif;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Kriter Puanları & Global ANP Ağırlıkları</div>`;
+
+  const sortedKeys=ANP
+    ? Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).map(([k])=>k)
+    : Object.keys(rec.scores||{});
+
+  let sh='';
+  sortedKeys.forEach(k=>{
+    const [g,s]=k.split('_');
+    const sc=parseFloat((rec.scores||{})[k])||0;
+    const gw=ANP?((ANP.globalW[k]||0)*100).toFixed(3):'—';
+    const gColor=GI[g]?GI[g].color:'var(--tx2)';
+    const scColor=sc>=7?'var(--ac3)':sc>=5?'var(--ac)':sc>=3?'var(--gold)':'var(--red)';
+    sh+=`<div class="dscore-item" style="border-color:${gColor}28">
+      <div class="dscore-left">
+        <div class="dscore-code" style="color:${gColor}">${s||k}</div>
+        <div class="dscore-name">${SF[s]||k}</div>
+        <div class="dscore-anp">ANP: ${gw}%</div>
+      </div>
+      <div class="dscore-right">
+        <div class="dscore-val" style="color:${scColor}">${sc}</div>
+        <div class="dscore-label">${S9[sc]||'—'}</div>
+      </div>
+    </div>`;
+  });
+
+  scoresEl.innerHTML=statsHtml+'<div class="detail-score-grid">'+sh+'</div>';
+}
+
 function closeDetailModal(){ const m=$('detail-modal'); if(m)m.classList.remove('show'); }
 
 /* ═══════════ KRİTERLER & KILAVUZ ═══════════ */
