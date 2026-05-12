@@ -1013,9 +1013,15 @@ function clearANP(){
 }
 
 /* ══════════════════════════════════════════════════════
-   PROJE LİSTESİ — EXCEL OKUMA
+   PROJE LİSTESİ — EXCEL OKUMA  ✅ DÜZELTİLDİ
    Sütunlar: A=Sıra No | B=Girişimci Adı | C=E-posta | D=Tel No | E=Proje Adı
-   Dropdown: "Girişimci Adı - Proje Adı"  (F sütunundaki formül mantığı)
+   
+   SORUN: XLSX.js sheet_to_json + header:1 + defval:'' kombinasyonu bazı satırlarda
+   boş hücre (Tel No gibi) olduğunda sparse array üretir; bu durumda indeksler
+   kayarak C(email) → r[3], E(proje adı) → r[4] yerine yanlış pozisyona geliyordu.
+   
+   ÇÖZÜM: worksheet hücrelerini doğrudan encode_cell ile A/B/C/D/E sütun
+   harflerinden okuyoruz. Böylece boş hücre = '' garantisi sağlanır, kayma olmaz.
    ══════════════════════════════════════════════════════ */
 function loadProjExcel(file){
   if(!file)return;
@@ -1025,23 +1031,51 @@ function loadProjExcel(file){
     try{
       const wb=XLSX.read(e.target.result,{type:'array'});
       const ws=wb.Sheets[wb.SheetNames[0]];
-      const raw=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
-      if(!raw.length){ toast('Excel boş.','err'); return; }
-      // Başlık satırını atla; B veya E dolu olan satırları al
-      const dataRows=raw.slice(1).filter(r=>r&&(String(r[1]||'').trim()||String(r[4]||'').trim()));
+      if(!ws){ toast('Excel boş.','err'); return; }
+
+      // Hücreyi doğrudan sütun/satır indeksiyle oku — sparse array sorununu önler
+      const getCellVal=(rowIdx,colIdx)=>{
+        const addr=XLSX.utils.encode_cell({r:rowIdx,c:colIdx});
+        const cell=ws[addr];
+        if(!cell)return '';
+        // Formül hücrelerinde .v hesaplanan değer, .f ise formül stringi
+        // .v varsa onu kullan, yoksa .w (formatted string), yoksa ''
+        const v=cell.v!==undefined?cell.v:(cell.w||'');
+        return String(v).trim();
+      };
+
+      const range=XLSX.utils.decode_range(ws['!ref']||'A1');
+      const dataRows=[];
+
+      // Satır 0 = başlık, satır 1'den itibaren veri
+      for(let ri=range.s.r+1; ri<=range.e.r; ri++){
+        const colA=getCellVal(ri,0); // A: Sıra No
+        const colB=getCellVal(ri,1); // B: Adı-Soyadı (Girişimci Adı)
+        const colC=getCellVal(ri,2); // C: E-posta
+        const colD=getCellVal(ri,3); // D: Tel No
+        const colE=getCellVal(ri,4); // E: İş Fikrinin Adı (Proje Adı)
+        // F sütunu (index 5) = Excel formülü "=B&E", kullanılmaz
+
+        if(!colB && !colE) continue; // tamamen boş satır
+
+        dataRows.push({ colA, colB, colC, colD, colE });
+      }
+
       if(!dataRows.length){ toast("Excel'de veri bulunamadı.",'err'); return; }
+
       PROJ_LIST=dataRows.map((r,i)=>{
-        const rawNo=String(r[0]||'').trim();
-        const seq=rawNo&&!isNaN(rawNo)?parseInt(rawNo):i+1;
+        const rawNo=r.colA;
+        const seq=(rawNo && !isNaN(rawNo)) ? parseInt(rawNo) : i+1;
         const no='2026-1-'+String(seq).padStart(2,'0');
         return{
           no,
-          gname : String(r[1]||'').trim(),   // B: Adı-Soyadı (Girişimci Adı)
-          email : String(r[2]||'').trim(),   // C: E-posta
-          tel   : String(r[3]||'').trim(),   // D: Tel No
-          name  : String(r[4]||'').trim()    // E: İş Fikrinin Adı (Proje Adı)
+          gname : r.colB,   // B: Adı-Soyadı (Girişimci Adı)
+          email : r.colC,   // C: E-posta
+          tel   : r.colD,   // D: Tel No
+          name  : r.colE    // E: İş Fikrinin Adı (Proje Adı)
         };
       });
+
       window._plistFname=file.name;
       showLoad('Proje listesi kaydediliyor…'); await saveProjListAll(); hideLoad();
       updateProjListBadge(); renderProjListPage(); toast(dataRows.length+' proje yüklendi.','ok');
@@ -1176,7 +1210,7 @@ function initEval(){
   goStep1(); buildScoreForm();
 }
 
-/* ── Dropdown: "Girişimci Adı - Proje Adı" (F sütunu mantığı) ── */
+/* ── Dropdown: "Girişimci Adı - Proje Adı" ── */
 function populateProjDropdown(){
   const sel=$('proj-select'); if(!sel)return;
   sel.innerHTML='<option value="">— Proje seçiniz —</option>';
