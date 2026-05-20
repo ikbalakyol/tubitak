@@ -1096,7 +1096,7 @@ async function processANP(raw,fname){
   h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px;grid-column:1/-1"><span style="font-size:12px">Ana Kriterler (5×5 PCM)</span><span class="badge ${mc<.10?'cr-ok':'cr-warn'}">CR=${mc.toFixed(4)}</span></div></div>`;
   h+=`<button class="btn bp" onclick="nav('sd-weights')" style="width:100%;justify-content:center">Global ANP Ağırlıklarını Gör →</button>`;
   const urb=$('upload-result-body'),ur=$('upload-result'); if(urb)urb.innerHTML=h; if(ur)ur.style.display='block';
-  toast('ANP hesaplandı ve kaydedildi!','ok');
+  const csCount=Object.keys(ANP.crossSubGM||{}).length; toast(`ANP hesaplandı: ${ANP.expertCount} uzman, ${csCount} çapraz etkileşim dahil`,'ok');
 }
 
 function setCS(idx,state){
@@ -1112,8 +1112,23 @@ function renderExpertList(){ if(!ANP)return; const el=$('expert-list'); if(!el)r
 /* ═══════════════════════════════════════════════════════════════
    LOCAL STORAGE & DB  — crossSubGM dahil
 ═══════════════════════════════════════════════════════════════ */
-function saveANPLocal(){ try{ localStorage.setItem('tubitak_anp_v60',JSON.stringify(ANP)); }catch(e){} }
-function loadANPLocal(){ try{ const s=localStorage.getItem('tubitak_anp_v60'); if(s){ ANP=JSON.parse(s); updateANPBadges(); return true; } }catch(e){} return false; }
+function saveANPLocal(){ try{ localStorage.setItem('tubitak_anp_v61',JSON.stringify(ANP)); }catch(e){} }
+function loadANPLocal(){
+  try{
+    const s=localStorage.getItem('tubitak_anp_v61');
+    if(s){
+      const parsed=JSON.parse(s);
+      // crossBySrc eksikse veya boşsa ANP geçersiz — yeniden Excel yüklenmeli
+      if(!parsed.crossBySrc||Object.keys(parsed.crossBySrc).length<8){
+        console.warn('ANP crossBySrc eksik, önbellek temizlendi');
+        localStorage.removeItem('tubitak_anp_v61');
+        return false;
+      }
+      ANP=parsed; updateANPBadges(); return true;
+    }
+  }catch(e){}
+  return false;
+}
 
 async function loadANPFromDB(){
   if(!USE_DB)return;
@@ -1121,12 +1136,26 @@ async function loadANPFromDB(){
     const{data,error}=await DB.from('anp_weights').select('*').order('created_at',{ascending:false}).limit(1);
     if(!error&&data&&data.length>0){
       const r=data[0];
+      const loadedCrossSubGM=r.cross_sub_gm||{};
+      const loadedCrossBySrc=r.cross_by_src||{};
+      // crossBySrc eksikse crossSubGM'den yeniden oluştur
+      let rebuiltCrossBySrc=loadedCrossBySrc;
+      if(Object.keys(loadedCrossBySrc).length<8 && Object.keys(loadedCrossSubGM).length>0){
+        rebuiltCrossBySrc={};
+        for(const [key,gm] of Object.entries(loadedCrossSubGM)){
+          const [frm,to]=key.split('->');
+          const tg=SUB_TO_GRP[to];
+          if(!rebuiltCrossBySrc[frm])rebuiltCrossBySrc[frm]={};
+          if(!rebuiltCrossBySrc[frm][tg])rebuiltCrossBySrc[frm][tg]={};
+          rebuiltCrossBySrc[frm][tg][to]=gm;
+        }
+      }
       ANP={
         expertCount:r.expert_count, fname:r.filename, date:new Date(r.created_at).toLocaleDateString('tr-TR'),
         globalW:r.global_weights, mainWd:r.main_weights, subW:r.sub_weights, subCR:r.sub_cr, mainCR:r.main_cr,
         experts:r.experts||[], W_lim:r.w_lim, W_unw:r.w_unw||r.w_lim, W_wei:r.w_wei||r.w_lim,
         subMat:r.sub_mat||null, mainMat:r.main_mat||null, inflRaw:r.infl_raw||{}, normInfl:r.norm_infl||{},
-        crossSubGM:r.cross_sub_gm||{}, crossBySrc:r.cross_by_src||{}
+        crossSubGM:loadedCrossSubGM, crossBySrc:rebuiltCrossBySrc
       };
       saveANPLocal(); updateANPBadges();
     }
@@ -1151,8 +1180,8 @@ async function saveANPToDB(a){
 /* ═══════════════════════════════════════════════════════════════
    PROJE DB
 ═══════════════════════════════════════════════════════════════ */
-function saveProjLocal(){ try{ localStorage.setItem('tubitak_proj_v60',JSON.stringify(PROJECTS)); }catch(e){} }
-function loadProjLocal(){ try{ const s=localStorage.getItem('tubitak_proj_v60'); if(s)PROJECTS=JSON.parse(s); }catch(e){} }
+function saveProjLocal(){ try{ localStorage.setItem('tubitak_proj_v61',JSON.stringify(PROJECTS)); }catch(e){} }
+function loadProjLocal(){ try{ const s=localStorage.getItem('tubitak_proj_v61'); if(s)PROJECTS=JSON.parse(s); }catch(e){} }
 async function loadProjFromDB(){
   if(!USE_DB){ loadProjLocal(); return; }
   try{
@@ -1253,11 +1282,14 @@ function renderUploadStatus(){
   const el=$('anp-status-card'); if(!el)return;
   if(!ANP){ el.innerHTML='<p style="color:var(--tx3);font-size:12px">Kayıtlı veri yok.</p>'; return; }
   const csCnt=ANP.crossSubGM?Object.keys(ANP.crossSubGM).length:0;
-  el.innerHTML=`<div class="notif n-ok" style="margin-bottom:10px"><span>💾</span><div><strong>${escHtml(ANP.fname||'anket.xlsx')}</strong> · ${ANP.expertCount} uzman · ${ANP.date}<br><span style="font-size:11px">Çapraz alt kriter: ${csCnt} etkileşim dahil</span></div></div><button class="btn bd" onclick="clearANP()">🗑 ANP Verisini Sil</button>`;
+  const csOk=csCnt>=18;
+  el.innerHTML=`<div class="notif n-ok" style="margin-bottom:10px"><span>💾</span><div><strong>${escHtml(ANP.fname||'anket.xlsx')}</strong> · ${ANP.expertCount} uzman · ${ANP.date}</div></div>`
+    +`<div class="${csOk?'notif n-ok':'notif n-warn'}" style="margin-bottom:10px"><span>${csOk?'🔗':'⚠'}</span><div>Çapraz alt kriter etkileşimi: <strong>${csCnt}/18</strong>${csOk?' — W_unw sütunları spesifik etkilerle oluşturuldu':' — Eksik! Excel'i yeniden yükleyin'}</div></div>`
+    +`<button class="btn bd" onclick="clearANP()">🗑 ANP Verisini Sil</button>`;
 }
 function clearANP(){
   if(!confirm('ANP verisi silinsin mi?'))return;
-  ANP=null; localStorage.removeItem('tubitak_anp_v60');
+  ANP=null; localStorage.removeItem('tubitak_anp_v61');
   const sdD=$('sd-dot'),sdT=$('sd-txt'),nbU=$('nb-upload'),tbA=$('tb-anp-badge'),ur=$('upload-result');
   if(sdD)sdD.className='sd empty'; if(sdT)sdT.textContent='Veri yüklenmedi'; if(nbU)nbU.textContent='—';
   if(tbA)tbA.textContent='● Hazır'; if(ur)ur.style.display='none';
@@ -1668,6 +1700,8 @@ function exportEvaluationsToExcel(){
    BAŞLATMA
 ═══════════════════════════════════════════════════════════════ */
 (function init(){
+  // Eski önbellekleri temizle (çapraz alt kriter güncellemesi)
+  try{ localStorage.removeItem('tubitak_anp_v60'); localStorage.removeItem('tubitak_proj_v60'); }catch(e){}
   loadANPLocal(); _loadProjListLocal(); loadProjLocal();
   updateProjListBadge(); initDB();
 })();
