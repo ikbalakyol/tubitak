@@ -299,7 +299,6 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
         <button class="ni an" data-p="sd-supermatrix"><span class="ni-dot"></span>Süperpozisyon Matrisleri</button>
         <button class="ni an" data-p="sd-submat"><span class="ni-dot"></span>Alt Kriter Matrisleri</button>
         <button class="ni an" data-p="sd-influence"><span class="ni-dot"></span>Etki / Bağımlılık Matrisi</button>
-        <button class="ni an" data-p="sd-crosssub"><span class="ni-dot"></span>Çapraz Alt Kriter Etkileri</button>
       </div>
       <div class="nav-sec">
         <div class="nav-lbl">Projeler</div>
@@ -388,7 +387,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       <!-- UPLOAD -->
       <div class="page" id="page-upload">
         <div class="ph">
-          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">Limit süperpozisyon + çapraz alt kriter etkileşimleri ile global ANP ağırlıkları hesaplanır.</p></div>
+          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">5 ANP adımı: model kurulumu → ikili karşılaştırmalar → W_unw → W_wei → W_lim. İç/dış bağımlılık ve 18 çapraz alt kriter etkileşimi dahil.</p></div>
         </div>
         <div class="g2" style="align-items:start">
           <div>
@@ -406,7 +405,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
                 <input type="file" id="file-inp" accept=".xlsx,.xls" onchange="handleFile(this.files[0])">
                 <div style="font-size:28px;margin-bottom:8px;opacity:.6">📊</div>
                 <div style="font-size:14px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:4px">Dosyayı sürükle veya tıkla</div>
-                <div style="font-size:11.5px;color:var(--tx3)">.xlsx / .xls — 68 sütun (50-67: çapraz alt kriter etkileri dahil)</div>
+                <div style="font-size:11.5px;color:var(--tx3)">.xlsx / .xls — 68 sütun (0-1: uzman, 2-49: karşılaştırmalar, 50-67: alt kriter etkileşimleri)</div>
               </div>
               <div id="fname-show" style="display:none;margin-top:9px;padding:8px 12px;background:var(--bg3);border-radius:var(--rs);font-size:12px;color:var(--ac3);align-items:center;gap:7px">
                 <span>📄</span><span id="fname-txt"></span>
@@ -436,15 +435,12 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
             <div class="card" style="margin-bottom:13px">
               <div class="card-t">ANP Hesaplama Adımları</div>
               <div id="calc-steps">
-                <div class="calc-step pending" id="cs-0"><span>📂</span><span>Adım 1: Problem Tanımı — Kriter ve Alt Kriter Yapısı</span></div>
-                <div class="calc-step pending" id="cs-1"><span>🕸️</span><span>Adım 2: Kriterlerarası Etkileşim Ağı Kurulması</span></div>
-                <div class="calc-step pending" id="cs-2"><span>📐</span><span>Adım 3: İkili Karşılaştırma — GM & PCM Normalize</span></div>
-                <div class="calc-step pending" id="cs-3"><span>🔢</span><span>Adım 4: Tutarlılık Testi — CR = CI/RI ≤ 0.10</span></div>
-                <div class="calc-step pending" id="cs-4"><span>🔗</span><span>Adım 5a: Çapraz Alt Kriter GM Hesaplama (18 etkileşim)</span></div>
-                <div class="calc-step pending" id="cs-5"><span>⬡</span><span>Adım 5b: Ağırlıksız Süpermatris — W_unw (16×16)</span></div>
-                <div class="calc-step pending" id="cs-6"><span>⚡</span><span>Adım 5c: Ağırlıklı / Stokastik Süpermatris — W_wei</span></div>
-                <div class="calc-step pending" id="cs-7"><span>♾️</span><span>Adım 5d: Limit Süpermatris — lim(W^2k) yakınsama</span></div>
-                <div class="calc-step pending" id="cs-8"><span>💾</span><span>Adım 6: Global Ağırlık Sentezi & Kaydetme</span></div>
+                <div class="calc-step pending" id="cs-0"><span>📂</span><span>Adım 1: Model Kurulumu — Kriter, Alt Kriter ve Ağ Yapısı (İç &amp; Dış Bağımlılık)</span></div>
+                <div class="calc-step pending" id="cs-1"><span>📐</span><span>Adım 2: İkili Karşılaştırmalar — Saaty 1-9, GM ve Yerel Öncelik Vektörleri (w)</span></div>
+                <div class="calc-step pending" id="cs-2"><span>🔢</span><span>Adım 2: Tutarlılık Analizi — λmax, CI, CR = CI/RI ≤ 0.10</span></div>
+                <div class="calc-step pending" id="cs-3"><span>⬡</span><span>Adım 3: Başlangıç Süpermatrisi — W_unw (16×16), iç ve dış bağımlılık + çapraz alt kriter etkileri</span></div>
+                <div class="calc-step pending" id="cs-4"><span>⚡</span><span>Adım 4: Ağırlıklı Süpermatris — W_wei, küme ağırlıkları (W_cluster) ile sütunlar stokastik</span></div>
+                <div class="calc-step pending" id="cs-5"><span>♾️</span><span>Adım 5: Limit Süpermatris — W_lim = lim(W_wei^2k), uzun dönem global ağırlıklar</span></div>
               </div>
             </div>
             <div id="upload-result" style="display:none">
@@ -502,7 +498,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 
       <!-- GLOBAL AĞIRLIKLAR -->
       <div class="page" id="page-sd-weights">
-        <div class="ph"><div><h1 class="pt">ANP Global Ağırlıklar</h1><p class="psd">Limit süperpozisyon sütun vektörü — çapraz alt kriter etkileri dahil.</p></div></div>
+        <div class="ph"><div><h1 class="pt">ANP Global Ağırlıklar</h1><p class="psd">Adım 5 çıktısı — Limit süpermatris (W_lim) ilk sütun normalize, iç/dış bağımlılık dahil.</p></div></div>
         <div id="gw-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
       </div>
 
@@ -524,11 +520,6 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
         <div id="infl-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
       </div>
 
-      <!-- ÇAPRAZ ALT KRİTER -->
-      <div class="page" id="page-sd-crosssub">
-        <div class="ph"><div><h1 class="pt">Çapraz Alt Kriter Etkileri</h1><p class="psd">18 adet farklı gruplar arası spesifik alt kriter etkileşimi — W_unw sütun yapısını doğrudan etkiler.</p></div></div>
-        <div id="crosssub-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
-      </div>
 
       <!-- KRİTERLER -->
       <div class="page" id="page-criteria-info">
@@ -652,20 +643,19 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
         <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd">ANP + TOPSIS — çapraz alt kriter etkileşimleri dahil tam süreç.</p></div></div>
         <div class="g2">
           <div class="card">
-            <div class="card-t">ANP — Adım Adım</div>
+            <div class="card-t">ANP — 5 Adım</div>
             <div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)">
-              <div><strong>Adım 1</strong> — Problem tanımı: amaç, 5 ana kriter, 16 alt kriter</div>
-              <div><strong>Adım 2</strong> — Etkileşim ağı: grup-arası + 18 spesifik alt kriter çapraz etkisi</div>
-              <div><strong>Adım 3</strong> — İkili karşılaştırmalar: Saaty 1-9, GM=(∏xᵢ)^(1/n)</div>
-              <div><strong>Adım 4</strong> — Tutarlılık: CR = CI/RI ≤ 0.10</div>
-              <div><strong>Adım 5a</strong> — Çapraz alt kriter GM'leri hesaplanır (18 etkileşim, sütun 50-67)</div>
-              <div><strong>Adım 5b</strong> — W_unw (16×16): Kaynak alt kriter sütunu için hedef grupta spesifik çapraz etki varsa GM-normalize vektör, yoksa grup-seviyesi ağırlık × yerel öncelik vektörü kullanılır</div>
-              <div><strong>Adım 5c</strong> — W_wei: Ana kriter ağırlıkları (mainW) ile çarpılır, sütunlar normalize (stokastik)</div>
-              <div><strong>Adım 5d</strong> — W_lim = lim(W_wei^2k) yakınsar</div>
-              <div><strong>Adım 6</strong> — globalW = normalize(W_lim[:,0])</div>
+              <div><strong>Adım 1</strong> — Model Kurulumu: Amaç, 5 ana küme (kriter), 16 alt kriter ve alternatifler tanımlanır. <em>İç bağımlılık</em> (küme içi elemanlar arası) ve <em>dış bağımlılık</em> (kümeler arası) ilişkiler yönlü oklarla belirlenir.</div>
+              <div><strong>Adım 2</strong> — İkili Karşılaştırmalar: Saaty 1-9 ölçeği ile A·w = λmax·w denkleminden yerel öncelik vektörü (w) hesaplanır.<br>
+              <span style="padding-left:12px;color:var(--tx3)">GM = (x₁·x₂·…·xₙ)^(1/n) → PCM normalize → satır ortalaması = w</span><br>
+              <span style="padding-left:12px;color:var(--tx3)">Tutarlılık: CI = (λmax−n)/(n−1) · CR = CI/RI ≤ 0.10</span></div>
+              <div><strong>Adım 3</strong> — Başlangıç Süpermatrisi W_unw (16×16): Tüm yerel öncelik vektörleri süpermatrise yerleştirilir. Her W_ij bloğu, j kümesinin i kümesi üzerindeki etkisini gösterir. İlişki yoksa sıfır. Bu çalışmada 18 çapraz alt kriter etkileşimi (sütun 50-67) de dahil edilmiştir; spesifik etki varsa GM-normalize vektör, yoksa grup-seviyesi dağılım kullanılır.</div>
+              <div><strong>Adım 4</strong> — Ağırlıklı Süpermatris W_wei: Küme karşılaştırmaları (W_cluster, sütun 30-49 ve ana kriter PCM) ile her W_ij bloğu ilgili küme ağırlığıyla çarpılır → tüm sütun toplamları = 1 (stokastik).</div>
+              <div><strong>Adım 5</strong> — Limit Süpermatris: W_lim = lim(W_wei^2k) · Global ağırlıklar = normalize(W_lim[:,0])</div>
             </div>
             <div style="margin-top:10px;padding:9px;background:var(--bg3);border-radius:7px;font-family:monospace;font-size:11px;color:var(--ac3)">
-              GM=(∏xᵢ)^(1/n) · CR=CI/RI&lt;0.10<br>
+              A·w = λmax·w · GM=(∏xᵢ)^(1/n) · CR=CI/RI&lt;0.10<br>
+              W_weighted = W_cluster × W_unw → col_sum=1<br>
               W_lim = lim(W_wei^2k) · globalW = norm(W_lim[:,0])
             </div>
           </div>
@@ -693,15 +683,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
             <tr><td style="color:var(--tx3)">RI</td><td>0</td><td>0</td><td>0.58</td><td>0.90</td><td>1.12</td><td>1.24</td><td>1.32</td><td>1.41</td><td>1.45</td><td>1.49</td></tr>
           </table>
         </div>
-        <div class="card" style="margin-top:13px">
-          <div class="card-t">Çapraz Alt Kriter Etkileri — W_unw Sütun Mantığı</div>
-          <div style="font-size:12px;color:var(--tx2);line-height:1.8">
-            Kaynak alt kriter <strong>s_j</strong> (grup G_f) sütunu için hedef grup G_t'ye yazılacak değer:<br>
-            &bull; G_t'ye spesifik çapraz etki varsa: GM değerleri normalize edilerek grup ağırlığı ile ölçeklenir<br>
-            &bull; Spesifik etki yoksa: normInfl[G_f→G_t] × subW[G_t] kullanılır<br>
-            &bull; Aynı grup bloğu: subW[G_f] (yerel öncelik vektörü)
-          </div>
-        </div>
+
       </div>
 
     </div>
@@ -809,7 +791,6 @@ const PM={
   'sd-supermatrix':['Süperpozisyon Matrisleri','16×16 matrisler'],
   'sd-submat':['Alt Kriter PCM Matrisleri','Geometrik ortalama PCM'],
   'sd-influence':['Gruplar Arası Etki','Grup etkileşim katsayıları'],
-  'sd-crosssub':['Çapraz Alt Kriter Etkileri','18 spesifik sub→sub etkileşim'],
   evaluate:['Proje Değerlendirme','Saaty 1-9 puanlama + ANP-TOPSIS'],
   'criteria-info':['Kriterler Hakkında','Değerlendirme kriterleri'],
   'user-guide':['Kullanım Kılavuzu','Uzman rehberi'],
@@ -838,7 +819,6 @@ function nav(id,isBack){
   if(id==='sd-supermatrix') renderSM();
   if(id==='sd-submat')    renderSubMat();
   if(id==='sd-influence') renderInfl();
-  if(id==='sd-crosssub')  renderCrossSub();
   if(id==='evaluate')     initEval();
   if(id==='results')      loadProjAndRender();
   if(id==='projects')     loadProjAndRender();
@@ -984,13 +964,11 @@ async function processANP(raw,fname){
 
   setCS(-1); await delay(30);
 
-  /* Adım 1 */
+  /* Adım 1: Model kurulumu — ağ yapısı, iç/dış bağımlılıklar */
   setCS(0,'active'); await delay(80); setCS(0,'done');
-  /* Adım 2 */
-  await delay(30); setCS(1,'active'); await delay(80); setCS(1,'done');
 
-  /* Adım 3: Alt kriter PCM ve öncelik vektörleri */
-  await delay(30); setCS(2,'active');
+  /* Adım 2a: İkili karşılaştırmalar — GM, PCM normalize, yerel öncelik vektörleri */
+  await delay(30); setCS(1,'active');
   const subMat={},subW={},subCR={};
   for(const g of GRP){
     const d=COL_MAP[g]; const M=buildPCM(rows,d.cols,d.pairs,SIZES[g]);
@@ -1000,18 +978,16 @@ async function processANP(raw,fname){
   const mainMat=buildPCM(rows,MAIN_COLS,MAIN_PAIRS,5);
   const mainW=priorityVector(mainMat); const mainCR=calcCR(mainMat,mainW);
   const mainWd=Object.fromEntries(GRP.map((g,i)=>[g,mainW[i]]));
-  setCS(2,'done');
+  setCS(1,'done');
 
-  /* Adım 4: CR kontrol */
-  await delay(30); setCS(3,'active'); await delay(80); setCS(3,'done');
-
-  /* ── YENİ Adım 5a: Çapraz alt kriter GM hesaplama ── */
-  await delay(30); setCS(4,'active');
+  /* Adım 2b: Tutarlılık analizi — λmax, CI, CR */
+  await delay(30); setCS(2,'active');
+  /* Çapraz alt kriter GM (iç/dış bağımlılık etkileşimleri, sütun 50-67) */
   const crossSubGM={};
   for(const [colIdx,frm,to] of CROSS_SUB_MAP){
     crossSubGM[`${frm}->${to}`]=geoMean(rows.map(r=>r[colIdx]));
   }
-  /* Grup-arası etki katsayıları */
+  /* Grup-arası etki katsayıları (dış bağımlılık, sütun 30-49) */
   const inflRaw={},normInfl={};
   for(const [f,t,c] of ETKI_MAP) inflRaw[`${f}->${t}`]=geoMean(rows.map(r=>r[c]));
   for(const f of GRP){
@@ -1027,10 +1003,10 @@ async function processANP(raw,fname){
     if(!crossBySrc[frm][tg]) crossBySrc[frm][tg]={};
     crossBySrc[frm][tg][to]=crossSubGM[`${frm}->${to}`];
   }
-  setCS(4,'done');
+  setCS(2,'done');
 
-  /* ── YENİ Adım 5b: Ağırlıksız Süpermatris W_unw (16×16) ── */
-  await delay(30); setCS(5,'active');
+  /* Adım 3: Başlangıç Süpermatrisi W_unw — iç bağımlılık (aynı grup) + dış bağımlılık + çapraz alt kriter etkileri */
+  await delay(30); setCS(3,'active');
   const N=16;
   const W_unw=Array.from({length:N},()=>Array(N).fill(0.0));
 
@@ -1063,10 +1039,10 @@ async function processANP(raw,fname){
       }
     }
   }
-  setCS(5,'done');
+  setCS(3,'done');
 
-  /* Adım 5c: Ağırlıklı/Stokastik W_wei */
-  await delay(30); setCS(6,'active');
+  /* Adım 4: Ağırlıklı Süpermatris W_wei — küme ağırlıkları (W_cluster) ile sütunlar stokastik hale getirilir */
+  await delay(30); setCS(4,'active');
   const W_wei=W_unw.map(r=>[...r]);
   for(let fi=0;fi<GRP.length;fi++){
     const f=GRP[fi],fo=OFFSETS[f],fs=SIZES[f];
@@ -1083,20 +1059,20 @@ async function processANP(raw,fname){
     const s=W_wei.reduce((a,r)=>a+r[j],0);
     if(s>0) for(let i=0;i<N;i++) W_wei[i][j]/=s;
   }
-  setCS(6,'done');
+  setCS(4,'done');
 
-  /* Adım 5d: Limit süpermatris */
-  await delay(30); setCS(7,'active');
+  /* Adım 5: Limit Süpermatris — W_lim = lim(W_wei^2k), uzun dönem global öncelikler */
+  await delay(30); setCS(5,'active');
   const W_lim=limitMatrix(W_wei);
-  setCS(7,'done');
+  setCS(5,'done');
 
-  /* Adım 6: Global ağırlıklar */
-  await delay(30); setCS(8,'active');
+  /* Global ağırlıklar — limit matrisin ilk sütunundan normalize */
+  await delay(30);
   const gRaw=W_lim.map(row=>row[0]);
   const gSum=gRaw.reduce((a,b)=>a+b,0);
   const globalW={};
   ALL_SUBS.forEach((s,i)=>{ globalW[`${SUB_TO_GRP[s]}_${s}`]=gSum>0?gRaw[i]/gSum:1/16; });
-  setCS(8,'done'); await delay(40);
+  await delay(40);
 
   /* ANP nesnesini oluştur */
   ANP={
@@ -1124,7 +1100,7 @@ async function processANP(raw,fname){
 }
 
 function setCS(idx,state){
-  const total=9; // 9 adım artık
+  const total=6;
   for(let i=0;i<total;i++){
     const el=document.getElementById('cs-'+i); if(!el)continue;
     el.className='calc-step '+(i<idx?'done':i===idx?(state||'active'):'pending');
@@ -1385,56 +1361,6 @@ function renderInfl(){
   GRP.forEach(t=>{ h+=`<th style="color:${GI[t].color}">${GI[t].name.substring(0,5)}</th>`; }); h+='</tr>';
   GRP.forEach(f=>{ h+=`<tr><td style="font-weight:600;color:${GI[f].color}">${GI[f].name}</td>`; GRP.forEach(t=>{ if(f===t){ h+=`<td style="text-align:center;color:var(--tx3)">—</td>`; }else{ const v=(((ANP.normInfl||{})[`${f}->${t}`]||0)*100).toFixed(1); h+=`<td style="text-align:center;font-weight:600;color:${GI[t].color}">${v}%</td>`; } }); h+='</tr>'; });
   h+='</table></div></div>'; el.innerHTML=h;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   YENİ: ÇAPRAZ ALT KRİTER ETKİLERİ GÖRÜNÜMÜ
-═══════════════════════════════════════════════════════════════ */
-function renderCrossSub(){
-  const el=$('crosssub-body'); if(!el)return; if(!ANP||!ANP.crossSubGM){ el.innerHTML=noData(); return; }
-  const csGM=ANP.crossSubGM;
-  const csEntries=Object.entries(csGM).sort((a,b)=>b[1]-a[1]);
-
-  let h=`<div class="notif n-info" style="margin-bottom:16px"><span>ℹ</span><div>Bu 18 etkileşim W_unw matrisinde ilgili sütunun hedef grup bloğunu doğrudan şekillendirir. Spesifik etki varsa grup-seviyesi dağılım yerine bu GM değerleri kullanılır.</div></div>`;
-  h+=`<div class="card" style="margin-bottom:13px"><div class="card-t">Çapraz Alt Kriter GM Değerleri (18 Etkileşim) — Sütun 50-67</div>`;
-  h+=`<table><tr><th>#</th><th>Kaynak Sub</th><th>Hedef Sub</th><th>Kaynak Grup</th><th>Hedef Grup</th><th>GM Değeri</th><th>W_unw Etkisi</th></tr>`;
-  CROSS_SUB_MAP.forEach(([col,frm,to],idx)=>{
-    const gm=csGM[`${frm}->${to}`]||0;
-    const fg=SUB_TO_GRP[frm],tg=SUB_TO_GRP[to];
-    const bar=Math.min(gm/9*100,100).toFixed(0);
-    h+=`<tr>
-      <td style="color:var(--tx3)">${idx+1}</td>
-      <td><strong style="color:${GI[fg].color}">${frm}</strong> <span style="font-size:11px;color:var(--tx3)">${SF[frm]}</span></td>
-      <td><strong style="color:${GI[tg].color}">${to}</strong> <span style="font-size:11px;color:var(--tx3)">${SF[to]}</span></td>
-      <td style="color:${GI[fg].color};font-weight:600">${GI[fg].name}</td>
-      <td style="color:${GI[tg].color};font-weight:600">${GI[tg].name}</td>
-      <td style="font-weight:700;color:${gm>6?'var(--gold)':gm>4?'var(--ac3)':'var(--ac)'}">${gm.toFixed(4)}</td>
-      <td><div style="width:80px;height:5px;background:var(--bg4);border-radius:3px;overflow:hidden"><div style="width:${bar}%;height:100%;background:${GI[tg].color};border-radius:3px"></div></div></td>
-    </tr>`;
-  });
-  h+='</table></div>';
-
-  /* Kaynak bazlı özet */
-  h+=`<div class="g2">`;
-  const bySrc={};
-  CROSS_SUB_MAP.forEach(([col,frm,to])=>{
-    if(!bySrc[frm])bySrc[frm]={frm,tgts:[]};
-    bySrc[frm].tgts.push({to,gm:csGM[`${frm}->${to}`]||0});
-  });
-  Object.values(bySrc).forEach(({frm,tgts})=>{
-    const fg=SUB_TO_GRP[frm];
-    h+=`<div class="card"><div class="card-t" style="color:${GI[fg].color}">${frm} — ${SF[frm]} ← Etki Kaynağı</div>`;
-    tgts.forEach(({to,gm})=>{
-      const tg=SUB_TO_GRP[to];
-      h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--bg3);border-radius:6px;margin-bottom:5px">
-        <span style="font-size:12px">→ <strong style="color:${GI[tg].color}">${to}</strong> (${SF[to]})</span>
-        <span class="badge b-green">${gm.toFixed(4)}</span>
-      </div>`;
-    });
-    h+='</div>';
-  });
-  h+='</div>';
-  el.innerHTML=h;
 }
 
 /* ═══════════════════════════════════════════════════════════════
