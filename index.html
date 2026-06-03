@@ -387,7 +387,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       <!-- UPLOAD -->
       <div class="page" id="page-upload">
         <div class="ph">
-          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">5 ANP adımı: model kurulumu → ikili karşılaştırmalar → W_unw → W_wei → W_lim. İç/dış bağımlılık ve 18 çapraz alt kriter etkileşimi dahil.</p></div>
+          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">  </p></div>
         </div>
         <div class="g2" style="align-items:start">
           <div>
@@ -422,7 +422,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
                 <span class="badge b-red" style="margin-right:5px">R-T (17-19)</span>Finans alt kriter çiftleri (3 çift)<br>
                 <span class="badge b-blue" style="margin-right:5px">U-AD (20-29)</span>Ana kriter 5×5 PCM (10 çift)<br>
                 <span class="badge b-amber" style="margin-right:5px">AE-AX (30-49)</span>Gruplar arası etki katsayıları (20 değer)<br>
-                <span class="badge b-green" style="margin-right:5px">AY-BP (50-67)</span>Çapraz alt kriter etkileri (18 çift — YENİ)
+                <span class="badge b-green" style="margin-right:5px">AY-BP (50-67)</span>Çapraz alt kriter etkileri (18 çift )
                 <div class="divider"></div>
                 <span style="color:var(--tx3)">⚠ Negatif değer = ters oran: −n → 1/|n|. Otomatik dönüştürülür.<br>
                 Çapraz etkiler: T1→P1, T1→P4, T1→F3, T2→E1, T2→U1, T3→P1,<br>
@@ -786,7 +786,7 @@ function showScr(id){
 ═══════════════════════════════════════════════════════════════ */
 const PM={
   dashboard:['Gösterge Paneli','Sistem özeti'],
-  upload:['ANP Excel Yükle & Hesapla','68 sütun — çapraz alt kriter etkileri dahil'],
+  upload:['ANP Excel Yükle & Hesapla',''],
   projlist:['Proje Listesi Yükle','Üyelerin göreceği proje listesi'],
   'sd-weights':['ANP Global Ağırlıklar','Limit matris sütun vektörü'],
   'sd-supermatrix':['Süperpozisyon Matrisleri','16×16 matrisler'],
@@ -1333,7 +1333,7 @@ function updateANPBadges(){
   const dExp=$('d-exp'),dDate=$('d-date'),nbU=$('nb-upload'),tbA=$('tb-anp-badge'),sdD=$('sd-dot'),sdT=$('sd-txt');
   if(dExp)dExp.textContent=ANP.expertCount||'—'; if(dDate)dDate.textContent=ANP.date||'—';
   if(nbU)nbU.textContent=(ANP.expertCount||'?')+' uzman'; if(tbA)tbA.textContent='● ANP Hazır';
-  if(sdD)sdD.className='sd loaded'; if(sdT)sdT.textContent=(ANP.expertCount||'?')+' uzman veri gişisi sağlandı';
+  if(sdD)sdD.className='sd loaded'; if(sdT)sdT.textContent=(ANP.expertCount||'?')+' uzmana ait veri girişi tamamlandı.';
 }
 function updateProjListBadge(){ const el=$('nb-plist'); if(el)el.textContent=PROJ_LIST.length>0?PROJ_LIST.length+' proje':'—'; }
 
@@ -1728,7 +1728,7 @@ function renderCriteriaInfo(){
 
 function renderUserGuide(){
   const el=$('user-guide-body'); if(!el)return;
-  el.innerHTML=`<div class="g2" style="margin-bottom:16px"><div class="card" style="border-left:4px solid var(--ac)"><div class="card-t" style="color:var(--ac)">📋 Genel Bakış</div><div style="font-size:13px;color:var(--tx2);line-height:1.8">Bu portal, TÜBİTAK girişimcilik projelerinin <strong>ANP</strong> (18 çapraz alt kriter etkisi dahil) ve <strong>TOPSIS</strong> yöntemleriyle bilimsel olarak değerlendirilmesi için tasarlanmıştır.</div></div><div class="card" style="border-left:4px solid var(--ac3)"><div class="card-t" style="color:var(--ac3)">🎯 Değerlendirme Ölçeği</div><div style="font-size:13px;color:var(--tx2);line-height:1.8"><strong>Saaty 1-9:</strong><br>1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div></div></div><div class="card" style="margin-bottom:16px"><div class="card-t">🪜 Adım Adım Değerlendirme</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px"><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac)"><div style="font-size:22px;margin-bottom:8px">1️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Proje Seç</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Listeden değerlendireceğiniz projeyi seçin.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac2)"><div style="font-size:22px;margin-bottom:8px">2️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Adınızı Girin</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Değerlendiren adı alanına ad ve soyadınızı yazın.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac3)"><div style="font-size:22px;margin-bottom:8px">3️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Kriterleri Puanla</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">16 kriter için 1-9 puan seçin. <strong>Tüm alanlar zorunludur.</strong></div></div></div></div><div class="card"><div class="card-t">❓ Sık Sorulan Sorular</div><div style="font-size:13px;color:var(--tx2);line-height:1.9"><strong style="color:var(--tx)">Listede projem görünmüyor?</strong> Yönetici henüz proje listesini yüklememiş olabilir.<br><strong style="color:var(--tx)">Kaydetmeden çıkarsam ne olur?</strong> "TOPSIS Hesapla & Kaydet" butonuna basılmadan hiçbir şey kaydedilmez.<br><strong style="color:var(--tx)">Tüm kriterleri doldurmak zorunda mıyım?</strong> Evet, eksik alan bırakılamaz.</div></div>`;
+  el.innerHTML=`<div class="g2" style="margin-bottom:16px"><div class="card" style="border-left:4px solid var(--ac)"><div class="card-t" style="color:var(--ac)">📋 Genel Bakış</div><div style="font-size:13px;color:var(--tx2);line-height:1.8">Bu portal, TÜBİTAK girişimcilik projelerinin <strong>ANP</strong>  ve <strong>TOPSIS</strong> yöntemleriyle bilimsel olarak değerlendirilmesi için tasarlanmıştır.</div></div><div class="card" style="border-left:4px solid var(--ac3)"><div class="card-t" style="color:var(--ac3)">🎯 Değerlendirme Ölçeği</div><div style="font-size:13px;color:var(--tx2);line-height:1.8"><strong>Saaty 1-9:</strong><br>1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div></div></div><div class="card" style="margin-bottom:16px"><div class="card-t">🪜 Adım Adım Değerlendirme</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px"><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac)"><div style="font-size:22px;margin-bottom:8px">1️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Proje Seç</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Listeden değerlendireceğiniz projeyi seçin.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac2)"><div style="font-size:22px;margin-bottom:8px">2️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Adınızı Girin</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Değerlendiren adı alanına ad ve soyadınızı yazın.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac3)"><div style="font-size:22px;margin-bottom:8px">3️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Kriterleri Puanla</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">16 kriter için 1-9 puan seçin. <strong>Tüm alanlar zorunludur.</strong></div></div></div></div><div class="card"><div class="card-t">❓ Sık Sorulan Sorular</div><div style="font-size:13px;color:var(--tx2);line-height:1.9"><strong style="color:var(--tx)">Listede projem görünmüyor?</strong> Yönetici henüz proje listesini yüklememiş olabilir.<br><strong style="color:var(--tx)">Kaydetmeden çıkarsam ne olur?</strong> "TOPSIS Hesapla & Kaydet" butonuna basılmadan hiçbir şey kaydedilmez.<br><strong style="color:var(--tx)">Tüm kriterleri doldurmak zorunda mıyım?</strong> Evet, eksik alan bırakılamaz.</div></div>`;
 }
 
 /* ═══════════════════════════════════════════════════════════════
