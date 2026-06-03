@@ -1342,10 +1342,8 @@ function renderUploadStatus(){
   if(!ANP){ el.innerHTML='<p style="color:var(--tx3);font-size:12px">Kayıtlı veri yok.</p>'; return; }
   const csCnt=ANP.crossSubGM?Object.keys(ANP.crossSubGM).length:0;
   const csOk=csCnt>=18;
-  const csMsg=csOk?' — W_unw sütunları spesifik etkilerle oluşturuldu':' — Eksik! Excel\u0027i yeniden yükleyin';
-  el.innerHTML='<div class="notif n-ok" style="margin-bottom:10px"><span>💾</span><div><strong>'+escHtml(ANP.fname||'anket.xlsx')+'</strong> · '+ANP.expertCount+' uzman · '+ANP.date+'</div></div>'
-    +'<div class="'+(csOk?'notif n-ok':'notif n-warn')+'" style="margin-bottom:10px"><span>'+(csOk?'🔗':'⚠')+'</span><div>Çapraz alt kriter etkileşimi: <strong>'+csCnt+'/18</strong>'+csMsg+'</div></div>'
-    +'<button class="btn bd" onclick="clearANP()">🗑 ANP Verisini Sil</button>';
+ el.innerHTML='<div class="notif n-ok" style="margin-bottom:10px"><span>💾</span><div><strong>'+escHtml(ANP.fname||'anket.xlsx')+'</strong> • '+ANP.expertCount+' uzman • '+ANP.date+'</div></div>'
++'<button class="btn bd" onclick="clearANP()">🗑 ANP Verisini Sil</button>';
 }
 function clearANP(){
   if(!confirm('ANP verisi silinsin mi?'))return;
