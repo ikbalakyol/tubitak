@@ -362,11 +362,11 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
         <div id="d-no-anp" class="notif n-warn" style="display:none"><span>⚠</span><div>ANP ağırlıkları yüklenmedi. <button class="btn bo" style="margin-left:8px;padding:4px 10px;font-size:12px" onclick="nav('upload')">Excel Yükle →</button></div></div>
         <div id="d-no-plist" class="notif n-warn" style="display:none"><span>⚠</span><div>Proje listesi yüklenmedi. <button class="btn bo" style="margin-left:8px;padding:4px 10px;font-size:12px" onclick="nav('projlist')">Liste Yükle →</button></div></div>
         <div class="g5" style="margin-bottom:14px">
-          <div class="stat"><div class="sl">Uzman</div><div class="sv" style="color:var(--ac)" id="d-exp">—</div><div class="ss">Katılımcı</div></div>
+          <div class="stat"><div class="sl">Kriter Ağırlıklandırması Yapan Uzman</div><div class="sv" style="color:var(--ac)" id="d-exp">—</div><div class="ss">Katılımcı</div></div>
           <div class="stat"><div class="sl">Ana Kriter</div><div class="sv" style="color:var(--ac2)">5</div></div>
           <div class="stat"><div class="sl">Alt Kriter</div><div class="sv" style="color:var(--ac3)">16</div></div>
           <div class="stat"><div class="sl">Proje</div><div class="sv" style="color:var(--ac4)" id="d-proj">0</div><div class="ss">Değerlendirilen</div></div>
-          <div class="stat"><div class="sl">Son Değerlendirme</div><div class="sv" style="font-size:12px;color:var(--gold)" id="d-date">—</div></div>
+          <div class="stat"><div class="sl">Son Değerlendirme Tarihi</div><div class="sv" style="font-size:12px;color:var(--gold)" id="d-date">—</div></div>
         </div>
         <div class="g2" style="margin-bottom:14px">
           <div class="card">
@@ -640,12 +640,12 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 
       <!-- YÖNTEM -->
       <div class="page" id="page-about">
-        <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd">ANP + TOPSIS — çapraz alt kriter etkileşimleri dahil tam süreç.</p></div></div>
+        <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd">ANP + TOPSIS </p></div></div>
         <div class="g2">
           <div class="card">
             <div class="card-t">ANP — 5 Adım</div>
             <div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)">
-              <div><strong>Adım 1</strong> — Model Kurulumu: Amaç, 5 ana küme (kriter), 16 alt kriter ve alternatifler tanımlanır. <em>İç bağımlılık</em> (küme içi elemanlar arası) ve <em>dış bağımlılık</em> (kümeler arası) ilişkiler yönlü oklarla belirlenir.</div>
+              <div><strong>Adım 1</strong> — Model Kurulumu: Amaç, 5 ana küme (kriter), 16 alt kriter ve etkileşimler tanımlanır. </div>
               <div><strong>Adım 2</strong> — İkili Karşılaştırmalar: Saaty 1-9 ölçeği ile A·w = λmax·w denkleminden yerel öncelik vektörü (w) hesaplanır.<br>
               <span style="padding-left:12px;color:var(--tx3)">GM = (x₁·x₂·…·xₙ)^(1/n) → PCM normalize → satır ortalaması = w</span><br>
               <span style="padding-left:12px;color:var(--tx3)">Tutarlılık: CI = (λmax−n)/(n−1) · CR = CI/RI ≤ 0.10</span></div>
@@ -1115,7 +1115,7 @@ async function processANP(raw,fname){
   saveANPLocal(); await saveANPToDB(ANP); updateANPBadges(); renderUploadStatus(); renderExpertList(); renderDashboard();
 
   /* Sonuç özeti */
-  let h=`<div class="notif n-ok"><span>✓</span><div>ANP tamamlandı. ${ec} uzman · 18 çapraz alt kriter etkisi dahil. ${USE_DB?'Veritabanına':'Yerel depoya'} kaydedildi.</div></div>`;
+  let h=`<div class="notif n-ok"><span>✓</span><div>ANP tamamlandı. ${ec} uzman ·  ${USE_DB?'Veritabanına':'Yerel depoya'} kaydedildi.</div></div>`;
   h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">`;
   for(const g of GRP){
     const cr=ANP.subCR[g].CR;
@@ -1125,7 +1125,7 @@ async function processANP(raw,fname){
   h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px;grid-column:1/-1"><span style="font-size:12px">Ana Kriterler (5×5 PCM)</span><span class="badge ${mc<.10?'cr-ok':'cr-warn'}">CR=${mc.toFixed(4)}</span></div></div>`;
   h+=`<button class="btn bp" onclick="nav('sd-weights')" style="width:100%;justify-content:center">Global ANP Ağırlıklarını Gör →</button>`;
   const urb=$('upload-result-body'),ur=$('upload-result'); if(urb)urb.innerHTML=h; if(ur)ur.style.display='block';
-  const csCount=Object.keys(ANP.crossSubGM||{}).length; toast(`ANP hesaplandı: ${ANP.expertCount} uzman, ${csCount} çapraz etkileşim dahil`,'ok');
+  const csCount=Object.keys(ANP.crossSubGM||{}).length; toast(`ANP hesaplandı: ${ANP.expertCount} uzman, ${csCount} `,'ok');
 }
 
 function setCS(idx,state){
@@ -1333,7 +1333,7 @@ function updateANPBadges(){
   const dExp=$('d-exp'),dDate=$('d-date'),nbU=$('nb-upload'),tbA=$('tb-anp-badge'),sdD=$('sd-dot'),sdT=$('sd-txt');
   if(dExp)dExp.textContent=ANP.expertCount||'—'; if(dDate)dDate.textContent=ANP.date||'—';
   if(nbU)nbU.textContent=(ANP.expertCount||'?')+' uzman'; if(tbA)tbA.textContent='● ANP Hazır';
-  if(sdD)sdD.className='sd loaded'; if(sdT)sdT.textContent=(ANP.expertCount||'?')+' uzman yüklü';
+  if(sdD)sdD.className='sd loaded'; if(sdT)sdT.textContent=(ANP.expertCount||'?')+' uzman veri gişisi sağlandı';
 }
 function updateProjListBadge(){ const el=$('nb-plist'); if(el)el.textContent=PROJ_LIST.length>0?PROJ_LIST.length+' proje':'—'; }
 
