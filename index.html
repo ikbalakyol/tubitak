@@ -353,7 +353,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       <!-- DASHBOARD -->
       <div class="page" id="page-dashboard">
         <div class="ph">
-          <div><h1 class="pt">Sistem Özeti</h1><p class="psd">ANP + TOPSIS Entegre Karar Destek Sistemi</p></div>
+          <div><h1 class="pt">Sistem Özeti</h1><p class="psd">ANP + TOPSIS Entegre Karar Destek Sistemi </p></div>
           <div style="display:flex;gap:8px">
             <button class="btn bo" onclick="nav('upload')">↑ ANP Excel</button>
             <button class="btn bp" onclick="nav('evaluate')">+ Proje Değerlendir</button>
@@ -362,11 +362,11 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
         <div id="d-no-anp" class="notif n-warn" style="display:none"><span>⚠</span><div>ANP ağırlıkları yüklenmedi. <button class="btn bo" style="margin-left:8px;padding:4px 10px;font-size:12px" onclick="nav('upload')">Excel Yükle →</button></div></div>
         <div id="d-no-plist" class="notif n-warn" style="display:none"><span>⚠</span><div>Proje listesi yüklenmedi. <button class="btn bo" style="margin-left:8px;padding:4px 10px;font-size:12px" onclick="nav('projlist')">Liste Yükle →</button></div></div>
         <div class="g5" style="margin-bottom:14px">
-          <div class="stat"><div class="sl">Kriter Ağırlıklandırması Yapan Uzman</div><div class="sv" style="color:var(--ac)" id="d-exp">—</div><div class="ss">Katılımcı</div></div>
+          <div class="stat"><div class="sl">Uzman</div><div class="sv" style="color:var(--ac)" id="d-exp">—</div><div class="ss">Katılımcı</div></div>
           <div class="stat"><div class="sl">Ana Kriter</div><div class="sv" style="color:var(--ac2)">5</div></div>
           <div class="stat"><div class="sl">Alt Kriter</div><div class="sv" style="color:var(--ac3)">16</div></div>
           <div class="stat"><div class="sl">Proje</div><div class="sv" style="color:var(--ac4)" id="d-proj">0</div><div class="ss">Değerlendirilen</div></div>
-          <div class="stat"><div class="sl">Son Değerlendirme Tarihi</div><div class="sv" style="font-size:12px;color:var(--gold)" id="d-date">—</div></div>
+          <div class="stat"><div class="sl">Son Değerlendirme Tarihi </div><div class="sv" style="font-size:12px;color:var(--gold)" id="d-date">—</div></div>
         </div>
         <div class="g2" style="margin-bottom:14px">
           <div class="card">
@@ -387,7 +387,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       <!-- UPLOAD -->
       <div class="page" id="page-upload">
         <div class="ph">
-          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">  </p></div>
+          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">Limit süperpozisyon yöntemi ile global ANP ağırlıkları hesaplanır.</p></div>
         </div>
         <div class="g2" style="align-items:start">
           <div>
@@ -405,14 +405,14 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
                 <input type="file" id="file-inp" accept=".xlsx,.xls" onchange="handleFile(this.files[0])">
                 <div style="font-size:28px;margin-bottom:8px;opacity:.6">📊</div>
                 <div style="font-size:14px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:4px">Dosyayı sürükle veya tıkla</div>
-                <div style="font-size:11.5px;color:var(--tx3)">.xlsx / .xls — 68 sütun (0-1: uzman, 2-49: karşılaştırmalar, 50-67: alt kriter etkileşimleri)</div>
+                <div style="font-size:11.5px;color:var(--tx3)">.xlsx / .xls — 50 sütun uzman anket verisi (15 satır uzman)</div>
               </div>
               <div id="fname-show" style="display:none;margin-top:9px;padding:8px 12px;background:var(--bg3);border-radius:var(--rs);font-size:12px;color:var(--ac3);align-items:center;gap:7px">
                 <span>📄</span><span id="fname-txt"></span>
               </div>
             </div>
             <div class="card">
-              <div class="card-t">Excel Sütun Yapısı (68 Sütun)</div>
+              <div class="card-t">Excel Sütun Yapısı </div>
               <div style="font-size:11.5px;color:var(--tx2);line-height:2">
                 <span class="badge b-gray" style="margin-right:5px">A-B (0-1)</span>Ad/Kurum · Uzmanlık<br>
                 <span class="badge b-blue" style="margin-right:5px">C-E (2-4)</span>Teknoloji alt kriter ikili karşılaştırmaları (3 çift)<br>
@@ -421,13 +421,10 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
                 <span class="badge b-amber" style="margin-right:5px">O-Q (14-16)</span>Uygulama alt kriter çiftleri (3 çift)<br>
                 <span class="badge b-red" style="margin-right:5px">R-T (17-19)</span>Finans alt kriter çiftleri (3 çift)<br>
                 <span class="badge b-blue" style="margin-right:5px">U-AD (20-29)</span>Ana kriter 5×5 PCM (10 çift)<br>
-                <span class="badge b-amber" style="margin-right:5px">AE-AX (30-49)</span>Gruplar arası etki katsayıları (20 değer)<br>
-                <span class="badge b-green" style="margin-right:5px">AY-BP (50-67)</span>Çapraz alt kriter etkileri (18 çift )
+                <span class="badge b-amber" style="margin-right:5px">AE-AX (30-49)</span>Gruplar arası etki katsayıları (20 değer)
                 <div class="divider"></div>
                 <span style="color:var(--tx3)">⚠ Negatif değer = ters oran: −n → 1/|n|. Otomatik dönüştürülür.<br>
-                Çapraz etkiler: T1→P1, T1→P4, T1→F3, T2→E1, T2→U1, T3→P1,<br>
-                E1→T1, E1→U1, E1→U3, E2→U1, E2→F3, E3→U3,<br>
-                P1→F2, P1→F3, P3→F2, P3→F3, U3→F1, F1→P4</span>
+                Formül: GM = (∏xᵢ)^(1/n) · PCM normalize → öncelik vektörü → CR = CI/RI ≤ 0.10</span>
               </div>
             </div>
           </div>
@@ -435,12 +432,14 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
             <div class="card" style="margin-bottom:13px">
               <div class="card-t">ANP Hesaplama Adımları</div>
               <div id="calc-steps">
-                <div class="calc-step pending" id="cs-0"><span>📂</span><span>Adım 1: Model Kurulumu — Kriter, Alt Kriter ve Ağ Yapısı (İç &amp; Dış Bağımlılık)</span></div>
-                <div class="calc-step pending" id="cs-1"><span>📐</span><span>Adım 2: İkili Karşılaştırmalar — Saaty 1-9, GM ve Yerel Öncelik Vektörleri (w)</span></div>
-                <div class="calc-step pending" id="cs-2"><span>🔢</span><span>Adım 2: Tutarlılık Analizi — λmax, CI, CR = CI/RI ≤ 0.10</span></div>
-                <div class="calc-step pending" id="cs-3"><span>⬡</span><span>Adım 3: Başlangıç Süpermatrisi — W_unw (16×16), iç ve dış bağımlılık + çapraz alt kriter etkileri</span></div>
-                <div class="calc-step pending" id="cs-4"><span>⚡</span><span>Adım 4: Ağırlıklı Süpermatris — W_wei, küme ağırlıkları (W_cluster) ile sütunlar stokastik</span></div>
-                <div class="calc-step pending" id="cs-5"><span>♾️</span><span>Adım 5: Limit Süpermatris — W_lim = lim(W_wei^2k), uzun dönem global ağırlıklar</span></div>
+                <div class="calc-step pending" id="cs-0"><span>📂</span><span>Adım 1: Problem Tanımı — Kriter ve Alt Kriter Yapısı</span></div>
+                <div class="calc-step pending" id="cs-1"><span>🕸️</span><span>Adım 2: Kriterlerarası Etkileşim Ağı Kurulması</span></div>
+                <div class="calc-step pending" id="cs-2"><span>📐</span><span>Adım 3: İkili Karşılaştırma — GM & PCM Normalize</span></div>
+                <div class="calc-step pending" id="cs-3"><span>🔢</span><span>Adım 4: Tutarlılık Testi — CR = CI/RI ≤ 0.10</span></div>
+                <div class="calc-step pending" id="cs-4"><span>⬡</span><span>Adım 5: Ağırlıksız Süpermatris (W_unw 16×16)</span></div>
+                <div class="calc-step pending" id="cs-5"><span>⚡</span><span>Adım 5: Ağırlıklı / Stokastik Süpermatris (W_wei)</span></div>
+                <div class="calc-step pending" id="cs-6"><span>♾️</span><span>Adım 5: Limit Süpermatris — lim(W^2k) yakınsama</span></div>
+                <div class="calc-step pending" id="cs-7"><span>💾</span><span>Adım 6: Global Ağırlık Sentezi & Kaydetme</span></div>
               </div>
             </div>
             <div id="upload-result" style="display:none">
@@ -484,6 +483,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
                 <tr><td><span class="badge b-blue">C</span></td><td>E-posta</td><td><span class="badge b-gray">Opsiyonel</span></td></tr>
                 <tr><td><span class="badge b-blue">D</span></td><td>Telefon No</td><td><span class="badge b-gray">Opsiyonel</span></td></tr>
                 <tr><td><span class="badge b-blue">E</span></td><td>İş Fikrinin Adı (Proje Adı)</td><td><span class="badge b-green">Evet</span></td></tr>
+                <tr><td><span class="badge b-gray">F</span></td><td>Birleşik (otomatik, kullanılmaz)</td><td><span class="badge b-gray">Hayır</span></td></tr>
               </table>
             </div>
           </div>
@@ -498,7 +498,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 
       <!-- GLOBAL AĞIRLIKLAR -->
       <div class="page" id="page-sd-weights">
-        <div class="ph"><div><h1 class="pt">ANP Global Ağırlıklar</h1><p class="psd">Adım 5 çıktısı — Limit süpermatris (W_lim) ilk sütun normalize, iç/dış bağımlılık dahil.</p></div></div>
+        <div class="ph"><div><h1 class="pt">ANP Global Ağırlıklar</h1><p class="psd">Limit süperpozisyon sütun vektörü — stasyoner dağılım .</p></div></div>
         <div id="gw-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
       </div>
 
@@ -516,10 +516,9 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 
       <!-- ETKİ -->
       <div class="page" id="page-sd-influence">
-        <div class="ph"><div><h1 class="pt">Gruplar Arası Etki / Bağımlılık Matrisi</h1><p class="psd">5 ana grup arasındaki ANP etkileşim katsayıları — geometrik ortalama & normalize.</p></div></div>
+        <div class="ph"><div><h1 class="pt">Etki / Bağımlılık Matrisi</h1><p class="psd">Gruplar arası ANP etkileşim katsayıları — geometrik ortalama & normalize.</p></div></div>
         <div id="infl-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
       </div>
-
 
       <!-- KRİTERLER -->
       <div class="page" id="page-criteria-info">
@@ -572,12 +571,28 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
                 <div id="member-no-plist" class="notif n-warn" style="display:none"><span>⚠</span><div>Proje listesi henüz yönetici tarafından yüklenmedi.</div></div>
                 <div id="member-sel-wrap">
                   <div class="fg"><label>Proje Seç *</label><select id="proj-select" onchange="fillProjFields()"><option value="">— Proje seçiniz —</option></select></div>
+                  <!-- ── Proje Bilgi Kartı: 5 Alan ── -->
                   <div class="proj-info-box" id="proj-info-grid" style="grid-template-columns:1fr 1fr">
-                    <div><div class="pif-label">Girişimci No</div><div class="pif-val" id="pf-no" style="color:var(--ac);font-family:monospace;font-size:14px">—</div></div>
-                    <div><div class="pif-label">Girişimci Adı</div><div class="pif-val" id="pf-gname" style="color:var(--ac3)">—</div></div>
-                    <div style="grid-column:1/-1"><div class="pif-label">Proje Adı</div><div class="pif-val" id="pf-projname" style="color:var(--tx);font-size:12.5px">—</div></div>
-                    <div><div class="pif-label">E-posta</div><div class="pif-val" id="pf-email" style="color:var(--tx2);font-size:12px;word-break:break-all">—</div></div>
-                    <div><div class="pif-label">Telefon No</div><div class="pif-val" id="pf-tel" style="color:var(--tx2);font-size:12px">—</div></div>
+                    <div>
+                      <div class="pif-label">Girişimci No</div>
+                      <div class="pif-val" id="pf-no" style="color:var(--ac);font-family:monospace;font-size:14px">—</div>
+                    </div>
+                    <div>
+                      <div class="pif-label">Girişimci Adı</div>
+                      <div class="pif-val" id="pf-gname" style="color:var(--ac3)">—</div>
+                    </div>
+                    <div style="grid-column:1/-1">
+                      <div class="pif-label">Proje Adı</div>
+                      <div class="pif-val" id="pf-projname" style="color:var(--tx);font-size:12.5px">—</div>
+                    </div>
+                    <div>
+                      <div class="pif-label">E-posta</div>
+                      <div class="pif-val" id="pf-email" style="color:var(--tx2);font-size:12px;word-break:break-all">—</div>
+                    </div>
+                    <div>
+                      <div class="pif-label">Telefon No</div>
+                      <div class="pif-val" id="pf-tel" style="color:var(--tx2);font-size:12px">—</div>
+                    </div>
                   </div>
                   <div class="fg">
                     <label>Değerlendiren Adı *</label>
@@ -606,7 +621,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       <!-- TOPSIS SONUÇLARI -->
       <div class="page" id="page-results">
         <div class="ph">
-          <div><h1 class="pt">TOPSIS Sıralaması</h1><p class="psd">ANP ağırlıklı C* = D⁻/(D⁺+D⁻) skoruna göre — Adım 6.</p></div>
+          <div><h1 class="pt">TOPSIS Sıralaması</h1><p class="psd">ANP ağırlıklı C* = D⁻/(D⁺+D⁻) skoruna göre —  Adım 6.</p></div>
           <div style="display:flex;gap:8px">
             <button class="btn bo" onclick="loadProjAndRender()">↺ Yenile</button>
             <button class="btn bo" onclick="exportCSV()">↓ CSV</button>
@@ -618,7 +633,7 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
       <!-- UZMAN PUANLARI -->
       <div class="page" id="page-evaluations">
         <div class="ph" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-          <div><h1 class="pt">Uzman Değerlendirme Puanları</h1><p class="psd">Uzmana göre sütunlar, projeye göre satırlar</p></div>
+          <div><h1 class="pt">Uzman Değerlendirme Puanları</h1><p class="psd">Uzmana göre sütunlar, projeye göre satırlar — detay için proje kartına tıklayın</p></div>
           <button onclick="exportEvaluationsToExcel()" class="btn bs" style="padding:10px 20px;">Excel'e Aktar</button>
         </div>
         <div id="eval-expert-grid" class="eval-expert-grid">
@@ -640,40 +655,41 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 
       <!-- YÖNTEM -->
       <div class="page" id="page-about">
-        <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd">ANP + TOPSIS </p></div></div>
+        <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd"> ANP + TOPSIS.</p></div></div>
         <div class="g2">
           <div class="card">
-            <div class="card-t">ANP — 5 Adım</div>
+            <div class="card-t">ANP — Adım Adım </div>
             <div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)">
-              <div><strong>Adım 1</strong> — Model Kurulumu: Amaç, 5 ana küme (kriter), 16 alt kriter ve etkileşimler tanımlanır. </div>
-              <div><strong>Adım 2</strong> — İkili Karşılaştırmalar: Saaty 1-9 ölçeği ile A·w = λmax·w denkleminden yerel öncelik vektörü (w) hesaplanır.<br>
-              <span style="padding-left:12px;color:var(--tx3)">GM = (x₁·x₂·…·xₙ)^(1/n) → PCM normalize → satır ortalaması = w</span><br>
-              <span style="padding-left:12px;color:var(--tx3)">Tutarlılık: CI = (λmax−n)/(n−1) · CR = CI/RI ≤ 0.10</span></div>
-              <div><strong>Adım 3</strong> — Başlangıç Süpermatrisi W_unw (16×16): W_ij bloğu = j grubunun i grubu üzerindeki yerel öncelik vektörü. Diagonal (iç bağımlılık) = 0 (iç bağımlılık PCM'i toplanmadı). Off-diagonal: 18 çapraz alt kriter etkisi varsa normalize(GM), yoksa subW[i].</div>
-              <div><strong>Adım 4</strong> — Ağırlıklı Süpermatris W_wei: W_cluster[tgtG][srcG] = mainW[srcG] × outerW[srcG→tgtG] küme ağırlığı ile her W_unw elemanı çarpılır → sütunlar normalize → stokastik.</div>
-              <div><strong>Adım 5</strong> — Limit Süpermatris: W_lim = lim(W_wei^2k) · Global ağırlıklar = normalize(W_lim[:,0])</div>
+              <div><strong>Adım 1</strong> — Problem tanımı: amaç, kriterler, alt kriterler, alternatifler</div>
+              <div><strong>Adım 2</strong> — Kriterlerarası iç ve dış bağımlılık ilişkileri belirlenir</div>
+              <div><strong>Adım 3</strong> — İkili karşılaştırmalar: Saaty 1-9 ölçeği, negatif = ters oran (1/|n|)</div>
+              <div style="padding-left:12px;color:var(--tx3)">GM = (x₁·x₂·…·xₙ)^(1/n) — geometrik ortalama</div>
+              <div style="padding-left:12px;color:var(--tx3)">PCM normalize: sütun toplamına böl → satır ortalaması = yerel W</div>
+              <div><strong>Adım 4</strong> — Tutarlılık: λmax = Σ(Aw/w)/n · CI = (λmax−n)/(n−1) · CR = CI/RI ≤ 0.10</div>
+              <div><strong>Adım 5a</strong> — Ağırlıksız süpermatris (W_unw 16×16): kriter sütunlarına öncelik vektörleri yerleştirilir</div>
+              <div><strong>Adım 5b</strong> — Ana kriter ağırlıkları (mainW) ile sütunlar çarpılır → stokastik hale getirilir (W_wei)</div>
+              <div><strong>Adım 5c</strong> — Limit süpermatris: W_lim = lim(W_wei^2k) — yakınsama</div>
+              <div><strong>Adım 6</strong> — Global ağırlıklar = W_lim'in ilk sütunu normalize edilir</div>
             </div>
             <div style="margin-top:10px;padding:9px;background:var(--bg3);border-radius:7px;font-family:monospace;font-size:11px;color:var(--ac3)">
-              A·w = λmax·w · GM=(∏xᵢ)^(1/n) · CR=CI/RI&lt;0.10<br>
-              W_cluster[tgt][src]=mainW[src]×outerW[src→tgt]<br>
-              W_weighted=W_cluster⊗W_unw → normalize → col_sum=1<br>
-              W_lim = lim(W_wei^2k) · globalW = norm(W_lim[:,0])
+              GM=(∏xᵢ)^(1/n) · CI=(λmax−n)/(n−1) · CR=CI/RI&lt;0.10<br>
+              W_lim = lim(W_wei^2k) · globalW = normalize(W_lim[:,0])
             </div>
           </div>
           <div class="card">
             <div class="card-t">TOPSIS — 6 Adım (ANP Ağırlıklı)</div>
             <div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)">
-              <div><strong>Adım 1</strong> — Karar matrisi A[m×n]: m alternatif, n=16 kriter</div>
-              <div><strong>Adım 2</strong> — Normalize: r_ij = a_ij / √(Σ a_kj²)</div>
+              <div><strong>Adım 1</strong> — Karar matrisi A[m×n]: m alternatif, n kriter (Saaty 1-9 puanları)</div>
+              <div><strong>Adım 2</strong> — Normalize edilmiş matris: r_ij = a_ij / √(Σ a_kj²)</div>
               <div><strong>Adım 3</strong> — Ağırlıklı normalize: v_ij = w_j × r_ij (w_j = ANP global ağırlık)</div>
-              <div><strong>Adım 4</strong> — A⁺ = {max v_ij} · A⁻ = {min v_ij}</div>
-              <div><strong>Adım 5</strong> — D⁺ = √Σ(v_ij−A⁺_j)² · D⁻ = √Σ(v_ij−A⁻_j)²</div>
-              <div><strong>Adım 6</strong> — C* = D⁻/(D⁺+D⁻) ∈ [0,1]</div>
+              <div><strong>Adım 4</strong> — İdeal pozitif: A⁺ = {max v_ij} · İdeal negatif: A⁻ = {min v_ij}</div>
+              <div><strong>Adım 5</strong> — D⁺ = √Σ(v_ij − A⁺_j)² · D⁻ = √Σ(v_ij − A⁻_j)²</div>
+              <div><strong>Adım 6</strong> — İdeal yakınlık: C* = D⁻ / (D⁺ + D⁻) ∈ [0,1]</div>
             </div>
             <div style="margin-top:10px;padding:9px;background:var(--bg3);border-radius:7px;font-family:monospace;font-size:11px;color:var(--ac)">
-              r_ij=a_ij/√Σa_kj² · v_ij=w_j·r_ij<br>
+              r_ij = a_ij/√Σa_kj² · v_ij = w_j·r_ij<br>
               D⁺=√Σ(v_ij−A⁺_j)² · D⁻=√Σ(v_ij−A⁻_j)²<br>
-              C*=D⁻/(D⁺+D⁻) → [0,1] büyük=iyi
+              C* = D⁻/(D⁺+D⁻) → [0,1] büyük=iyi
             </div>
           </div>
         </div>
@@ -684,7 +700,6 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
             <tr><td style="color:var(--tx3)">RI</td><td>0</td><td>0</td><td>0.58</td><td>0.90</td><td>1.12</td><td>1.24</td><td>1.32</td><td>1.41</td><td>1.45</td><td>1.49</td></tr>
           </table>
         </div>
-
       </div>
 
     </div>
@@ -693,6 +708,16 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 
 <div class="toast" id="toast"><div class="toast-dot" id="toast-dot"></div><span id="toast-msg"></span></div>
 <div class="lov" id="lov"><div class="spin"></div><div style="font-size:13px;color:var(--tx2)" id="lov-txt">Yükleniyor…</div></div>
+
+<div id="detail-modal" class="modal-overlay">
+  <div class="modal-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;border-bottom:1px solid var(--bdr);padding-bottom:10px;">
+      <h3 id="modal-project-title" style="margin:0;font-weight:700;color:var(--tx);">Proje Değerlendirme Detayları</h3>
+      <button onclick="closeDetailModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--tx3);">&times;</button>
+    </div>
+    <div id="modal-project-body"></div>
+  </div>
+</div>
 
 <div id="eval-detail-modal" class="modal-overlay">
   <div class="modal-card" style="max-width:700px">
@@ -710,9 +735,6 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
 <script>
 'use strict';
 
-/* ═══════════════════════════════════════════════════════════════
-   YARDIMCI FONKSİYONLAR
-═══════════════════════════════════════════════════════════════ */
 function $(id){ return document.getElementById(id); }
 function noData(){ return '<div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div>'; }
 function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -729,9 +751,6 @@ function showLoad(txt){ const el=$('lov'); if(!el)return; const t=$('lov-txt'); 
 function hideLoad(){ const el=$('lov'); if(el)el.classList.remove('show'); }
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 
-/* ═══════════════════════════════════════════════════════════════
-   SUPABASE
-═══════════════════════════════════════════════════════════════ */
 const SB_URL='https://okdqitbirdgghidamyxl.supabase.co';
 const SB_KEY='sb_publishable_nj7BVGpS-JnvKr4SlGVpAQ_VRnAydQg';
 let DB=null, USE_DB=false;
@@ -750,9 +769,6 @@ function setDBBadge(on){
   else{ b.className='ps-db warn'; b.textContent='⬤ Yerel Mod'; if(led)led.className='db-led local'; if(txt)txt.textContent='Yerel Mod (localStorage)'; }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   AUTH
-═══════════════════════════════════════════════════════════════ */
 const ADMINS=[{u:'ikbal',p:'2026'},{u:'beyza',p:'4126'},{u:'orkun',p:'2626'},{u:'burak',p:'0626'}];
 let PORTAL=null, ME=null;
 
@@ -781,31 +797,24 @@ function showScr(id){
   const t=document.getElementById(id); if(t)t.classList.add('show');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   NAVİGASYON
-═══════════════════════════════════════════════════════════════ */
 const PM={
-  dashboard:['Gösterge Paneli','Sistem özeti'],
-  upload:['ANP Excel Yükle & Hesapla',''],
-  projlist:['Proje Listesi Yükle','Üyelerin göreceği proje listesi'],
-  'sd-weights':['ANP Global Ağırlıklar','Limit matris sütun vektörü'],
-  'sd-supermatrix':['Süperpozisyon Matrisleri','16×16 matrisler'],
-  'sd-submat':['Alt Kriter PCM Matrisleri','Geometrik ortalama PCM'],
-  'sd-influence':['Gruplar Arası Etki','Grup etkileşim katsayıları'],
-  evaluate:['Proje Değerlendirme','Saaty 1-9 puanlama + ANP-TOPSIS'],
-  'criteria-info':['Kriterler Hakkında','Değerlendirme kriterleri'],
-  'user-guide':['Kullanım Kılavuzu','Uzman rehberi'],
-  results:['TOPSIS Sıralaması','C* skoruna göre tüm projeler'],
-  evaluations:['Uzman Puanları','Uzmana göre sütunlar'],
-  projects:['Değerlendirme Listesi','Kayıtlı değerlendirmeler'],
-  about:['Yöntem & Formüller','ANP ve TOPSIS temelleri'],
+  dashboard:['Gösterge Paneli','Sistem özeti'],upload:['ANP Excel Yükle & Hesapla','Uzman anket → limit süperpozisyon'],
+  projlist:['Proje Listesi Yükle','Üyelerin göreceği proje listesi'],'sd-weights':['ANP Global Ağırlıklar','Limit matris sütun vektörü'],
+  'sd-supermatrix':['Süperpozisyon Matrisleri','16×16 matrisler'],'sd-submat':['Alt Kriter PCM Matrisleri','Geometrik ortalama PCM'],
+  'sd-influence':['Etki / Bağımlılık','Grup arası etkileşimler'],evaluate:['Proje Değerlendirme','Saaty 1-9 puanlama + ANP-TOPSIS'],
+  'criteria-info':['Kriterler Hakkında','Değerlendirme kriterleri'],'user-guide':['Kullanım Kılavuzu','Uzman rehberi'],
+  results:['TOPSIS Sıralaması','C* skoruna göre tüm projeler'],evaluations:['Uzman Puanları','Uzmana göre sütunlar — projeye tıklayın'],
+  projects:['Değerlendirme Listesi','Kayıtlı değerlendirmeler'],about:['Yöntem & Formüller','ANP ve TOPSIS temelleri'],
 };
 let _navHistory=[], _currentPage='dashboard';
 
-function navBack(){ if(_navHistory.length>0){ const prev=_navHistory.pop(); nav(prev,true); } }
+function navBack(){
+  if(_navHistory.length>0){ const prev=_navHistory.pop(); nav(prev,true); }
+}
 function _updateBackBtn(){
   const btn=$('back-btn'); if(!btn)return;
-  btn.style.display=(PORTAL==='admin'&&_navHistory.length>0)?'inline-flex':'none';
+  if(PORTAL==='admin'&&_navHistory.length>0){ btn.style.display='inline-flex'; }
+  else{ btn.style.display='none'; }
 }
 function nav(id,isBack){
   if(!isBack&&_currentPage&&_currentPage!==id){ _navHistory.push(_currentPage); if(_navHistory.length>20)_navHistory.shift(); }
@@ -815,27 +824,24 @@ function nav(id,isBack){
   const pg=document.getElementById('page-'+id); if(pg)pg.classList.add('active');
   document.querySelectorAll('.ni[data-p="'+id+'"]').forEach(n=>n.classList.add('active'));
   const [t,s]=PM[id]||[id,'']; const tbt=$('tb-t'),tbs=$('tb-s'); if(tbt)tbt.textContent=t; if(tbs)tbs.textContent=s;
-  if(id==='dashboard')    renderDashboard();
-  if(id==='sd-weights')   renderGW();
+  if(id==='dashboard') renderDashboard();
+  if(id==='sd-weights') renderGW();
   if(id==='sd-supermatrix') renderSM();
-  if(id==='sd-submat')    renderSubMat();
+  if(id==='sd-submat') renderSubMat();
   if(id==='sd-influence') renderInfl();
-  if(id==='evaluate')     initEval();
-  if(id==='results')      loadProjAndRender();
-  if(id==='projects')     loadProjAndRender();
-  if(id==='upload')       renderUploadStatus();
-  if(id==='evaluations')  renderEvaluationsGrid();
+  if(id==='evaluate') initEval();
+  if(id==='results') loadProjAndRender();
+  if(id==='projects') loadProjAndRender();
+  if(id==='upload') renderUploadStatus();
+  if(id==='evaluations') renderEvaluationsGrid();
   if(id==='criteria-info') renderCriteriaInfo();
-  if(id==='user-guide')   renderUserGuide();
-  if(id==='projlist')     renderProjListPage();
+  if(id==='user-guide') renderUserGuide();
+  if(id==='projlist') renderProjListPage();
 }
 document.addEventListener('click',function(e){
   const ni=e.target.closest('.ni[data-p]'); if(ni){ const p=ni.getAttribute('data-p'); if(p)nav(p); }
 });
 
-/* ═══════════════════════════════════════════════════════════════
-   ANP SABİTLERİ
-═══════════════════════════════════════════════════════════════ */
 const GRP=['T','E','P','U','F'];
 const GI={
   T:{name:'Teknoloji',color:'#2563eb',subs:['T1','T2','T3']},
@@ -854,10 +860,8 @@ const SF={
 const ALL_SUBS=['T1','T2','T3','E1','E2','E3','P1','P2','P3','P4','U1','U2','U3','F1','F2','F3'];
 const OFFSETS={T:0,E:3,P:6,U:10,F:13};
 const SIZES={T:3,E:3,P:4,U:3,F:3};
-const SUB_TO_GRP={T1:'T',T2:'T',T3:'T',E1:'E',E2:'E',E3:'E',P1:'P',P2:'P',P3:'P',P4:'P',U1:'U',U2:'U',U3:'U',F1:'F',F2:'F',F3:'F'};
 const S9=['','Çok Zayıf','Zayıf','Ortanın Altı','Orta-Alt','Orta','Orta-Üst','İyi','Çok İyi','Mükemmel'];
 
-/* Sütun haritaları */
 const COL_MAP={
   T:{cols:[2,3,4],   pairs:[[0,1],[0,2],[1,2]]},
   E:{cols:[5,6,7],   pairs:[[0,1],[0,2],[1,2]]},
@@ -874,371 +878,82 @@ const ETKI_MAP=[
   ['U','T',42],['U','E',43],['U','P',44],['U','F',45],
   ['F','T',46],['F','E',47],['F','P',48],['F','U',49]
 ];
-
-/* ── YENİ: Çapraz alt kriter etkileşimleri (sütun 50-67) ── */
-const CROSS_SUB_MAP=[
-  [50,'T1','P1'],[51,'T1','P4'],[52,'T1','F3'],
-  [53,'T2','E1'],[54,'T2','U1'],
-  [55,'T3','P1'],
-  [56,'E1','T1'],[57,'E1','U1'],[58,'E1','U3'],
-  [59,'E2','U1'],[60,'E2','F3'],
-  [61,'E3','U3'],
-  [62,'P1','F2'],[63,'P1','F3'],
-  [64,'P3','F2'],[65,'P3','F3'],
-  [66,'U3','F1'],
-  [67,'F1','P4']
-];
-
 const RI_TBL={1:0,2:0,3:0.58,4:0.90,5:1.12,6:1.24,7:1.32,8:1.41,9:1.45,10:1.49};
 
-/* ═══════════════════════════════════════════════════════════════
-   ANP MATEMATİK
-═══════════════════════════════════════════════════════════════ */
-function toSaaty(v){ const n=parseFloat(v); if(isNaN(n)||n===0)return 1.0; return n<0?1.0/Math.abs(n):n; }
-
-function geoMean(vals){
-  const ps=vals.map(toSaaty).filter(v=>v>0&&isFinite(v));
-  if(!ps.length)return 1.0;
-  return Math.exp(ps.reduce((s,v)=>s+Math.log(v),0)/ps.length);
-}
-
-function buildPCM(rows,colIdxs,pairs,n){
-  const M=Array.from({length:n},()=>Array(n).fill(1.0));
-  pairs.forEach(([i,j],k)=>{ const g=geoMean(rows.map(r=>r[colIdxs[k]])); M[i][j]=g; M[j][i]=1.0/g; });
-  return M;
-}
-
-function priorityVector(M){
-  const n=M.length;
-  const colSum=Array(n).fill(0);
-  for(let j=0;j<n;j++) for(let i=0;i<n;i++) colSum[j]+=M[i][j];
-  const nm=M.map(row=>row.map((v,j)=>colSum[j]>0?v/colSum[j]:0));
-  return nm.map(row=>row.reduce((a,b)=>a+b,0)/n);
-}
-
-function calcCR(M,w){
-  const n=M.length;
-  let lam=0;
-  for(let i=0;i<n;i++){ let s=0; for(let j=0;j<n;j++) s+=M[i][j]*w[j]; lam+=s/(w[i]||1e-12); }
-  lam/=n;
-  const CI=(lam-n)/(n-1); const ri=RI_TBL[n]||1.49;
-  return{CR:ri>0?CI/ri:0,CI,lam};
-}
-
-function matMul(A,B){
-  const n=A.length;
-  return Array.from({length:n},(_,i)=>Array.from({length:n},(_,j)=>A[i].reduce((s,_,k)=>s+A[i][k]*B[k][j],0)));
-}
-
-function limitMatrix(W){
-  let M=W.map(r=>[...r]);
-  for(let k=0;k<2000;k++){
-    const N=matMul(M,M); let diff=0;
-    for(let i=0;i<M.length;i++) for(let j=0;j<M.length;j++) diff=Math.max(diff,Math.abs(M[i][j]-N[i][j]));
-    M=N; if(diff<1e-14) break;
-  }
-  return M;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   ANP EXCEL İŞLEME  — DÜZELTİLMİŞ W_unw MANTĞI
-═══════════════════════════════════════════════════════════════ */
 let ANP=null, PROJECTS=[], PROJ_LIST=[];
+
+function toSaaty(v){ const n=parseFloat(v); if(isNaN(n)||n===0)return 1.0; return n<0?1.0/Math.abs(n):n; }
+function geoMean(vals){ const ps=vals.map(toSaaty).filter(v=>v>0&&isFinite(v)); if(!ps.length)return 1.0; return Math.exp(ps.reduce((s,v)=>s+Math.log(v),0)/ps.length); }
+function buildPCM(rows,colIdxs,pairs,n){ const M=Array.from({length:n},()=>Array(n).fill(1.0)); pairs.forEach(([i,j],k)=>{ const g=geoMean(rows.map(r=>r[colIdxs[k]])); M[i][j]=g; M[j][i]=1.0/g; }); return M; }
+function priorityVector(M){ const n=M.length; const colSum=Array(n).fill(0); for(let j=0;j<n;j++)for(let i=0;i<n;i++)colSum[j]+=M[i][j]; const nm=M.map(row=>row.map((v,j)=>colSum[j]>0?v/colSum[j]:0)); return nm.map(row=>row.reduce((a,b)=>a+b,0)/n); }
+function calcCR(M,w){ const n=M.length; let lam=0; for(let i=0;i<n;i++){ let s=0; for(let j=0;j<n;j++)s+=M[i][j]*w[j]; lam+=s/(w[i]||1e-12); } lam/=n; const CI=(lam-n)/(n-1); const ri=RI_TBL[n]||1.49; return{CR:ri>0?CI/ri:0,CI,lam}; }
+function matMul(A,B){ const n=A.length; return Array.from({length:n},(_,i)=>Array.from({length:n},(_,j)=>A[i].reduce((s,_,k)=>s+A[i][k]*B[k][j],0))); }
+function limitMatrix(W){ let M=W.map(r=>[...r]); for(let k=0;k<2000;k++){ const N=matMul(M,M); let diff=0; for(let i=0;i<M.length;i++)for(let j=0;j<M.length;j++)diff=Math.max(diff,Math.abs(M[i][j]-N[i][j])); M=N; if(diff<1e-14)break; } return M; }
 
 function handleFile(file){
   if(!file)return;
   if(!['xlsx','xls'].includes(file.name.split('.').pop().toLowerCase())){alert('Lütfen .xlsx veya .xls seçin.');return;}
   const ft=$('fname-txt'),fs=$('fname-show'); if(ft)ft.textContent=file.name; if(fs)fs.style.display='flex';
   const reader=new FileReader();
-  reader.onload=e=>{
-    try{ const wb=XLSX.read(e.target.result,{type:'array'}); const ws=wb.Sheets[wb.SheetNames[0]];
-      const raw=XLSX.utils.sheet_to_json(ws,{header:1,defval:null}); processANP(raw,file.name); }
-    catch(err){ showCalcErr('Dosya okunamadı: '+err.message); }
-  };
+  reader.onload=e=>{ try{ const wb=XLSX.read(e.target.result,{type:'array'}); const ws=wb.Sheets[wb.SheetNames[0]]; const raw=XLSX.utils.sheet_to_json(ws,{header:1,defval:null}); processANP(raw,file.name); }catch(err){ showCalcErr('Dosya okunamadı: '+err.message); } };
   reader.readAsArrayBuffer(file);
 }
-
 async function processANP(raw,fname){
-  const rows=raw.slice(1).filter(r=>r&&r[0]!=null);
-  const ec=rows.length;
-  if(ec<1){ showCalcErr("Excel'de veri satırı bulunamadı."); return; }
-
-  setCS(-1); await delay(30);
-
-  /* Adım 1: Model kurulumu — ağ yapısı, iç/dış bağımlılıklar */
-  setCS(0,'active'); await delay(80); setCS(0,'done');
-
-  /* Adım 2a: İkili karşılaştırmalar — GM, PCM normalize, yerel öncelik vektörleri */
-  await delay(30); setCS(1,'active');
-  const subMat={},subW={},subCR={};
-  for(const g of GRP){
-    const d=COL_MAP[g]; const M=buildPCM(rows,d.cols,d.pairs,SIZES[g]);
-    const w=priorityVector(M); const cr=calcCR(M,w);
-    subMat[g]=M; subW[g]=w; subCR[g]=cr;
-  }
-  const mainMat=buildPCM(rows,MAIN_COLS,MAIN_PAIRS,5);
-  const mainW=priorityVector(mainMat); const mainCR=calcCR(mainMat,mainW);
-  const mainWd=Object.fromEntries(GRP.map((g,i)=>[g,mainW[i]]));
-  setCS(1,'done');
-
-  /* ── Adım 2b: Tutarlılık + Dış Bağımlılık + Çapraz Alt Kriter ── */
+  const rows=raw.slice(1).filter(r=>r&&r[0]!=null); const ec=rows.length;
+  if(ec<1){showCalcErr("Excel'de veri satırı bulunamadı.");return;}
+  setCS(-1); await delay(30); setCS(0,'active'); await delay(80); setCS(0,'done');
+  await delay(30); setCS(1,'active'); await delay(80); setCS(1,'done');
   await delay(30); setCS(2,'active');
-
-  /* (a) Çapraz alt kriter GM'leri (sütun 50-67) */
-  const crossSubGM={};
-  for(const [colIdx,frm,to] of CROSS_SUB_MAP){
-    crossSubGM[frm+'->'+to]=geoMean(rows.map(r=>r[colIdx]));
-  }
-  /* Arama indeksi: srcSub → { tgtGrp → { tgtSub: gm } } */
-  const crossBySrc={};
-  for(const [colIdx,frm,to] of CROSS_SUB_MAP){
-    const tg=SUB_TO_GRP[to];
-    if(!crossBySrc[frm]) crossBySrc[frm]={};
-    if(!crossBySrc[frm][tg]) crossBySrc[frm][tg]={};
-    crossBySrc[frm][tg][to]=crossSubGM[frm+'->'+to];
-  }
-
-  /* (b) Dış bağımlılık: her kaynak grup f için diğer gruplara etki ağırlıkları
-   *     outerW[f][t] = f'nin t grubuna normalise edilmiş etkisi
-   *     Literatür: ham GM değerleri sütun toplamına bölünür → normalize öncelik */
-  const inflRaw={};
-  for(const [f,t,c] of ETKI_MAP) inflRaw[f+'->'+t]=geoMean(rows.map(r=>r[c]));
-  const outerW={};
-  for(const f of GRP){
-    outerW[f]={};
-    const others=GRP.filter(t=>t!==f);
-    const tot=others.reduce((s,t)=>s+(inflRaw[f+'->'+t]||0),0);
-    for(const t of others) outerW[f][t]=tot>0?(inflRaw[f+'->'+t]||0)/tot:0;
-    outerW[f][f]=0; // iç bağımlılık yok
-  }
-  setCS(2,'done');
-
-  /* ── Adım 3: Başlangıç Süpermatrisi W_unw (16×16) ──
-   * Literatür (Saaty 2001):
-   *   W_ij bloğu = j grubunun i grubu üzerindeki etkisini gösteren öncelik vektörü
-   *   - Diagonal (i=j): iç bağımlılık PCM'i yoksa SIFIR
-   *   - Off-diagonal: spesifik çapraz etki varsa normalize(GM), yoksa subW[i]
-   *   NOT: Grup ölçekleme bu aşamada YAPILMAZ — W_cluster Adım 4'te uygulanır */
-  await delay(30); setCS(3,'active');
-  const N=16;
-  const W_unw=Array.from({length:N},()=>Array(N).fill(0.0));
-
-  for(const srcG of GRP){                          // kaynak grup (sütun grubu)
-    const sOff=OFFSETS[srcG], sSz=SIZES[srcG];
-    const srcSubs=GI[srcG].subs;
-
-    for(let sj=0;sj<sSz;sj++){
-      const col=sOff+sj;
-      const srcSub=srcSubs[sj];
-
-      /* Diagonal blok: iç bağımlılık yoksa 0 (zaten 0.0 ile başlatıldı) */
-
-      /* Off-diagonal bloklar */
-      for(const tgtG of GRP){
-        if(tgtG===srcG) continue;                  // diagonal atla
-        const tOff=OFFSETS[tgtG], tSz=SIZES[tgtG];
-        const tgtSubs=GI[tgtG].subs;
-
-        /* Bu srcSub için tgtG'ye spesifik çapraz etki var mı? */
-        const specific=(crossBySrc[srcSub]||{})[tgtG]||null;
-
-        let colVec;
-        if(specific && Object.keys(specific).length>0){
-          /* Spesifik etki: sadece belirtilen tgt sub'lar ağırlık alır,
-           * geri kalanlar 0 → normalize */
-          const raw=tgtSubs.map(s=>specific[s]||0);
-          const tot=raw.reduce((a,b)=>a+b,0);
-          colVec=tot>0?raw.map(v=>v/tot):subW[tgtG];
-        } else {
-          /* Spesifik etki yok: tgtG'nin yerel öncelik vektörü */
-          colVec=subW[tgtG];
-        }
-
-        for(let ti=0;ti<tSz;ti++) W_unw[tOff+ti][col]=colVec[ti];
-      }
-    }
-  }
-  setCS(3,'done');
-
-  /* ── Adım 4: Ağırlıklı (Stokastik) Süpermatris W_wei ──
-   * Literatür: W_weighted = W_cluster ⊗ W_unw   (blok bazında çarpım)
-   * W_cluster[tgtG][srcG] = mainWd[srcG] * outerW[srcG][tgtG]
-   *   → srcG'nin tgtG üzerindeki ağırlıklı etkisi
-   * Diagonal: iç bağımlılık yoksa 0 */
+  const subMat={},subW={},subCR={};
+  for(const g of GRP){ const d=COL_MAP[g]; const M=buildPCM(rows,d.cols,d.pairs,SIZES[g]); const w=priorityVector(M); const cr=calcCR(M,w); subMat[g]=M; subW[g]=w; subCR[g]=cr; }
+  const mainMat=buildPCM(rows,MAIN_COLS,MAIN_PAIRS,5); const mainW=priorityVector(mainMat); const mainCR=calcCR(mainMat,mainW);
+  setCS(2,'done'); await delay(40); await delay(30); setCS(3,'active'); await delay(80); setCS(3,'done');
+  const inflRaw={},normInfl={};
+  for(const [f,t,c] of ETKI_MAP) inflRaw[`${f}->${t}`]=geoMean(rows.map(r=>r[c]));
+  for(const f of GRP){ const others=GRP.filter(t=>t!==f); const tot=others.reduce((s,t)=>s+(inflRaw[`${f}->${t}`]||0),0); for(const t of others) normInfl[`${f}->${t}`]=tot>0?(inflRaw[`${f}->${t}`]||0)/tot:0; }
   await delay(30); setCS(4,'active');
-  const W_wei=Array.from({length:N},()=>Array(N).fill(0.0));
-
-  for(const srcG of GRP){
-    const sOff=OFFSETS[srcG], sSz=SIZES[srcG];
-    for(let sj=0;sj<sSz;sj++){
-      const col=sOff+sj;
-      for(const tgtG of GRP){
-        if(tgtG===srcG) continue;                  // iç bağımlılık yok
-        const tOff=OFFSETS[tgtG], tSz=SIZES[tgtG];
-        /* Küme ağırlığı: kaynak grubun ana kriter ağırlığı × dış bağımlılık katsayısı */
-        const clusterW=(mainWd[srcG]||0)*(outerW[srcG][tgtG]||0);
-        for(let ti=0;ti<tSz;ti++){
-          W_wei[tOff+ti][col]=W_unw[tOff+ti][col]*clusterW;
-        }
-      }
-    }
-  }
-  /* Sütunları normalize et → stokastik (her sütun toplamı = 1) */
-  for(let j=0;j<N;j++){
-    const s=W_wei.reduce((a,r)=>a+r[j],0);
-    if(s>0) for(let i=0;i<N;i++) W_wei[i][j]/=s;
-  }
-  setCS(4,'done');
-
-  /* Adım 5: Limit Süpermatris — W_lim = lim(W_wei^2k), uzun dönem global öncelikler */
-  await delay(30); setCS(5,'active');
-  const W_lim=limitMatrix(W_wei);
-  setCS(5,'done');
-
-  /* Global ağırlıklar — limit matrisin ilk sütunundan normalize */
-  await delay(30);
-  const gRaw=W_lim.map(row=>row[0]);
-  const gSum=gRaw.reduce((a,b)=>a+b,0);
-  const globalW={};
-  ALL_SUBS.forEach((s,i)=>{ globalW[`${SUB_TO_GRP[s]}_${s}`]=gSum>0?gRaw[i]/gSum:1/16; });
-  await delay(40);
-
-  /* ANP nesnesini oluştur */
-  ANP={
-    expertCount:ec, fname, date:new Date().toLocaleDateString('tr-TR'),
-    subMat, subW, subCR, mainMat, mainWd, mainCR,
-    inflRaw, outerW, crossSubGM, crossBySrc,
-    W_unw, W_wei, W_lim, globalW,
-    experts:rows.map(r=>({name:String(r[0]||'—'),domain:String(r[1]||'—')}))
-  };
-
+  const N=16; const W_unw=Array.from({length:N},()=>Array(N).fill(0.0));
+  for(const f of GRP){ const fo=OFFSETS[f],fs2=SIZES[f]; for(let j=0;j<fs2;j++){ const col=fo+j; for(let i=0;i<fs2;i++)W_unw[fo+i][col]=subW[f][i]; for(const t of GRP){ if(t===f)continue; const to=OFFSETS[t],ts=SIZES[t]; const sc=normInfl[`${f}->${t}`]||0; for(let i=0;i<ts;i++)W_unw[to+i][col]=sc*subW[t][i]; } } }
+  setCS(4,'done'); await delay(40); await delay(30); setCS(5,'active');
+  const W_wei=W_unw.map(r=>[...r]);
+  for(let fi=0;fi<GRP.length;fi++){ const f=GRP[fi],fo=OFFSETS[f],fs2=SIZES[f]; for(let j=0;j<fs2;j++){ const col=fo+j; for(let ti=0;ti<GRP.length;ti++){ const t=GRP[ti],to=OFFSETS[t],ts=SIZES[t]; for(let i=0;i<ts;i++)W_wei[to+i][col]=W_unw[to+i][col]*mainW[ti]; } } }
+  for(let j=0;j<N;j++){ const s=W_wei.reduce((a,r)=>a+r[j],0); if(s>0)for(let i=0;i<N;i++)W_wei[i][j]/=s; }
+  setCS(5,'done'); await delay(40); await delay(30); setCS(6,'active');
+  const W_lim=limitMatrix(W_wei); setCS(6,'done'); await delay(40); await delay(30); setCS(7,'active');
+  const gRaw=W_lim.map(row=>row[0]); const gSum=gRaw.reduce((a,b)=>a+b,0); const globalW={};
+  ALL_SUBS.forEach((s,i)=>{ const g=GRP.find(g2=>GI[g2].subs.includes(s)); globalW[`${g}_${s}`]=gSum>0?gRaw[i]/gSum:1/16; });
+  setCS(7,'done'); await delay(40);
+  ANP={expertCount:ec,fname,date:new Date().toLocaleDateString('tr-TR'),subMat,subW,subCR,mainMat,mainW:Object.fromEntries(GRP.map((g,i)=>[g,mainW[i]])),mainCR,inflRaw,normInfl,W_unw,W_wei,W_lim,globalW,experts:rows.map(r=>({name:String(r[0]||'—'),domain:String(r[1]||'—')}))};
   saveANPLocal(); await saveANPToDB(ANP); updateANPBadges(); renderUploadStatus(); renderExpertList(); renderDashboard();
-
-  /* Sonuç özeti */
-  let h=`<div class="notif n-ok"><span>✓</span><div>ANP tamamlandı. ${ec} uzman ·  ${USE_DB?'Veritabanına':'Yerel depoya'} kaydedildi.</div></div>`;
+  let h=`<div class="notif n-ok"><span>✓</span><div>ANP tamamlandı. ${ec} uzman. ${USE_DB?'Veritabanına':'Yerel depoya'} kaydedildi.</div></div>`;
   h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">`;
-  for(const g of GRP){
-    const cr=ANP.subCR[g].CR;
-    h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px"><span style="font-size:12px;color:${GI[g].color}">${GI[g].name} (${SIZES[g]}×${SIZES[g]})</span><span class="badge ${cr<.10?'cr-ok':'cr-warn'}">CR=${cr.toFixed(4)}</span></div>`;
-  }
+  for(const g of GRP){ const cr=ANP.subCR[g].CR; h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px"><span style="font-size:12px;color:${GI[g].color}">${GI[g].name} (${SIZES[g]}×${SIZES[g]})</span><span class="badge ${cr<.10?'cr-ok':'cr-warn'}">CR=${cr.toFixed(4)}</span></div>`; }
   const mc=ANP.mainCR.CR;
   h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px;grid-column:1/-1"><span style="font-size:12px">Ana Kriterler (5×5 PCM)</span><span class="badge ${mc<.10?'cr-ok':'cr-warn'}">CR=${mc.toFixed(4)}</span></div></div>`;
   h+=`<button class="btn bp" onclick="nav('sd-weights')" style="width:100%;justify-content:center">Global ANP Ağırlıklarını Gör →</button>`;
   const urb=$('upload-result-body'),ur=$('upload-result'); if(urb)urb.innerHTML=h; if(ur)ur.style.display='block';
-  const csCount=Object.keys(ANP.crossSubGM||{}).length; toast(`ANP hesaplandı: ${ANP.expertCount} uzman, ${csCount} `,'ok');
+  toast('ANP hesaplandı ve kaydedildi!','ok');
 }
-
-function setCS(idx,state){
-  const total=6;
-  for(let i=0;i<total;i++){
-    const el=document.getElementById('cs-'+i); if(!el)continue;
-    el.className='calc-step '+(i<idx?'done':i===idx?(state||'active'):'pending');
-  }
-}
+function setCS(idx,state){ const total=8; for(let i=0;i<total;i++){ const el=document.getElementById('cs-'+i); if(!el)continue; el.className='calc-step '+(i<idx?'done':i===idx?(state||'active'):'pending'); } }
 function showCalcErr(msg){ const ur=$('upload-result'),urb=$('upload-result-body'); if(ur)ur.style.display='block'; if(urb)urb.innerHTML=`<div class="notif n-err"><span>✗</span><div>${msg}</div></div>`; }
 function renderExpertList(){ if(!ANP)return; const el=$('expert-list'); if(!el)return; let h=`<table><tr><th>#</th><th>Ad / Kurum</th><th>Uzmanlık</th></tr>`; ANP.experts.forEach((e,i)=>{ h+=`<tr><td style="color:var(--tx3)">${i+1}</td><td>${escHtml(e.name)}</td><td style="color:var(--tx2)">${escHtml(e.domain)}</td></tr>`; }); el.innerHTML=h+'</table>'; }
 
-/* ═══════════════════════════════════════════════════════════════
-   LOCAL STORAGE & DB  — crossSubGM dahil
-═══════════════════════════════════════════════════════════════ */
-function saveANPLocal(){ try{ localStorage.setItem('tubitak_anp_v61',JSON.stringify(ANP)); }catch(e){} }
-function loadANPLocal(){
-  try{
-    const s=localStorage.getItem('tubitak_anp_v61');
-    if(s){
-      const parsed=JSON.parse(s);
-      // crossBySrc eksikse veya boşsa ANP geçersiz — yeniden Excel yüklenmeli
-      if(!parsed.crossBySrc||Object.keys(parsed.crossBySrc).length<8){
-        console.warn('ANP crossBySrc eksik, önbellek temizlendi');
-        localStorage.removeItem('tubitak_anp_v61');
-        return false;
-      }
-      ANP=parsed; updateANPBadges(); return true;
-    }
-  }catch(e){}
-  return false;
-}
-
+function saveANPLocal(){ try{ localStorage.setItem('tubitak_anp_v50',JSON.stringify(ANP)); }catch(e){} }
+function loadANPLocal(){ try{ const s=localStorage.getItem('tubitak_anp_v50'); if(s){ ANP=JSON.parse(s); updateANPBadges(); return true; } }catch(e){} return false; }
 async function loadANPFromDB(){
   if(!USE_DB)return;
   try{
     const{data,error}=await DB.from('anp_weights').select('*').order('created_at',{ascending:false}).limit(1);
-    if(!error&&data&&data.length>0){
-      const r=data[0];
-      const loadedCrossSubGM=r.cross_sub_gm||{};
-      const loadedCrossBySrc=r.cross_by_src||{};
-      // crossBySrc eksikse crossSubGM'den yeniden oluştur
-      let rebuiltCrossBySrc=loadedCrossBySrc;
-      if(Object.keys(loadedCrossBySrc).length<8 && Object.keys(loadedCrossSubGM).length>0){
-        rebuiltCrossBySrc={};
-        for(const [key,gm] of Object.entries(loadedCrossSubGM)){
-          const [frm,to]=key.split('->');
-          const tg=SUB_TO_GRP[to];
-          if(!rebuiltCrossBySrc[frm])rebuiltCrossBySrc[frm]={};
-          if(!rebuiltCrossBySrc[frm][tg])rebuiltCrossBySrc[frm][tg]={};
-          rebuiltCrossBySrc[frm][tg][to]=gm;
-        }
-      }
-      ANP={
-        expertCount:r.expert_count, fname:r.filename, date:new Date(r.created_at).toLocaleDateString('tr-TR'),
-        globalW:r.global_weights, mainWd:r.main_weights, subW:r.sub_weights, subCR:r.sub_cr, mainCR:r.main_cr,
-        experts:r.experts||[], W_lim:r.w_lim, W_unw:r.w_unw||r.w_lim, W_wei:r.w_wei||r.w_lim,
-        subMat:r.sub_mat||null, mainMat:r.main_mat||null, inflRaw:r.infl_raw||{}, outerW:r.norm_infl||{},
-        crossSubGM:loadedCrossSubGM, crossBySrc:rebuiltCrossBySrc
-      };
-      saveANPLocal(); updateANPBadges();
-    }
+    if(!error&&data&&data.length>0){ const r=data[0]; ANP={expertCount:r.expert_count,fname:r.filename,date:new Date(r.created_at).toLocaleDateString('tr-TR'),globalW:r.global_weights,mainW:r.main_weights,subW:r.sub_weights,subCR:r.sub_cr,mainCR:r.main_cr,experts:r.experts||[],W_lim:r.w_lim,W_unw:r.w_unw||r.w_lim,W_wei:r.w_wei||r.w_lim,subMat:r.sub_mat||null,mainMat:r.main_mat||null,inflRaw:r.infl_raw||{},normInfl:r.norm_infl||{}}; saveANPLocal(); updateANPBadges(); }
   }catch(e){ console.warn(e); }
 }
-
 async function saveANPToDB(a){
   if(!USE_DB)return;
-
-  /* Temel payload — her zaman kaydet */
-  const base={
-    id:1,
-    expert_count:a.expertCount,
-    filename:a.fname,
-    global_weights:a.globalW,
-    main_weights:a.mainWd,
-    sub_weights:a.subW,
-    sub_cr:a.subCR,
-    main_cr:a.mainCR,
-    experts:a.experts,
-    w_lim:a.W_lim,
-    infl_raw:a.inflRaw,
-    norm_infl:a.outerW||{},
-    cross_sub_gm:a.crossSubGM,
-    cross_by_src:a.crossBySrc
-  };
-
-  /* 1. Adim: temel kayit */
-  try{
-    const{error:e1}=await DB.from('anp_weights').upsert(base);
-    if(e1){
-      console.error('saveANPToDB hata:',e1);
-      toast('DB kayit hatasi: '+e1.message,'err');
-      return;
-    }
-    toast('Supabase kaydi OK','ok');
-  }catch(e){ console.error('saveANPToDB exception:',e); toast('DB baglanti hatasi','err'); return; }
-
-  /* 2. Adim: buyuk matris kolonlari — yoksa sessiz gec */
-  try{
-    await DB.from('anp_weights').update({
-      w_unw:a.W_unw,
-      w_wei:a.W_wei,
-      sub_mat:a.subMat,
-      main_mat:a.mainMat
-    }).eq('id',1);
-  }catch(e){ console.warn('Matris kolonlari kaydedilemedi:',e.message||e); }
+  try{ await DB.from('anp_weights').upsert({id:1,expert_count:a.expertCount,filename:a.fname,global_weights:a.globalW,main_weights:a.mainW,sub_weights:a.subW,sub_cr:a.subCR,main_cr:a.mainCR,experts:a.experts,w_lim:a.W_lim,w_unw:a.W_unw,w_wei:a.W_wei,sub_mat:a.subMat,main_mat:a.mainMat,infl_raw:a.inflRaw,norm_infl:a.normInfl}); }catch(e){ console.warn(e); }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PROJE DB
-═══════════════════════════════════════════════════════════════ */
-function saveProjLocal(){ try{ localStorage.setItem('tubitak_proj_v61',JSON.stringify(PROJECTS)); }catch(e){} }
-function loadProjLocal(){ try{ const s=localStorage.getItem('tubitak_proj_v61'); if(s)PROJECTS=JSON.parse(s); }catch(e){} }
+function saveProjLocal(){ try{ localStorage.setItem('tubitak_proj_v50',JSON.stringify(PROJECTS)); }catch(e){} }
+function loadProjLocal(){ try{ const s=localStorage.getItem('tubitak_proj_v50'); if(s)PROJECTS=JSON.parse(s); }catch(e){} }
 async function loadProjFromDB(){
   if(!USE_DB){ loadProjLocal(); return; }
   try{
@@ -1248,28 +963,20 @@ async function loadProjFromDB(){
 }
 async function saveProjToDB(p){
   if(!USE_DB)return null;
-  try{
-    const{data,error}=await DB.from('projects').insert({name:p.name,owner:p.owner,type:p.type,budget:p.budget,duration:p.dur,scores:p.scores,cstar:p.Cstar,dp:p.Dp,dn:p.Dn,evaluator:p.evaluator,proj_no:p.projNo}).select().single();
-    if(error){ console.error('saveProjToDB hata:',error); toast('Proje DB hatasi: '+error.message,'err'); return null; }
-    if(data)return data.id;
-  }catch(e){ console.error('saveProjToDB exception:',e); toast('Proje DB baglanti hatasi','err'); }
+  try{ const{data,error}=await DB.from('projects').insert({name:p.name,owner:p.owner,type:p.type,budget:p.budget,duration:p.dur,scores:p.scores,cstar:p.Cstar,dp:p.Dp,dn:p.Dn,evaluator:p.evaluator,proj_no:p.projNo}).select().single(); if(!error&&data)return data.id; }catch(e){ console.warn(e); }
   return null;
 }
 async function deleteProjFromDB(id){ if(!USE_DB||!id)return; try{ await DB.from('projects').delete().eq('id',id); }catch(e){} }
 
-/* ═══════════════════════════════════════════════════════════════
-   PROJE LİSTESİ
-═══════════════════════════════════════════════════════════════ */
-const PLIST_KEY='tubitak_plist_v60';
-function _saveProjListLocal(){ try{ localStorage.setItem(PLIST_KEY,JSON.stringify({list:PROJ_LIST,fname:window._plistFname||'',date:window._plistDate||''})); }catch(e){} }
+const PLIST_KEY='tubitak_plist_v50';
+function _saveProjListLocal(){ try{ localStorage.setItem(PLIST_KEY,JSON.stringify({list:PROJ_LIST,fname:window._plistFname||'',date:window._plistDate||new Date().toLocaleDateString('tr-TR')})); }catch(e){} }
 async function saveProjListToDB(){ if(!USE_DB)return; try{ await DB.from('anp_weights').update({project_list_data:PROJ_LIST,project_list_fname:window._plistFname||''}).eq('id',1); }catch(e){ console.warn(e); } }
 async function loadProjListFromDB(){
   if(!USE_DB){ _loadProjListLocal(); return; }
   try{
     const{data,error}=await DB.from('anp_weights').select('project_list_data,project_list_fname').eq('id',1).single();
-    if(error){ console.warn('loadProjListFromDB:',error.message); }
-    else if(data&&data.project_list_data&&data.project_list_data.length>0){ PROJ_LIST=data.project_list_data; window._plistFname=data.project_list_fname||''; window._plistDate=''; _saveProjListLocal(); return; }
-  }catch(e){ console.warn('loadProjListFromDB exception:',e); }
+    if(!error&&data&&data.project_list_data&&data.project_list_data.length>0){ PROJ_LIST=data.project_list_data; window._plistFname=data.project_list_fname||''; window._plistDate=''; _saveProjListLocal(); return; }
+  }catch(e){ console.warn(e); }
   _loadProjListLocal();
 }
 function _loadProjListLocal(){ try{ const s=localStorage.getItem(PLIST_KEY); if(s){ const d=JSON.parse(s); PROJ_LIST=d.list||[]; window._plistFname=d.fname||''; window._plistDate=d.date||''; } }catch(e){} }
@@ -1282,6 +989,40 @@ async function clearProjList(){
   renderProjListPage(); toast('Proje listesi silindi','warn');
 }
 
+function updateANPBadges(){
+  if(!ANP)return;
+  const dExp=$('d-exp'),dDate=$('d-date'),nbU=$('nb-upload'),tbA=$('tb-anp-badge'),sdD=$('sd-dot'),sdT=$('sd-txt');
+  if(dExp)dExp.textContent=ANP.expertCount||'—'; if(dDate)dDate.textContent=ANP.date||'—';
+  if(nbU)nbU.textContent=(ANP.expertCount||'?')+' uzman'; if(tbA)tbA.textContent='● ANP Hazır';
+  if(sdD)sdD.className='sd loaded'; if(sdT)sdT.textContent=(ANP.expertCount||'?')+' uzman yüklü';
+}
+function updateProjListBadge(){ const el=$('nb-plist'); if(el)el.textContent=PROJ_LIST.length>0?PROJ_LIST.length+' proje':'—'; }
+
+function renderUploadStatus(){
+  const el=$('anp-status-card'); if(!el)return;
+  if(!ANP){ el.innerHTML='<p style="color:var(--tx3);font-size:12px">Kayıtlı veri yok.</p>'; return; }
+  el.innerHTML=`<div class="notif n-ok" style="margin-bottom:10px"><span>💾</span><div><strong>${escHtml(ANP.fname||'anket.xlsx')}</strong> · ${ANP.expertCount} uzman · ${ANP.date}</div></div><button class="btn bd" onclick="clearANP()">🗑 ANP Verisini Sil</button>`;
+}
+function clearANP(){
+  if(!confirm('ANP verisi silinsin mi?'))return;
+  ANP=null; localStorage.removeItem('tubitak_anp_v50');
+  const sdD=$('sd-dot'),sdT=$('sd-txt'),nbU=$('nb-upload'),tbA=$('tb-anp-badge'),dExp=$('d-exp'),dDate=$('d-date'),ur=$('upload-result');
+  if(sdD)sdD.className='sd empty'; if(sdT)sdT.textContent='Veri yüklenmedi'; if(nbU)nbU.textContent='—';
+  if(tbA)tbA.textContent='● Hazır'; if(dExp)dExp.textContent='—'; if(dDate)dDate.textContent='—'; if(ur)ur.style.display='none';
+  setCS(-1); renderUploadStatus(); toast('ANP verisi silindi','warn');
+}
+
+/* ══════════════════════════════════════════════════════
+   PROJE LİSTESİ — EXCEL OKUMA  ✅ DÜZELTİLDİ
+   Sütunlar: A=Sıra No | B=Girişimci Adı | C=E-posta | D=Tel No | E=Proje Adı
+   
+   SORUN: XLSX.js sheet_to_json + header:1 + defval:'' kombinasyonu bazı satırlarda
+   boş hücre (Tel No gibi) olduğunda sparse array üretir; bu durumda indeksler
+   kayarak C(email) → r[3], E(proje adı) → r[4] yerine yanlış pozisyona geliyordu.
+   
+   ÇÖZÜM: worksheet hücrelerini doğrudan encode_cell ile A/B/C/D/E sütun
+   harflerinden okuyoruz. Böylece boş hücre = '' garantisi sağlanır, kayma olmaz.
+   ══════════════════════════════════════════════════════ */
 function loadProjExcel(file){
   if(!file)return;
   if(!['xlsx','xls'].includes(file.name.split('.').pop().toLowerCase())){ alert('Lütfen .xlsx veya .xls seçin.'); return; }
@@ -1289,19 +1030,52 @@ function loadProjExcel(file){
   reader.onload=async e=>{
     try{
       const wb=XLSX.read(e.target.result,{type:'array'});
-      const ws=wb.Sheets[wb.SheetNames[0]]; if(!ws){ toast('Excel boş.','err'); return; }
-      const getCellVal=(ri,ci)=>{ const addr=XLSX.utils.encode_cell({r:ri,c:ci}); const cell=ws[addr]; if(!cell)return ''; const v=cell.v!==undefined?cell.v:(cell.w||''); return String(v).trim(); };
-      const range=XLSX.utils.decode_range(ws['!ref']||'A1'); const dataRows=[];
-      for(let ri=range.s.r+1;ri<=range.e.r;ri++){
-        const colA=getCellVal(ri,0),colB=getCellVal(ri,1),colC=getCellVal(ri,2),colD=getCellVal(ri,3),colE=getCellVal(ri,4);
-        if(!colB&&!colE)continue;
-        dataRows.push({colA,colB,colC,colD,colE});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      if(!ws){ toast('Excel boş.','err'); return; }
+
+      // Hücreyi doğrudan sütun/satır indeksiyle oku — sparse array sorununu önler
+      const getCellVal=(rowIdx,colIdx)=>{
+        const addr=XLSX.utils.encode_cell({r:rowIdx,c:colIdx});
+        const cell=ws[addr];
+        if(!cell)return '';
+        // Formül hücrelerinde .v hesaplanan değer, .f ise formül stringi
+        // .v varsa onu kullan, yoksa .w (formatted string), yoksa ''
+        const v=cell.v!==undefined?cell.v:(cell.w||'');
+        return String(v).trim();
+      };
+
+      const range=XLSX.utils.decode_range(ws['!ref']||'A1');
+      const dataRows=[];
+
+      // Satır 0 = başlık, satır 1'den itibaren veri
+      for(let ri=range.s.r+1; ri<=range.e.r; ri++){
+        const colA=getCellVal(ri,0); // A: Sıra No
+        const colB=getCellVal(ri,1); // B: Adı-Soyadı (Girişimci Adı)
+        const colC=getCellVal(ri,2); // C: E-posta
+        const colD=getCellVal(ri,3); // D: Tel No
+        const colE=getCellVal(ri,4); // E: İş Fikrinin Adı (Proje Adı)
+        // F sütunu (index 5) = Excel formülü "=B&E", kullanılmaz
+
+        if(!colB && !colE) continue; // tamamen boş satır
+
+        dataRows.push({ colA, colB, colC, colD, colE });
       }
+
       if(!dataRows.length){ toast("Excel'de veri bulunamadı.",'err'); return; }
+
       PROJ_LIST=dataRows.map((r,i)=>{
-        const rawNo=r.colA; const seq=(rawNo&&!isNaN(rawNo))?parseInt(rawNo):i+1;
-        return{no:'2026-1-'+String(seq).padStart(2,'0'),gname:r.colB,email:r.colC,tel:r.colD,name:r.colE};
+        const rawNo=r.colA;
+        const seq=(rawNo && !isNaN(rawNo)) ? parseInt(rawNo) : i+1;
+        const no='2026-1-'+String(seq).padStart(2,'0');
+        return{
+          no,
+          gname : r.colB,   // B: Adı-Soyadı (Girişimci Adı)
+          email : r.colC,   // C: E-posta
+          tel   : r.colD,   // D: Tel No
+          name  : r.colE    // E: İş Fikrinin Adı (Proje Adı)
+        };
       });
+
       window._plistFname=file.name;
       showLoad('Proje listesi kaydediliyor…'); await saveProjListAll(); hideLoad();
       updateProjListBadge(); renderProjListPage(); toast(dataRows.length+' proje yüklendi.','ok');
@@ -1311,7 +1085,8 @@ function loadProjExcel(file){
 }
 
 function renderProjListPage(){
-  const statusEl=$('plist-status'),previewEl=$('plist-preview'),zone=$('plist-drop-zone'),lbl=$('plist-file-label');
+  const statusEl=$('plist-status'),previewEl=$('plist-preview');
+  const zone=$('plist-drop-zone'),lbl=$('plist-file-label');
   if(!statusEl||!previewEl)return;
   if(!PROJ_LIST.length){
     statusEl.innerHTML='<p style="color:var(--tx3);font-size:12px">Henüz liste yüklenmedi.</p>';
@@ -1319,63 +1094,38 @@ function renderProjListPage(){
     if(zone)zone.classList.remove('loaded'); if(lbl)lbl.textContent='Proje listesini sürükle veya tıkla'; return;
   }
   statusEl.innerHTML=`<div class="notif n-ok" style="margin-bottom:10px"><span>✅</span><div><strong>${escHtml(window._plistFname||'liste.xlsx')}</strong> · ${PROJ_LIST.length} proje · ${window._plistDate||'—'}</div></div><button class="btn bd" onclick="clearProjList()">🗑 Listeyi Sil</button>`;
-  if(zone)zone.classList.add('loaded'); if(lbl)lbl.textContent='✓ '+(window._plistFname||'liste.xlsx')+' ('+PROJ_LIST.length+' proje)';
-  let h=`<div style="max-height:460px;overflow-y:auto"><table><tr><th>#</th><th>No</th><th>Girişimci</th><th>E-posta</th><th>Tel</th><th>Proje Adı</th></tr>`;
-  PROJ_LIST.forEach((p,i)=>{ h+=`<tr><td style="color:var(--tx3)">${i+1}</td><td style="font-weight:700;color:var(--ac3);font-family:monospace">${escHtml(p.no)}</td><td style="color:var(--tx2)">${escHtml(p.gname||'—')}</td><td style="color:var(--tx3);font-size:11px">${escHtml(p.email||'—')}</td><td style="color:var(--tx3);font-size:11px">${escHtml(p.tel||'—')}</td><td style="font-weight:500">${escHtml(p.name||'—')}</td></tr>`; });
+  if(zone)zone.classList.add('loaded');
+  if(lbl)lbl.textContent='✓ '+(window._plistFname||'liste.xlsx')+' ('+PROJ_LIST.length+' proje)';
+  let h=`<div style="max-height:460px;overflow-y:auto"><table><tr><th>#</th><th>No</th><th>Girişimci Adı</th><th>E-posta</th><th>Tel</th><th>Proje Adı</th></tr>`;
+  PROJ_LIST.forEach((p,i)=>{
+    h+=`<tr>
+      <td style="color:var(--tx3)">${i+1}</td>
+      <td style="font-weight:700;color:var(--ac3);font-family:monospace">${escHtml(p.no)}</td>
+      <td style="color:var(--tx2)">${escHtml(p.gname||'—')}</td>
+      <td style="color:var(--tx3);font-size:11px">${escHtml(p.email||'—')}</td>
+      <td style="color:var(--tx3);font-size:11px">${escHtml(p.tel||'—')}</td>
+      <td style="font-weight:500">${escHtml(p.name||'—')}</td></tr>`;
+  });
   previewEl.innerHTML=h+'</table></div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   BADGE GÜNCELLEMELERİ
-═══════════════════════════════════════════════════════════════ */
-function updateANPBadges(){
-  if(!ANP)return;
-  const dExp=$('d-exp'),dDate=$('d-date'),nbU=$('nb-upload'),tbA=$('tb-anp-badge'),sdD=$('sd-dot'),sdT=$('sd-txt');
-  if(dExp)dExp.textContent=ANP.expertCount||'—'; if(dDate)dDate.textContent=ANP.date||'—';
-  if(nbU)nbU.textContent=(ANP.expertCount||'?')+' uzman'; if(tbA)tbA.textContent='● ANP Hazır';
-  if(sdD)sdD.className='sd loaded'; if(sdT)sdT.textContent=(ANP.expertCount||'?')+' uzmana ait veri girişi tamamlandı.';
-}
-function updateProjListBadge(){ const el=$('nb-plist'); if(el)el.textContent=PROJ_LIST.length>0?PROJ_LIST.length+' proje':'—'; }
-
-function renderUploadStatus(){
-  const el=$('anp-status-card'); if(!el)return;
-  if(!ANP){ el.innerHTML='<p style="color:var(--tx3);font-size:12px">Kayıtlı veri yok.</p>'; return; }
-  const csCnt=ANP.crossSubGM?Object.keys(ANP.crossSubGM).length:0;
-  const csOk=csCnt>=18;
- el.innerHTML='<div class="notif n-ok" style="margin-bottom:10px"><span>💾</span><div><strong>'+escHtml(ANP.fname||'anket.xlsx')+'</strong> • '+ANP.expertCount+' uzman • '+ANP.date+'</div></div>'
-+'<button class="btn bd" onclick="clearANP()">🗑 ANP Verisini Sil</button>';
-}
-function clearANP(){
-  if(!confirm('ANP verisi silinsin mi?'))return;
-  ANP=null; localStorage.removeItem('tubitak_anp_v61');
-  const sdD=$('sd-dot'),sdT=$('sd-txt'),nbU=$('nb-upload'),tbA=$('tb-anp-badge'),ur=$('upload-result');
-  if(sdD)sdD.className='sd empty'; if(sdT)sdT.textContent='Veri yüklenmedi'; if(nbU)nbU.textContent='—';
-  if(tbA)tbA.textContent='● Hazır'; if(ur)ur.style.display='none';
-  setCS(-1); renderUploadStatus(); toast('ANP verisi silindi','warn');
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   DASHBOARD
-═══════════════════════════════════════════════════════════════ */
 function renderDashboard(){
   const dP=$('d-proj'),nbR=$('nb-res'); if(dP)dP.textContent=PROJECTS.length; if(nbR)nbR.textContent=PROJECTS.length;
-  if($('d-no-anp'))$('d-no-anp').style.display=ANP?'none':'flex';
-  if($('d-no-plist'))$('d-no-plist').style.display=PROJ_LIST.length>0?'none':'flex';
+  const dNA=$('d-no-anp'),dNP=$('d-no-plist');
+  if(dNA)dNA.style.display=ANP?'none':'flex';
+  if(dNP)dNP.style.display=PROJ_LIST.length>0?'none':'flex';
   const dW=$('d-wviz'),dC=$('d-cr');
   if(!ANP){
     if(dW)dW.innerHTML='<p style="color:var(--tx3);font-size:12px;padding:14px 0;text-align:center">Veri bekleniyor…</p>';
     if(dC)dC.innerHTML='<p style="color:var(--tx3);font-size:12px">Veri bekleniyor…</p>';
   }else{
     let wh=''; const maxW=Math.max(...Object.values(ANP.globalW));
-    Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).forEach(([k,w])=>{
-      const [g,s]=k.split('_'),col=GI[g].color,pct=(w*100).toFixed(2);
-      wh+=`<div class="wb"><div class="wb-l" style="color:${col}">${s} — ${(SF[s]||'').substring(0,22)}</div><div class="wb-b"><div class="wb-f" style="width:${(w/maxW*100).toFixed(1)}%;background:${col}"></div></div><div class="wb-v">${pct}%</div></div>`;
-    });
+    Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).forEach(([k,w])=>{ const [g,s]=k.split('_'),col=GI[g].color,pct=(w*100).toFixed(2); wh+=`<div class="wb"><div class="wb-l" style="color:${col}">${s} — ${SF[s].substring(0,22)}</div><div class="wb-b"><div class="wb-f" style="width:${(w/maxW*100).toFixed(1)}%;background:${col}"></div></div><div class="wb-v">${pct}%</div></div>`; });
     if(dW)dW.innerHTML=wh;
     let ch='';
     GRP.forEach(g=>{ const cr=ANP.subCR[g].CR; ch+=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;color:${GI[g].color}">${GI[g].name} (${SIZES[g]}×${SIZES[g]})</span><span class="badge ${cr<.10?'cr-ok':'cr-warn'}">CR=${cr.toFixed(4)}</span></div>`; });
     ch+='<div class="divider"></div>';
-    GRP.forEach(g=>{ const w=((ANP.mainWd[g]||0)*100).toFixed(1); ch+=`<div class="wb"><div class="wb-l" style="color:${GI[g].color};font-weight:500">${GI[g].name}</div><div class="wb-b"><div class="wb-f" style="width:${parseFloat(w)*3}%;background:${GI[g].color}"></div></div><div class="wb-v">${w}%</div></div>`; });
+    GRP.forEach(g=>{ const w=(ANP.mainW[g]*100).toFixed(1); ch+=`<div class="wb"><div class="wb-l" style="color:${GI[g].color};font-weight:500">${GI[g].name}</div><div class="wb-b"><div class="wb-f" style="width:${parseFloat(w)*3}%;background:${GI[g].color}"></div></div><div class="wb-v">${w}%</div></div>`; });
     if(dC)dC.innerHTML=ch;
   }
   const ranked=rankAll(),dR=$('d-recent'); if(!dR)return;
@@ -1385,29 +1135,22 @@ function renderDashboard(){
   dR.innerHTML=rh+'</table>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   GLOBAL AĞIRLIK GÖRÜNÜMÜ
-═══════════════════════════════════════════════════════════════ */
 function renderGW(){
   const el=$('gw-body'); if(!el)return; if(!ANP){ el.innerHTML=noData(); return; }
   let h='';
-  GRP.forEach(g=>{
-    const ss=GI[g].subs,tot=ss.reduce((s,s2)=>s+(ANP.globalW[`${g}_${s2}`]||0),0),cr=ANP.subCR[g].CR;
-    h+=`<div class="card" style="margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div class="card-t" style="margin-bottom:0;color:${GI[g].color}">${GI[g].name} Grubu</div><div style="display:flex;gap:7px"><span class="badge ${cr<.10?'cr-ok':'cr-warn'}">CR=${cr.toFixed(4)}</span><span class="badge b-amber">Grup Toplam: ${(tot*100).toFixed(2)}%</span><span class="badge b-blue">Ana W: ${((ANP.mainWd[g]||0)*100).toFixed(2)}%</span></div></div><table><tr><th>Kod</th><th>Alt Kriter</th><th>Yerel W (PCM)</th><th>Global ANP W (Limit)</th></tr>`;
+  GRP.forEach(g=>{ const ss=GI[g].subs,tot=ss.reduce((s,s2)=>s+(ANP.globalW[`${g}_${s2}`]||0),0),cr=ANP.subCR[g].CR;
+    h+=`<div class="card" style="margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div class="card-t" style="margin-bottom:0;color:${GI[g].color}">${GI[g].name} Grubu</div><div style="display:flex;gap:7px"><span class="badge ${cr<.10?'cr-ok':'cr-warn'}">CR=${cr.toFixed(4)}</span><span class="badge b-amber">Grup Toplam: ${(tot*100).toFixed(2)}%</span><span class="badge b-blue">Ana W: ${(ANP.mainW[g]*100).toFixed(2)}%</span></div></div><table><tr><th>Kod</th><th>Alt Kriter</th><th>Yerel W (PCM)</th><th>Global ANP W (Limit)</th></tr>`;
     ss.forEach(s=>{ h+=`<tr><td style="font-weight:600">${s}</td><td style="font-size:11.5px;color:var(--tx2)">${SF[s]}</td><td style="color:${GI[g].color};font-weight:600">${((ANP.subW[g]||[])[GI[g].subs.indexOf(s)]*100||0).toFixed(2)}%</td><td style="color:var(--ac3);font-weight:700">${((ANP.globalW[`${g}_${s}`]||0)*100).toFixed(3)}%</td></tr>`; });
     h+='</table></div>';
   });
-  h+=`<div class="card"><div class="card-t">Ana Kriter PCM — 5×5</div><table><tr><th>Grup</th><th>Ana W</th><th>CR</th></tr>`;
-  GRP.forEach(g=>{ h+=`<tr><td style="color:${GI[g].color};font-weight:600">${GI[g].name}</td><td>${((ANP.mainWd[g]||0)*100).toFixed(2)}%</td><td><span class="badge ${ANP.mainCR.CR<.10?'cr-ok':'cr-warn'}">CR=${ANP.mainCR.CR.toFixed(4)}</span></td></tr>`; });
+  h+=`<div class="card"><div class="card-t">Ana Kriter PCM — 5×5 </div><table><tr><th>Grup</th><th>Ana W (PCM normalize)</th><th>CR Durumu</th></tr>`;
+  GRP.forEach(g=>{ h+=`<tr><td style="color:${GI[g].color};font-weight:600">${GI[g].name}</td><td>${((ANP.mainW[g]||0)*100).toFixed(2)}%</td><td><span class="badge ${ANP.mainCR.CR<.10?'cr-ok':'cr-warn'}">CR=${ANP.mainCR.CR.toFixed(4)}</span></td></tr>`; });
   h+='</table></div>'; el.innerHTML=h;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SÜPERMATRİS
-═══════════════════════════════════════════════════════════════ */
 function renderSM(){
   const el=$('sm-body'); if(!el)return; if(!ANP){ el.innerHTML=noData(); return; }
-  el.innerHTML=`<div class="sd-panel"><div class="sd-tabs"><button class="sdt active" onclick="smTab(this,'sm-u')">Ağırlıksız W_unw</button><button class="sdt" onclick="smTab(this,'sm-w')">Ağırlıklı W_wei</button><button class="sdt" onclick="smTab(this,'sm-l')">Limit W_lim</button></div><div class="sd-body"><div id="sm-u">${mat16(ANP.W_unw,'Ağırlıksız Süpermatris W_unw (16×16) — Çapraz alt kriter etkileri dahil')}</div><div id="sm-w" style="display:none">${mat16(ANP.W_wei,'Ağırlıklı/Stokastik Süpermatris W_wei — Ana kriter ağırlıkları ile ölçekli')}</div><div id="sm-l" style="display:none">${mat16(ANP.W_lim,'Limit Süpermatris W_lim — lim(W^2k) yakınsaması')}</div></div></div>`;
+  el.innerHTML=`<div class="sd-panel"><div class="sd-tabs"><button class="sdt active" onclick="smTab(this,'sm-u')">Ağırlıksız W_unw</button><button class="sdt" onclick="smTab(this,'sm-w')">Ağırlıklı/Stokastik W_wei</button><button class="sdt" onclick="smTab(this,'sm-l')">Limit W_lim</button></div><div class="sd-body"><div id="sm-u">${mat16(ANP.W_unw,'Ağırlıksız Süpermatris W_unw (16×16) — Adım 5a')}</div><div id="sm-w" style="display:none">${mat16(ANP.W_wei,'Ağırlıklı/Stokastik Süpermatris W_wei — Adım 5b')}</div><div id="sm-l" style="display:none">${mat16(ANP.W_lim,'Limit Süpermatris W_lim — Adım 5c lim(W^2k)')}</div></div></div>`;
 }
 function smTab(btn,id){ btn.closest('.sd-panel').querySelectorAll('.sdt').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); ['sm-u','sm-w','sm-l'].forEach(s=>{ const e=document.getElementById(s); if(e)e.style.display=s===id?'block':'none'; }); }
 function mat16(M,desc){
@@ -1418,14 +1161,10 @@ function mat16(M,desc){
   return h+'</table></div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ALT KRİTER MATRİSLERİ
-═══════════════════════════════════════════════════════════════ */
 function renderSubMat(){
   const el=$('submat-body'); if(!el)return; if(!ANP){ el.innerHTML=noData(); return; }
   let h='';
-  GRP.forEach(g=>{
-    const M=ANP.subMat?ANP.subMat[g]:null,ss=GI[g].subs,n=ss.length,cr=ANP.subCR[g];
+  GRP.forEach(g=>{ const M=ANP.subMat?ANP.subMat[g]:null,ss=GI[g].subs,n=ss.length,cr=ANP.subCR[g];
     if(!M){ h+=`<div class="card" style="margin-bottom:12px"><div class="card-t">${GI[g].name}</div><p style="color:var(--tx3);font-size:12px">Matris verisi mevcut değil.</p></div>`; return; }
     h+=`<div class="card" style="margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div class="card-t" style="margin-bottom:0;color:${GI[g].color}">${GI[g].name} — Alt Kriter PCM (${n}×${n})</div><div style="display:flex;gap:7px"><span class="badge ${cr.CR<.10?'cr-ok':'cr-warn'}">CR=${cr.CR.toFixed(4)}</span><span class="badge b-gray">λmax=${cr.lam.toFixed(4)}</span><span class="badge b-blue">CI=${cr.CI.toFixed(4)}</span></div></div><div class="smt-wrap"><table class="smt"><tr><th></th>`;
     ss.forEach(s=>{ h+=`<th>${s}</th>`; }); h+='<th>W(yerel)</th></tr>';
@@ -1433,13 +1172,10 @@ function renderSubMat(){
     h+='</table></div></div>';
   });
   const mM=ANP.mainMat,mc=ANP.mainCR;
-  if(mM){ h+=`<div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div class="card-t" style="margin-bottom:0">Ana Kriter 5×5 PCM</div><div style="display:flex;gap:7px"><span class="badge ${mc.CR<.10?'cr-ok':'cr-warn'}">CR=${mc.CR.toFixed(4)}</span><span class="badge b-gray">λmax=${mc.lam.toFixed(4)}</span></div></div><div class="smt-wrap"><table class="smt"><tr><th></th>`; GRP.forEach(g=>{ h+=`<th>${GI[g].name.substring(0,5)}</th>`; }); h+='<th>W</th></tr>'; for(let i=0;i<5;i++){ h+=`<tr><td class="rh">${GI[GRP[i]].name}</td>`; for(let j=0;j<5;j++){ const v=mM[i][j]; h+=`<td class="${i===j?'dc':v>1?'hi':'lo'}">${i===j?'1':v>=1?v.toFixed(3):'1/'+(1/v).toFixed(2)}</td>`; } h+=`<td style="font-weight:600;color:${GI[GRP[i]].color}">${((ANP.mainWd[GRP[i]]||0)*100).toFixed(2)}%</td></tr>`; } h+='</table></div></div>'; }
+  if(mM){ h+=`<div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div class="card-t" style="margin-bottom:0">Ana Kriter 5×5 PCM</div><div style="display:flex;gap:7px"><span class="badge ${mc.CR<.10?'cr-ok':'cr-warn'}">CR=${mc.CR.toFixed(4)}</span><span class="badge b-gray">λmax=${mc.lam.toFixed(4)}</span></div></div><div class="smt-wrap"><table class="smt"><tr><th></th>`; GRP.forEach(g=>{ h+=`<th>${GI[g].name.substring(0,5)}</th>`; }); h+='<th>W</th></tr>'; for(let i=0;i<5;i++){ h+=`<tr><td class="rh">${GI[GRP[i]].name}</td>`; for(let j=0;j<5;j++){ const v=mM[i][j]; h+=`<td class="${i===j?'dc':v>1?'hi':'lo'}">${i===j?'1':v>=1?v.toFixed(3):'1/'+(1/v).toFixed(2)}</td>`; } h+=`<td style="font-weight:600;color:${GI[GRP[i]].color}">${((ANP.mainW[GRP[i]]||0)*100).toFixed(2)}%</td></tr>`; } h+='</table></div></div>'; }
   el.innerHTML=h;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   GRUPLAR ARASI ETKİ MATRİSİ
-═══════════════════════════════════════════════════════════════ */
 function renderInfl(){
   const el=$('infl-body'); if(!el)return; if(!ANP){ el.innerHTML=noData(); return; }
   let h='<div class="g2">';
@@ -1449,15 +1185,14 @@ function renderInfl(){
   h+='</table></div>';
   h+=`<div class="card"><div class="card-t">Normalize Etki — Satır Toplamı = 1</div><table><tr><th>Kaynak →</th>`;
   GRP.forEach(t=>{ h+=`<th style="color:${GI[t].color}">${GI[t].name.substring(0,5)}</th>`; }); h+='</tr>';
-  const _ow=ANP.outerW||{}; GRP.forEach(f=>{ h+=`<tr><td style="font-weight:600;color:${GI[f].color}">${GI[f].name}</td>`; GRP.forEach(t=>{ if(f===t){ h+=`<td style="text-align:center;color:var(--tx3)">—</td>`; }else{ const v=(((_ow[f]||{})[t]||0)*100).toFixed(1); h+=`<td style="text-align:center;font-weight:600;color:${GI[t].color}">${v}%</td>`; } }); h+='</tr>'; });
+  GRP.forEach(f=>{ h+=`<tr><td style="font-weight:600;color:${GI[f].color}">${GI[f].name}</td>`; GRP.forEach(t=>{ if(f===t){ h+=`<td style="text-align:center;color:var(--tx3)">—</td>`; }else{ const v=(((ANP.normInfl||{})[`${f}->${t}`]||0)*100).toFixed(1); h+=`<td style="text-align:center;font-weight:600;color:${GI[t].color}">${v}%</td>`; } }); h+='</tr>'; });
   h+='</table></div></div>'; el.innerHTML=h;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   DEĞERLENDİRME — TOPSIS
-═══════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   DEĞERLENDİRME
+   ══════════════════════════════════════════════════════ */
 let evalScores={};
-
 function initEval(){
   const noA=$('eval-no-anp'),wrap=$('eval-wrap');
   if(!ANP){ if(noA)noA.style.display='flex'; if(wrap)wrap.style.display='none'; return; }
@@ -1471,28 +1206,39 @@ function initEval(){
     if(!PROJ_LIST.length){ if(nl)nl.style.display='flex'; if(sw)sw.style.display='none'; }
     else{ if(nl)nl.style.display='none'; if(sw)sw.style.display='block'; populateProjDropdown(); }
   }
-  if(isAdmin){ ['pname','powner','pbudget','pdur'].forEach(id=>{ const el=$(id); if(el)el.value=''; }); }
+  if(isAdmin){ const pn=$('pname'),po=$('powner'),pb=$('pbudget'),pd=$('pdur'); if(pn)pn.value=''; if(po)po.value=''; if(pb)pb.value=''; if(pd)pd.value=''; }
   goStep1(); buildScoreForm();
 }
 
+/* ── Dropdown: "Girişimci Adı - Proje Adı" ── */
 function populateProjDropdown(){
   const sel=$('proj-select'); if(!sel)return;
   sel.innerHTML='<option value="">— Proje seçiniz —</option>';
-  PROJ_LIST.forEach((p,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=(p.gname&&p.name)?(p.gname+' - '+p.name):(p.name||p.gname||('Proje '+(i+1))); sel.appendChild(o); });
+  PROJ_LIST.forEach((p,i)=>{
+    const o=document.createElement('option');
+    o.value=i;
+    o.textContent=(p.gname&&p.name)?(p.gname+' - '+p.name):(p.name||p.gname||('Proje '+(i+1)));
+    sel.appendChild(o);
+  });
   fillProjFields();
 }
 
+/* ── Bilgi Kartı: Girişimci No, Adı, Proje Adı, E-posta, Tel ── */
 function fillProjFields(){
   const sel=$('proj-select'),box=$('proj-info-grid'); if(!sel)return;
   const idx=parseInt(sel.value);
   const pn=$('pf-no'),pg=$('pf-gname'),pp=$('pf-projname'),pe=$('pf-email'),pt=$('pf-tel');
   if(isNaN(idx)||!PROJ_LIST[idx]){
-    [pn,pg,pp,pe,pt].forEach(el=>{ if(el)el.textContent='—'; });
+    if(pn)pn.textContent='—'; if(pg)pg.textContent='—';
+    if(pp)pp.textContent='—'; if(pe)pe.textContent='—'; if(pt)pt.textContent='—';
     if(box)box.classList.remove('active-box'); return;
   }
   const p=PROJ_LIST[idx];
-  if(pn)pn.textContent=p.no||'—'; if(pg)pg.textContent=p.gname||'—';
-  if(pp)pp.textContent=p.name||'—'; if(pe)pe.textContent=p.email||'—'; if(pt)pt.textContent=p.tel||'—';
+  if(pn)pn.textContent=p.no||'—';
+  if(pg)pg.textContent=p.gname||'—';
+  if(pp)pp.textContent=p.name||'—';
+  if(pe)pe.textContent=p.email||'—';
+  if(pt)pt.textContent=p.tel||'—';
   if(box)box.classList.add('active-box');
 }
 
@@ -1514,9 +1260,8 @@ function buildScoreForm(){
   const sf=$('score-form'); if(!sf||!ANP)return;
   let h='';
   GRP.forEach(g=>{
-    h+=`<div class="card" style="margin-bottom:12px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><span style="width:8px;height:8px;border-radius:50%;background:${GI[g].color};display:inline-block"></span><div class="card-t" style="margin-bottom:0;color:${GI[g].color}">${GI[g].name} Grubu</div><span class="badge b-amber">Ana W: ${((ANP.mainWd[g]||0)*100).toFixed(1)}%</span></div>`;
-    GI[g].subs.forEach(s=>{
-      const gw=((ANP.globalW[`${g}_${s}`]||0)*100).toFixed(3);
+    h+=`<div class="card" style="margin-bottom:12px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><span style="width:8px;height:8px;border-radius:50%;background:${GI[g].color};display:inline-block"></span><div class="card-t" style="margin-bottom:0;color:${GI[g].color}">${GI[g].name} Grubu</div><span class="badge b-amber">Ana W: ${((ANP.mainW[g]||0)*100).toFixed(1)}%</span></div>`;
+    GI[g].subs.forEach(s=>{ const gw=((ANP.globalW[`${g}_${s}`]||0)*100).toFixed(3);
       h+=`<div style="margin-bottom:13px;padding-bottom:13px;border-bottom:1px solid var(--bdr)"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px"><div style="font-weight:500;font-size:13px">${s} — ${SF[s]}</div><span class="badge b-green" style="flex-shrink:0">Global ANP: ${gw}%</span></div><div class="sr">`;
       for(let v=1;v<=9;v++){ h+=`<button class="sb9" id="sb-${g}-${s}-${v}" onclick="setScore('${g}','${s}',${v})" title="${v} — ${S9[v]}">${v}</button>`; }
       h+=`</div><div style="font-size:11px;color:var(--tx3);margin-top:4px" id="sl-${g}-${s}">Puan seçilmedi</div></div>`;
@@ -1525,33 +1270,23 @@ function buildScoreForm(){
   });
   sf.innerHTML=h;
 }
-
 function setScore(g,s,v){
   evalScores[`${g}_${s}`]=v;
   for(let i=1;i<=9;i++){ const b=document.getElementById(`sb-${g}-${s}-${i}`); if(b)b.className=i===v?'sb9 sel':'sb9'; }
   const l=document.getElementById(`sl-${g}-${s}`); if(l){ l.textContent=`Seçilen: ${v} — ${S9[v]}`; l.style.color='var(--ac3)'; }
 }
-
 function goStep1(){ const e1=$('es1'),e2=$('es2'),e3=$('es3'); if(e1)e1.style.display='block'; if(e2)e2.style.display='none'; if(e3)e3.style.display='none'; setStepUI(1); }
 function goStep2(){ const pnEl=$('pname'); if(PORTAL==='admin'&&pnEl&&!pnEl.value.trim()){ alert('Proje adı gerekli'); return; } const e1=$('es1'),e2=$('es2'),e3=$('es3'); if(e1)e1.style.display='none'; if(e2)e2.style.display='block'; if(e3)e3.style.display='none'; setStepUI(2); }
 function setStepUI(s){ for(let i=1;i<=3;i++){ const el=document.getElementById('st'+i); if(!el)continue; el.className='step'+(i<s?' done':i===s?' active':''); el.style.opacity=i>s?'.45':'1'; const ln=document.getElementById('sl'+i); if(ln)ln.className='stepline'+(i<s?' done':''); } }
 
-/* ═══════════════════════════════════════════════════════════════
-   TOPSIS HESAPLAMA
-═══════════════════════════════════════════════════════════════ */
 function rankAll(){
   if(!PROJECTS.length||!ANP)return [];
   const keys=Object.keys(ANP.globalW);
   const grouped={};
   PROJECTS.forEach(p=>{ const key=p.projNo||p.name; if(!grouped[key])grouped[key]={base:p,evaluators:[],scoresList:[]}; if(p.evaluator)grouped[key].evaluators.push(p.evaluator); grouped[key].scoresList.push(p.scores); });
-  const aggProjects=Object.values(grouped).map(g=>{
-    const avgScores={};
-    keys.forEach(k=>{ let sum=0,count=0; g.scoresList.forEach(sc=>{ const val=parseFloat(sc&&sc[k])||1; sum+=val; count++; }); avgScores[k]=count>0?sum/count:1; });
-    return{...g.base,evaluator:[...new Set(g.evaluators)].join(', '),scores:avgScores};
-  });
+  const aggProjects=Object.values(grouped).map(g=>{ const avgScores={}; keys.forEach(k=>{ let sum=0,count=0; g.scoresList.forEach(sc=>{ const val=parseFloat(sc&&sc[k])||1; sum+=val; count++; }); avgScores[k]=count>0?sum/count:1; }); return{...g.base,evaluator:[...new Set(g.evaluators)].join(', '),scores:avgScores}; });
   return topsisCalculate(aggProjects,keys);
 }
-
 function topsisCalculate(projects,keys){
   if(!projects.length)return [];
   const W=keys.map(k=>ANP.globalW[k]||0);
@@ -1561,29 +1296,16 @@ function topsisCalculate(projects,keys){
   const wm=nm.map(r=>r.map((v,j)=>v*W[j]));
   const Ap=keys.map((_,j)=>Math.max(...wm.map(r=>r[j])));
   const An=keys.map((_,j)=>Math.min(...wm.map(r=>r[j])));
-  return projects.map((p,i)=>{
-    const Dp=Math.sqrt(keys.reduce((s,_,j)=>s+(wm[i][j]-Ap[j])**2,0));
-    const Dn=Math.sqrt(keys.reduce((s,_,j)=>s+(wm[i][j]-An[j])**2,0));
-    return{...p,Dp,Dn,Cstar:(Dp+Dn)>0?Dn/(Dp+Dn):0};
-  }).sort((a,b)=>b.Cstar-a.Cstar);
+  return projects.map((p,i)=>{ const Dp=Math.sqrt(keys.reduce((s,_,j)=>s+(wm[i][j]-Ap[j])**2,0)); const Dn=Math.sqrt(keys.reduce((s,_,j)=>s+(wm[i][j]-An[j])**2,0)); return{...p,Dp,Dn,Cstar:(Dp+Dn)>0?Dn/(Dp+Dn):0}; }).sort((a,b)=>b.Cstar-a.Cstar);
 }
 
 async function doTOPSIS(){
   const pnEl=$('pname'); const name=pnEl?pnEl.value.trim():'';
   if(!name){ alert('Proje adı gerekli'); return; }
   const keys=Object.keys(ANP.globalW); const missing=keys.filter(k=>!evalScores[k]);
-  if(missing.length){
-    const mn=missing.map(k=>{ const [g,s]=k.split('_'); return`${s} — ${SF[s]}`; });
-    alert(`⚠️ ${missing.length} kriter puanlanmamış:\n\n${mn.join('\n')}\n\nLütfen tüm kriterleri doldurunuz.`);
-    const [fg,fs]=missing[0].split('_'); const el=document.getElementById(`sb-${fg}-${fs}-1`);
-    if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.style.outline='2px solid var(--red)'; setTimeout(()=>el.style.outline='',2000); }
-    return;
-  }
+  if(missing.length){ const mn=missing.map(k=>{ const [g,s]=k.split('_'); return`${s} — ${SF[s]}`; }); alert(`⚠️ ${missing.length} kriter puanlanmamış:\n\n${mn.join('\n')}\n\nLütfen tüm kriterleri doldurunuz.`); const [fg,fs]=missing[0].split('_'); const el=document.getElementById(`sb-${fg}-${fs}-1`); if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.style.outline='2px solid var(--red)'; setTimeout(()=>el.style.outline='',2000); } return; }
   showLoad('TOPSIS hesaplanıyor…');
-  const tmpProj={scores:{...evalScores}};
-  const allForCalc=[...PROJECTS,tmpProj];
-  const tmpResult=topsisCalculate(allForCalc,keys);
-  const newEntry=tmpResult.find(x=>x.scores===tmpProj.scores)||tmpResult[tmpResult.length-1];
+  const tmpProj={scores:{...evalScores}}; const allForCalc=[...PROJECTS,tmpProj]; const tmpResult=topsisCalculate(allForCalc,keys); const newEntry=tmpResult.find(x=>x.scores===tmpProj.scores)||tmpResult[tmpResult.length-1];
   const ptEl=$('ptype'),poEl=$('powner'),pbEl=$('pbudget'),pdEl=$('pdur');
   const p={name,owner:poEl?poEl.value:'',type:ptEl?ptEl.value:'—',budget:pbEl?pbEl.value:'',dur:pdEl?pdEl.value:'',date:new Date().toLocaleDateString('tr-TR'),scores:{...evalScores},evaluator:ME||'üye',projNo:window._evalProjNo||'',Cstar:newEntry.Cstar,Dp:newEntry.Dp,Dn:newEntry.Dn};
   const dbId=await saveProjToDB(p); if(dbId)p.id=dbId;
@@ -1597,38 +1319,32 @@ async function doTOPSIS(){
   if(p.owner)h+=`<div><span style="color:var(--tx3)">Girişimci:</span> ${escHtml(p.owner)}</div>`;
   h+=`<div><span style="color:var(--tx3)">Değerlendiren:</span> ${escHtml(p.evaluator)}</div><div><span style="color:var(--tx3)">Tarih:</span> ${p.date}</div></div></div>`;
   h+=`<div class="g3" style="margin-bottom:14px"><div class="stat"><div class="sl">C* Skoru</div><div class="sv" style="color:var(--ac3)">${p.Cstar.toFixed(4)}</div><div class="ss">İdeal Yakınlık D⁻/(D⁺+D⁻)</div></div><div class="stat"><div class="sl">Sıralama</div><div class="sv" style="color:var(--gold)">#${rank}</div><div class="ss">${PROJECTS.length} proje içinde</div></div><div class="stat"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:12px">${p.Dp.toFixed(4)} / ${p.Dn.toFixed(4)}</div></div></div>`;
-  h+=`<div class="card" style="margin-bottom:12px"><div class="card-t">Kriter Puanları & Global ANP Ağırlıkları</div><table><tr><th>Kod</th><th>Alt Kriter</th><th>Puan</th><th>Global ANP W</th></tr>`;
+  h+=`<div class="card" style="margin-bottom:12px"><div class="card-t">Kriter Puanları & Global ANP Ağırlıkları</div><table><tr><th>Kod</th><th>Alt Kriter</th><th>Puan (1-9)</th><th>Global ANP W</th></tr>`;
   Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).forEach(([k,w])=>{ const [g,s]=k.split('_'),sc=evalScores[k]||5; h+=`<tr><td style="font-weight:600">${s}</td><td style="font-size:11.5px;color:var(--tx2)">${SF[s]}</td><td><strong style="color:${GI[g].color}">${sc}</strong> <span style="color:var(--tx3);font-size:10px">${S9[sc]}</span></td><td style="color:var(--ac3)">${(w*100).toFixed(3)}%</td></tr>`; });
   h+=`</table></div><div style="display:flex;gap:9px"><button class="btn bo" onclick="initEval()">Yeni Değerlendirme</button>`;
   if(PORTAL==='admin')h+=`<button class="btn bp" onclick="nav('results')">Sıralamaya Git →</button>`;
   h+='</div>';
   if(er)er.innerHTML=h;
-  if($('d-proj'))$('d-proj').textContent=PROJECTS.length;
+  const dP=$('d-proj'); if(dP)dP.textContent=PROJECTS.length;
   toast('Proje kaydedildi!','ok');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SONUÇ GÖRÜNÜMLERI
-═══════════════════════════════════════════════════════════════ */
 async function loadProjAndRender(){
   showLoad('Projeler yükleniyor…'); await loadProjFromDB(); hideLoad();
   const pg=document.querySelector('.page.active');
   if(pg){ if(pg.id==='page-results')renderResults(); if(pg.id==='page-projects')renderProjects(); if(pg.id==='page-evaluations')renderEvaluationsGrid(); }
   renderDashboard();
 }
-
 function renderResults(){
   const el=$('res-body'); if(!el)return;
   if(!PROJECTS.length){ el.innerHTML='<p style="text-align:center;padding:40px;color:var(--tx3)">Henüz proje yok.</p>'; return; }
   const ranked=rankAll(); let h='';
-  ranked.forEach((p,i)=>{
-    const pct=(p.Cstar*100).toFixed(1),col=i===0?'var(--gold)':i<3?'var(--ac3)':'var(--ac)';
+  ranked.forEach((p,i)=>{ const pct=(p.Cstar*100).toFixed(1),col=i===0?'var(--gold)':i<3?'var(--ac3)':'var(--ac)';
     h+=`<div class="rc ${i===0?'r1':''}" data-key="${escHtml(p.projNo||p.name)}"><div class="rn" style="${i===0?'background:rgba(180,83,9,.12);color:var(--gold)':''}">${i+1}</div><div class="ri"><div class="rname">${escHtml(p.name)}${p.projNo?` <span style="font-size:10.5px;color:var(--tx3);font-weight:400">[${escHtml(p.projNo)}]</span>`:''}</div><div class="rmeta">${p.owner?escHtml(p.owner)+' · ':''}${p.evaluator?'Uzmanlar: '+escHtml(p.evaluator)+' · ':''}${p.date}</div><div class="pbar"><div class="pfill" style="width:${pct}%;background:${col}"></div></div></div><div style="text-align:right;flex-shrink:0"><div class="rscore" style="color:${col}">${p.Cstar.toFixed(4)}</div><div style="font-size:10px;color:var(--tx3)">C* = ${pct}%</div><span class="badge ${p.Cstar>.6?'b-green':p.Cstar>.4?'b-amber':'b-purple'}" style="margin-top:5px;display:inline-flex">${p.Cstar>.6?'Öncelikli':p.Cstar>.4?'İncelemede':'Düşük'}</span></div></div>`;
   });
   el.innerHTML=h;
   el.querySelectorAll('.rc[data-key]').forEach(card=>{ card.addEventListener('click',()=>showProjectDetails(card.getAttribute('data-key'))); });
 }
-
 function renderProjects(){
   const el=$('proj-tbl'); if(!el)return;
   if(!PROJECTS.length){ el.innerHTML='<p style="text-align:center;padding:28px;color:var(--tx3)">Henüz proje yok.</p>'; return; }
@@ -1640,9 +1356,6 @@ function renderProjects(){
   el.querySelectorAll('.del-btn').forEach(btn=>{ btn.addEventListener('click',()=>deleteProj(btn.getAttribute('data-id'),btn.getAttribute('data-name'))); });
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   UZMAN DEĞERLENDİRME GRİDİ
-═══════════════════════════════════════════════════════════════ */
 const EXP_COLORS=[{bg:'#f59e0b',text:'#1a1200'},{bg:'#84cc16',text:'#0f2800'},{bg:'#22d3ee',text:'#001c22'},{bg:'#f472b6',text:'#2a0018'},{bg:'#a78bfa',text:'#1a0035'},{bg:'#fb923c',text:'#2a0800'}];
 
 function renderEvaluationsGrid(){
@@ -1651,8 +1364,7 @@ function renderEvaluationsGrid(){
   const expertNames=[]; PROJECTS.forEach(p=>{ const ev=p.evaluator||'—'; if(!expertNames.includes(ev))expertNames.push(ev); });
   const map={}; expertNames.forEach(ev=>{ map[ev]={}; }); PROJECTS.forEach(p=>{ const ev=p.evaluator||'—',key=p.projNo||p.name; if(!map[ev])map[ev]={}; map[ev][key]=p; });
   let h='';
-  expertNames.forEach((ev,ei)=>{
-    const col=EXP_COLORS[ei%EXP_COLORS.length],evProjs=Object.values(map[ev]||{}),initials=ev.split(' ').map(w=>w[0]||'').join('').toUpperCase().substring(0,2)||'U';
+  expertNames.forEach((ev,ei)=>{ const col=EXP_COLORS[ei%EXP_COLORS.length],evProjs=Object.values(map[ev]||{}),initials=ev.split(' ').map(w=>w[0]||'').join('').toUpperCase().substring(0,2)||'U';
     h+=`<div class="eval-expert-col"><div class="exp-col-head"><div class="exp-col-head-inner"><div class="exp-avatar" style="background:${col.bg};color:${col.text}">${escHtml(initials)}</div><div class="exp-name">${escHtml(ev)}</div><div class="exp-count">${evProjs.length} proje değerlendirdi</div></div></div><div class="eval-cards-list">`;
     if(!evProjs.length){ h+=`<div class="eval-proj-card empty-card">Değerlendirme yok</div>`; }
     else{ evProjs.forEach(rec=>{ const key=rec.projNo||rec.name,cstar=(rec.Cstar||0),statusLabel=cstar>.6?'Öncelikli':cstar>.4?'İncelemede':'Düşük'; h+=`<div class="eval-proj-card" style="background:${col.bg};color:${col.text}" data-ev="${escHtml(ev)}" data-projkey="${escHtml(key)}">${rec.projNo?`<div class="epc-no">${escHtml(rec.projNo)}</div>`:''}<div class="epc-name">${escHtml(rec.name||key)}</div><div class="epc-score-row"><div class="epc-score">C* ${cstar.toFixed(4)}</div><span class="epc-badge">${statusLabel}</span></div><div class="epc-detail">Detayı gör →</div></div>`; }); }
@@ -1670,7 +1382,7 @@ function openEvalDetailModal(expertName,projKey){
   const cstar=(rec.Cstar||0),scores=Object.values(rec.scores||{}).map(v=>parseFloat(v)||0).filter(v=>v>0);
   const avgSc=scores.length>0?(scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(2):'—',maxSc=scores.length>0?Math.max(...scores):'—',minSc=scores.length>0?Math.min(...scores):'—';
   const cstarCol=cstar>.6?'var(--ac3)':cstar>.4?'var(--gold)':'var(--ac2)';
-  const statsHtml=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"><div class="stat" style="padding:12px"><div class="sl">C* Skoru</div><div class="sv" style="font-size:18px;color:${cstarCol}">${cstar.toFixed(4)}</div></div><div class="stat" style="padding:12px"><div class="sl">Ort. Puan</div><div class="sv" style="font-size:18px;color:var(--ac)">${avgSc}</div><div class="ss">Min:${minSc} · Max:${maxSc}</div></div><div class="stat" style="padding:12px"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:13px;color:var(--tx2)">${(rec.Dp||0).toFixed(4)}<br>${(rec.Dn||0).toFixed(4)}</div></div></div>`;
+  const statsHtml=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"><div class="stat" style="padding:12px"><div class="sl">C* Skoru</div><div class="sv" style="font-size:18px;color:${cstarCol}">${cstar.toFixed(4)}</div><div class="ss">İdeal yakınlık</div></div><div class="stat" style="padding:12px"><div class="sl">Ort. Puan</div><div class="sv" style="font-size:18px;color:var(--ac)">${avgSc}</div><div class="ss">Min:${minSc} · Max:${maxSc}</div></div><div class="stat" style="padding:12px"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:13px;color:var(--tx2)">${(rec.Dp||0).toFixed(4)}<br>${(rec.Dn||0).toFixed(4)}</div></div></div>`;
   const sortedKeys=ANP?Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).map(([k])=>k):Object.keys(rec.scores||{});
   let sh='';
   sortedKeys.forEach(k=>{ const [g,s]=k.split('_'),sc=parseFloat((rec.scores||{})[k])||0,gw=ANP?((ANP.globalW[k]||0)*100).toFixed(3):'—',gColor=GI[g]?GI[g].color:'var(--tx2)',scColor=sc>=7?'var(--ac3)':sc>=5?'var(--ac)':sc>=3?'var(--gold)':'var(--red)'; sh+=`<div class="dscore-item" style="border-color:${gColor}28"><div class="dscore-left"><div class="dscore-code" style="color:${gColor}">${s||k}</div><div class="dscore-name">${SF[s]||k}</div><div class="dscore-anp">ANP: ${gw}%</div></div><div class="dscore-right"><div class="dscore-val" style="color:${scColor}">${sc}</div><div class="dscore-label">${S9[sc]||'—'}</div></div></div>`; });
@@ -1679,6 +1391,12 @@ function openEvalDetailModal(expertName,projKey){
 }
 function closeEvalDetailModal(){ const m=$('eval-detail-modal'); if(m)m.classList.remove('show'); }
 document.getElementById('eval-detail-modal').addEventListener('click',function(e){ if(e.target===this)closeEvalDetailModal(); });
+
+function exportEvaluationsToExcel(){
+  if(!PROJECTS||!PROJECTS.length){ toast('Dışa aktarılacak veri yok!','warn'); return; }
+  const data=PROJECTS.map(p=>{ let r={'Proje No / Adı':p.projNo||p.name||'','Değerlendiren Uzman':p.evaluator||''}; Object.keys(p.scores||{}).forEach(k=>{ r[`Kriter: ${k}`]=p.scores[k]||1; }); return r; });
+  const ws=XLSX.utils.json_to_sheet(data),wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Uzman_Puanlari'); XLSX.writeFile(wb,'Uzman_Degerlendirme_Puanlari.xlsx');
+}
 
 function showProjectDetails(key){
   const evals=PROJECTS.filter(p=>(p.projNo||p.name)===key); if(!evals.length)return;
@@ -1694,51 +1412,28 @@ function showProjectDetails(key){
   scoresEl.innerHTML=tabHtml; window._pdEvals=evals; _renderEvalTabContent(0); mo.classList.add('show');
 }
 function switchEvalTab(idx){ const evals=window._pdEvals||[]; evals.forEach((_,i)=>{ const btn=document.getElementById('edm-tab-'+i); if(!btn)return; if(i===idx){btn.style.background='var(--ac)';btn.style.color='#fff';btn.style.borderColor='var(--ac)';}else{btn.style.background='transparent';btn.style.color='var(--tx2)';btn.style.borderColor='var(--bdr2)';} }); _renderEvalTabContent(idx); }
-function _renderEvalTabContent(idx){
-  const evals=window._pdEvals||[],rec=evals[idx]; if(!rec)return;
-  const scoresEl=document.getElementById('edm-tab-content')||$('edm-scores'); if(!scoresEl)return;
-  const cstar=(rec.Cstar||0),scores=Object.values(rec.scores||{}).map(v=>parseFloat(v)||0).filter(v=>v>0);
-  const avgSc=scores.length>0?(scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(2):'—',maxSc=scores.length>0?Math.max(...scores):'—',minSc=scores.length>0?Math.min(...scores):'—';
-  const cstarCol=cstar>.6?'var(--ac3)':cstar>.4?'var(--gold)':'var(--ac2)';
-  const statsHtml=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"><div class="stat" style="padding:12px"><div class="sl">C* Skoru</div><div class="sv" style="font-size:18px;color:${cstarCol}">${cstar.toFixed(4)}</div></div><div class="stat" style="padding:12px"><div class="sl">Ort. Puan</div><div class="sv" style="font-size:18px;color:var(--ac)">${avgSc}</div><div class="ss">Min:${minSc} · Max:${maxSc}</div></div><div class="stat" style="padding:12px"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:13px;color:var(--tx2)">${(rec.Dp||0).toFixed(4)}<br>${(rec.Dn||0).toFixed(4)}</div></div></div>`;
-  const sortedKeys=ANP?Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).map(([k])=>k):Object.keys(rec.scores||{});
-  let sh='';
-  sortedKeys.forEach(k=>{ const [g,s]=k.split('_'),sc=parseFloat((rec.scores||{})[k])||0,gw=ANP?((ANP.globalW[k]||0)*100).toFixed(3):'—',gColor=GI[g]?GI[g].color:'var(--tx2)',scColor=sc>=7?'var(--ac3)':sc>=5?'var(--ac)':sc>=3?'var(--gold)':'var(--red)'; sh+=`<div class="dscore-item" style="border-color:${gColor}28"><div class="dscore-left"><div class="dscore-code" style="color:${gColor}">${s||k}</div><div class="dscore-name">${SF[s]||k}</div><div class="dscore-anp">ANP: ${gw}%</div></div><div class="dscore-right"><div class="dscore-val" style="color:${scColor}">${sc}</div><div class="dscore-label">${S9[sc]||'—'}</div></div></div>`; });
-  scoresEl.innerHTML=statsHtml+'<div class="detail-score-grid">'+sh+'</div>';
-}
+function _renderEvalTabContent(idx){ const evals=window._pdEvals||[],rec=evals[idx]; if(!rec)return; const scoresEl=document.getElementById('edm-tab-content')||$('edm-scores'); if(!scoresEl)return; const cstar=(rec.Cstar||0),scores=Object.values(rec.scores||{}).map(v=>parseFloat(v)||0).filter(v=>v>0); const avgSc=scores.length>0?(scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(2):'—',maxSc=scores.length>0?Math.max(...scores):'—',minSc=scores.length>0?Math.min(...scores):'—'; const cstarCol=cstar>.6?'var(--ac3)':cstar>.4?'var(--gold)':'var(--ac2)'; const statsHtml=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px"><div class="stat" style="padding:12px"><div class="sl">C* Skoru</div><div class="sv" style="font-size:18px;color:${cstarCol}">${cstar.toFixed(4)}</div><div class="ss">İdeal yakınlık</div></div><div class="stat" style="padding:12px"><div class="sl">Ort. Puan</div><div class="sv" style="font-size:18px;color:var(--ac)">${avgSc}</div><div class="ss">Min:${minSc} · Max:${maxSc}</div></div><div class="stat" style="padding:12px"><div class="sl">D⁺ / D⁻</div><div class="sv" style="font-size:13px;color:var(--tx2)">${(rec.Dp||0).toFixed(4)}<br>${(rec.Dn||0).toFixed(4)}</div></div></div><div style="font-size:9.5px;font-weight:700;font-family:'Syne',sans-serif;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Kriter Puanları & Global ANP Ağırlıkları</div>`; const sortedKeys=ANP?Object.entries(ANP.globalW).sort((a,b)=>b[1]-a[1]).map(([k])=>k):Object.keys(rec.scores||{}); let sh=''; sortedKeys.forEach(k=>{ const [g,s]=k.split('_'),sc=parseFloat((rec.scores||{})[k])||0,gw=ANP?((ANP.globalW[k]||0)*100).toFixed(3):'—',gColor=GI[g]?GI[g].color:'var(--tx2)',scColor=sc>=7?'var(--ac3)':sc>=5?'var(--ac)':sc>=3?'var(--gold)':'var(--red)'; sh+=`<div class="dscore-item" style="border-color:${gColor}28"><div class="dscore-left"><div class="dscore-code" style="color:${gColor}">${s||k}</div><div class="dscore-name">${SF[s]||k}</div><div class="dscore-anp">ANP: ${gw}%</div></div><div class="dscore-right"><div class="dscore-val" style="color:${scColor}">${sc}</div><div class="dscore-label">${S9[sc]||'—'}</div></div></div>`; }); scoresEl.innerHTML=statsHtml+'<div class="detail-score-grid">'+sh+'</div>'; }
 
-/* ═══════════════════════════════════════════════════════════════
-   KRİTERLER / KILAVUZ
-═══════════════════════════════════════════════════════════════ */
+function closeDetailModal(){ const m=$('detail-modal'); if(m)m.classList.remove('show'); }
+
 function renderCriteriaInfo(){
   const el=$('criteria-info-body'); if(!el)return;
-  const groups=[
-    {no:'1',name:'Teknoloji Grubu',color:'#2563eb',icon:'🔬',items:[{code:'T1',name:'Projenin Özgünlüğü ve Yenilikçi Yönü',desc:'Mevcut projelerden farkı, taklit edilemez oluşu ve sektöre veya literatüre getirdiği yeni yaklaşım.'},{code:'T2',name:'Teknoloji Düzeyi',desc:'Kullanılan teknolojinin güncelliği ve karmaşıklığı.'},{code:'T3',name:'Ar-Ge Niteliği',desc:'Bilimsel yöntemlerle yapılan araştırma ve geliştirme derinliği.'}]},
-    {no:'2',name:'Ekip Grubu',color:'#6d28d9',icon:'👥',items:[{code:'E1',name:'Ekip Yetkinliği',desc:'Uzmanlıkların proje ihtiyaçlarını karşılama düzeyi.'},{code:'E2',name:'Teknik/Ticari Birikim',desc:'Ekibin geçmişteki iş ve akademik deneyimleri.'},{code:'E3',name:'Ekip Uyumu ve Motivasyonu',desc:'Üyelerin birlikte çalışma pratiği ve ortak vizyon.'}]},
-    {no:'3',name:'Pazar Grubu',color:'#059669',icon:'📊',items:[{code:'P1',name:'Pazar Büyüklüğü ve Potansiyeli',desc:'Ürünün hitap ettiği pazarın toplam hacmi ve büyüme hızı.'},{code:'P2',name:'Hedef Kitle Tanımı',desc:'Potansiyel müşterilerin kim olduğunun netliği.'},{code:'P3',name:'Gelir Modeli',desc:'Ürünün satılabilirliği ve gelir modeli netliği.'},{code:'P4',name:'Projenin Ölçeklenebilirliği',desc:'Projenin büyüme kapasitesi ve pazarlara uyarlanabilme potansiyeli.'}]},
-    {no:'4',name:'Uygulama Grubu',color:'#d97706',icon:'⚙️',items:[{code:'U1',name:'Projenin Uygulanabilirliği',desc:'Mevcut teknik imkânların projeyi tamamlamaya yetmesi.'},{code:'U2',name:'Faaliyet Uygunluğu',desc:'Seçilen yöntemlerin proje amaçlarına hizmet etmesi.'},{code:'U3',name:'İş Planının Uygunluğu',desc:'Zaman çizelgesinin ve iş paketlerinin uygunluğu.'}]},
-    {no:'5',name:'Finans Grubu',color:'#b45309',icon:'💰',items:[{code:'F1',name:'Bütçe ve Maliyet Etkinliği',desc:'Harcanacak paranın verimli ve dengeli kullanımı.'},{code:'F2',name:'Beklenen Kâr',desc:'Yatırımın sonucunda elde edilecek finansal kazanç.'},{code:'F3',name:'Ekonomik Getiri',desc:'Projenin ülke ekonomisine sağlayacağı katma değer.'}]}
-  ];
+  const groups=[{no:'1',name:'Teknoloji Grubu',color:'#2563eb',icon:'🔬',items:[{code:'T1',name:'Projenin Özgünlüğü ve Yenilikçi Yönü',desc:'Mevcut projelerden farkı, taklit edilemez oluşu ve sektöre veya literatüre getirdiği yeni yaklaşım.'},{code:'T2',name:'Teknoloji Düzeyi',desc:'Kullanılan teknolojinin güncelliği ve karmaşıklığı ile birlikte teknolojide gelinen noktayı ifade eder.'},{code:'T3',name:'Ar-Ge Niteliği',desc:'Bilimsel yöntemlerle yapılan araştırma ve geliştirme derinliği ile projenin fikri mülkiyet hakları kapsamında korunabilirliği.'}]},{no:'2',name:'Ekip Grubu',color:'#6d28d9',icon:'👥',items:[{code:'E1',name:'Ekip Yetkinliği',desc:'Uzmanlıkların proje ihtiyaçlarını karşılama düzeyi.'},{code:'E2',name:'Teknik/Ticari Birikim',desc:'Ekibin geçmişteki iş ve akademik deneyimleri.'},{code:'E3',name:'Ekip Uyumu ve Motivasyonu',desc:'Üyelerin birlikte çalışma pratiği ve projenin ortak amaçlarına yönelik vizyoner uyumu.'}]},{no:'3',name:'Pazar Grubu',color:'#059669',icon:'📊',items:[{code:'P1',name:'Pazar Büyüklüğü ve Potansiyeli',desc:'Ürünün hitap ettiği pazarın toplam hacmi ve büyüme hızı.'},{code:'P2',name:'Hedef Kitle Tanımı',desc:'Potansiyel müşterilerin kim olduğunun netliği.'},{code:'P3',name:'Gelir Modeli',desc:'Ürünün satılabilirliği ve gelir modeli netliği.'},{code:'P4',name:'Projenin Ölçeklenebilirliği',desc:'Projenin ölçeklenebilirlik kapasitesi veya pazarlara uyarlanabilme potansiyeli.'}]},{no:'4',name:'Uygulama Grubu',color:'#d97706',icon:'⚙️',items:[{code:'U1',name:'Projenin Uygulanabilirliği',desc:'Mevcut teknik ve fiziksel imkânların projeyi başarıyla tamamlamaya yetmesi.'},{code:'U2',name:'Faaliyet Uygunluğu',desc:'Seçilen yöntemlerin proje amaçlarına hizmet etmesi.'},{code:'U3',name:'İş Planının Uygunluğu',desc:'Zaman çizelgesinin ve iş paketlerinin uygunluğu.'}]},{no:'5',name:'Finans Grubu',color:'#b45309',icon:'💰',items:[{code:'F1',name:'Bütçe ve Maliyet Etkinliği',desc:'Harcanacak paranın verimli ve dengeli kullanımı.'},{code:'F2',name:'Beklenen Kâr',desc:'Yatırımın sonucunda elde edilecek finansal kazanç.'},{code:'F3',name:'Ekonomik Getiri',desc:'Projenin ülke ekonomisine veya yatırımcıya sağlayacağı katma değer.'}]}];
   let h='';
   groups.forEach(g=>{ h+=`<div class="card" style="margin-bottom:16px;border-left:4px solid ${g.color}"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="font-size:22px">${g.icon}</span><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:${g.color}">${g.no}. ${g.name}</div></div>`; g.items.forEach(item=>{ h+=`<div style="margin-bottom:12px;padding:12px 14px;background:var(--bg3);border-radius:var(--rs);border-left:3px solid ${g.color}40"><div style="font-weight:600;font-size:13px;color:var(--tx);margin-bottom:4px"><span style="display:inline-block;background:${g.color}20;color:${g.color};padding:1px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-right:7px">${item.code}</span>${item.name}</div><div style="font-size:12.5px;color:var(--tx2);line-height:1.7">${item.desc}</div></div>`; }); h+='</div>'; });
   el.innerHTML=h;
 }
-
 function renderUserGuide(){
   const el=$('user-guide-body'); if(!el)return;
-  el.innerHTML=`<div class="g2" style="margin-bottom:16px"><div class="card" style="border-left:4px solid var(--ac)"><div class="card-t" style="color:var(--ac)">📋 Genel Bakış</div><div style="font-size:13px;color:var(--tx2);line-height:1.8">Bu portal, TÜBİTAK girişimcilik projelerinin <strong>ANP</strong>  ve <strong>TOPSIS</strong> yöntemleriyle bilimsel olarak değerlendirilmesi için tasarlanmıştır.</div></div><div class="card" style="border-left:4px solid var(--ac3)"><div class="card-t" style="color:var(--ac3)">🎯 Değerlendirme Ölçeği</div><div style="font-size:13px;color:var(--tx2);line-height:1.8"><strong>Saaty 1-9:</strong><br>1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div></div></div><div class="card" style="margin-bottom:16px"><div class="card-t">🪜 Adım Adım Değerlendirme</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px"><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac)"><div style="font-size:22px;margin-bottom:8px">1️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Proje Seç</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Listeden değerlendireceğiniz projeyi seçin.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac2)"><div style="font-size:22px;margin-bottom:8px">2️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Adınızı Girin</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Değerlendiren adı alanına ad ve soyadınızı yazın.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac3)"><div style="font-size:22px;margin-bottom:8px">3️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Kriterleri Puanla</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">16 kriter için 1-9 puan seçin. <strong>Tüm alanlar zorunludur.</strong></div></div></div></div><div class="card"><div class="card-t">❓ Sık Sorulan Sorular</div><div style="font-size:13px;color:var(--tx2);line-height:1.9"><strong style="color:var(--tx)">Listede projem görünmüyor?</strong> Yönetici henüz proje listesini yüklememiş olabilir.<br><strong style="color:var(--tx)">Kaydetmeden çıkarsam ne olur?</strong> "TOPSIS Hesapla & Kaydet" butonuna basılmadan hiçbir şey kaydedilmez.<br><strong style="color:var(--tx)">Tüm kriterleri doldurmak zorunda mıyım?</strong> Evet, eksik alan bırakılamaz.</div></div>`;
+  el.innerHTML=`<div class="g2" style="margin-bottom:16px"><div class="card" style="border-left:4px solid var(--ac)"><div class="card-t" style="color:var(--ac)">📋 Genel Bakış</div><div style="font-size:13px;color:var(--tx2);line-height:1.8">Bu portal, TÜBİTAK girişimcilik projelerinin <strong>ANP</strong> ve <strong>TOPSIS</strong> yöntemleriyle, bilimsel olarak değerlendirilmesi için tasarlanmıştır.</div></div><div class="card" style="border-left:4px solid var(--ac3)"><div class="card-t" style="color:var(--ac3)">🎯 Değerlendirme Ölçeği</div><div style="font-size:13px;color:var(--tx2);line-height:1.8"><strong>Saaty 1-9:</strong><br>1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div></div></div><div class="card" style="margin-bottom:16px"><div class="card-t">🪜 Adım Adım Değerlendirme</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px"><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac)"><div style="font-size:22px;margin-bottom:8px">1️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Proje Seç</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Listeden değerlendireceğiniz projeyi seçin.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac2)"><div style="font-size:22px;margin-bottom:8px">2️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Adınızı Girin</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Değerlendiren adı alanına ad ve soyadınızı yazın.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac3)"><div style="font-size:22px;margin-bottom:8px">3️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Kriterleri Puanla</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">16 kriter için 1-9 puan seçin. <strong>Tüm alanlar zorunludur.</strong></div></div></div></div><div class="card"><div class="card-t">❓ Sık Sorulan Sorular</div><div style="font-size:13px;color:var(--tx2);line-height:1.9"><strong style="color:var(--tx)">Listede projem görünmüyor?</strong> Yönetici henüz proje listesini yüklememiş olabilir.<br><strong style="color:var(--tx)">Kaydetmeden çıkarsam ne olur?</strong> "TOPSIS Hesapla & Kaydet" butonuna basılmadan hiçbir şey kaydedilmez.<br><strong style="color:var(--tx)">Tüm kriterleri doldurmak zorunda mıyım?</strong> Evet, eksik alan bırakılamaz.</div></div>`;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SİLME / EXPORT
-═══════════════════════════════════════════════════════════════ */
 function deleteProj(id,name){
   if(!confirm(`"${name}" silinsin mi?`))return;
   if(id&&id!=='undefined'&&id!=='null'){ deleteProjFromDB(id); PROJECTS=PROJECTS.filter(p=>String(p.id)!==String(id)); }
   else{ const idx=PROJECTS.findIndex(p=>p.name===name); if(idx!==-1)PROJECTS.splice(idx,1); }
   saveProjLocal(); renderProjects(); renderDashboard(); toast('Proje silindi','warn');
 }
-
 function exportCSV(){
   if(!PROJECTS.length){ alert('Proje yok.'); return; }
   const ranked=rankAll(),keys=ANP?Object.keys(ANP.globalW):[];
@@ -1748,18 +1443,7 @@ function exportCSV(){
   a.click(); URL.revokeObjectURL(a.href); toast('CSV indirildi','ok');
 }
 
-function exportEvaluationsToExcel(){
-  if(!PROJECTS||!PROJECTS.length){ toast('Dışa aktarılacak veri yok!','warn'); return; }
-  const data=PROJECTS.map(p=>{ let r={'Proje No':p.projNo||'','Proje Adı':p.name||'','Değerlendiren':p.evaluator||''}; Object.keys(p.scores||{}).forEach(k=>{ r[`Kriter:${k}`]=p.scores[k]||1; }); r['C*']=p.Cstar||0; r['D+']=p.Dp||0; r['D-']=p.Dn||0; return r; });
-  const ws=XLSX.utils.json_to_sheet(data),wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Uzman_Puanlari'); XLSX.writeFile(wb,'Uzman_Degerlendirme_Puanlari.xlsx');
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   BAŞLATMA
-═══════════════════════════════════════════════════════════════ */
 (function init(){
-  // Eski önbellekleri temizle (çapraz alt kriter güncellemesi)
-  try{ localStorage.removeItem('tubitak_anp_v60'); localStorage.removeItem('tubitak_proj_v60'); }catch(e){}
   loadANPLocal(); _loadProjListLocal(); loadProjLocal();
   updateProjListBadge(); initDB();
 })();
