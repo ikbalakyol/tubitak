@@ -241,23 +241,11 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
     <div class="ps-db warn" id="ps-db-badge">⬤ Bağlanıyor…</div>
   </div>
   <div class="ps-cards">
-    <button class="ps-card admin" onclick="goLogin()">
-      <span class="ps-lock">🔒 Şifreli</span>
-      <span class="ps-icon">🏛️</span>
-      <div class="ps-ctitle">Yönetici Portalı</div>
-      <div class="ps-cdesc">ANP hesaplama, limit süperpozisyon matrisleri, proje yönetimi ve tüm sistem kontrolü.</div>
-      <span class="ps-cta">Giriş Yap →</span>
-    </button>
-    <button class="ps-card member" onclick="goMember()">
-      <span class="ps-icon">📋</span>
-      <div class="ps-ctitle">Değerlendirici Uzman Portalı</div>
-      <div class="ps-cdesc">Proje puanlama ve ANP ağırlıklı TOPSIS sıralaması. Saaty 1-9 ölçeği ile değerlendirme.</div>
-      <span class="ps-cta">Giriş →</span>
-    </button>
+    <button class="ps-card admin" onclick="goLogin()"><span class="ps-lock">🔒 Şifreli</span><span class="ps-icon">🏛️</span><div class="ps-ctitle">Yönetici Portalı</div><div class="ps-cdesc">ANP hesaplama, limit süperpozisyon matrisleri, proje yönetimi ve tüm sistem kontrolü.</div><span class="ps-cta">Giriş Yap →</span></button>
+    <button class="ps-card member" onclick="goMember()"><span class="ps-icon">📋</span><div class="ps-ctitle">Değerlendirici Uzman Portalı</div><div class="ps-cdesc">Proje puanlama ve ANP ağırlıklı TOPSIS sıralaması. Saaty 1-9 ölçeği ile değerlendirme.</div><span class="ps-cta">Giriş →</span></button>
   </div>
   <div class="ps-foot">TÜBİTAK · ANP+TOPSIS Karar Destek Sistemi · Eskişehir Teknik Üniversitesi</div>
 </div>
-
 <div id="scr-login" class="screen">
   <div class="al-box">
     <button class="al-back" onclick="goBack()">← Geri</button>
@@ -272,93 +260,32 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
     <div class="al-err" id="login-err">❌ Kullanıcı adı veya şifre hatalı.</div>
   </div>
 </div>
-
 <div id="scr-app" class="screen">
   <nav class="sidebar">
-    <div class="logo-wrap">
-      <div class="logo-tag a" id="sb-tag">Yönetici Portalı</div>
-      <div class="logo-h">TÜBİTAK<br>ANP+TOPSIS</div>
-    </div>
+    <div class="logo-wrap"><div class="logo-tag a" id="sb-tag">Yönetici Portalı</div><div class="logo-h">TÜBİTAK<br>ANP+TOPSIS</div></div>
     <div id="nav-admin">
-      <div class="status-pill">
-        <span class="sd empty" id="sd-dot"></span>
-        <span id="sd-txt" style="font-size:11px">Veri yüklenmedi</span>
-      </div>
-      <div class="nav-sec">
-        <div class="nav-lbl">Genel</div>
-        <button class="ni an" data-p="dashboard"><span class="ni-dot"></span>Gösterge Paneli</button>
-      </div>
-      <div class="nav-sec">
-        <div class="nav-lbl">ANP & Ağırlıklar</div>
-        <button class="ni an" data-p="upload"><span class="ni-dot"></span>ANP Excel Yükle / Hesapla<span class="ni-badge" id="nb-upload">—</span></button>
-        <button class="ni an" data-p="projlist"><span class="ni-dot"></span>Proje Listesi Yükle<span class="ni-badge" id="nb-plist">—</span></button>
-        <button class="ni an" data-p="sd-weights"><span class="ni-dot"></span>Global ANP Ağırlıklar</button>
-      </div>
-      <div class="nav-sec">
-        <div class="nav-lbl">Matrisler</div>
-        <button class="ni an" data-p="sd-supermatrix"><span class="ni-dot"></span>Süperpozisyon Matrisleri</button>
-        <button class="ni an" data-p="sd-submat"><span class="ni-dot"></span>Alt Kriter Matrisleri</button>
-        <button class="ni an" data-p="sd-influence"><span class="ni-dot"></span>Etki / Bağımlılık Matrisi</button>
-      </div>
-      <div class="nav-sec">
-        <div class="nav-lbl">Projeler</div>
-        <button class="ni an" data-p="results"><span class="ni-dot"></span>TOPSIS Sıralaması<span class="ni-badge" id="nb-res">0</span></button>
-        <button class="ni an" data-p="evaluations"><span class="ni-dot"></span>Uzman Puanları</button>
-        <button class="ni an" data-p="projects"><span class="ni-dot"></span>Değerlendirme Listesi</button>
-      </div>
-      <div class="nav-sec">
-        <div class="nav-lbl">Referans</div>
-        <button class="ni an" data-p="about"><span class="ni-dot"></span>Yöntem & Formüller</button>
-      </div>
+      <div class="status-pill"><span class="sd empty" id="sd-dot"></span><span id="sd-txt" style="font-size:11px">Veri yüklenmedi</span></div>
+      <div class="nav-sec"><div class="nav-lbl">Genel</div><button class="ni an" data-p="dashboard"><span class="ni-dot"></span>Gösterge Paneli</button></div>
+      <div class="nav-sec"><div class="nav-lbl">ANP & Ağırlıklar</div><button class="ni an" data-p="upload"><span class="ni-dot"></span>ANP Excel Yükle / Hesapla<span class="ni-badge" id="nb-upload">—</span></button><button class="ni an" data-p="projlist"><span class="ni-dot"></span>Proje Listesi Yükle<span class="ni-badge" id="nb-plist">—</span></button><button class="ni an" data-p="sd-weights"><span class="ni-dot"></span>Global ANP Ağırlıklar</button></div>
+      <div class="nav-sec"><div class="nav-lbl">Matrisler</div><button class="ni an" data-p="sd-supermatrix"><span class="ni-dot"></span>Süperpozisyon Matrisleri</button><button class="ni an" data-p="sd-submat"><span class="ni-dot"></span>Alt Kriter Matrisleri</button><button class="ni an" data-p="sd-influence"><span class="ni-dot"></span>Etki / Bağımlılık Matrisi</button></div>
+      <div class="nav-sec"><div class="nav-lbl">Projeler</div><button class="ni an" data-p="results"><span class="ni-dot"></span>TOPSIS Sıralaması<span class="ni-badge" id="nb-res">0</span></button><button class="ni an" data-p="evaluations"><span class="ni-dot"></span>Uzman Puanları</button><button class="ni an" data-p="projects"><span class="ni-dot"></span>Değerlendirme Listesi</button></div>
+      <div class="nav-sec"><div class="nav-lbl">Referans</div><button class="ni an" data-p="about"><span class="ni-dot"></span>Yöntem & Formüller</button></div>
     </div>
-    <div id="nav-member" style="display:none">
-      <div class="nav-sec" style="padding-top:12px">
-        <div class="nav-lbl">Menü</div>
-        <button class="ni mn" data-p="evaluate"><span class="ni-dot"></span>Proje Değerlendir</button>
-        <button class="ni mn" data-p="criteria-info"><span class="ni-dot"></span>Kriterler Hakkında</button>
-        <button class="ni mn" data-p="user-guide"><span class="ni-dot"></span>Kullanım Kılavuzu</button>
-      </div>
-    </div>
+    <div id="nav-member" style="display:none"><div class="nav-sec" style="padding-top:12px"><div class="nav-lbl">Menü</div><button class="ni mn" data-p="evaluate"><span class="ni-dot"></span>Proje Değerlendir</button><button class="ni mn" data-p="criteria-info"><span class="ni-dot"></span>Kriterler Hakkında</button><button class="ni mn" data-p="user-guide"><span class="ni-dot"></span>Kullanım Kılavuzu</button></div></div>
     <button class="sw-btn" onclick="goPortalSelect()">🔄 <span>Portal Değiştir</span></button>
-    <div class="sb-foot">
-      ANP+TOPSIS · Eskişehir Teknik Üniversitesi<br>
-      <div class="db-row"><span class="db-led" id="db-led"></span><span id="db-txt">Yerel Mod</span></div>
-    </div>
+    <div class="sb-foot">ANP+TOPSIS · Eskişehir Teknik Üniversitesi<br><div class="db-row"><span class="db-led" id="db-led"></span><span id="db-txt">Yerel Mod</span></div></div>
   </nav>
-
   <div class="main">
     <div class="topbar">
       <div style="display:flex;align-items:center;gap:10px">
-        <button id="back-btn" onclick="navBack()" title="Geri"
-          style="display:none;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--rs);border:1px solid var(--bdr2);background:var(--bg3);color:var(--tx2);font-size:12.5px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .14s;flex-shrink:0"
-          onmouseover="this.style.background='var(--bg4)';this.style.color='var(--tx)'"
-          onmouseout="this.style.background='var(--bg3)';this.style.color='var(--tx2)'">
-          ← Geri
-        </button>
-        <div>
-          <div class="tb-t" id="tb-t">Gösterge Paneli</div>
-          <div class="tb-s" id="tb-s">TÜBİTAK Proje Seçim Karar Destek Sistemi</div>
-        </div>
+        <button id="back-btn" onclick="navBack()" title="Geri" style="display:none;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--rs);border:1px solid var(--bdr2);background:var(--bg3);color:var(--tx2);font-size:12.5px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .14s;flex-shrink:0" onmouseover="this.style.background='var(--bg4)';this.style.color='var(--tx)'" onmouseout="this.style.background='var(--bg3)';this.style.color='var(--tx2)'">← Geri</button>
+        <div><div class="tb-t" id="tb-t">Gösterge Paneli</div><div class="tb-s" id="tb-s">TÜBİTAK Proje Seçim Karar Destek Sistemi</div></div>
       </div>
-      <div class="tb-r">
-        <span class="badge b-blue" id="tb-portal">🏛️ Yönetici</span>
-        <span class="badge b-green" id="tb-anp-badge">● Hazır</span>
-        <span class="badge b-purple">16 Alt Kriter · ANP</span>
-        <span class="badge b-gray" id="tb-user">—</span>
-      </div>
+      <div class="tb-r"><span class="badge b-blue" id="tb-portal">🏛️ Yönetici</span><span class="badge b-green" id="tb-anp-badge">● Hazır</span><span class="badge b-purple">16 Alt Kriter · ANP</span><span class="badge b-gray" id="tb-user">—</span></div>
     </div>
-
     <div class="content">
-
-      <!-- DASHBOARD -->
       <div class="page" id="page-dashboard">
-        <div class="ph">
-          <div><h1 class="pt">Sistem Özeti</h1><p class="psd">ANP + TOPSIS Entegre Karar Destek Sistemi</p></div>
-          <div style="display:flex;gap:8px">
-            <button class="btn bo" onclick="nav('upload')">↑ ANP Excel</button>
-            <button class="btn bp" onclick="nav('evaluate')">+ Proje Değerlendir</button>
-          </div>
-        </div>
+        <div class="ph"><div><h1 class="pt">Sistem Özeti</h1><p class="psd">ANP + TOPSIS Entegre Karar Destek Sistemi</p></div><div style="display:flex;gap:8px"><button class="btn bo" onclick="nav('upload')">↑ ANP Excel</button><button class="btn bp" onclick="nav('evaluate')">+ Proje Değerlendir</button></div></div>
         <div id="d-no-anp" class="notif n-warn" style="display:none"><span>⚠</span><div>ANP ağırlıkları yüklenmedi. <button class="btn bo" style="margin-left:8px;padding:4px 10px;font-size:12px" onclick="nav('upload')">Excel Yükle →</button></div></div>
         <div id="d-no-plist" class="notif n-warn" style="display:none"><span>⚠</span><div>Proje listesi yüklenmedi. <button class="btn bo" style="margin-left:8px;padding:4px 10px;font-size:12px" onclick="nav('projlist')">Liste Yükle →</button></div></div>
         <div class="g5" style="margin-bottom:14px">
@@ -369,175 +296,45 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
           <div class="stat"><div class="sl">Son Değerlendirme Tarihi</div><div class="sv" style="font-size:12px;color:var(--gold)" id="d-date">—</div></div>
         </div>
         <div class="g2" style="margin-bottom:14px">
-          <div class="card">
-            <div class="card-t">ANP Global Ağırlıklar — Limit Süperpozisyon Sütun Vektörü</div>
-            <div id="d-wviz"><p style="color:var(--tx3);font-size:12px;padding:14px 0;text-align:center">Veri bekleniyor…</p></div>
-          </div>
-          <div class="card">
-            <div class="card-t">CR Tutarlılık & Ana Kriter Ağırlıkları (PCM)</div>
-            <div id="d-cr"><p style="color:var(--tx3);font-size:12px">Veri bekleniyor…</p></div>
-          </div>
+          <div class="card"><div class="card-t">ANP Global Ağırlıklar — Limit Süperpozisyon Sütun Vektörü</div><div id="d-wviz"><p style="color:var(--tx3);font-size:12px;padding:14px 0;text-align:center">Veri bekleniyor…</p></div></div>
+          <div class="card"><div class="card-t">CR Tutarlılık & Ana Kriter Ağırlıkları (PCM)</div><div id="d-cr"><p style="color:var(--tx3);font-size:12px">Veri bekleniyor…</p></div></div>
         </div>
-        <div class="card">
-          <div class="card-t">Son Değerlendirmeler</div>
-          <div id="d-recent"><p style="text-align:center;padding:18px;color:var(--tx3)">Henüz proje yok.</p></div>
-        </div>
+        <div class="card"><div class="card-t">Son Değerlendirmeler</div><div id="d-recent"><p style="text-align:center;padding:18px;color:var(--tx3)">Henüz proje yok.</p></div></div>
       </div>
-
-      <!-- UPLOAD -->
       <div class="page" id="page-upload">
-        <div class="ph">
-          <div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd">  </p></div>
-        </div>
+        <div class="ph"><div><h1 class="pt">ANP Excel Yükle & Hesapla</h1><p class="psd"></p></div></div>
         <div class="g2" style="align-items:start">
           <div>
-            <div class="card" style="margin-bottom:13px">
-              <div class="card-t">Mevcut ANP Durumu</div>
-              <div id="anp-status-card"><p style="color:var(--tx3);font-size:12px">Kayıtlı veri yok.</p></div>
-            </div>
-            <div class="card" style="margin-bottom:13px">
-              <div class="card-t">Yeni ANP Excel Yükle</div>
-              <div class="upload-zone" id="drop-zone"
-                onclick="document.getElementById('file-inp').click()"
-                ondragover="event.preventDefault();this.classList.add('drag')"
-                ondragleave="this.classList.remove('drag')"
-                ondrop="event.preventDefault();this.classList.remove('drag');handleFile(event.dataTransfer.files[0])">
-                <input type="file" id="file-inp" accept=".xlsx,.xls" onchange="handleFile(this.files[0])">
-                <div style="font-size:28px;margin-bottom:8px;opacity:.6">📊</div>
-                <div style="font-size:14px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:4px">Dosyayı sürükle veya tıkla</div>
-                <div style="font-size:11.5px;color:var(--tx3)">.xlsx / .xls — 68 sütun (0-1: uzman, 2-49: karşılaştırmalar, 50-67: alt kriter etkileşimleri)</div>
-              </div>
-              <div id="fname-show" style="display:none;margin-top:9px;padding:8px 12px;background:var(--bg3);border-radius:var(--rs);font-size:12px;color:var(--ac3);align-items:center;gap:7px">
-                <span>📄</span><span id="fname-txt"></span>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-t">Excel Sütun Yapısı (68 Sütun)</div>
-              <div style="font-size:11.5px;color:var(--tx2);line-height:2">
-                <span class="badge b-gray" style="margin-right:5px">A-B (0-1)</span>Ad/Kurum · Uzmanlık<br>
-                <span class="badge b-blue" style="margin-right:5px">C-E (2-4)</span>Teknoloji alt kriter ikili karşılaştırmaları (3 çift)<br>
-                <span class="badge b-purple" style="margin-right:5px">F-H (5-7)</span>Ekip alt kriter çiftleri (3 çift)<br>
-                <span class="badge b-green" style="margin-right:5px">I-N (8-13)</span>Pazar alt kriter çiftleri (6 çift)<br>
-                <span class="badge b-amber" style="margin-right:5px">O-Q (14-16)</span>Uygulama alt kriter çiftleri (3 çift)<br>
-                <span class="badge b-red" style="margin-right:5px">R-T (17-19)</span>Finans alt kriter çiftleri (3 çift)<br>
-                <span class="badge b-blue" style="margin-right:5px">U-AD (20-29)</span>Ana kriter 5×5 PCM (10 çift)<br>
-                <span class="badge b-amber" style="margin-right:5px">AE-AX (30-49)</span>Gruplar arası etki katsayıları (20 değer)<br>
-                <span class="badge b-green" style="margin-right:5px">AY-BP (50-67)</span>Çapraz alt kriter etkileri (18 çift )
-                <div class="divider"></div>
-                <span style="color:var(--tx3)">⚠ Negatif değer = ters oran: −n → 1/|n|. Otomatik dönüştürülür.<br>
-                Çapraz etkiler: T1→P1, T1→P4, T1→F3, T2→E1, T2→U1, T3→P1,<br>
-                E1→T1, E1→U1, E1→U3, E2→U1, E2→F3, E3→U3,<br>
-                P1→F2, P1→F3, P3→F2, P3→F3, U3→F1, F1→P4</span>
-              </div>
-            </div>
+            <div class="card" style="margin-bottom:13px"><div class="card-t">Mevcut ANP Durumu</div><div id="anp-status-card"><p style="color:var(--tx3);font-size:12px">Kayıtlı veri yok.</p></div></div>
+            <div class="card" style="margin-bottom:13px"><div class="card-t">Yeni ANP Excel Yükle</div><div class="upload-zone" id="drop-zone" onclick="document.getElementById('file-inp').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="event.preventDefault();this.classList.remove('drag');handleFile(event.dataTransfer.files[0])"><input type="file" id="file-inp" accept=".xlsx,.xls" onchange="handleFile(this.files[0])"><div style="font-size:28px;margin-bottom:8px;opacity:.6">📊</div><div style="font-size:14px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:4px">Dosyayı sürükle veya tıkla</div><div style="font-size:11.5px;color:var(--tx3)">.xlsx / .xls — 68 sütun (0-1: uzman, 2-49: karşılaştırmalar, 50-67: alt kriter etkileşimleri)</div></div><div id="fname-show" style="display:none;margin-top:9px;padding:8px 12px;background:var(--bg3);border-radius:var(--rs);font-size:12px;color:var(--ac3);align-items:center;gap:7px"><span>📄</span><span id="fname-txt"></span></div></div>
+            <div class="card"><div class="card-t">Excel Sütun Yapısı (68 Sütun)</div><div style="font-size:11.5px;color:var(--tx2);line-height:2"><span class="badge b-gray" style="margin-right:5px">A-B (0-1)</span>Ad/Kurum · Uzmanlık<br><span class="badge b-blue" style="margin-right:5px">C-E (2-4)</span>Teknoloji alt kriter (3 çift)<br><span class="badge b-purple" style="margin-right:5px">F-H (5-7)</span>Ekip alt kriter (3 çift)<br><span class="badge b-green" style="margin-right:5px">I-N (8-13)</span>Pazar alt kriter (6 çift)<br><span class="badge b-amber" style="margin-right:5px">O-Q (14-16)</span>Uygulama alt kriter (3 çift)<br><span class="badge b-red" style="margin-right:5px">R-T (17-19)</span>Finans alt kriter (3 çift)<br><span class="badge b-blue" style="margin-right:5px">U-AD (20-29)</span>Ana kriter 5×5 PCM (10 çift)<br><span class="badge b-amber" style="margin-right:5px">AE-AX (30-49)</span>Gruplar arası etki (20 değer)<br><span class="badge b-green" style="margin-right:5px">AY-BP (50-67)</span>Çapraz alt kriter etkileri (18 çift)</div></div>
           </div>
           <div>
-            <div class="card" style="margin-bottom:13px">
-              <div class="card-t">ANP Hesaplama Adımları</div>
-              <div id="calc-steps">
-                <div class="calc-step pending" id="cs-0"><span>📂</span><span>Adım 1: Model Kurulumu — Kriter, Alt Kriter ve Ağ Yapısı (İç &amp; Dış Bağımlılık)</span></div>
-                <div class="calc-step pending" id="cs-1"><span>📐</span><span>Adım 2: İkili Karşılaştırmalar — Saaty 1-9, GM ve Yerel Öncelik Vektörleri (w)</span></div>
-                <div class="calc-step pending" id="cs-2"><span>🔢</span><span>Adım 2: Tutarlılık Analizi — λmax, CI, CR = CI/RI ≤ 0.10</span></div>
-                <div class="calc-step pending" id="cs-3"><span>⬡</span><span>Adım 3: Başlangıç Süpermatrisi — W_unw (16×16), iç ve dış bağımlılık + çapraz alt kriter etkileri</span></div>
-                <div class="calc-step pending" id="cs-4"><span>⚡</span><span>Adım 4: Ağırlıklı Süpermatris — W_wei, küme ağırlıkları (W_cluster) ile sütunlar stokastik</span></div>
-                <div class="calc-step pending" id="cs-5"><span>♾️</span><span>Adım 5: Limit Süpermatris — W_lim = lim(W_wei^2k), uzun dönem global ağırlıklar</span></div>
-              </div>
-            </div>
-            <div id="upload-result" style="display:none">
-              <div class="card" style="margin-bottom:13px"><div class="card-t">Hesaplama Sonucu</div><div id="upload-result-body"></div></div>
-            </div>
+            <div class="card" style="margin-bottom:13px"><div class="card-t">ANP Hesaplama Adımları</div><div id="calc-steps"><div class="calc-step pending" id="cs-0"><span>📂</span><span>Adım 1: Model Kurulumu</span></div><div class="calc-step pending" id="cs-1"><span>📐</span><span>Adım 2: İkili Karşılaştırmalar — GM, Yerel Öncelik Vektörleri</span></div><div class="calc-step pending" id="cs-2"><span>🔢</span><span>Adım 2: Tutarlılık Analizi — CR ≤ 0.10</span></div><div class="calc-step pending" id="cs-3"><span>⬡</span><span>Adım 3: Başlangıç Süpermatrisi W_unw (16×16)</span></div><div class="calc-step pending" id="cs-4"><span>⚡</span><span>Adım 4: Ağırlıklı Süpermatris W_wei</span></div><div class="calc-step pending" id="cs-5"><span>♾️</span><span>Adım 5: Limit Süpermatris W_lim</span></div></div></div>
+            <div id="upload-result" style="display:none"><div class="card" style="margin-bottom:13px"><div class="card-t">Hesaplama Sonucu</div><div id="upload-result-body"></div></div></div>
             <div class="card"><div class="card-t">Uzman Listesi</div><div id="expert-list"><p style="color:var(--tx3);font-size:12px">—</p></div></div>
           </div>
         </div>
       </div>
-
-      <!-- PROJE LİSTESİ -->
       <div class="page" id="page-projlist">
-        <div class="ph">
-          <div><h1 class="pt">Proje Listesi Yükle</h1><p class="psd">Üyelerin değerlendirme ekranında göreceği proje listesi.</p></div>
-        </div>
+        <div class="ph"><div><h1 class="pt">Proje Listesi Yükle</h1><p class="psd">Üyelerin değerlendirme ekranında göreceği proje listesi.</p></div></div>
         <div class="g2" style="align-items:start">
           <div>
-            <div class="card" style="margin-bottom:13px">
-              <div class="card-t">Kayıtlı Liste Durumu</div>
-              <div id="plist-status"><p style="color:var(--tx3);font-size:12px">Henüz liste yüklenmedi.</p></div>
-            </div>
-            <div class="card" style="margin-bottom:13px">
-              <div class="card-t">Yeni Liste Yükle / Güncelle</div>
-              <div class="proj-upload-zone" id="plist-drop-zone"
-                onclick="document.getElementById('plist-file-inp').click()"
-                ondragover="event.preventDefault();this.classList.add('drag')"
-                ondragleave="this.classList.remove('drag')"
-                ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event.dataTransfer.files[0])">
-                <input type="file" id="plist-file-inp" accept=".xlsx,.xls" onchange="loadProjExcel(this.files[0])">
-                <div style="font-size:26px;margin-bottom:7px;opacity:.65">📋</div>
-                <div style="font-size:13.5px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:3px" id="plist-file-label">Proje listesini sürükle veya tıkla</div>
-                <div style="font-size:11.5px;color:var(--tx3)">.xlsx / .xls — Yeni liste eskinin üzerine yazar</div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-t">Beklenen Sütun Sırası</div>
-              <table>
-                <tr><th>Sütun</th><th>İçerik</th><th>Zorunlu?</th></tr>
-                <tr><td><span class="badge b-blue">A</span></td><td>Sıra No</td><td><span class="badge b-green">Evet</span></td></tr>
-                <tr><td><span class="badge b-blue">B</span></td><td>Girişimci Adı-Soyadı</td><td><span class="badge b-green">Evet</span></td></tr>
-                <tr><td><span class="badge b-blue">C</span></td><td>E-posta</td><td><span class="badge b-gray">Opsiyonel</span></td></tr>
-                <tr><td><span class="badge b-blue">D</span></td><td>Telefon No</td><td><span class="badge b-gray">Opsiyonel</span></td></tr>
-                <tr><td><span class="badge b-blue">E</span></td><td>İş Fikrinin Adı (Proje Adı)</td><td><span class="badge b-green">Evet</span></td></tr>
-              </table>
-            </div>
+            <div class="card" style="margin-bottom:13px"><div class="card-t">Kayıtlı Liste Durumu</div><div id="plist-status"><p style="color:var(--tx3);font-size:12px">Henüz liste yüklenmedi.</p></div></div>
+            <div class="card" style="margin-bottom:13px"><div class="card-t">Yeni Liste Yükle / Güncelle</div><div class="proj-upload-zone" id="plist-drop-zone" onclick="document.getElementById('plist-file-inp').click()" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="event.preventDefault();this.classList.remove('drag');loadProjExcel(event.dataTransfer.files[0])"><input type="file" id="plist-file-inp" accept=".xlsx,.xls" onchange="loadProjExcel(this.files[0])"><div style="font-size:26px;margin-bottom:7px;opacity:.65">📋</div><div style="font-size:13.5px;font-weight:600;font-family:'Syne',sans-serif;margin-bottom:3px" id="plist-file-label">Proje listesini sürükle veya tıkla</div><div style="font-size:11.5px;color:var(--tx3)">.xlsx / .xls — Yeni liste eskinin üzerine yazar</div></div></div>
+            <div class="card"><div class="card-t">Beklenen Sütun Sırası</div><table><tr><th>Sütun</th><th>İçerik</th><th>Zorunlu?</th></tr><tr><td><span class="badge b-blue">A</span></td><td>Sıra No</td><td><span class="badge b-green">Evet</span></td></tr><tr><td><span class="badge b-blue">B</span></td><td>Girişimci Adı-Soyadı</td><td><span class="badge b-green">Evet</span></td></tr><tr><td><span class="badge b-blue">C</span></td><td>E-posta</td><td><span class="badge b-gray">Opsiyonel</span></td></tr><tr><td><span class="badge b-blue">D</span></td><td>Telefon No</td><td><span class="badge b-gray">Opsiyonel</span></td></tr><tr><td><span class="badge b-blue">E</span></td><td>İş Fikrinin Adı</td><td><span class="badge b-green">Evet</span></td></tr></table></div>
           </div>
-          <div>
-            <div class="card">
-              <div class="card-t">Liste Önizleme</div>
-              <div id="plist-preview"><p style="color:var(--tx3);font-size:12px;padding:12px 0">Liste yüklenmedi.</p></div>
-            </div>
-          </div>
+          <div><div class="card"><div class="card-t">Liste Önizleme</div><div id="plist-preview"><p style="color:var(--tx3);font-size:12px;padding:12px 0">Liste yüklenmedi.</p></div></div></div>
         </div>
       </div>
-
-      <!-- GLOBAL AĞIRLIKLAR -->
-      <div class="page" id="page-sd-weights">
-        <div class="ph"><div><h1 class="pt">ANP Global Ağırlıklar</h1><p class="psd">Adım 5 çıktısı — Limit süpermatris (W_lim) ilk sütun normalize, iç/dış bağımlılık dahil.</p></div></div>
-        <div id="gw-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
-      </div>
-
-      <!-- SÜPERMATRİS -->
-      <div class="page" id="page-sd-supermatrix">
-        <div class="ph"><div><h1 class="pt">Süperpozisyon Matrisleri</h1><p class="psd">16×16: Ağırlıksız (W_unw) → Ağırlıklı/Stokastik (W_wei) → Limit (W_lim).</p></div></div>
-        <div id="sm-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
-      </div>
-
-      <!-- ALT KRİTER -->
-      <div class="page" id="page-sd-submat">
-        <div class="ph"><div><h1 class="pt">Alt Kriter PCM Matrisleri</h1><p class="psd">Geometrik ortalama ile oluşturulan ikili karşılaştırma matrisleri — tutarlılık analizi.</p></div></div>
-        <div id="submat-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
-      </div>
-
-      <!-- ETKİ -->
-      <div class="page" id="page-sd-influence">
-        <div class="ph"><div><h1 class="pt">Gruplar Arası Etki / Bağımlılık Matrisi</h1><p class="psd">5 ana grup arasındaki ANP etkileşim katsayıları — geometrik ortalama & normalize.</p></div></div>
-        <div id="infl-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div>
-      </div>
-
-
-      <!-- KRİTERLER -->
-      <div class="page" id="page-criteria-info">
-        <div class="ph"><div><h1 class="pt">Kriterler Hakkında</h1><p class="psd">5 ana kriter, 16 alt kriter — değerlendirme boyutları</p></div></div>
-        <div id="criteria-info-body"></div>
-      </div>
-
-      <!-- KILAVUZ -->
-      <div class="page" id="page-user-guide">
-        <div class="ph"><div><h1 class="pt">Portal Kullanım Kılavuzu</h1><p class="psd">Uzman değerlendirici rehberi</p></div></div>
-        <div id="user-guide-body"></div>
-      </div>
-
-      <!-- DEĞERLENDİRME -->
+      <div class="page" id="page-sd-weights"><div class="ph"><div><h1 class="pt">ANP Global Ağırlıklar</h1><p class="psd">Adım 5 çıktısı — Limit süpermatris (W_lim) ilk sütun normalize, iç/dış bağımlılık dahil.</p></div></div><div id="gw-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div></div>
+      <div class="page" id="page-sd-supermatrix"><div class="ph"><div><h1 class="pt">Süperpozisyon Matrisleri</h1><p class="psd">16×16: Ağırlıksız (W_unw) → Ağırlıklı/Stokastik (W_wei) → Limit (W_lim).</p></div></div><div id="sm-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div></div>
+      <div class="page" id="page-sd-submat"><div class="ph"><div><h1 class="pt">Alt Kriter PCM Matrisleri</h1><p class="psd">Geometrik ortalama ile oluşturulan ikili karşılaştırma matrisleri — tutarlılık analizi.</p></div></div><div id="submat-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div></div>
+      <div class="page" id="page-sd-influence"><div class="ph"><div><h1 class="pt">Gruplar Arası Etki / Bağımlılık Matrisi</h1><p class="psd">5 ana grup arasındaki ANP etkileşim katsayıları — geometrik ortalama & normalize.</p></div></div><div id="infl-body"><div class="notif n-warn"><span>⚠</span><div>Önce ANP Excel yükleyin.</div></div></div></div>
+      <div class="page" id="page-criteria-info"><div class="ph"><div><h1 class="pt">Kriterler Hakkında</h1><p class="psd">5 ana kriter, 16 alt kriter — değerlendirme boyutları</p></div></div><div id="criteria-info-body"></div></div>
+      <div class="page" id="page-user-guide"><div class="ph"><div><h1 class="pt">Portal Kullanım Kılavuzu</h1><p class="psd">Uzman değerlendirici rehberi</p></div></div><div id="user-guide-body"></div></div>
       <div class="page" id="page-evaluate">
-        <div class="ph">
-          <div><h1 class="pt">Proje Değerlendirme</h1><p class="psd">Saaty 1-9 ölçeği (1=Çok Zayıf → 9=Mükemmel)</p></div>
-        </div>
+        <div class="ph"><div><h1 class="pt">Proje Değerlendirme</h1><p class="psd">Saaty 1-9 ölçeği (1=Çok Zayıf → 9=Mükemmel)</p></div></div>
         <div id="eval-no-anp" class="notif n-warn" style="display:none"><span>⚠</span><div>ANP ağırlıkları henüz yüklenmedi. Yönetici ANP Excel yüklemesini bekleyin.</div></div>
         <div id="eval-wrap">
           <div class="steps">
@@ -553,19 +350,8 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
               <div id="admin-proj-form">
                 <div class="fg"><label>Proje Adı *</label><input id="pname" type="text" placeholder="Proje adını giriniz"></div>
                 <div class="fg"><label>Kurum / Başvuru Sahibi</label><input id="powner" type="text"></div>
-                <div class="fg"><label>Proje Türü</label>
-                  <select id="ptype">
-                    <option>1001 - Bilimsel ve Teknolojik Araştırma</option>
-                    <option>1002 - Hızlı Destek Programı</option>
-                    <option>1003 - Uygulamalı Ar-Ge</option>
-                    <option>1505 - Üniversite-Sanayi İşbirliği</option>
-                    <option>2209 - Lisans Öğrencisi Araştırma</option>
-                  </select>
-                </div>
-                <div class="g2">
-                  <div class="fg"><label>Bütçe (TL)</label><input id="pbudget" type="number"></div>
-                  <div class="fg"><label>Süre (Ay)</label><input id="pdur" type="number"></div>
-                </div>
+                <div class="fg"><label>Proje Türü</label><select id="ptype"><option>1001 - Bilimsel ve Teknolojik Araştırma</option><option>1002 - Hızlı Destek Programı</option><option>1003 - Uygulamalı Ar-Ge</option><option>1505 - Üniversite-Sanayi İşbirliği</option><option>2209 - Lisans Öğrencisi Araştırma</option></select></div>
+                <div class="g2"><div class="fg"><label>Bütçe (TL)</label><input id="pbudget" type="number"></div><div class="fg"><label>Süre (Ay)</label><input id="pdur" type="number"></div></div>
                 <button class="btn bp" onclick="goStep2()" style="width:100%;justify-content:center;margin-top:4px">Devam → Kriterleri Puanla</button>
               </div>
               <div id="member-proj-form" style="display:none">
@@ -579,135 +365,54 @@ label{font-size:11px;color:var(--tx2);display:block;margin-bottom:4px}
                     <div><div class="pif-label">E-posta</div><div class="pif-val" id="pf-email" style="color:var(--tx2);font-size:12px;word-break:break-all">—</div></div>
                     <div><div class="pif-label">Telefon No</div><div class="pif-val" id="pf-tel" style="color:var(--tx2);font-size:12px">—</div></div>
                   </div>
-                  <div class="fg">
-                    <label>Değerlendiren Adı *</label>
-                    <input id="peval-name" type="text" placeholder="Ad ve soyadınızı giriniz">
-                    <div style="font-size:10.5px;color:var(--tx3);margin-top:4px">📅 Değerlendirme tarihi otomatik kaydedilecektir.</div>
-                  </div>
+                  <div class="fg"><label>Değerlendiren Adı *</label><input id="peval-name" type="text" placeholder="Ad ve soyadınızı giriniz"><div style="font-size:10.5px;color:var(--tx3);margin-top:4px">📅 Değerlendirme tarihi otomatik kaydedilecektir.</div></div>
                   <button class="btn bp" onclick="goStep2FromList()" style="width:100%;justify-content:center;margin-top:4px">Devam → Kriterleri Puanla</button>
                 </div>
               </div>
             </div>
           </div>
           <div id="es2" style="display:none">
-            <div class="notif n-info"><span>ℹ</span>
-              <div><strong>Saaty 1-9:</strong> 1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div>
-            </div>
+            <div class="notif n-info"><span>ℹ</span><div><strong>Saaty 1-9:</strong> 1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div></div>
             <div id="score-form"></div>
-            <div style="display:flex;gap:10px;margin-top:16px">
-              <button class="btn bo" onclick="goStep1()">← Geri</button>
-              <button class="btn bs" onclick="doTOPSIS()" style="flex:1;justify-content:center">✓ TOPSIS Hesapla & Kaydet</button>
-            </div>
+            <div style="display:flex;gap:10px;margin-top:16px"><button class="btn bo" onclick="goStep1()">← Geri</button><button class="btn bs" onclick="doTOPSIS()" style="flex:1;justify-content:center">✓ TOPSIS Hesapla & Kaydet</button></div>
           </div>
           <div id="es3" style="display:none"><div id="eval-result"></div></div>
         </div>
       </div>
-
-      <!-- TOPSIS SONUÇLARI -->
       <div class="page" id="page-results">
-        <div class="ph">
-          <div><h1 class="pt">TOPSIS Sıralaması</h1><p class="psd">ANP ağırlıklı C* = D⁻/(D⁺+D⁻) skoruna göre — Adım 6.</p></div>
-          <div style="display:flex;gap:8px">
-            <button class="btn bo" onclick="loadProjAndRender()">↺ Yenile</button>
-            <button class="btn bo" onclick="exportCSV()">↓ CSV</button>
-          </div>
-        </div>
+        <div class="ph"><div><h1 class="pt">TOPSIS Sıralaması</h1><p class="psd">ANP ağırlıklı C* = D⁻/(D⁺+D⁻) skoruna göre.</p></div><div style="display:flex;gap:8px"><button class="btn bo" onclick="loadProjAndRender()">↺ Yenile</button><button class="btn bo" onclick="exportCSV()">↓ CSV</button></div></div>
         <div id="res-body"><p style="text-align:center;padding:40px;color:var(--tx3)">Yükleniyor…</p></div>
       </div>
-
-      <!-- UZMAN PUANLARI -->
       <div class="page" id="page-evaluations">
-        <div class="ph" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-          <div><h1 class="pt">Uzman Değerlendirme Puanları</h1><p class="psd">Uzmana göre sütunlar, projeye göre satırlar</p></div>
-          <button onclick="exportEvaluationsToExcel()" class="btn bs" style="padding:10px 20px;">Excel'e Aktar</button>
-        </div>
-        <div id="eval-expert-grid" class="eval-expert-grid">
-          <p style="padding:32px;text-align:center;color:var(--tx3)">Henüz değerlendirme yok.</p>
-        </div>
+        <div class="ph" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;"><div><h1 class="pt">Uzman Değerlendirme Puanları</h1><p class="psd">Uzmana göre sütunlar, projeye göre satırlar</p></div><button onclick="exportEvaluationsToExcel()" class="btn bs" style="padding:10px 20px;">Excel'e Aktar</button></div>
+        <div id="eval-expert-grid" class="eval-expert-grid"><p style="padding:32px;text-align:center;color:var(--tx3)">Henüz değerlendirme yok.</p></div>
       </div>
-
-      <!-- PROJE LİSTESİ -->
       <div class="page" id="page-projects">
-        <div class="ph">
-          <div><h1 class="pt">Değerlendirme Listesi</h1></div>
-          <div style="display:flex;gap:8px">
-            <button class="btn bo" onclick="loadProjAndRender()">↺ Yenile</button>
-            <button class="btn bp" onclick="nav('evaluate')">+ Yeni</button>
-          </div>
-        </div>
+        <div class="ph"><div><h1 class="pt">Değerlendirme Listesi</h1></div><div style="display:flex;gap:8px"><button class="btn bo" onclick="loadProjAndRender()">↺ Yenile</button><button class="btn bp" onclick="nav('evaluate')">+ Yeni</button></div></div>
         <div class="card"><div id="proj-tbl"><p style="text-align:center;padding:28px;color:var(--tx3)">Yükleniyor…</p></div></div>
       </div>
-
-      <!-- YÖNTEM -->
       <div class="page" id="page-about">
-        <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd">ANP + TOPSIS </p></div></div>
+        <div class="ph"><div><h1 class="pt">Yöntem & Formüller</h1><p class="psd">ANP + TOPSIS</p></div></div>
         <div class="g2">
-          <div class="card">
-            <div class="card-t">ANP — 5 Adım</div>
-            <div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)">
-              <div><strong>Adım 1</strong> — Model Kurulumu: Amaç, 5 ana küme (kriter), 16 alt kriter ve etkileşimler tanımlanır. </div>
-              <div><strong>Adım 2</strong> — İkili Karşılaştırmalar: Saaty 1-9 ölçeği ile A·w = λmax·w denkleminden yerel öncelik vektörü (w) hesaplanır.<br>
-              <span style="padding-left:12px;color:var(--tx3)">GM = (x₁·x₂·…·xₙ)^(1/n) → PCM normalize → satır ortalaması = w</span><br>
-              <span style="padding-left:12px;color:var(--tx3)">Tutarlılık: CI = (λmax−n)/(n−1) · CR = CI/RI ≤ 0.10</span></div>
-              <div><strong>Adım 3</strong> — Başlangıç Süpermatrisi W_unw (16×16): W_ij bloğu = j grubunun i grubu üzerindeki yerel öncelik vektörü. Diagonal (iç bağımlılık) = 0 (iç bağımlılık PCM'i toplanmadı). Off-diagonal: 18 çapraz alt kriter etkisi varsa normalize(GM), yoksa subW[i].</div>
-              <div><strong>Adım 4</strong> — Ağırlıklı Süpermatris W_wei: W_cluster[tgtG][srcG] = mainW[srcG] × outerW[srcG→tgtG] küme ağırlığı ile her W_unw elemanı çarpılır → sütunlar normalize → stokastik.</div>
-              <div><strong>Adım 5</strong> — Limit Süpermatris: W_lim = lim(W_wei^2k) · Global ağırlıklar = normalize(W_lim[:,0])</div>
-            </div>
-            <div style="margin-top:10px;padding:9px;background:var(--bg3);border-radius:7px;font-family:monospace;font-size:11px;color:var(--ac3)">
-              A·w = λmax·w · GM=(∏xᵢ)^(1/n) · CR=CI/RI&lt;0.10<br>
-              W_cluster[tgt][src]=mainW[src]×outerW[src→tgt]<br>
-              W_weighted=W_cluster⊗W_unw → normalize → col_sum=1<br>
-              W_lim = lim(W_wei^2k) · globalW = norm(W_lim[:,0])
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-t">TOPSIS — 6 Adım (ANP Ağırlıklı)</div>
-            <div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)">
-              <div><strong>Adım 1</strong> — Karar matrisi A[m×n]: m alternatif, n=16 kriter</div>
-              <div><strong>Adım 2</strong> — Normalize: r_ij = a_ij / √(Σ a_kj²)</div>
-              <div><strong>Adım 3</strong> — Ağırlıklı normalize: v_ij = w_j × r_ij (w_j = ANP global ağırlık)</div>
-              <div><strong>Adım 4</strong> — A⁺ = {max v_ij} · A⁻ = {min v_ij}</div>
-              <div><strong>Adım 5</strong> — D⁺ = √Σ(v_ij−A⁺_j)² · D⁻ = √Σ(v_ij−A⁻_j)²</div>
-              <div><strong>Adım 6</strong> — C* = D⁻/(D⁺+D⁻) ∈ [0,1]</div>
-            </div>
-            <div style="margin-top:10px;padding:9px;background:var(--bg3);border-radius:7px;font-family:monospace;font-size:11px;color:var(--ac)">
-              r_ij=a_ij/√Σa_kj² · v_ij=w_j·r_ij<br>
-              D⁺=√Σ(v_ij−A⁺_j)² · D⁻=√Σ(v_ij−A⁻_j)²<br>
-              C*=D⁻/(D⁺+D⁻) → [0,1] büyük=iyi
-            </div>
-          </div>
+          <div class="card"><div class="card-t">ANP — 5 Adım</div><div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)"><div><strong>Adım 1</strong> — Model Kurulumu: 5 ana küme, 16 alt kriter.</div><div><strong>Adım 2</strong> — İkili Karşılaştırmalar: GM → w · CR=CI/RI≤0.10</div><div><strong>Adım 3</strong> — Başlangıç Süpermatrisi W_unw (16×16)</div><div><strong>Adım 4</strong> — Ağırlıklı Süpermatris W_wei: stokastik</div><div><strong>Adım 5</strong> — Limit Süpermatris: W_lim = lim(W_wei^2k)</div></div><div style="margin-top:10px;padding:9px;background:var(--bg3);border-radius:7px;font-family:monospace;font-size:11px;color:var(--ac3)">GM=(∏xᵢ)^(1/n) · CR=CI/RI&lt;0.10<br>W_lim=lim(W_wei^2k) · globalW=norm(W_lim[:,0])</div></div>
+          <div class="card"><div class="card-t">TOPSIS — 6 Adım (ANP Ağırlıklı)</div><div style="font-size:12px;color:var(--tx2);line-height:2;padding-left:11px;border-left:2px solid var(--bdr)"><div><strong>Adım 1</strong> — Karar matrisi A[m×16]</div><div><strong>Adım 2</strong> — Normalize: r_ij=a_ij/√(Σa_kj²)</div><div><strong>Adım 3</strong> — Ağırlıklı: v_ij=w_j×r_ij</div><div><strong>Adım 4</strong> — A⁺={max} · A⁻={min}</div><div><strong>Adım 5</strong> — D⁺=√Σ(v_ij−A⁺_j)² · D⁻=√Σ(v_ij−A⁻_j)²</div><div><strong>Adım 6</strong> — C*=D⁻/(D⁺+D⁻)∈[0,1]</div></div><div style="margin-top:10px;padding:9px;background:var(--bg3);border-radius:7px;font-family:monospace;font-size:11px;color:var(--ac)">C*=D⁻/(D⁺+D⁻) → [0,1] büyük=iyi</div></div>
         </div>
-        <div class="card" style="margin-top:13px">
-          <div class="card-t">RI Tablosu — Rastgele Tutarlılık İndeksi (Saaty 1980)</div>
-          <table>
-            <tr><th>n</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
-            <tr><td style="color:var(--tx3)">RI</td><td>0</td><td>0</td><td>0.58</td><td>0.90</td><td>1.12</td><td>1.24</td><td>1.32</td><td>1.41</td><td>1.45</td><td>1.49</td></tr>
-          </table>
-        </div>
-
+        <div class="card" style="margin-top:13px"><div class="card-t">RI Tablosu (Saaty 1980)</div><table><tr><th>n</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr><tr><td style="color:var(--tx3)">RI</td><td>0</td><td>0</td><td>0.58</td><td>0.90</td><td>1.12</td><td>1.24</td><td>1.32</td><td>1.41</td><td>1.45</td><td>1.49</td></tr></table></div>
       </div>
-
     </div>
   </div>
 </div>
-
 <div class="toast" id="toast"><div class="toast-dot" id="toast-dot"></div><span id="toast-msg"></span></div>
 <div class="lov" id="lov"><div class="spin"></div><div style="font-size:13px;color:var(--tx2)" id="lov-txt">Yükleniyor…</div></div>
-
 <div id="eval-detail-modal" class="modal-overlay">
   <div class="modal-card" style="max-width:700px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;border-bottom:1px solid var(--bdr);padding-bottom:12px;">
-      <div>
-        <h3 id="edm-title" style="margin:0;font-weight:700;color:var(--tx);font-family:'Syne',sans-serif;font-size:16px"></h3>
-        <div id="edm-meta" style="font-size:11px;color:var(--tx3);margin-top:3px"></div>
-      </div>
-      <button onclick="closeEvalDetailModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--tx3);">&times;</button>
-    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;border-bottom:1px solid var(--bdr);padding-bottom:12px;"><div><h3 id="edm-title" style="margin:0;font-weight:700;color:var(--tx);font-family:'Syne',sans-serif;font-size:16px"></h3><div id="edm-meta" style="font-size:11px;color:var(--tx3);margin-top:3px"></div></div><button onclick="closeEvalDetailModal()" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--tx3);">&times;</button></div>
     <div id="edm-scores"></div>
   </div>
 </div>
 
 <script>
+
 'use strict';
 
 /* ═══════════════════════════════════════════════════════════════
@@ -857,7 +562,6 @@ const SIZES={T:3,E:3,P:4,U:3,F:3};
 const SUB_TO_GRP={T1:'T',T2:'T',T3:'T',E1:'E',E2:'E',E3:'E',P1:'P',P2:'P',P3:'P',P4:'P',U1:'U',U2:'U',U3:'U',F1:'F',F2:'F',F3:'F'};
 const S9=['','Çok Zayıf','Zayıf','Ortanın Altı','Orta-Alt','Orta','Orta-Üst','İyi','Çok İyi','Mükemmel'];
 
-/* Sütun haritaları */
 const COL_MAP={
   T:{cols:[2,3,4],   pairs:[[0,1],[0,2],[1,2]]},
   E:{cols:[5,6,7],   pairs:[[0,1],[0,2],[1,2]]},
@@ -874,8 +578,6 @@ const ETKI_MAP=[
   ['U','T',42],['U','E',43],['U','P',44],['U','F',45],
   ['F','T',46],['F','E',47],['F','P',48],['F','U',49]
 ];
-
-/* ── YENİ: Çapraz alt kriter etkileşimleri (sütun 50-67) ── */
 const CROSS_SUB_MAP=[
   [50,'T1','P1'],[51,'T1','P4'],[52,'T1','F3'],
   [53,'T2','E1'],[54,'T2','U1'],
@@ -888,26 +590,22 @@ const CROSS_SUB_MAP=[
   [66,'U3','F1'],
   [67,'F1','P4']
 ];
-
 const RI_TBL={1:0,2:0,3:0.58,4:0.90,5:1.12,6:1.24,7:1.32,8:1.41,9:1.45,10:1.49};
 
 /* ═══════════════════════════════════════════════════════════════
    ANP MATEMATİK
 ═══════════════════════════════════════════════════════════════ */
 function toSaaty(v){ const n=parseFloat(v); if(isNaN(n)||n===0)return 1.0; return n<0?1.0/Math.abs(n):n; }
-
 function geoMean(vals){
   const ps=vals.map(toSaaty).filter(v=>v>0&&isFinite(v));
   if(!ps.length)return 1.0;
   return Math.exp(ps.reduce((s,v)=>s+Math.log(v),0)/ps.length);
 }
-
 function buildPCM(rows,colIdxs,pairs,n){
   const M=Array.from({length:n},()=>Array(n).fill(1.0));
   pairs.forEach(([i,j],k)=>{ const g=geoMean(rows.map(r=>r[colIdxs[k]])); M[i][j]=g; M[j][i]=1.0/g; });
   return M;
 }
-
 function priorityVector(M){
   const n=M.length;
   const colSum=Array(n).fill(0);
@@ -915,21 +613,17 @@ function priorityVector(M){
   const nm=M.map(row=>row.map((v,j)=>colSum[j]>0?v/colSum[j]:0));
   return nm.map(row=>row.reduce((a,b)=>a+b,0)/n);
 }
-
 function calcCR(M,w){
-  const n=M.length;
-  let lam=0;
+  const n=M.length; let lam=0;
   for(let i=0;i<n;i++){ let s=0; for(let j=0;j<n;j++) s+=M[i][j]*w[j]; lam+=s/(w[i]||1e-12); }
   lam/=n;
   const CI=(lam-n)/(n-1); const ri=RI_TBL[n]||1.49;
   return{CR:ri>0?CI/ri:0,CI,lam};
 }
-
 function matMul(A,B){
   const n=A.length;
   return Array.from({length:n},(_,i)=>Array.from({length:n},(_,j)=>A[i].reduce((s,_,k)=>s+A[i][k]*B[k][j],0)));
 }
-
 function limitMatrix(W){
   let M=W.map(r=>[...r]);
   for(let k=0;k<2000;k++){
@@ -941,7 +635,28 @@ function limitMatrix(W){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   ANP EXCEL İŞLEME  — DÜZELTİLMİŞ W_unw MANTĞI
+   ★ YENİ: parseOuterW — düz "E->F" formatını iç içe {"E":{"F":v}} 'ye çevirir
+═══════════════════════════════════════════════════════════════ */
+function parseOuterW(raw){
+  if(!raw||typeof raw!=='object') return {};
+  const keys=Object.keys(raw);
+  if(!keys.length) return {};
+  // Zaten iç içe format: {"E":{"F":0.22,...},...} → direkt döndür
+  if(typeof raw[keys[0]]==='object') return raw;
+  // Düz format: {"E->F":0.22,...} → iç içeye çevir
+  const result={};
+  for(const [key,val] of Object.entries(raw)){
+    const parts=key.split('->');
+    if(parts.length!==2) continue;
+    const [f,t]=parts;
+    if(!result[f]) result[f]={};
+    result[f][t]=val;
+  }
+  return result;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANP EXCEL İŞLEME
 ═══════════════════════════════════════════════════════════════ */
 let ANP=null, PROJECTS=[], PROJ_LIST=[];
 
@@ -962,13 +677,8 @@ async function processANP(raw,fname){
   const rows=raw.slice(1).filter(r=>r&&r[0]!=null);
   const ec=rows.length;
   if(ec<1){ showCalcErr("Excel'de veri satırı bulunamadı."); return; }
-
   setCS(-1); await delay(30);
-
-  /* Adım 1: Model kurulumu — ağ yapısı, iç/dış bağımlılıklar */
   setCS(0,'active'); await delay(80); setCS(0,'done');
-
-  /* Adım 2a: İkili karşılaştırmalar — GM, PCM normalize, yerel öncelik vektörleri */
   await delay(30); setCS(1,'active');
   const subMat={},subW={},subCR={};
   for(const g of GRP){
@@ -980,16 +690,9 @@ async function processANP(raw,fname){
   const mainW=priorityVector(mainMat); const mainCR=calcCR(mainMat,mainW);
   const mainWd=Object.fromEntries(GRP.map((g,i)=>[g,mainW[i]]));
   setCS(1,'done');
-
-  /* ── Adım 2b: Tutarlılık + Dış Bağımlılık + Çapraz Alt Kriter ── */
   await delay(30); setCS(2,'active');
-
-  /* (a) Çapraz alt kriter GM'leri (sütun 50-67) */
   const crossSubGM={};
-  for(const [colIdx,frm,to] of CROSS_SUB_MAP){
-    crossSubGM[frm+'->'+to]=geoMean(rows.map(r=>r[colIdx]));
-  }
-  /* Arama indeksi: srcSub → { tgtGrp → { tgtSub: gm } } */
+  for(const [colIdx,frm,to] of CROSS_SUB_MAP) crossSubGM[frm+'->'+to]=geoMean(rows.map(r=>r[colIdx]));
   const crossBySrc={};
   for(const [colIdx,frm,to] of CROSS_SUB_MAP){
     const tg=SUB_TO_GRP[to];
@@ -997,135 +700,78 @@ async function processANP(raw,fname){
     if(!crossBySrc[frm][tg]) crossBySrc[frm][tg]={};
     crossBySrc[frm][tg][to]=crossSubGM[frm+'->'+to];
   }
-
-  /* (b) Dış bağımlılık: her kaynak grup f için diğer gruplara etki ağırlıkları
-   *     outerW[f][t] = f'nin t grubuna normalise edilmiş etkisi
-   *     Literatür: ham GM değerleri sütun toplamına bölünür → normalize öncelik */
   const inflRaw={};
   for(const [f,t,c] of ETKI_MAP) inflRaw[f+'->'+t]=geoMean(rows.map(r=>r[c]));
+  // outerW her zaman iç içe formatta hesaplanır
   const outerW={};
   for(const f of GRP){
     outerW[f]={};
     const others=GRP.filter(t=>t!==f);
     const tot=others.reduce((s,t)=>s+(inflRaw[f+'->'+t]||0),0);
     for(const t of others) outerW[f][t]=tot>0?(inflRaw[f+'->'+t]||0)/tot:0;
-    outerW[f][f]=0; // iç bağımlılık yok
+    outerW[f][f]=0;
   }
   setCS(2,'done');
-
-  /* ── Adım 3: Başlangıç Süpermatrisi W_unw (16×16) ──
-   * Literatür (Saaty 2001):
-   *   W_ij bloğu = j grubunun i grubu üzerindeki etkisini gösteren öncelik vektörü
-   *   - Diagonal (i=j): iç bağımlılık PCM'i yoksa SIFIR
-   *   - Off-diagonal: spesifik çapraz etki varsa normalize(GM), yoksa subW[i]
-   *   NOT: Grup ölçekleme bu aşamada YAPILMAZ — W_cluster Adım 4'te uygulanır */
   await delay(30); setCS(3,'active');
   const N=16;
   const W_unw=Array.from({length:N},()=>Array(N).fill(0.0));
-
-  for(const srcG of GRP){                          // kaynak grup (sütun grubu)
-    const sOff=OFFSETS[srcG], sSz=SIZES[srcG];
-    const srcSubs=GI[srcG].subs;
-
+  for(const srcG of GRP){
+    const sOff=OFFSETS[srcG],sSz=SIZES[srcG],srcSubs=GI[srcG].subs;
     for(let sj=0;sj<sSz;sj++){
-      const col=sOff+sj;
-      const srcSub=srcSubs[sj];
-
-      /* Diagonal blok: iç bağımlılık yoksa 0 (zaten 0.0 ile başlatıldı) */
-
-      /* Off-diagonal bloklar */
+      const col=sOff+sj,srcSub=srcSubs[sj];
       for(const tgtG of GRP){
-        if(tgtG===srcG) continue;                  // diagonal atla
-        const tOff=OFFSETS[tgtG], tSz=SIZES[tgtG];
-        const tgtSubs=GI[tgtG].subs;
-
-        /* Bu srcSub için tgtG'ye spesifik çapraz etki var mı? */
+        if(tgtG===srcG) continue;
+        const tOff=OFFSETS[tgtG],tSz=SIZES[tgtG],tgtSubs=GI[tgtG].subs;
         const specific=(crossBySrc[srcSub]||{})[tgtG]||null;
-
         let colVec;
-        if(specific && Object.keys(specific).length>0){
-          /* Spesifik etki: sadece belirtilen tgt sub'lar ağırlık alır,
-           * geri kalanlar 0 → normalize */
+        if(specific&&Object.keys(specific).length>0){
           const raw=tgtSubs.map(s=>specific[s]||0);
           const tot=raw.reduce((a,b)=>a+b,0);
           colVec=tot>0?raw.map(v=>v/tot):subW[tgtG];
-        } else {
-          /* Spesifik etki yok: tgtG'nin yerel öncelik vektörü */
-          colVec=subW[tgtG];
-        }
-
+        } else { colVec=subW[tgtG]; }
         for(let ti=0;ti<tSz;ti++) W_unw[tOff+ti][col]=colVec[ti];
       }
     }
   }
   setCS(3,'done');
-
-  /* ── Adım 4: Ağırlıklı (Stokastik) Süpermatris W_wei ──
-   * Literatür: W_weighted = W_cluster ⊗ W_unw   (blok bazında çarpım)
-   * W_cluster[tgtG][srcG] = mainWd[srcG] * outerW[srcG][tgtG]
-   *   → srcG'nin tgtG üzerindeki ağırlıklı etkisi
-   * Diagonal: iç bağımlılık yoksa 0 */
   await delay(30); setCS(4,'active');
   const W_wei=Array.from({length:N},()=>Array(N).fill(0.0));
-
   for(const srcG of GRP){
-    const sOff=OFFSETS[srcG], sSz=SIZES[srcG];
+    const sOff=OFFSETS[srcG],sSz=SIZES[srcG];
     for(let sj=0;sj<sSz;sj++){
       const col=sOff+sj;
       for(const tgtG of GRP){
-        if(tgtG===srcG) continue;                  // iç bağımlılık yok
-        const tOff=OFFSETS[tgtG], tSz=SIZES[tgtG];
-        /* Küme ağırlığı: kaynak grubun ana kriter ağırlığı × dış bağımlılık katsayısı */
+        if(tgtG===srcG) continue;
+        const tOff=OFFSETS[tgtG],tSz=SIZES[tgtG];
         const clusterW=(mainWd[srcG]||0)*(outerW[srcG][tgtG]||0);
-        for(let ti=0;ti<tSz;ti++){
-          W_wei[tOff+ti][col]=W_unw[tOff+ti][col]*clusterW;
-        }
+        for(let ti=0;ti<tSz;ti++) W_wei[tOff+ti][col]=W_unw[tOff+ti][col]*clusterW;
       }
     }
   }
-  /* Sütunları normalize et → stokastik (her sütun toplamı = 1) */
   for(let j=0;j<N;j++){
     const s=W_wei.reduce((a,r)=>a+r[j],0);
     if(s>0) for(let i=0;i<N;i++) W_wei[i][j]/=s;
   }
   setCS(4,'done');
-
-  /* Adım 5: Limit Süpermatris — W_lim = lim(W_wei^2k), uzun dönem global öncelikler */
   await delay(30); setCS(5,'active');
   const W_lim=limitMatrix(W_wei);
   setCS(5,'done');
-
-  /* Global ağırlıklar — limit matrisin ilk sütunundan normalize */
   await delay(30);
   const gRaw=W_lim.map(row=>row[0]);
   const gSum=gRaw.reduce((a,b)=>a+b,0);
   const globalW={};
   ALL_SUBS.forEach((s,i)=>{ globalW[`${SUB_TO_GRP[s]}_${s}`]=gSum>0?gRaw[i]/gSum:1/16; });
   await delay(40);
-
-  /* ANP nesnesini oluştur */
-  ANP={
-    expertCount:ec, fname, date:new Date().toLocaleDateString('tr-TR'),
-    subMat, subW, subCR, mainMat, mainWd, mainCR,
-    inflRaw, outerW, crossSubGM, crossBySrc,
-    W_unw, W_wei, W_lim, globalW,
-    experts:rows.map(r=>({name:String(r[0]||'—'),domain:String(r[1]||'—')}))
-  };
-
+  ANP={expertCount:ec,fname,date:new Date().toLocaleDateString('tr-TR'),subMat,subW,subCR,mainMat,mainWd,mainCR,inflRaw,outerW,crossSubGM,crossBySrc,W_unw,W_wei,W_lim,globalW,experts:rows.map(r=>({name:String(r[0]||'—'),domain:String(r[1]||'—')}))};
   saveANPLocal(); await saveANPToDB(ANP); updateANPBadges(); renderUploadStatus(); renderExpertList(); renderDashboard();
-
-  /* Sonuç özeti */
-  let h=`<div class="notif n-ok"><span>✓</span><div>ANP tamamlandı. ${ec} uzman ·  ${USE_DB?'Veritabanına':'Yerel depoya'} kaydedildi.</div></div>`;
+  let h=`<div class="notif n-ok"><span>✓</span><div>ANP tamamlandı. ${ec} uzman · ${USE_DB?'Veritabanına':'Yerel depoya'} kaydedildi.</div></div>`;
   h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">`;
-  for(const g of GRP){
-    const cr=ANP.subCR[g].CR;
-    h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px"><span style="font-size:12px;color:${GI[g].color}">${GI[g].name} (${SIZES[g]}×${SIZES[g]})</span><span class="badge ${cr<.10?'cr-ok':'cr-warn'}">CR=${cr.toFixed(4)}</span></div>`;
-  }
+  for(const g of GRP){ const cr=ANP.subCR[g].CR; h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px"><span style="font-size:12px;color:${GI[g].color}">${GI[g].name} (${SIZES[g]}×${SIZES[g]})</span><span class="badge ${cr<.10?'cr-ok':'cr-warn'}">CR=${cr.toFixed(4)}</span></div>`; }
   const mc=ANP.mainCR.CR;
   h+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px;grid-column:1/-1"><span style="font-size:12px">Ana Kriterler (5×5 PCM)</span><span class="badge ${mc<.10?'cr-ok':'cr-warn'}">CR=${mc.toFixed(4)}</span></div></div>`;
   h+=`<button class="btn bp" onclick="nav('sd-weights')" style="width:100%;justify-content:center">Global ANP Ağırlıklarını Gör →</button>`;
   const urb=$('upload-result-body'),ur=$('upload-result'); if(urb)urb.innerHTML=h; if(ur)ur.style.display='block';
-  const csCount=Object.keys(ANP.crossSubGM||{}).length; toast(`ANP hesaplandı: ${ANP.expertCount} uzman, ${csCount} `,'ok');
+  toast(`ANP hesaplandı: ${ANP.expertCount} uzman`,'ok');
 }
 
 function setCS(idx,state){
@@ -1139,7 +785,7 @@ function showCalcErr(msg){ const ur=$('upload-result'),urb=$('upload-result-body
 function renderExpertList(){ if(!ANP)return; const el=$('expert-list'); if(!el)return; let h=`<table><tr><th>#</th><th>Ad / Kurum</th><th>Uzmanlık</th></tr>`; ANP.experts.forEach((e,i)=>{ h+=`<tr><td style="color:var(--tx3)">${i+1}</td><td>${escHtml(e.name)}</td><td style="color:var(--tx2)">${escHtml(e.domain)}</td></tr>`; }); el.innerHTML=h+'</table>'; }
 
 /* ═══════════════════════════════════════════════════════════════
-   LOCAL STORAGE & DB  — crossSubGM dahil
+   ★ DÜZELTİLDİ: LOCAL STORAGE
 ═══════════════════════════════════════════════════════════════ */
 function saveANPLocal(){ try{ localStorage.setItem('tubitak_anp_v61',JSON.stringify(ANP)); }catch(e){} }
 function loadANPLocal(){
@@ -1147,91 +793,98 @@ function loadANPLocal(){
     const s=localStorage.getItem('tubitak_anp_v61');
     if(s){
       const parsed=JSON.parse(s);
-      // crossBySrc eksikse veya boşsa ANP geçersiz — yeniden Excel yüklenmeli
-      if(!parsed.crossBySrc||Object.keys(parsed.crossBySrc).length<8){
-        console.warn('ANP crossBySrc eksik, önbellek temizlendi');
-        localStorage.removeItem('tubitak_anp_v61');
-        return false;
-      }
+      if(!parsed||!parsed.globalW){ return false; }
+      // outerW düz formatta kaydedilmişse iç içeye çevir
+      if(parsed.outerW) parsed.outerW=parseOuterW(parsed.outerW);
       ANP=parsed; updateANPBadges(); return true;
     }
   }catch(e){}
   return false;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ★ DÜZELTİLDİ: loadANPFromDB — outerW her zaman doğru parse edilir
+═══════════════════════════════════════════════════════════════ */
 async function loadANPFromDB(){
   if(!USE_DB)return;
   try{
     const{data,error}=await DB.from('anp_weights').select('*').order('created_at',{ascending:false}).limit(1);
-    if(!error&&data&&data.length>0){
-      const r=data[0];
-      const loadedCrossSubGM=r.cross_sub_gm||{};
-      const loadedCrossBySrc=r.cross_by_src||{};
-      // crossBySrc eksikse crossSubGM'den yeniden oluştur
-      let rebuiltCrossBySrc=loadedCrossBySrc;
-      if(Object.keys(loadedCrossBySrc).length<8 && Object.keys(loadedCrossSubGM).length>0){
-        rebuiltCrossBySrc={};
-        for(const [key,gm] of Object.entries(loadedCrossSubGM)){
-          const [frm,to]=key.split('->');
-          const tg=SUB_TO_GRP[to];
-          if(!rebuiltCrossBySrc[frm])rebuiltCrossBySrc[frm]={};
-          if(!rebuiltCrossBySrc[frm][tg])rebuiltCrossBySrc[frm][tg]={};
-          rebuiltCrossBySrc[frm][tg][to]=gm;
-        }
+    if(error){ console.warn('loadANPFromDB sorgu hatası:',error.message); return; }
+    if(!data||!data.length){ console.log("DB'de ANP kaydı yok."); return; }
+    const r=data[0];
+    console.log("DB'den ANP yükleniyor, id:",r.id,"dosya:",r.filename);
+    const loadedCrossSubGM=r.cross_sub_gm||{};
+    let loadedCrossBySrc=r.cross_by_src||{};
+    if(Object.keys(loadedCrossBySrc).length<1&&Object.keys(loadedCrossSubGM).length>0){
+      loadedCrossBySrc={};
+      for(const [key,gm] of Object.entries(loadedCrossSubGM)){
+        const parts=key.split('->'); if(parts.length!==2) continue;
+        const [frm,to]=parts; const tg=SUB_TO_GRP[to]; if(!tg) continue;
+        if(!loadedCrossBySrc[frm])loadedCrossBySrc[frm]={};
+        if(!loadedCrossBySrc[frm][tg])loadedCrossBySrc[frm][tg]={};
+        loadedCrossBySrc[frm][tg][to]=gm;
       }
-      ANP={
-        expertCount:r.expert_count, fname:r.filename, date:new Date(r.created_at).toLocaleDateString('tr-TR'),
-        globalW:r.global_weights, mainWd:r.main_weights, subW:r.sub_weights, subCR:r.sub_cr, mainCR:r.main_cr,
-        experts:r.experts||[], W_lim:r.w_lim, W_unw:r.w_unw||r.w_lim, W_wei:r.w_wei||r.w_lim,
-        subMat:r.sub_mat||null, mainMat:r.main_mat||null, inflRaw:r.infl_raw||{}, outerW:r.norm_infl||{},
-        crossSubGM:loadedCrossSubGM, crossBySrc:rebuiltCrossBySrc
-      };
-      saveANPLocal(); updateANPBadges();
     }
-  }catch(e){ console.warn(e); }
+    const loadedInflRaw=r.infl_raw||{};
+    // ★ outerW: düz veya iç içe formatı parseOuterW ile güvenle oku
+    let loadedOuterW=parseOuterW(r.norm_infl||{});
+    // outerW hâlâ boşsa veya tüm değerler 0 ise inflRaw'dan yeniden hesapla
+    const owEmpty=Object.keys(loadedOuterW).length===0||
+      GRP.every(f=>GRP.filter(t=>t!==f).every(t=>!((loadedOuterW[f]||{})[t])));
+    if(owEmpty&&Object.keys(loadedInflRaw).length>0){
+      console.log("outerW boş, inflRaw'dan yeniden hesaplanıyor…");
+      loadedOuterW={};
+      for(const f of GRP){
+        loadedOuterW[f]={};
+        const others=GRP.filter(t=>t!==f);
+        const tot=others.reduce((s,t)=>s+(loadedInflRaw[f+'->'+t]||0),0);
+        for(const t of others) loadedOuterW[f][t]=tot>0?(loadedInflRaw[f+'->'+t]||0)/tot:0;
+        loadedOuterW[f][f]=0;
+      }
+    }
+    ANP={
+      expertCount:r.expert_count,fname:r.filename,date:new Date(r.created_at).toLocaleDateString('tr-TR'),
+      globalW:r.global_weights,mainWd:r.main_weights,subW:r.sub_weights,subCR:r.sub_cr,mainCR:r.main_cr,
+      experts:r.experts||[],W_lim:r.w_lim,W_unw:r.w_unw||r.w_lim,W_wei:r.w_wei||r.w_lim,
+      subMat:r.sub_mat||null,mainMat:r.main_mat||null,inflRaw:loadedInflRaw,outerW:loadedOuterW,
+      crossSubGM:loadedCrossSubGM,crossBySrc:loadedCrossBySrc
+    };
+    saveANPLocal(); updateANPBadges();
+    console.log("✅ ANP DB'den yüklendi:",ANP.expertCount,"uzman · outerW grupları:",Object.keys(ANP.outerW).length);
+  }catch(e){ console.warn('loadANPFromDB hata:',e); }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ★ DÜZELTİLDİ: saveANPToDB — mevcut kaydı bul/güncelle, hepsini tek seferde yaz
+═══════════════════════════════════════════════════════════════ */
 async function saveANPToDB(a){
   if(!USE_DB)return;
-
-  /* Temel payload — her zaman kaydet */
-  const base={
-    id:1,
-    expert_count:a.expertCount,
-    filename:a.fname,
-    global_weights:a.globalW,
-    main_weights:a.mainWd,
-    sub_weights:a.subW,
-    sub_cr:a.subCR,
-    main_cr:a.mainCR,
-    experts:a.experts,
-    w_lim:a.W_lim,
-    infl_raw:a.inflRaw,
-    norm_infl:a.outerW||{},
-    cross_sub_gm:a.crossSubGM,
-    cross_by_src:a.crossBySrc
+  // outerW her zaman iç içe formatta kaydedilsin
+  const outerWNested=parseOuterW(a.outerW||{});
+  const payload={
+    expert_count:a.expertCount,filename:a.fname,
+    global_weights:a.globalW,main_weights:a.mainWd,sub_weights:a.subW,
+    sub_cr:a.subCR,main_cr:a.mainCR,experts:a.experts,
+    w_lim:a.W_lim,w_unw:a.W_unw,w_wei:a.W_wei,
+    sub_mat:a.subMat,main_mat:a.mainMat,
+    infl_raw:a.inflRaw,norm_infl:outerWNested,
+    cross_sub_gm:a.crossSubGM,cross_by_src:a.crossBySrc
   };
-
-  /* 1. Adim: temel kayit */
   try{
-    const{error:e1}=await DB.from('anp_weights').upsert(base);
-    if(e1){
-      console.error('saveANPToDB hata:',e1);
-      toast('DB kayit hatasi: '+e1.message,'err');
-      return;
+    // Mevcut kayıt var mı?
+    const{data:existing,error:selErr}=await DB.from('anp_weights').select('id').limit(1);
+    if(selErr){ console.error('saveANPToDB select hata:',selErr); toast('DB okuma hatası: '+selErr.message,'err'); return; }
+    let saveError;
+    if(existing&&existing.length>0){
+      const{error:upErr}=await DB.from('anp_weights').update(payload).eq('id',existing[0].id);
+      saveError=upErr;
+    } else {
+      const{error:insErr}=await DB.from('anp_weights').insert(payload);
+      saveError=insErr;
     }
-    toast('Supabase kaydi OK','ok');
-  }catch(e){ console.error('saveANPToDB exception:',e); toast('DB baglanti hatasi','err'); return; }
-
-  /* 2. Adim: buyuk matris kolonlari — yoksa sessiz gec */
-  try{
-    await DB.from('anp_weights').update({
-      w_unw:a.W_unw,
-      w_wei:a.W_wei,
-      sub_mat:a.subMat,
-      main_mat:a.mainMat
-    }).eq('id',1);
-  }catch(e){ console.warn('Matris kolonlari kaydedilemedi:',e.message||e); }
+    if(saveError){ console.error('saveANPToDB kayıt hata:',saveError); toast('DB kayıt hatası: '+saveError.message,'err'); return; }
+    toast('✅ ANP Supabase\'e kaydedildi ('+a.expertCount+' uzman)','ok');
+  }catch(e){ console.error('saveANPToDB exception:',e); toast('DB bağlantı hatası: '+e.message,'err'); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1250,9 +903,9 @@ async function saveProjToDB(p){
   if(!USE_DB)return null;
   try{
     const{data,error}=await DB.from('projects').insert({name:p.name,owner:p.owner,type:p.type,budget:p.budget,duration:p.dur,scores:p.scores,cstar:p.Cstar,dp:p.Dp,dn:p.Dn,evaluator:p.evaluator,proj_no:p.projNo}).select().single();
-    if(error){ console.error('saveProjToDB hata:',error); toast('Proje DB hatasi: '+error.message,'err'); return null; }
+    if(error){ console.error('saveProjToDB hata:',error); toast('Proje DB hatası: '+error.message,'err'); return null; }
     if(data)return data.id;
-  }catch(e){ console.error('saveProjToDB exception:',e); toast('Proje DB baglanti hatasi','err'); }
+  }catch(e){ console.error('saveProjToDB exception:',e); toast('Proje DB bağlantı hatası','err'); }
   return null;
 }
 async function deleteProjFromDB(id){ if(!USE_DB||!id)return; try{ await DB.from('projects').delete().eq('id',id); }catch(e){} }
@@ -1262,11 +915,11 @@ async function deleteProjFromDB(id){ if(!USE_DB||!id)return; try{ await DB.from(
 ═══════════════════════════════════════════════════════════════ */
 const PLIST_KEY='tubitak_plist_v60';
 function _saveProjListLocal(){ try{ localStorage.setItem(PLIST_KEY,JSON.stringify({list:PROJ_LIST,fname:window._plistFname||'',date:window._plistDate||''})); }catch(e){} }
-async function saveProjListToDB(){ if(!USE_DB)return; try{ await DB.from('anp_weights').update({project_list_data:PROJ_LIST,project_list_fname:window._plistFname||''}).eq('id',1); }catch(e){ console.warn(e); } }
+async function saveProjListToDB(){ if(!USE_DB)return; try{ await DB.from('anp_weights').update({project_list_data:PROJ_LIST,project_list_fname:window._plistFname||''}).eq('id',(await DB.from('anp_weights').select('id').limit(1).then(r=>r.data&&r.data[0]&&r.data[0].id))||1); }catch(e){ console.warn(e); } }
 async function loadProjListFromDB(){
   if(!USE_DB){ _loadProjListLocal(); return; }
   try{
-    const{data,error}=await DB.from('anp_weights').select('project_list_data,project_list_fname').eq('id',1).single();
+    const{data,error}=await DB.from('anp_weights').select('project_list_data,project_list_fname').order('created_at',{ascending:false}).limit(1).single();
     if(error){ console.warn('loadProjListFromDB:',error.message); }
     else if(data&&data.project_list_data&&data.project_list_data.length>0){ PROJ_LIST=data.project_list_data; window._plistFname=data.project_list_fname||''; window._plistDate=''; _saveProjListLocal(); return; }
   }catch(e){ console.warn('loadProjListFromDB exception:',e); }
@@ -1277,11 +930,10 @@ async function saveProjListAll(){ window._plistDate=new Date().toLocaleDateStrin
 async function clearProjList(){
   if(!confirm('Proje listesi silinsin mi?'))return;
   PROJ_LIST=[]; window._plistFname=''; window._plistDate=''; localStorage.removeItem(PLIST_KEY);
-  if(USE_DB){ try{ await DB.from('anp_weights').update({project_list_data:[],project_list_fname:''}).eq('id',1); }catch(e){} }
+  if(USE_DB){ try{ const{data}=await DB.from('anp_weights').select('id').limit(1); if(data&&data[0]) await DB.from('anp_weights').update({project_list_data:[],project_list_fname:''}).eq('id',data[0].id); }catch(e){} }
   const nb=$('nb-plist'); if(nb)nb.textContent='—';
   renderProjListPage(); toast('Proje listesi silindi','warn');
 }
-
 function loadProjExcel(file){
   if(!file)return;
   if(!['xlsx','xls'].includes(file.name.split('.').pop().toLowerCase())){ alert('Lütfen .xlsx veya .xls seçin.'); return; }
@@ -1309,7 +961,6 @@ function loadProjExcel(file){
   };
   reader.readAsArrayBuffer(file);
 }
-
 function renderProjListPage(){
   const statusEl=$('plist-status'),previewEl=$('plist-preview'),zone=$('plist-drop-zone'),lbl=$('plist-file-label');
   if(!statusEl||!previewEl)return;
@@ -1325,9 +976,7 @@ function renderProjListPage(){
   previewEl.innerHTML=h+'</table></div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   BADGE GÜNCELLEMELERİ
-═══════════════════════════════════════════════════════════════ */
+/* BADGE GÜNCELLEMELERİ */
 function updateANPBadges(){
   if(!ANP)return;
   const dExp=$('d-exp'),dDate=$('d-date'),nbU=$('nb-upload'),tbA=$('tb-anp-badge'),sdD=$('sd-dot'),sdT=$('sd-txt');
@@ -1336,13 +985,10 @@ function updateANPBadges(){
   if(sdD)sdD.className='sd loaded'; if(sdT)sdT.textContent=(ANP.expertCount||'?')+' uzmana ait veri girişi tamamlandı.';
 }
 function updateProjListBadge(){ const el=$('nb-plist'); if(el)el.textContent=PROJ_LIST.length>0?PROJ_LIST.length+' proje':'—'; }
-
 function renderUploadStatus(){
   const el=$('anp-status-card'); if(!el)return;
   if(!ANP){ el.innerHTML='<p style="color:var(--tx3);font-size:12px">Kayıtlı veri yok.</p>'; return; }
-  const csCnt=ANP.crossSubGM?Object.keys(ANP.crossSubGM).length:0;
-  const csOk=csCnt>=18;
- el.innerHTML='<div class="notif n-ok" style="margin-bottom:10px"><span>💾</span><div><strong>'+escHtml(ANP.fname||'anket.xlsx')+'</strong> • '+ANP.expertCount+' uzman • '+ANP.date+'</div></div>'
+  el.innerHTML='<div class="notif n-ok" style="margin-bottom:10px"><span>💾</span><div><strong>'+escHtml(ANP.fname||'anket.xlsx')+'</strong> • '+ANP.expertCount+' uzman • '+ANP.date+'</div></div>'
 +'<button class="btn bd" onclick="clearANP()">🗑 ANP Verisini Sil</button>';
 }
 function clearANP(){
@@ -1354,9 +1000,7 @@ function clearANP(){
   setCS(-1); renderUploadStatus(); toast('ANP verisi silindi','warn');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   DASHBOARD
-═══════════════════════════════════════════════════════════════ */
+/* DASHBOARD */
 function renderDashboard(){
   const dP=$('d-proj'),nbR=$('nb-res'); if(dP)dP.textContent=PROJECTS.length; if(nbR)nbR.textContent=PROJECTS.length;
   if($('d-no-anp'))$('d-no-anp').style.display=ANP?'none':'flex';
@@ -1385,9 +1029,7 @@ function renderDashboard(){
   dR.innerHTML=rh+'</table>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   GLOBAL AĞIRLIK GÖRÜNÜMÜ
-═══════════════════════════════════════════════════════════════ */
+/* GLOBAL AĞIRLIK */
 function renderGW(){
   const el=$('gw-body'); if(!el)return; if(!ANP){ el.innerHTML=noData(); return; }
   let h='';
@@ -1402,9 +1044,7 @@ function renderGW(){
   h+='</table></div>'; el.innerHTML=h;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SÜPERMATRİS
-═══════════════════════════════════════════════════════════════ */
+/* SÜPERMATRİS */
 function renderSM(){
   const el=$('sm-body'); if(!el)return; if(!ANP){ el.innerHTML=noData(); return; }
   el.innerHTML=`<div class="sd-panel"><div class="sd-tabs"><button class="sdt active" onclick="smTab(this,'sm-u')">Ağırlıksız W_unw</button><button class="sdt" onclick="smTab(this,'sm-w')">Ağırlıklı W_wei</button><button class="sdt" onclick="smTab(this,'sm-l')">Limit W_lim</button></div><div class="sd-body"><div id="sm-u">${mat16(ANP.W_unw,'Ağırlıksız Süpermatris W_unw (16×16) — Çapraz alt kriter etkileri dahil')}</div><div id="sm-w" style="display:none">${mat16(ANP.W_wei,'Ağırlıklı/Stokastik Süpermatris W_wei — Ana kriter ağırlıkları ile ölçekli')}</div><div id="sm-l" style="display:none">${mat16(ANP.W_lim,'Limit Süpermatris W_lim — lim(W^2k) yakınsaması')}</div></div></div>`;
@@ -1418,9 +1058,7 @@ function mat16(M,desc){
   return h+'</table></div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ALT KRİTER MATRİSLERİ
-═══════════════════════════════════════════════════════════════ */
+/* ALT KRİTER MATRİSLERİ */
 function renderSubMat(){
   const el=$('submat-body'); if(!el)return; if(!ANP){ el.innerHTML=noData(); return; }
   let h='';
@@ -1438,10 +1076,26 @@ function renderSubMat(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   GRUPLAR ARASI ETKİ MATRİSİ
+   ★ DÜZELTİLDİ: renderInfl — outerW boşsa inflRaw'dan anlık hesapla
 ═══════════════════════════════════════════════════════════════ */
 function renderInfl(){
   const el=$('infl-body'); if(!el)return; if(!ANP){ el.innerHTML=noData(); return; }
+  // outerW'yi güvenle parse et
+  let ow=parseOuterW(ANP.outerW||{});
+  // Hâlâ boş veya tüm değerler 0 ise inflRaw'dan yeniden hesapla
+  const owEmpty=Object.keys(ow).length===0||
+    GRP.every(f=>GRP.filter(t=>t!==f).every(t=>!((ow[f]||{})[t])));
+  if(owEmpty&&ANP.inflRaw&&Object.keys(ANP.inflRaw).length>0){
+    ow={};
+    for(const f of GRP){
+      ow[f]={};
+      const others=GRP.filter(t=>t!==f);
+      const tot=others.reduce((s,t)=>s+(ANP.inflRaw[f+'->'+t]||0),0);
+      for(const t of others) ow[f][t]=tot>0?(ANP.inflRaw[f+'->'+t]||0)/tot:0;
+      ow[f][f]=0;
+    }
+    ANP.outerW=ow; // önbelleğe al
+  }
   let h='<div class="g2">';
   h+=`<div class="card"><div class="card-t">Ham Etki — Geometrik Ortalama (GM)</div><table><tr><th>Kaynak →</th>`;
   GRP.forEach(t=>{ h+=`<th style="color:${GI[t].color}">${GI[t].name.substring(0,5)}</th>`; }); h+='</tr>';
@@ -1449,15 +1103,12 @@ function renderInfl(){
   h+='</table></div>';
   h+=`<div class="card"><div class="card-t">Normalize Etki — Satır Toplamı = 1</div><table><tr><th>Kaynak →</th>`;
   GRP.forEach(t=>{ h+=`<th style="color:${GI[t].color}">${GI[t].name.substring(0,5)}</th>`; }); h+='</tr>';
-  const _ow=ANP.outerW||{}; GRP.forEach(f=>{ h+=`<tr><td style="font-weight:600;color:${GI[f].color}">${GI[f].name}</td>`; GRP.forEach(t=>{ if(f===t){ h+=`<td style="text-align:center;color:var(--tx3)">—</td>`; }else{ const v=(((_ow[f]||{})[t]||0)*100).toFixed(1); h+=`<td style="text-align:center;font-weight:600;color:${GI[t].color}">${v}%</td>`; } }); h+='</tr>'; });
+  GRP.forEach(f=>{ h+=`<tr><td style="font-weight:600;color:${GI[f].color}">${GI[f].name}</td>`; GRP.forEach(t=>{ if(f===t){ h+=`<td style="text-align:center;color:var(--tx3)">—</td>`; }else{ const v=(((ow[f]||{})[t]||0)*100).toFixed(1); h+=`<td style="text-align:center;font-weight:600;color:${GI[t].color}">${v}%</td>`; } }); h+='</tr>'; });
   h+='</table></div></div>'; el.innerHTML=h;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   DEĞERLENDİRME — TOPSIS
-═══════════════════════════════════════════════════════════════ */
+/* DEĞERLENDİRME */
 let evalScores={};
-
 function initEval(){
   const noA=$('eval-no-anp'),wrap=$('eval-wrap');
   if(!ANP){ if(noA)noA.style.display='flex'; if(wrap)wrap.style.display='none'; return; }
@@ -1474,28 +1125,22 @@ function initEval(){
   if(isAdmin){ ['pname','powner','pbudget','pdur'].forEach(id=>{ const el=$(id); if(el)el.value=''; }); }
   goStep1(); buildScoreForm();
 }
-
 function populateProjDropdown(){
   const sel=$('proj-select'); if(!sel)return;
   sel.innerHTML='<option value="">— Proje seçiniz —</option>';
   PROJ_LIST.forEach((p,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=(p.gname&&p.name)?(p.gname+' - '+p.name):(p.name||p.gname||('Proje '+(i+1))); sel.appendChild(o); });
   fillProjFields();
 }
-
 function fillProjFields(){
   const sel=$('proj-select'),box=$('proj-info-grid'); if(!sel)return;
   const idx=parseInt(sel.value);
   const pn=$('pf-no'),pg=$('pf-gname'),pp=$('pf-projname'),pe=$('pf-email'),pt=$('pf-tel');
-  if(isNaN(idx)||!PROJ_LIST[idx]){
-    [pn,pg,pp,pe,pt].forEach(el=>{ if(el)el.textContent='—'; });
-    if(box)box.classList.remove('active-box'); return;
-  }
+  if(isNaN(idx)||!PROJ_LIST[idx]){ [pn,pg,pp,pe,pt].forEach(el=>{ if(el)el.textContent='—'; }); if(box)box.classList.remove('active-box'); return; }
   const p=PROJ_LIST[idx];
   if(pn)pn.textContent=p.no||'—'; if(pg)pg.textContent=p.gname||'—';
   if(pp)pp.textContent=p.name||'—'; if(pe)pe.textContent=p.email||'—'; if(pt)pt.textContent=p.tel||'—';
   if(box)box.classList.add('active-box');
 }
-
 function goStep2FromList(){
   const sel=$('proj-select'),en=$('peval-name'); if(!sel)return;
   const idx=parseInt(sel.value);
@@ -1509,7 +1154,6 @@ function goStep2FromList(){
   if(pnEl)pnEl.value=p.name||''; if(poEl)poEl.value=p.gname||'';
   goStep2();
 }
-
 function buildScoreForm(){
   const sf=$('score-form'); if(!sf||!ANP)return;
   let h='';
@@ -1525,20 +1169,16 @@ function buildScoreForm(){
   });
   sf.innerHTML=h;
 }
-
 function setScore(g,s,v){
   evalScores[`${g}_${s}`]=v;
   for(let i=1;i<=9;i++){ const b=document.getElementById(`sb-${g}-${s}-${i}`); if(b)b.className=i===v?'sb9 sel':'sb9'; }
   const l=document.getElementById(`sl-${g}-${s}`); if(l){ l.textContent=`Seçilen: ${v} — ${S9[v]}`; l.style.color='var(--ac3)'; }
 }
-
 function goStep1(){ const e1=$('es1'),e2=$('es2'),e3=$('es3'); if(e1)e1.style.display='block'; if(e2)e2.style.display='none'; if(e3)e3.style.display='none'; setStepUI(1); }
 function goStep2(){ const pnEl=$('pname'); if(PORTAL==='admin'&&pnEl&&!pnEl.value.trim()){ alert('Proje adı gerekli'); return; } const e1=$('es1'),e2=$('es2'),e3=$('es3'); if(e1)e1.style.display='none'; if(e2)e2.style.display='block'; if(e3)e3.style.display='none'; setStepUI(2); }
 function setStepUI(s){ for(let i=1;i<=3;i++){ const el=document.getElementById('st'+i); if(!el)continue; el.className='step'+(i<s?' done':i===s?' active':''); el.style.opacity=i>s?'.45':'1'; const ln=document.getElementById('sl'+i); if(ln)ln.className='stepline'+(i<s?' done':''); } }
 
-/* ═══════════════════════════════════════════════════════════════
-   TOPSIS HESAPLAMA
-═══════════════════════════════════════════════════════════════ */
+/* TOPSIS */
 function rankAll(){
   if(!PROJECTS.length||!ANP)return [];
   const keys=Object.keys(ANP.globalW);
@@ -1551,7 +1191,6 @@ function rankAll(){
   });
   return topsisCalculate(aggProjects,keys);
 }
-
 function topsisCalculate(projects,keys){
   if(!projects.length)return [];
   const W=keys.map(k=>ANP.globalW[k]||0);
@@ -1567,7 +1206,6 @@ function topsisCalculate(projects,keys){
     return{...p,Dp,Dn,Cstar:(Dp+Dn)>0?Dn/(Dp+Dn):0};
   }).sort((a,b)=>b.Cstar-a.Cstar);
 }
-
 async function doTOPSIS(){
   const pnEl=$('pname'); const name=pnEl?pnEl.value.trim():'';
   if(!name){ alert('Proje adı gerekli'); return; }
@@ -1607,16 +1245,13 @@ async function doTOPSIS(){
   toast('Proje kaydedildi!','ok');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SONUÇ GÖRÜNÜMLERI
-═══════════════════════════════════════════════════════════════ */
+/* SONUÇ GÖRÜNÜMLERI */
 async function loadProjAndRender(){
   showLoad('Projeler yükleniyor…'); await loadProjFromDB(); hideLoad();
   const pg=document.querySelector('.page.active');
   if(pg){ if(pg.id==='page-results')renderResults(); if(pg.id==='page-projects')renderProjects(); if(pg.id==='page-evaluations')renderEvaluationsGrid(); }
   renderDashboard();
 }
-
 function renderResults(){
   const el=$('res-body'); if(!el)return;
   if(!PROJECTS.length){ el.innerHTML='<p style="text-align:center;padding:40px;color:var(--tx3)">Henüz proje yok.</p>'; return; }
@@ -1628,7 +1263,6 @@ function renderResults(){
   el.innerHTML=h;
   el.querySelectorAll('.rc[data-key]').forEach(card=>{ card.addEventListener('click',()=>showProjectDetails(card.getAttribute('data-key'))); });
 }
-
 function renderProjects(){
   const el=$('proj-tbl'); if(!el)return;
   if(!PROJECTS.length){ el.innerHTML='<p style="text-align:center;padding:28px;color:var(--tx3)">Henüz proje yok.</p>'; return; }
@@ -1640,11 +1274,8 @@ function renderProjects(){
   el.querySelectorAll('.del-btn').forEach(btn=>{ btn.addEventListener('click',()=>deleteProj(btn.getAttribute('data-id'),btn.getAttribute('data-name'))); });
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   UZMAN DEĞERLENDİRME GRİDİ
-═══════════════════════════════════════════════════════════════ */
+/* UZMAN DEĞERLENDİRME GRİDİ */
 const EXP_COLORS=[{bg:'#f59e0b',text:'#1a1200'},{bg:'#84cc16',text:'#0f2800'},{bg:'#22d3ee',text:'#001c22'},{bg:'#f472b6',text:'#2a0018'},{bg:'#a78bfa',text:'#1a0035'},{bg:'#fb923c',text:'#2a0800'}];
-
 function renderEvaluationsGrid(){
   const el=$('eval-expert-grid'); if(!el)return;
   if(!PROJECTS||!PROJECTS.length){ el.innerHTML='<p style="padding:32px;text-align:center;color:var(--tx3)">Henüz değerlendirme yok.</p>'; return; }
@@ -1661,7 +1292,6 @@ function renderEvaluationsGrid(){
   el.innerHTML=h;
   el.querySelectorAll('.eval-proj-card:not(.empty-card)').forEach(card=>{ card.addEventListener('click',()=>{ openEvalDetailModal(card.getAttribute('data-ev'),card.getAttribute('data-projkey')); }); });
 }
-
 function openEvalDetailModal(expertName,projKey){
   const rec=PROJECTS.find(p=>(p.projNo||p.name)===projKey&&(p.evaluator||'—')===expertName); if(!rec)return;
   const titleEl=$('edm-title'),metaEl=$('edm-meta'),scoresEl=$('edm-scores'),mo=$('eval-detail-modal'); if(!titleEl||!mo)return;
@@ -1679,7 +1309,6 @@ function openEvalDetailModal(expertName,projKey){
 }
 function closeEvalDetailModal(){ const m=$('eval-detail-modal'); if(m)m.classList.remove('show'); }
 document.getElementById('eval-detail-modal').addEventListener('click',function(e){ if(e.target===this)closeEvalDetailModal(); });
-
 function showProjectDetails(key){
   const evals=PROJECTS.filter(p=>(p.projNo||p.name)===key); if(!evals.length)return;
   if(evals.length===1){ openEvalDetailModal(evals[0].evaluator||'—',key); return; }
@@ -1707,9 +1336,7 @@ function _renderEvalTabContent(idx){
   scoresEl.innerHTML=statsHtml+'<div class="detail-score-grid">'+sh+'</div>';
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   KRİTERLER / KILAVUZ
-═══════════════════════════════════════════════════════════════ */
+/* KRİTERLER / KILAVUZ */
 function renderCriteriaInfo(){
   const el=$('criteria-info-body'); if(!el)return;
   const groups=[
@@ -1723,22 +1350,18 @@ function renderCriteriaInfo(){
   groups.forEach(g=>{ h+=`<div class="card" style="margin-bottom:16px;border-left:4px solid ${g.color}"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="font-size:22px">${g.icon}</span><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:${g.color}">${g.no}. ${g.name}</div></div>`; g.items.forEach(item=>{ h+=`<div style="margin-bottom:12px;padding:12px 14px;background:var(--bg3);border-radius:var(--rs);border-left:3px solid ${g.color}40"><div style="font-weight:600;font-size:13px;color:var(--tx);margin-bottom:4px"><span style="display:inline-block;background:${g.color}20;color:${g.color};padding:1px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-right:7px">${item.code}</span>${item.name}</div><div style="font-size:12.5px;color:var(--tx2);line-height:1.7">${item.desc}</div></div>`; }); h+='</div>'; });
   el.innerHTML=h;
 }
-
 function renderUserGuide(){
   const el=$('user-guide-body'); if(!el)return;
-  el.innerHTML=`<div class="g2" style="margin-bottom:16px"><div class="card" style="border-left:4px solid var(--ac)"><div class="card-t" style="color:var(--ac)">📋 Genel Bakış</div><div style="font-size:13px;color:var(--tx2);line-height:1.8">Bu portal, TÜBİTAK girişimcilik projelerinin <strong>ANP</strong>  ve <strong>TOPSIS</strong> yöntemleriyle bilimsel olarak değerlendirilmesi için tasarlanmıştır.</div></div><div class="card" style="border-left:4px solid var(--ac3)"><div class="card-t" style="color:var(--ac3)">🎯 Değerlendirme Ölçeği</div><div style="font-size:13px;color:var(--tx2);line-height:1.8"><strong>Saaty 1-9:</strong><br>1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div></div></div><div class="card" style="margin-bottom:16px"><div class="card-t">🪜 Adım Adım Değerlendirme</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px"><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac)"><div style="font-size:22px;margin-bottom:8px">1️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Proje Seç</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Listeden değerlendireceğiniz projeyi seçin.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac2)"><div style="font-size:22px;margin-bottom:8px">2️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Adınızı Girin</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Değerlendiren adı alanına ad ve soyadınızı yazın.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac3)"><div style="font-size:22px;margin-bottom:8px">3️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Kriterleri Puanla</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">16 kriter için 1-9 puan seçin. <strong>Tüm alanlar zorunludur.</strong></div></div></div></div><div class="card"><div class="card-t">❓ Sık Sorulan Sorular</div><div style="font-size:13px;color:var(--tx2);line-height:1.9"><strong style="color:var(--tx)">Listede projem görünmüyor?</strong> Yönetici henüz proje listesini yüklememiş olabilir.<br><strong style="color:var(--tx)">Kaydetmeden çıkarsam ne olur?</strong> "TOPSIS Hesapla & Kaydet" butonuna basılmadan hiçbir şey kaydedilmez.<br><strong style="color:var(--tx)">Tüm kriterleri doldurmak zorunda mıyım?</strong> Evet, eksik alan bırakılamaz.</div></div>`;
+  el.innerHTML=`<div class="g2" style="margin-bottom:16px"><div class="card" style="border-left:4px solid var(--ac)"><div class="card-t" style="color:var(--ac)">📋 Genel Bakış</div><div style="font-size:13px;color:var(--tx2);line-height:1.8">Bu portal, TÜBİTAK girişimcilik projelerinin <strong>ANP</strong> ve <strong>TOPSIS</strong> yöntemleriyle bilimsel olarak değerlendirilmesi için tasarlanmıştır.</div></div><div class="card" style="border-left:4px solid var(--ac3)"><div class="card-t" style="color:var(--ac3)">🎯 Değerlendirme Ölçeği</div><div style="font-size:13px;color:var(--tx2);line-height:1.8"><strong>Saaty 1-9:</strong><br>1=Çok Zayıf · 2=Zayıf · 3=Ortanın Altı · 4=Orta-Alt · 5=Orta · 6=Orta-Üst · 7=İyi · 8=Çok İyi · 9=Mükemmel</div></div></div><div class="card" style="margin-bottom:16px"><div class="card-t">🪜 Adım Adım Değerlendirme</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px"><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac)"><div style="font-size:22px;margin-bottom:8px">1️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Proje Seç</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Listeden değerlendireceğiniz projeyi seçin.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac2)"><div style="font-size:22px;margin-bottom:8px">2️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Adınızı Girin</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">Değerlendiren adı alanına ad ve soyadınızı yazın.</div></div><div style="padding:16px;background:var(--bg3);border-radius:var(--rs);border-top:3px solid var(--ac3)"><div style="font-size:22px;margin-bottom:8px">3️⃣</div><div style="font-weight:700;font-size:13px;margin-bottom:6px">Kriterleri Puanla</div><div style="font-size:12px;color:var(--tx2);line-height:1.7">16 kriter için 1-9 puan seçin. <strong>Tüm alanlar zorunludur.</strong></div></div></div></div><div class="card"><div class="card-t">❓ Sık Sorulan Sorular</div><div style="font-size:13px;color:var(--tx2);line-height:1.9"><strong style="color:var(--tx)">Listede projem görünmüyor?</strong> Yönetici henüz proje listesini yüklememiş olabilir.<br><strong style="color:var(--tx)">Kaydetmeden çıkarsam ne olur?</strong> "TOPSIS Hesapla & Kaydet" butonuna basılmadan hiçbir şey kaydedilmez.<br><strong style="color:var(--tx)">Tüm kriterleri doldurmak zorunda mıyım?</strong> Evet, eksik alan bırakılamaz.</div></div>`;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SİLME / EXPORT
-═══════════════════════════════════════════════════════════════ */
+/* SİLME / EXPORT */
 function deleteProj(id,name){
   if(!confirm(`"${name}" silinsin mi?`))return;
   if(id&&id!=='undefined'&&id!=='null'){ deleteProjFromDB(id); PROJECTS=PROJECTS.filter(p=>String(p.id)!==String(id)); }
   else{ const idx=PROJECTS.findIndex(p=>p.name===name); if(idx!==-1)PROJECTS.splice(idx,1); }
   saveProjLocal(); renderProjects(); renderDashboard(); toast('Proje silindi','warn');
 }
-
 function exportCSV(){
   if(!PROJECTS.length){ alert('Proje yok.'); return; }
   const ranked=rankAll(),keys=ANP?Object.keys(ANP.globalW):[];
@@ -1747,22 +1370,19 @@ function exportCSV(){
   const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'})),download:'tubitak_anp_topsis_'+new Date().toISOString().slice(0,10)+'.csv'});
   a.click(); URL.revokeObjectURL(a.href); toast('CSV indirildi','ok');
 }
-
 function exportEvaluationsToExcel(){
   if(!PROJECTS||!PROJECTS.length){ toast('Dışa aktarılacak veri yok!','warn'); return; }
   const data=PROJECTS.map(p=>{ let r={'Proje No':p.projNo||'','Proje Adı':p.name||'','Değerlendiren':p.evaluator||''}; Object.keys(p.scores||{}).forEach(k=>{ r[`Kriter:${k}`]=p.scores[k]||1; }); r['C*']=p.Cstar||0; r['D+']=p.Dp||0; r['D-']=p.Dn||0; return r; });
   const ws=XLSX.utils.json_to_sheet(data),wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Uzman_Puanlari'); XLSX.writeFile(wb,'Uzman_Degerlendirme_Puanlari.xlsx');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   BAŞLATMA
-═══════════════════════════════════════════════════════════════ */
+/* BAŞLATMA */
 (function init(){
-  // Eski önbellekleri temizle (çapraz alt kriter güncellemesi)
   try{ localStorage.removeItem('tubitak_anp_v60'); localStorage.removeItem('tubitak_proj_v60'); }catch(e){}
   loadANPLocal(); _loadProjListLocal(); loadProjLocal();
   updateProjListBadge(); initDB();
 })();
+
 </script>
 </body>
 </html>
